@@ -10,18 +10,32 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-    public partial class Form1 : Form
+    public partial class Trade_Auto : Form
     {
         //Main
-        public Form1()
+        public Trade_Auto()
         {
             InitializeComponent();
+            //로그인
             Login_btn.Click += login_btn;
             axKHOpenAPI1.OnEventConnect += onEventConnect;
+            //TR조회
+            axKHOpenAPI1.OnReceiveTrData += onReceiveTrData;
+            //예수금 조회
+            User_account_list.SelectedIndexChanged += selectedIndexChange;
+            //종목 조회
+            Stock_search_btn.Click += stock_search_btn;
+            //조건식 조회
+            Fomula_search_btn.Click += fomula_search_btn;
+            axKHOpenAPI1.OnReceiveConditionVer += onReceiveConditionVer;
+            //
         }
+
+
         //로그인
         private void login_btn(object sender, EventArgs e)
         {
+            //CommConnect를 하는 경우 KHOpenAPI Control의 OnEventConnect 이벤트가 호출
             axKHOpenAPI1.CommConnect();
         }
         private void onEventConnect(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnEventConnectEvent e)
@@ -99,6 +113,168 @@ namespace WindowsFormsApp1
             }
                 
         }
+
+
+        //데이터 조회(예수금, 유가증권, 조건식, 일반 검색, 실시간 검색 등)
+        private void onReceiveTrData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e)
+        {
+            switch (e.sRQName)
+            {
+                case "예수금상세현황":
+                    User_money.Text = string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "예수금").Trim()));
+                    break;
+                case "주식기본정보":
+                    WriteLog("------------------------------------\n");
+                    WriteLog(string.Format("종목코드: {0}\n", axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목코드").Trim()));
+                    WriteLog(string.Format("종목명: {0}\n", axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목명").Trim()));
+                    WriteLog(string.Format("연중최고: {0:#,##0}\n", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "연중최고").Trim())));
+                    WriteLog(string.Format("연중최저: {0:#,##0}\n", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "연중최저").Trim())));
+                    WriteLog(string.Format("PER: {0:#,##0.00}\n", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "PER").Trim())));
+                    WriteLog(string.Format("EPS: {0:#,##0}\n", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "EPS").Trim())));
+                    WriteLog(string.Format("ROE: {0:#,##0.00}\n", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "ROE").Trim())));
+                    WriteLog(string.Format("PBR: {0:#,##0.00}\n", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "PBR").Trim())));
+                    WriteLog(string.Format("EV: {0:#,##0.00}\n", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "EV").Trim())));
+                    WriteLog(string.Format("BPS: {0:#,##0}\n", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "BPS").Trim())));
+                    WriteLog(string.Format("신용비율: {0:#,##0.00}%\n", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "신용비율").Trim())));
+                    WriteLog(string.Format("외인소진률: {0:#,##0.00}%\n", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "외인소진률").Trim())));
+                    WriteLog(string.Format("거래량: {0:#,##0}\n", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "거래량").Trim())));
+                    WriteLog("------------------------------------\n");
+                    break;
+            }
+        }
+
+
+        //예수금 조회
+        private void selectedIndexChange(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(User_account_list.Text.Trim()))
+                GetCashInfo(User_account_list.Text.Trim());
+        }
+        private void GetCashInfo(string acctNo)
+        {
+            //SetInputValu : 계좌번호, 비밀번호입력매체구분, 조회구분
+            //비밀번호입력매체구 : 기본(00), 일반조회(2). 추정조회(3)
+            //CommRqData(Request Name, TR CODE, 0, 화면 번호)
+            axKHOpenAPI1.SetInputValue("계좌번호", acctNo);
+            axKHOpenAPI1.SetInputValue("비밀번호입력매체구분", "00");
+            axKHOpenAPI1.SetInputValue("조회구분", "2");
+            //CommRqData(sRQName, sTRCode, nPreNext, sScreenNo)
+            //CommRqData(임의 사용자 구분명, TR목록, 연속조회여부, 화면번호)
+            //CommRqData를 하는 경우 KHOpenAPI Control의 OnReceiveTrData 이벤트가 호출
+            int result = axKHOpenAPI1.CommRqData("예수금상세현황", "OPW00001", 0, GetScreenNo());
+            GetErrorMessage(result);
+        }
+
+
+        //종목 조회
+        private void stock_search_btn(object sender, EventArgs e)
+        {
+            if (axKHOpenAPI1.GetConnectState() == 0)
+            {
+                MessageBox.Show("Open API 연결되어 있지 않습니다.","알림",MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (string.IsNullOrEmpty(Stock_code.Text.Trim()))
+            {
+                MessageBox.Show("종목코드를 입력해주세요.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            WriteLog("[종목 조회]\n");
+            SearchStockInfo(Stock_code.Text.Trim());
+            
+        }
+        private void SearchStockInfo(string code)
+        {
+            axKHOpenAPI1.SetInputValue("종목코드", code);
+            int result = axKHOpenAPI1.CommRqData("주식기본정보", "OPT10001", 0, GetScreenNo());
+            GetErrorMessage(result);
+        }
+
+
+        //조건식 검색
+        private void fomula_search_btn(object sender, EventArgs e)
+        {
+            if (axKHOpenAPI1.GetConnectState() == 0)
+            {
+                MessageBox.Show("Open API 연결되어 있지 않습니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            WriteLog("[조건식 조회]\n");
+            if (axKHOpenAPI1.GetConditionLoad() == 1)
+                WriteLog("조건식 파일 저장 성공\n");
+            else
+                WriteLog("조건식 파일 저장 실패\n");
+        }
+        class ConditionInfo
+        {
+            public int Index { get; set; }
+            public string Name { get; set; }
+            public DateTime? LastRequestTime { get; set; }
+        }
+        private List<ConditionInfo> conditionInfo = new List<ConditionInfo>();
+        private void onReceiveConditionVer(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveConditionVerEvent e)
+        {
+            if (e.lRet != 1) return;
+            Fomula_list.Items.Clear();
+            conditionInfo.Clear();
+            // ';' 구분
+            string[] arrCondition = axKHOpenAPI1.GetConditionNameList().Trim().Split(';');
+            foreach (var cond in arrCondition)
+            {
+                if (string.IsNullOrEmpty(cond)) continue;
+                // '^' 구분 ex) 001^조건식1
+                var item = cond.Split('^');
+                conditionInfo.Add(new ConditionInfo
+                {
+                    Index = Convert.ToInt32(item[0]),
+                    Name = item[1]
+                });
+            }
+            Fomula_list.Items.AddRange(arrCondition);
+            if (Fomula_list.Items.Count > 0)
+            {
+                Fomula_list.SelectedIndex = 0;
+            }
+            WriteLog("조건식 조회 성공\n");
+        }
+
+
+        //화면번호
+        private int _screenNo = 1001;
+        private string GetScreenNo()
+        {
+            //화면번호 : 조회나 주문등 필요한 기능을 요청할때 이를 구별하기 위한 키값
+            //0000(혹은 0)을 제외한 임의의 네자리 숫자
+            //개수가 200개로 한정, 이 개수를 넘지 않도록 관리
+            //200개를 넘는 경우 조회 결과나 주문 결과에 다른 데이터가 섞이거나 원하지 않는 결과가 나타날 수 있다.
+            if (_screenNo < 1200)
+                _screenNo++;
+            else
+                _screenNo = 1001;
+            return _screenNo.ToString();
+        }
+
+
+        //CommRqData 에러 목록
+        private void GetErrorMessage(int errorcode)
+        {
+            switch (errorcode)
+            {
+                case 0:
+                    WriteLog("정상조회\n");
+                    break;
+                case 200:
+                    WriteLog("시세과부화\n");
+                    break;
+                case 201:
+                    WriteLog("조회전문작성 에러\n");
+                    break;
+            }
+        }
+
+
         //로그창
         private void WriteLog(string message)
         {
