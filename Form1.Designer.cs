@@ -36,16 +36,22 @@ namespace WindowsFormsApp1
             this.axKHOpenAPI1 = new AxKHOpenAPILib.AxKHOpenAPI();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.Fire_wall = new System.Windows.Forms.Label();
             this.User_name = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.User_account_list = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.User_id = new System.Windows.Forms.Label();
+            this.User_account_list = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.Fire_wall = new System.Windows.Forms.Label();
+            this.Keyboard_wall = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.User_money = new System.Windows.Forms.TextBox();
+            this.User_connection = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.Fomula_list = new System.Windows.Forms.ComboBox();
             this.Real_time_search_btn = new System.Windows.Forms.Button();
             this.Stock_search_btn = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
@@ -53,18 +59,17 @@ namespace WindowsFormsApp1
             this.Fomula_search_btn = new System.Windows.Forms.Button();
             this.Normal_search_btn = new System.Windows.Forms.Button();
             this.Real_time_stop_btn = new System.Windows.Forms.Button();
-            this.Fomula_list = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.User_connection = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.Keyboard_wall = new System.Windows.Forms.Label();
             this.Stock_code = new System.Windows.Forms.TextBox();
-            this.User_money = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menu = new System.Windows.Forms.MenuStrip();
+            this.Main_menu = new System.Windows.Forms.ToolStripMenuItem();
+            this.Order_setting_menu = new System.Windows.Forms.ToolStripMenuItem();
+            this.System_setting_menu = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.axKHOpenAPI1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.menu.SuspendLayout();
             this.SuspendLayout();
             // 
             // Login_btn
@@ -75,17 +80,17 @@ namespace WindowsFormsApp1
             this.Login_btn.BackColor = System.Drawing.Color.SteelBlue;
             this.Login_btn.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Login_btn.ForeColor = System.Drawing.Color.Transparent;
-            this.Login_btn.Location = new System.Drawing.Point(12, 12);
+            this.Login_btn.Location = new System.Drawing.Point(12, 31);
             this.Login_btn.Margin = new System.Windows.Forms.Padding(0);
             this.Login_btn.Name = "Login_btn";
-            this.Login_btn.Size = new System.Drawing.Size(82, 50);
+            this.Login_btn.Size = new System.Drawing.Size(82, 53);
             this.Login_btn.TabIndex = 1;
             this.Login_btn.Text = "로그인";
             this.Login_btn.UseVisualStyleBackColor = false;
             // 
             // log_window
             // 
-            this.log_window.Location = new System.Drawing.Point(12, 177);
+            this.log_window.Location = new System.Drawing.Point(12, 196);
             this.log_window.Name = "log_window";
             this.log_window.Size = new System.Drawing.Size(386, 341);
             this.log_window.TabIndex = 2;
@@ -94,7 +99,7 @@ namespace WindowsFormsApp1
             // axKHOpenAPI1
             // 
             this.axKHOpenAPI1.Enabled = true;
-            this.axKHOpenAPI1.Location = new System.Drawing.Point(1020, 12);
+            this.axKHOpenAPI1.Location = new System.Drawing.Point(1020, 31);
             this.axKHOpenAPI1.Name = "axKHOpenAPI1";
             this.axKHOpenAPI1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axKHOpenAPI1.OcxState")));
             this.axKHOpenAPI1.Size = new System.Drawing.Size(100, 50);
@@ -103,7 +108,7 @@ namespace WindowsFormsApp1
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(404, 177);
+            this.dataGridView1.Location = new System.Drawing.Point(404, 196);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(716, 341);
@@ -132,7 +137,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel1.Controls.Add(this.User_money, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.User_connection, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label7, 0, 2);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 65);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 84);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -140,19 +145,6 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(514, 106);
             this.tableLayoutPanel1.TabIndex = 4;
-            // 
-            // Fire_wall
-            // 
-            this.Fire_wall.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Fire_wall.AutoSize = true;
-            this.Fire_wall.BackColor = System.Drawing.Color.White;
-            this.Fire_wall.Location = new System.Drawing.Point(428, 70);
-            this.Fire_wall.Name = "Fire_wall";
-            this.Fire_wall.Size = new System.Drawing.Size(83, 36);
-            this.Fire_wall.TabIndex = 9;
-            this.Fire_wall.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // User_name
             // 
@@ -199,22 +191,6 @@ namespace WindowsFormsApp1
             this.label3.Text = "계좌번호";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.LightSlateGray;
-            this.label4.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(173, 70);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 36);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "키보드보안";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // label5
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -230,18 +206,6 @@ namespace WindowsFormsApp1
             this.label5.TabIndex = 3;
             this.label5.Text = "사용자 이름";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // User_account_list
-            // 
-            this.User_account_list.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.User_account_list.FormattingEnabled = true;
-            this.User_account_list.ItemHeight = 12;
-            this.User_account_list.Location = new System.Drawing.Point(88, 38);
-            this.User_account_list.Name = "User_account_list";
-            this.User_account_list.Size = new System.Drawing.Size(79, 20);
-            this.User_account_list.TabIndex = 11;
             // 
             // label6
             // 
@@ -272,6 +236,113 @@ namespace WindowsFormsApp1
             this.User_id.TabIndex = 5;
             this.User_id.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // User_account_list
+            // 
+            this.User_account_list.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.User_account_list.FormattingEnabled = true;
+            this.User_account_list.ItemHeight = 12;
+            this.User_account_list.Location = new System.Drawing.Point(88, 38);
+            this.User_account_list.Name = "User_account_list";
+            this.User_account_list.Size = new System.Drawing.Size(79, 20);
+            this.User_account_list.TabIndex = 11;
+            // 
+            // label10
+            // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.LightSlateGray;
+            this.label10.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label10.ForeColor = System.Drawing.Color.White;
+            this.label10.Location = new System.Drawing.Point(343, 70);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(79, 36);
+            this.label10.TabIndex = 14;
+            this.label10.Text = "방화벽";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Fire_wall
+            // 
+            this.Fire_wall.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Fire_wall.AutoSize = true;
+            this.Fire_wall.BackColor = System.Drawing.Color.White;
+            this.Fire_wall.Location = new System.Drawing.Point(428, 70);
+            this.Fire_wall.Name = "Fire_wall";
+            this.Fire_wall.Size = new System.Drawing.Size(83, 36);
+            this.Fire_wall.TabIndex = 9;
+            this.Fire_wall.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Keyboard_wall
+            // 
+            this.Keyboard_wall.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Keyboard_wall.AutoSize = true;
+            this.Keyboard_wall.BackColor = System.Drawing.Color.White;
+            this.Keyboard_wall.Location = new System.Drawing.Point(258, 70);
+            this.Keyboard_wall.Name = "Keyboard_wall";
+            this.Keyboard_wall.Size = new System.Drawing.Size(79, 36);
+            this.Keyboard_wall.TabIndex = 15;
+            this.Keyboard_wall.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.LightSlateGray;
+            this.label4.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(173, 70);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(79, 36);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "키보드보안";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // User_money
+            // 
+            this.User_money.Location = new System.Drawing.Point(258, 38);
+            this.User_money.Name = "User_money";
+            this.User_money.ReadOnly = true;
+            this.User_money.Size = new System.Drawing.Size(79, 21);
+            this.User_money.TabIndex = 16;
+            // 
+            // User_connection
+            // 
+            this.User_connection.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.User_connection.AutoSize = true;
+            this.User_connection.BackColor = System.Drawing.Color.White;
+            this.User_connection.Location = new System.Drawing.Point(88, 70);
+            this.User_connection.Name = "User_connection";
+            this.User_connection.Size = new System.Drawing.Size(79, 36);
+            this.User_connection.TabIndex = 13;
+            this.User_connection.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.LightSlateGray;
+            this.label7.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(3, 70);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(79, 36);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "접속구분";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 3;
@@ -287,7 +358,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel2.Controls.Add(this.Normal_search_btn, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.Real_time_stop_btn, 2, 2);
             this.tableLayoutPanel2.Controls.Add(this.Stock_code, 1, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(796, 65);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(796, 84);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -296,6 +367,17 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(324, 106);
             this.tableLayoutPanel2.TabIndex = 6;
+            // 
+            // Fomula_list
+            // 
+            this.Fomula_list.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Fomula_list.FormattingEnabled = true;
+            this.Fomula_list.Location = new System.Drawing.Point(110, 38);
+            this.Fomula_list.Name = "Fomula_list";
+            this.Fomula_list.Size = new System.Drawing.Size(102, 20);
+            this.Fomula_list.TabIndex = 12;
             // 
             // Real_time_search_btn
             // 
@@ -410,75 +492,6 @@ namespace WindowsFormsApp1
             this.Real_time_stop_btn.Text = "실시간 중단";
             this.Real_time_stop_btn.UseVisualStyleBackColor = false;
             // 
-            // Fomula_list
-            // 
-            this.Fomula_list.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Fomula_list.FormattingEnabled = true;
-            this.Fomula_list.Location = new System.Drawing.Point(110, 38);
-            this.Fomula_list.Name = "Fomula_list";
-            this.Fomula_list.Size = new System.Drawing.Size(102, 20);
-            this.Fomula_list.TabIndex = 12;
-            // 
-            // label7
-            // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.Color.LightSlateGray;
-            this.label7.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(3, 70);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(79, 36);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "접속구분";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // User_connection
-            // 
-            this.User_connection.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.User_connection.AutoSize = true;
-            this.User_connection.BackColor = System.Drawing.Color.White;
-            this.User_connection.Location = new System.Drawing.Point(88, 70);
-            this.User_connection.Name = "User_connection";
-            this.User_connection.Size = new System.Drawing.Size(79, 36);
-            this.User_connection.TabIndex = 13;
-            this.User_connection.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label10
-            // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.Color.LightSlateGray;
-            this.label10.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(343, 70);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(79, 36);
-            this.label10.TabIndex = 14;
-            this.label10.Text = "방화벽";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Keyboard_wall
-            // 
-            this.Keyboard_wall.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Keyboard_wall.AutoSize = true;
-            this.Keyboard_wall.BackColor = System.Drawing.Color.White;
-            this.Keyboard_wall.Location = new System.Drawing.Point(258, 70);
-            this.Keyboard_wall.Name = "Keyboard_wall";
-            this.Keyboard_wall.Size = new System.Drawing.Size(79, 36);
-            this.Keyboard_wall.TabIndex = 15;
-            this.Keyboard_wall.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // Stock_code
             // 
             this.Stock_code.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -489,30 +502,54 @@ namespace WindowsFormsApp1
             this.Stock_code.Size = new System.Drawing.Size(102, 21);
             this.Stock_code.TabIndex = 13;
             // 
-            // User_money
-            // 
-            this.User_money.Location = new System.Drawing.Point(258, 38);
-            this.User_money.Name = "User_money";
-            this.User_money.ReadOnly = true;
-            this.User_money.Size = new System.Drawing.Size(79, 21);
-            this.User_money.TabIndex = 16;
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // menu
+            // 
+            this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Main_menu,
+            this.Order_setting_menu,
+            this.System_setting_menu});
+            this.menu.Location = new System.Drawing.Point(0, 0);
+            this.menu.Name = "menu";
+            this.menu.Size = new System.Drawing.Size(1132, 24);
+            this.menu.TabIndex = 7;
+            this.menu.Text = "menuStrip1";
+            // 
+            // Main_menu
+            // 
+            this.Main_menu.Name = "Main_menu";
+            this.Main_menu.Size = new System.Drawing.Size(43, 20);
+            this.Main_menu.Text = "메인";
+            // 
+            // Order_setting_menu
+            // 
+            this.Order_setting_menu.Name = "Order_setting_menu";
+            this.Order_setting_menu.Size = new System.Drawing.Size(71, 20);
+            this.Order_setting_menu.Text = "거래 설정";
+            // 
+            // System_setting_menu
+            // 
+            this.System_setting_menu.Name = "System_setting_menu";
+            this.System_setting_menu.Size = new System.Drawing.Size(83, 20);
+            this.System_setting_menu.Text = "시스템 설정";
+            // 
             // Trade_Auto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1132, 530);
+            this.ClientSize = new System.Drawing.Size(1132, 567);
+            this.Controls.Add(this.menu);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.log_window);
             this.Controls.Add(this.Login_btn);
             this.Controls.Add(this.axKHOpenAPI1);
+            this.MainMenuStrip = this.menu;
             this.Name = "Trade_Auto";
             this.Text = "Trade_Auto";
             ((System.ComponentModel.ISupportInitialize)(this.axKHOpenAPI1)).EndInit();
@@ -521,7 +558,10 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.menu.ResumeLayout(false);
+            this.menu.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -557,6 +597,10 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.TextBox Stock_code;
         private System.Windows.Forms.TextBox User_money;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.MenuStrip menu;
+        private System.Windows.Forms.ToolStripMenuItem Main_menu;
+        private System.Windows.Forms.ToolStripMenuItem Order_setting_menu;
+        private System.Windows.Forms.ToolStripMenuItem System_setting_menu;
     }
 }
 

@@ -28,7 +28,16 @@ namespace WindowsFormsApp1
             //조건식 조회
             Fomula_search_btn.Click += fomula_search_btn;
             axKHOpenAPI1.OnReceiveConditionVer += onReceiveConditionVer;
+            //조건식 일반 검색
+            Normal_search_btn.Click += normal_search_btn;
+            axKHOpenAPI1.OnReceiveTrCondition += onReceiveTrCondition;
+            //조건식 실시간 검색
+            Real_time_search_btn.Click += real_time_search_btn;
+            //조건식 실시간 중단
+            Real_time_stop_btn.Click += real_time_stop_btn;
             //
+            Main_menu.Click += main_menu;
+            Order_setting_menu.Click += order_setting_menu;
         }
 
 
@@ -49,7 +58,7 @@ namespace WindowsFormsApp1
                 string 계좌목록 = axKHOpenAPI1.GetLoginInfo("ACCLIST").Trim();
                 //계좌목록은 ';'문자로 분리된 문자열
                 //분리된 계좌를 ComboBox에 추가 
-                string[] 사용자계좌 = 계좌목록.Split(';');                              
+                string[] 사용자계좌 = 계좌목록.Split(';');
                 for (int i = 0; i < 사용자계좌.Length; i++)
                 {
                     User_account_list.Items.Add(사용자계좌[i]);
@@ -62,7 +71,7 @@ namespace WindowsFormsApp1
                 User_name.Text = 사용자이름;
                 //접속서버 구분(1 : 모의투자, 나머지: 실거래서버)
                 string 접속서버구분 = axKHOpenAPI1.GetLoginInfo("GetServerGubun");
-                if(접속서버구분.Equals("1"))
+                if (접속서버구분.Equals("1"))
                 {
                     User_connection.Text = "모의투자\n";
                 }
@@ -86,7 +95,7 @@ namespace WindowsFormsApp1
                 {
                     Fire_wall.Text = "미설정\n";
                 }
-                else if(방화벽.Equals("1"))
+                else if (방화벽.Equals("1"))
                 {
                     Fire_wall.Text = "설정\n";
                 }
@@ -109,9 +118,9 @@ namespace WindowsFormsApp1
                         WriteLog("버전처리 실패\n");
                         break;
                 }
-                
+
             }
-                
+
         }
 
 
@@ -120,9 +129,11 @@ namespace WindowsFormsApp1
         {
             switch (e.sRQName)
             {
+                //예수금 데이터 조회
                 case "예수금상세현황":
                     User_money.Text = string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "예수금").Trim()));
                     break;
+                //개별 증권 데이터 조회
                 case "주식기본정보":
                     WriteLog("------------------------------------\n");
                     WriteLog(string.Format("종목코드: {0}\n", axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목코드").Trim()));
@@ -139,6 +150,43 @@ namespace WindowsFormsApp1
                     WriteLog(string.Format("외인소진률: {0:#,##0.00}%\n", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "외인소진률").Trim())));
                     WriteLog(string.Format("거래량: {0:#,##0}\n", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "거래량").Trim())));
                     WriteLog("------------------------------------\n");
+                    break;
+                //일반 검색 데이터 조회
+                case "조건일반검색":
+                    DataTable dataTable = new DataTable();
+                    dataTable.Columns.Add("종목코드", typeof(string));
+                    dataTable.Columns.Add("종목명", typeof(string));
+                    dataTable.Columns.Add("현재가", typeof(string));
+                    dataTable.Columns.Add("전일대비", typeof(string));
+                    dataTable.Columns.Add("등락율", typeof(string));
+                    dataTable.Columns.Add("거래량", typeof(string));
+                    int count = axKHOpenAPI1.GetRepeatCnt(e.sTrCode, e.sRQName);
+                    for (int i = 0; i < count; i++)
+                    {
+                        dataTable.Rows.Add(
+                            axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "종목코드").Trim(),
+                            axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "종목명").Trim(),
+                            string.Format("{0:#,##0}", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "현재가").Trim())),
+                            string.Format("{0:#,##0}", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "전일대비").Trim())),
+                            string.Format("{0:#,##0.00}%", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "등락율").Trim())),
+                            string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "거래량").Trim()))
+                        );
+                    }
+                    dtCondStock = dataTable;
+                    dataGridView1.DataSource = dtCondStock;
+                    break;
+                //실시간 조건 검색 데이터 조회
+                case "I":
+                    //종목 편입
+                    axKHOpenAPI1.SetInputValue("종목코드", e.sTrCode);
+                    axKHOpenAPI1.CommRqData("조건실시간검색", "OPT10001", 0, GetScreenNo());
+                    break;
+                case "D":
+                    //종목 이탈
+                    DataRow[] findRows = dtCondStock.Select($"종목코드 = {e.sTrCode}");
+                    if (findRows.Length == 0) return;
+                    dtCondStock.Rows.Remove(findRows[0]);
+                    dataGridView1.DataSource = dtCondStock;
                     break;
             }
         }
@@ -171,7 +219,7 @@ namespace WindowsFormsApp1
         {
             if (axKHOpenAPI1.GetConnectState() == 0)
             {
-                MessageBox.Show("Open API 연결되어 있지 않습니다.","알림",MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Open API 연결되어 있지 않습니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             if (string.IsNullOrEmpty(Stock_code.Text.Trim()))
@@ -182,7 +230,7 @@ namespace WindowsFormsApp1
 
             WriteLog("[종목 조회]\n");
             SearchStockInfo(Stock_code.Text.Trim());
-            
+
         }
         private void SearchStockInfo(string code)
         {
@@ -219,6 +267,7 @@ namespace WindowsFormsApp1
             if (e.lRet != 1) return;
             Fomula_list.Items.Clear();
             conditionInfo.Clear();
+            //사용자 조건식을 조건식의 고유번호와 조건식 이름을 한 쌍으로 하는 문자열
             // ';' 구분
             string[] arrCondition = axKHOpenAPI1.GetConditionNameList().Trim().Split(';');
             foreach (var cond in arrCondition)
@@ -238,6 +287,91 @@ namespace WindowsFormsApp1
                 Fomula_list.SelectedIndex = 0;
             }
             WriteLog("조건식 조회 성공\n");
+        }
+
+
+        //조건식 일반 검색
+        private void normal_search_btn(object sender, EventArgs e)
+        {
+            //검색된 조건식이 없을시
+            if (string.IsNullOrEmpty(Fomula_list.SelectedItem.ToString())) return;
+            //검색된 조건식이 있을시
+            string[] condition = Fomula_list.SelectedItem.ToString().Split('^');
+            var condInfo = conditionInfo.Find(f => f.Index == Convert.ToInt32(condition[0]));
+            if (condInfo == null) return;
+            //조건식에 대한 검색은 60초 마다 가능
+            if (condInfo.LastRequestTime != null && condInfo.LastRequestTime >= DateTime.Now.AddSeconds(-60))
+            {
+                int second = 60 - (DateTime.Now - condInfo.LastRequestTime.Value).Seconds;
+                WriteLog($"{second}초 후에 조회 가능합니다.\n");
+                return;
+            }
+            //
+            WriteLog("[일반 검색]\n");
+            //
+            condInfo.LastRequestTime = DateTime.Now;
+            //종목 검색 요청
+            //화면 번호, 조건식 이름, 조건식 번호, 조회 구분(0은 일반 검색, 1은 실시간 검색)
+            int result = axKHOpenAPI1.SendCondition(GetScreenNo(), condition[1], Convert.ToInt32(condition[0]), 0);
+            if (result == 1)
+                WriteLog("조건식 일반 검색 성공\n");
+            else
+                WriteLog("조건식 일반 검색 실패\n");
+        }
+        private void onReceiveTrCondition(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrConditionEvent e)
+        {
+            string code = e.strCodeList.Trim();
+            if (string.IsNullOrEmpty(code)) return;
+            if (code.Length > 0) code = code.Remove(code.Length - 1);
+            int codeCount = code.Split(';').Length;
+            //종목 데이터
+            //종목코드 리스트, 연속조회여부(기본값0만존재), 종목코드 갯수, 종목(0 주식, 3 선물옵션), 사용자 구분명, 화면번호
+            axKHOpenAPI1.CommKwRqData(code, 0, codeCount, 0, "조건일반검색", GetScreenNo());
+        }
+        private DataTable dtCondStock = new DataTable();
+
+
+        //조건식 실시간 검색
+        private void real_time_search_btn(object sender, EventArgs e)
+        {
+            //검색된 조건식이 없을시
+            if (string.IsNullOrEmpty(Fomula_list.SelectedItem.ToString())) return;
+            //검색된 조건식이 있을시
+            string[] condition = Fomula_list.SelectedItem.ToString().Split('^');
+            var condInfo = conditionInfo.Find(f => f.Index == Convert.ToInt32(condition[0]));
+            if (condInfo == null) return;
+            //조건식에 대한 검색은 60초 마다 가능
+            if (condInfo.LastRequestTime != null && condInfo.LastRequestTime >= DateTime.Now.AddSeconds(-60))
+            {
+                int second = 60 - (DateTime.Now - condInfo.LastRequestTime.Value).Seconds;
+                WriteLog($"{second}초 후에 조회 가능합니다.\n");
+                return;
+            }
+            //
+            WriteLog("[실시간 검색]\n");
+            //
+            condInfo.LastRequestTime = DateTime.Now;
+            //종목 검색 요청
+            //화면 번호, 조건식 이름, 조건식 번호, 조회 구분(0은 일반 검색, 1은 실시간 검색)
+            int result = axKHOpenAPI1.SendCondition(GetScreenNo(), condition[1], Convert.ToInt32(condition[0]), 1);
+            if (result == 1)
+                WriteLog("조건식 실시간 검색 성공\n");
+            else
+                WriteLog("조건식 실시간 검색 실패\n");
+        }
+
+
+        //조건식 실시간 중단
+        private void real_time_stop_btn(object sender, EventArgs e)
+        {
+            // 검색된 조건식이 없을시
+            if (string.IsNullOrEmpty(Fomula_list.SelectedItem.ToString())) return;
+            //검색된 조건식이 있을시
+            string[] condition = Fomula_list.SelectedItem.ToString().Split('^');
+            WriteLog("[실시간 중단]\n");
+            //실시간 조건검색을 중지
+            //화면번호
+            axKHOpenAPI1.SendConditionStop(GetScreenNo(), condition[1], Convert.ToInt32(condition[0]));
         }
 
 
@@ -279,6 +413,18 @@ namespace WindowsFormsApp1
         private void WriteLog(string message)
         {
             log_window.AppendText($@"{message}");
+        }
+
+
+        //
+        private void main_menu(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void order_setting_menu(object sender, EventArgs e)
+        {
+            
         }
     }
 }
