@@ -19,7 +19,7 @@
 https://seongyeopchoi.notion.site/_-_-_API_C-_Python-Share-0bf017356a0a4d659f292639f31bd07f?pvs=4
 
 # 사용기술
-- C#, Visual Studio, Github
+- C#, Visual Studio(2019), Github
 
 # 사용 API
 - Kiwoom_open_api : 매매 기능
