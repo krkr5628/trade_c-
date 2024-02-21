@@ -15,9 +15,6 @@
 
 💯 Solution : API 기반 자체 매매 프로그램을 만들자.
 
-# 상세 정보
-https://seongyeopchoi.notion.site/_-_-_API_C-_Python-Share-0bf017356a0a4d659f292639f31bd07f?pvs=4
-
 # 사용기술
 - C#, Visual Studio(2019), Github
 
