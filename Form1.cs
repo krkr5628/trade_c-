@@ -16,30 +16,51 @@ namespace WindowsFormsApp1
         public Trade_Auto()
         {
             InitializeComponent();
-            //로그인
+            //실시간 시간 표시
+            timer1.Start();
+
+            //업데이트
+            //axKHOpenAPI1.CommConnect();
+
+            //수동 로그인
             Login_btn.Click += login_btn;
+
+            //로그인 상태 확인
             axKHOpenAPI1.OnEventConnect += onEventConnect;
+
             //TR조회
             axKHOpenAPI1.OnReceiveTrData += onReceiveTrData;
+
             //예수금 조회
             User_account_list.SelectedIndexChanged += selectedIndexChange;
+
             //종목 조회
             Stock_search_btn.Click += stock_search_btn;
+
             //조건식 조회
             Fomula_search_btn.Click += fomula_search_btn;
             axKHOpenAPI1.OnReceiveConditionVer += onReceiveConditionVer;
+
             //조건식 일반 검색
             Normal_search_btn.Click += normal_search_btn;
             axKHOpenAPI1.OnReceiveTrCondition += onReceiveTrCondition;
+
             //조건식 실시간 검색
             Real_time_search_btn.Click += real_time_search_btn;
+
             //조건식 실시간 중단
             Real_time_stop_btn.Click += real_time_stop_btn;
+
             //
             Main_menu.Click += main_menu;
             Order_setting_menu.Click += order_setting_menu;
         }
 
+        //시간 표시
+        private void ClockEvent(object sender, EventArgs e)
+        {
+            timetimer.Text = DateTime.Now.ToString("yy MM-dd (ddd) HH:mm:ss");
+        }
 
         //로그인
         private void login_btn(object sender, EventArgs e)
@@ -425,6 +446,11 @@ namespace WindowsFormsApp1
         private void order_setting_menu(object sender, EventArgs e)
         {
             
+        }
+
+        private void Login_btn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
