@@ -19,7 +19,7 @@ namespace WindowsFormsApp1
             //실시간 시간 표시
             timer1.Start();
 
-            //업데이트
+            //자동 로그인
             //axKHOpenAPI1.CommConnect();
 
             //수동 로그인
@@ -53,6 +53,8 @@ namespace WindowsFormsApp1
 
             //
             Main_menu.Click += main_menu;
+
+            //
             Order_setting_menu.Click += order_setting_menu;
         }
 
@@ -196,7 +198,19 @@ namespace WindowsFormsApp1
                     dtCondStock = dataTable;
                     dataGridView1.DataSource = dtCondStock;
                     break;
-                //실시간 조건 검색 데이터 조회
+                //실시간 조건 검색
+                case "조건실시간검색":
+                    dtCondStock.Rows.Add(
+                        axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목코드").Trim(),
+                        axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목명").Trim(),
+                        string.Format("{0:#,##0}", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "현재가").Trim())),
+                        string.Format("{0:#,##0}", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "전일대비").Trim())),
+                        string.Format("{0:#,##0.00}%", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "등락율").Trim())),
+                        string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "거래량").Trim()))
+                    );
+                    dataGridView1.DataSource = dtCondStock;
+                    break;
+                //실시간 조건 검색 - 데이터 갱신
                 case "I":
                     //종목 편입
                     axKHOpenAPI1.SetInputValue("종목코드", e.sTrCode);
@@ -221,7 +235,7 @@ namespace WindowsFormsApp1
         }
         private void GetCashInfo(string acctNo)
         {
-            //SetInputValu : 계좌번호, 비밀번호입력매체구분, 조회구분
+            //SetInputValue : 계좌번호, 비밀번호입력매체구분, 조회구분
             //비밀번호입력매체구 : 기본(00), 일반조회(2). 추정조회(3)
             //CommRqData(Request Name, TR CODE, 0, 화면 번호)
             axKHOpenAPI1.SetInputValue("계좌번호", acctNo);
