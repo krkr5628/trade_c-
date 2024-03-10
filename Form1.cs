@@ -65,8 +65,6 @@ namespace WindowsFormsApp1
             //
             Main_menu.Click += main_menu;
 
-            //
-            Order_setting_menu.Click += order_setting_menu;
         }
 
 
@@ -542,11 +540,6 @@ namespace WindowsFormsApp1
 
 
         private void main_menu(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void order_setting_menu(object sender, EventArgs e)
         {
             
         }
