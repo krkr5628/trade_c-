@@ -66,7 +66,6 @@ namespace WindowsFormsApp1
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menu = new System.Windows.Forms.MenuStrip();
             this.Main_menu = new System.Windows.Forms.ToolStripMenuItem();
-            this.Order_setting_menu = new System.Windows.Forms.ToolStripMenuItem();
             this.System_setting_menu = new System.Windows.Forms.ToolStripMenuItem();
             this.time = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -88,11 +87,25 @@ namespace WindowsFormsApp1
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.axKHOpenAPI1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -102,6 +115,12 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.tableLayoutPanel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // Login_btn
@@ -124,10 +143,11 @@ namespace WindowsFormsApp1
             // log_window
             // 
             this.log_window.AcceptsTab = true;
-            this.log_window.Location = new System.Drawing.Point(1351, 513);
+            this.log_window.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.log_window.Location = new System.Drawing.Point(7, 28);
             this.log_window.Margin = new System.Windows.Forms.Padding(4);
             this.log_window.Name = "log_window";
-            this.log_window.Size = new System.Drawing.Size(463, 464);
+            this.log_window.Size = new System.Drawing.Size(442, 604);
             this.log_window.TabIndex = 2;
             this.log_window.Text = "";
             // 
@@ -145,12 +165,12 @@ namespace WindowsFormsApp1
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(17, 513);
+            this.dataGridView1.Location = new System.Drawing.Point(6, 72);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(1319, 464);
+            this.dataGridView1.Size = new System.Drawing.Size(1306, 448);
             this.dataGridView1.TabIndex = 3;
             // 
             // tableLayoutPanel1
@@ -634,7 +654,6 @@ namespace WindowsFormsApp1
             this.menu.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Main_menu,
-            this.Order_setting_menu,
             this.System_setting_menu});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
@@ -647,12 +666,6 @@ namespace WindowsFormsApp1
             this.Main_menu.Name = "Main_menu";
             this.Main_menu.Size = new System.Drawing.Size(64, 29);
             this.Main_menu.Text = "메인";
-            // 
-            // Order_setting_menu
-            // 
-            this.Order_setting_menu.Name = "Order_setting_menu";
-            this.Order_setting_menu.Size = new System.Drawing.Size(106, 29);
-            this.Order_setting_menu.Text = "거래 설정";
             // 
             // System_setting_menu
             // 
@@ -687,11 +700,11 @@ namespace WindowsFormsApp1
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(17, 306);
+            this.dataGridView2.Location = new System.Drawing.Point(6, 74);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersWidth = 62;
             this.dataGridView2.RowTemplate.Height = 30;
-            this.dataGridView2.Size = new System.Drawing.Size(1319, 187);
+            this.dataGridView2.Size = new System.Drawing.Size(1306, 222);
             this.dataGridView2.TabIndex = 10;
             // 
             // tableLayoutPanel3
@@ -707,7 +720,8 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel3.Controls.Add(this.Login_btn, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.button3, 2, 0);
             this.tableLayoutPanel3.Controls.Add(this.Trade_setting, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.button2, 5, 0);
+            this.tableLayoutPanel3.Controls.Add(this.button14, 4, 0);
+            this.tableLayoutPanel3.Controls.Add(this.button2, 3, 0);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(17, 50);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
@@ -755,10 +769,10 @@ namespace WindowsFormsApp1
             this.button2.BackColor = System.Drawing.Color.SteelBlue;
             this.button2.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.button2.ForeColor = System.Drawing.Color.Transparent;
-            this.button2.Location = new System.Drawing.Point(530, 0);
+            this.button2.Location = new System.Drawing.Point(318, 0);
             this.button2.Margin = new System.Windows.Forms.Padding(0);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(111, 61);
+            this.button2.Size = new System.Drawing.Size(106, 61);
             this.button2.TabIndex = 3;
             this.button2.Text = "업데이트  내역";
             this.button2.UseVisualStyleBackColor = false;
@@ -775,7 +789,7 @@ namespace WindowsFormsApp1
             this.User_connection.Location = new System.Drawing.Point(1351, 50);
             this.User_connection.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.User_connection.Name = "User_connection";
-            this.User_connection.Size = new System.Drawing.Size(132, 60);
+            this.User_connection.Size = new System.Drawing.Size(132, 233);
             this.User_connection.TabIndex = 13;
             this.User_connection.Text = "모의";
             this.User_connection.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -882,24 +896,18 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel5.Controls.Add(this.button4, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.button5, 0, 1);
-            this.tableLayoutPanel5.Controls.Add(this.button6, 2, 1);
-            this.tableLayoutPanel5.Controls.Add(this.button7, 0, 2);
-            this.tableLayoutPanel5.Controls.Add(this.button8, 2, 2);
-            this.tableLayoutPanel5.Controls.Add(this.button9, 0, 3);
             this.tableLayoutPanel5.Controls.Add(this.button10, 2, 0);
-            this.tableLayoutPanel5.Controls.Add(this.button11, 2, 3);
-            this.tableLayoutPanel5.Controls.Add(this.button12, 0, 4);
-            this.tableLayoutPanel5.Controls.Add(this.button13, 2, 4);
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(1351, 306);
+            this.tableLayoutPanel5.Controls.Add(this.button12, 0, 1);
+            this.tableLayoutPanel5.Controls.Add(this.button13, 2, 1);
+            this.tableLayoutPanel5.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(11, 27);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 5;
+            this.tableLayoutPanel5.RowCount = 4;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(456, 187);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(438, 168);
             this.tableLayoutPanel5.TabIndex = 5;
             // 
             // button4
@@ -913,7 +921,7 @@ namespace WindowsFormsApp1
             this.button4.Location = new System.Drawing.Point(0, 0);
             this.button4.Margin = new System.Windows.Forms.Padding(0);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(114, 37);
+            this.button4.Size = new System.Drawing.Size(109, 42);
             this.button4.TabIndex = 5;
             this.button4.Text = "동작시간";
             this.button4.UseVisualStyleBackColor = false;
@@ -926,10 +934,10 @@ namespace WindowsFormsApp1
             this.button5.BackColor = System.Drawing.Color.LightBlue;
             this.button5.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.button5.ForeColor = System.Drawing.Color.Transparent;
-            this.button5.Location = new System.Drawing.Point(0, 37);
+            this.button5.Location = new System.Drawing.Point(0, 0);
             this.button5.Margin = new System.Windows.Forms.Padding(0);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(114, 37);
+            this.button5.Size = new System.Drawing.Size(163, 36);
             this.button5.TabIndex = 6;
             this.button5.Text = "매수조건";
             this.button5.UseVisualStyleBackColor = false;
@@ -942,10 +950,10 @@ namespace WindowsFormsApp1
             this.button6.BackColor = System.Drawing.Color.OrangeRed;
             this.button6.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.button6.ForeColor = System.Drawing.Color.Transparent;
-            this.button6.Location = new System.Drawing.Point(228, 37);
+            this.button6.Location = new System.Drawing.Point(652, 0);
             this.button6.Margin = new System.Windows.Forms.Padding(0);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(114, 37);
+            this.button6.Size = new System.Drawing.Size(163, 36);
             this.button6.TabIndex = 7;
             this.button6.Text = "매도조건";
             this.button6.UseVisualStyleBackColor = false;
@@ -958,10 +966,10 @@ namespace WindowsFormsApp1
             this.button7.BackColor = System.Drawing.Color.LightBlue;
             this.button7.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.button7.ForeColor = System.Drawing.Color.Transparent;
-            this.button7.Location = new System.Drawing.Point(0, 74);
+            this.button7.Location = new System.Drawing.Point(326, 0);
             this.button7.Margin = new System.Windows.Forms.Padding(0);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(114, 37);
+            this.button7.Size = new System.Drawing.Size(163, 36);
             this.button7.TabIndex = 8;
             this.button7.Text = "매매방식";
             this.button7.UseVisualStyleBackColor = false;
@@ -974,29 +982,13 @@ namespace WindowsFormsApp1
             this.button8.BackColor = System.Drawing.Color.OrangeRed;
             this.button8.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.button8.ForeColor = System.Drawing.Color.Transparent;
-            this.button8.Location = new System.Drawing.Point(228, 74);
+            this.button8.Location = new System.Drawing.Point(978, 0);
             this.button8.Margin = new System.Windows.Forms.Padding(0);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(114, 37);
+            this.button8.Size = new System.Drawing.Size(163, 36);
             this.button8.TabIndex = 9;
             this.button8.Text = "매매방식";
             this.button8.UseVisualStyleBackColor = false;
-            // 
-            // button9
-            // 
-            this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button9.BackColor = System.Drawing.Color.LightBlue;
-            this.button9.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button9.ForeColor = System.Drawing.Color.Transparent;
-            this.button9.Location = new System.Drawing.Point(0, 111);
-            this.button9.Margin = new System.Windows.Forms.Padding(0);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(114, 37);
-            this.button9.TabIndex = 10;
-            this.button9.Text = "분할여부";
-            this.button9.UseVisualStyleBackColor = false;
             // 
             // button10
             // 
@@ -1006,29 +998,13 @@ namespace WindowsFormsApp1
             this.button10.BackColor = System.Drawing.Color.DimGray;
             this.button10.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.button10.ForeColor = System.Drawing.Color.Transparent;
-            this.button10.Location = new System.Drawing.Point(228, 0);
+            this.button10.Location = new System.Drawing.Point(218, 0);
             this.button10.Margin = new System.Windows.Forms.Padding(0);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(114, 37);
+            this.button10.Size = new System.Drawing.Size(109, 42);
             this.button10.TabIndex = 11;
             this.button10.Text = "당일청산";
             this.button10.UseVisualStyleBackColor = false;
-            // 
-            // button11
-            // 
-            this.button11.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button11.BackColor = System.Drawing.Color.OrangeRed;
-            this.button11.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button11.ForeColor = System.Drawing.Color.Transparent;
-            this.button11.Location = new System.Drawing.Point(228, 111);
-            this.button11.Margin = new System.Windows.Forms.Padding(0);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(114, 37);
-            this.button11.TabIndex = 12;
-            this.button11.Text = "분할여부";
-            this.button11.UseVisualStyleBackColor = false;
             // 
             // button12
             // 
@@ -1038,10 +1014,10 @@ namespace WindowsFormsApp1
             this.button12.BackColor = System.Drawing.Color.MediumOrchid;
             this.button12.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.button12.ForeColor = System.Drawing.Color.Transparent;
-            this.button12.Location = new System.Drawing.Point(0, 148);
+            this.button12.Location = new System.Drawing.Point(0, 42);
             this.button12.Margin = new System.Windows.Forms.Padding(0);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(114, 39);
+            this.button12.Size = new System.Drawing.Size(109, 42);
             this.button12.TabIndex = 13;
             this.button12.Text = "이익(%)";
             this.button12.UseVisualStyleBackColor = false;
@@ -1054,30 +1030,213 @@ namespace WindowsFormsApp1
             this.button13.BackColor = System.Drawing.Color.MediumPurple;
             this.button13.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.button13.ForeColor = System.Drawing.Color.Transparent;
-            this.button13.Location = new System.Drawing.Point(228, 148);
+            this.button13.Location = new System.Drawing.Point(218, 42);
             this.button13.Margin = new System.Windows.Forms.Padding(0);
             this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(114, 39);
+            this.button13.Size = new System.Drawing.Size(109, 42);
             this.button13.TabIndex = 14;
             this.button13.Text = "손실(%)";
             this.button13.UseVisualStyleBackColor = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.log_window);
+            this.groupBox1.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.groupBox1.Location = new System.Drawing.Point(1351, 513);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(456, 647);
+            this.groupBox1.TabIndex = 14;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "LOG";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.tableLayoutPanel7);
+            this.groupBox2.Controls.Add(this.dataGridView2);
+            this.groupBox2.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.groupBox2.Location = new System.Drawing.Point(17, 306);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(1319, 313);
+            this.groupBox2.TabIndex = 15;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "계좌보유 현황";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.tableLayoutPanel6);
+            this.groupBox3.Controls.Add(this.dataGridView1);
+            this.groupBox3.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.groupBox3.Location = new System.Drawing.Point(17, 625);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(1319, 535);
+            this.groupBox3.TabIndex = 16;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "실시간 조건검색 현황";
+            // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.ColumnCount = 8;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel6.Controls.Add(this.textBox4, 7, 0);
+            this.tableLayoutPanel6.Controls.Add(this.textBox2, 3, 0);
+            this.tableLayoutPanel6.Controls.Add(this.button5, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.button8, 6, 0);
+            this.tableLayoutPanel6.Controls.Add(this.button7, 2, 0);
+            this.tableLayoutPanel6.Controls.Add(this.button6, 4, 0);
+            this.tableLayoutPanel6.Controls.Add(this.textBox1, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.textBox3, 5, 0);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(6, 29);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 1;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(1306, 36);
+            this.tableLayoutPanel6.TabIndex = 11;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(166, 3);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(157, 30);
+            this.textBox1.TabIndex = 10;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(492, 3);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(157, 30);
+            this.textBox2.TabIndex = 11;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(818, 3);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(157, 30);
+            this.textBox3.TabIndex = 12;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(1144, 3);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(159, 30);
+            this.textBox4.TabIndex = 13;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.tableLayoutPanel5);
+            this.groupBox4.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.groupBox4.Location = new System.Drawing.Point(1351, 306);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(456, 201);
+            this.groupBox4.TabIndex = 17;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "설정 요약";
+            // 
+            // tableLayoutPanel7
+            // 
+            this.tableLayoutPanel7.ColumnCount = 8;
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel7.Controls.Add(this.textBox5, 0, 0);
+            this.tableLayoutPanel7.Controls.Add(this.comboBox1, 1, 0);
+            this.tableLayoutPanel7.Controls.Add(this.button1, 4, 0);
+            this.tableLayoutPanel7.Controls.Add(this.button9, 5, 0);
+            this.tableLayoutPanel7.Controls.Add(this.button11, 6, 0);
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(7, 27);
+            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
+            this.tableLayoutPanel7.RowCount = 1;
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(1302, 42);
+            this.tableLayoutPanel7.TabIndex = 11;
+            // 
+            // textBox5
+            // 
+            this.textBox5.BackColor = System.Drawing.SystemColors.Menu;
+            this.textBox5.Location = new System.Drawing.Point(3, 3);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(156, 30);
+            this.textBox5.TabIndex = 0;
+            this.textBox5.Text = "수익률 주기";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(165, 3);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(156, 28);
+            this.comboBox1.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(651, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(156, 36);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "전체 청산";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(813, 3);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(156, 36);
+            this.button9.TabIndex = 3;
+            this.button9.Text = "수익 청산";
+            this.button9.UseVisualStyleBackColor = true;
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(975, 3);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(156, 36);
+            this.button11.TabIndex = 4;
+            this.button11.Text = "손실 청산";
+            this.button11.UseVisualStyleBackColor = true;
+            // 
+            // button14
+            // 
+            this.button14.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button14.BackColor = System.Drawing.Color.SteelBlue;
+            this.button14.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.button14.ForeColor = System.Drawing.Color.Transparent;
+            this.button14.Location = new System.Drawing.Point(424, 0);
+            this.button14.Margin = new System.Windows.Forms.Padding(0);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(106, 61);
+            this.button14.TabIndex = 5;
+            this.button14.Text = "동의사항";
+            this.button14.UseVisualStyleBackColor = false;
             // 
             // Trade_Auto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1830, 1003);
+            this.ClientSize = new System.Drawing.Size(1830, 1176);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tableLayoutPanel4);
             this.Controls.Add(this.tableLayoutPanel3);
-            this.Controls.Add(this.dataGridView2);
-            this.Controls.Add(this.tableLayoutPanel5);
             this.Controls.Add(this.timetimer);
             this.Controls.Add(this.menu);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.User_connection);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.log_window);
             this.Controls.Add(this.axKHOpenAPI1);
             this.Controls.Add(this.time);
             this.MainMenuStrip = this.menu;
@@ -1097,6 +1256,14 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.tableLayoutPanel7.ResumeLayout(false);
+            this.tableLayoutPanel7.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1130,7 +1297,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.MenuStrip menu;
         private System.Windows.Forms.ToolStripMenuItem Main_menu;
-        private System.Windows.Forms.ToolStripMenuItem Order_setting_menu;
         private System.Windows.Forms.ToolStripMenuItem System_setting_menu;
         private System.Windows.Forms.Label time;
         private System.Windows.Forms.Timer timer1;
@@ -1161,11 +1327,25 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button button14;
     }
 }
 
