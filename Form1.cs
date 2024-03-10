@@ -40,6 +40,9 @@ namespace WindowsFormsApp1
             //예수금 조회
             User_account_list.SelectedIndexChanged += selectedIndexChange;
 
+            //설정창 실행
+            Trade_setting.Click += trade_setting;
+
             //종목 조회
             Stock_search_btn.Click += stock_search_btn;
 
@@ -341,6 +344,15 @@ namespace WindowsFormsApp1
             GetErrorMessage(result);
         }
 
+        //초기 설정 등록
+
+
+        //설정창 실행
+        private void trade_setting(object sender, EventArgs e)
+        {
+            Setting newform2 = new Setting();
+            newform2.ShowDialog(); //form2 닫기 전까지 form1 제어 불가능
+        }
 
         //종목 조회
         private void stock_search_btn(object sender, EventArgs e)
