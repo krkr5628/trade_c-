@@ -133,7 +133,7 @@ namespace WindowsFormsApp1
             this.Login_btn.Location = new System.Drawing.Point(0, 0);
             this.Login_btn.Margin = new System.Windows.Forms.Padding(0);
             this.Login_btn.Name = "Login_btn";
-            this.Login_btn.Size = new System.Drawing.Size(106, 61);
+            this.Login_btn.Size = new System.Drawing.Size(106, 62);
             this.Login_btn.TabIndex = 1;
             this.Login_btn.Text = "UPDATE";
             this.Login_btn.UseVisualStyleBackColor = false;
@@ -144,20 +144,20 @@ namespace WindowsFormsApp1
             this.log_window.AcceptsTab = true;
             this.log_window.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.log_window.Location = new System.Drawing.Point(7, 28);
-            this.log_window.Margin = new System.Windows.Forms.Padding(4);
+            this.log_window.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.log_window.Name = "log_window";
-            this.log_window.Size = new System.Drawing.Size(442, 604);
+            this.log_window.Size = new System.Drawing.Size(443, 604);
             this.log_window.TabIndex = 2;
             this.log_window.Text = "";
             // 
             // axKHOpenAPI1
             // 
             this.axKHOpenAPI1.Enabled = true;
-            this.axKHOpenAPI1.Location = new System.Drawing.Point(1182, 106);
-            this.axKHOpenAPI1.Margin = new System.Windows.Forms.Padding(4);
+            this.axKHOpenAPI1.Location = new System.Drawing.Point(1104, 50);
+            this.axKHOpenAPI1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.axKHOpenAPI1.Name = "axKHOpenAPI1";
             this.axKHOpenAPI1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axKHOpenAPI1.OcxState")));
-            this.axKHOpenAPI1.Size = new System.Drawing.Size(150, 75);
+            this.axKHOpenAPI1.Size = new System.Drawing.Size(225, 112);
             this.axKHOpenAPI1.TabIndex = 0;
             this.axKHOpenAPI1.Visible = false;
             // 
@@ -165,7 +165,7 @@ namespace WindowsFormsApp1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(6, 72);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
             this.dataGridView1.RowTemplate.Height = 23;
@@ -197,7 +197,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel1.Controls.Add(this.label13, 8, 0);
             this.tableLayoutPanel1.Controls.Add(this.label14, 9, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(17, 198);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -226,10 +226,10 @@ namespace WindowsFormsApp1
             // 
             this.User_money.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.User_money.Location = new System.Drawing.Point(397, 47);
-            this.User_money.Margin = new System.Windows.Forms.Padding(4);
+            this.User_money.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.User_money.Name = "User_money";
             this.User_money.ReadOnly = true;
-            this.User_money.Size = new System.Drawing.Size(123, 28);
+            this.User_money.Size = new System.Drawing.Size(121, 28);
             this.User_money.TabIndex = 16;
             // 
             // total_balance
@@ -395,7 +395,7 @@ namespace WindowsFormsApp1
             this.User_name.Location = new System.Drawing.Point(322, 0);
             this.User_name.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.User_name.Name = "User_name";
-            this.User_name.Size = new System.Drawing.Size(98, 55);
+            this.User_name.Size = new System.Drawing.Size(98, 56);
             this.User_name.TabIndex = 6;
             this.User_name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -411,7 +411,7 @@ namespace WindowsFormsApp1
             this.label2.Location = new System.Drawing.Point(4, 0);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(98, 55);
+            this.label2.Size = new System.Drawing.Size(98, 56);
             this.label2.TabIndex = 0;
             this.label2.Text = "ID";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -428,7 +428,7 @@ namespace WindowsFormsApp1
             this.label3.Location = new System.Drawing.Point(428, 0);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(98, 55);
+            this.label3.Size = new System.Drawing.Size(98, 56);
             this.label3.TabIndex = 1;
             this.label3.Text = "계좌번호";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -445,7 +445,7 @@ namespace WindowsFormsApp1
             this.label5.Location = new System.Drawing.Point(216, 0);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(98, 55);
+            this.label5.Size = new System.Drawing.Size(98, 56);
             this.label5.TabIndex = 3;
             this.label5.Text = "NAME";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -460,7 +460,7 @@ namespace WindowsFormsApp1
             this.User_id.Location = new System.Drawing.Point(110, 0);
             this.User_id.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.User_id.Name = "User_id";
-            this.User_id.Size = new System.Drawing.Size(98, 55);
+            this.User_id.Size = new System.Drawing.Size(98, 56);
             this.User_id.TabIndex = 5;
             this.User_id.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -472,7 +472,7 @@ namespace WindowsFormsApp1
             this.User_account_list.FormattingEnabled = true;
             this.User_account_list.ItemHeight = 18;
             this.User_account_list.Location = new System.Drawing.Point(534, 4);
-            this.User_account_list.Margin = new System.Windows.Forms.Padding(4);
+            this.User_account_list.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.User_account_list.Name = "User_account_list";
             this.User_account_list.Size = new System.Drawing.Size(98, 26);
             this.User_account_list.TabIndex = 11;
@@ -493,7 +493,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel2.Controls.Add(this.Real_time_stop_btn, 2, 2);
             this.tableLayoutPanel2.Controls.Add(this.Stock_code, 1, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(1351, 126);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -510,7 +510,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Fomula_list.FormattingEnabled = true;
             this.Fomula_list.Location = new System.Drawing.Point(155, 57);
-            this.Fomula_list.Margin = new System.Windows.Forms.Padding(4);
+            this.Fomula_list.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Fomula_list.Name = "Fomula_list";
             this.Fomula_list.Size = new System.Drawing.Size(144, 26);
             this.Fomula_list.TabIndex = 12;
@@ -636,7 +636,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Stock_code.Location = new System.Drawing.Point(155, 4);
-            this.Stock_code.Margin = new System.Windows.Forms.Padding(4);
+            this.Stock_code.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Stock_code.Name = "Stock_code";
             this.Stock_code.Size = new System.Drawing.Size(144, 28);
             this.Stock_code.TabIndex = 13;
@@ -655,6 +655,7 @@ namespace WindowsFormsApp1
             this.Main_menu});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
+            this.menu.Padding = new System.Windows.Forms.Padding(6, 2, 0, 2);
             this.menu.Size = new System.Drawing.Size(1830, 33);
             this.menu.TabIndex = 7;
             this.menu.Text = "menuStrip1";
@@ -669,7 +670,7 @@ namespace WindowsFormsApp1
             // 
             this.time.Location = new System.Drawing.Point(0, 0);
             this.time.Name = "time";
-            this.time.Size = new System.Drawing.Size(100, 23);
+            this.time.Size = new System.Drawing.Size(100, 22);
             this.time.TabIndex = 8;
             // 
             // timer1
@@ -718,7 +719,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(641, 61);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(641, 62);
             this.tableLayoutPanel3.TabIndex = 11;
             // 
             // button3
@@ -732,7 +733,7 @@ namespace WindowsFormsApp1
             this.button3.Location = new System.Drawing.Point(212, 0);
             this.button3.Margin = new System.Windows.Forms.Padding(0);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(106, 61);
+            this.button3.Size = new System.Drawing.Size(106, 62);
             this.button3.TabIndex = 4;
             this.button3.Text = "매매내역";
             this.button3.UseVisualStyleBackColor = false;
@@ -748,7 +749,7 @@ namespace WindowsFormsApp1
             this.Trade_setting.Location = new System.Drawing.Point(106, 0);
             this.Trade_setting.Margin = new System.Windows.Forms.Padding(0);
             this.Trade_setting.Name = "Trade_setting";
-            this.Trade_setting.Size = new System.Drawing.Size(106, 61);
+            this.Trade_setting.Size = new System.Drawing.Size(106, 62);
             this.Trade_setting.TabIndex = 2;
             this.Trade_setting.Text = "매매설정";
             this.Trade_setting.UseVisualStyleBackColor = false;
@@ -764,7 +765,7 @@ namespace WindowsFormsApp1
             this.button14.Location = new System.Drawing.Point(424, 0);
             this.button14.Margin = new System.Windows.Forms.Padding(0);
             this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(106, 61);
+            this.button14.Size = new System.Drawing.Size(106, 62);
             this.button14.TabIndex = 5;
             this.button14.Text = "동의사항";
             this.button14.UseVisualStyleBackColor = false;
@@ -780,7 +781,7 @@ namespace WindowsFormsApp1
             this.button2.Location = new System.Drawing.Point(318, 0);
             this.button2.Margin = new System.Windows.Forms.Padding(0);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(106, 61);
+            this.button2.Size = new System.Drawing.Size(106, 62);
             this.button2.TabIndex = 3;
             this.button2.Text = "업데이트  내역";
             this.button2.UseVisualStyleBackColor = false;
@@ -797,7 +798,7 @@ namespace WindowsFormsApp1
             this.User_connection.Location = new System.Drawing.Point(1351, 50);
             this.User_connection.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.User_connection.Name = "User_connection";
-            this.User_connection.Size = new System.Drawing.Size(132, 60);
+            this.User_connection.Size = new System.Drawing.Size(131, 62);
             this.User_connection.TabIndex = 13;
             this.User_connection.Text = "모의";
             this.User_connection.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -814,7 +815,7 @@ namespace WindowsFormsApp1
             this.label4.Location = new System.Drawing.Point(640, 0);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(98, 55);
+            this.label4.Size = new System.Drawing.Size(98, 56);
             this.label4.TabIndex = 2;
             this.label4.Text = "KEYBOARD";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -829,7 +830,7 @@ namespace WindowsFormsApp1
             this.Keyboard_wall.Location = new System.Drawing.Point(746, 0);
             this.Keyboard_wall.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Keyboard_wall.Name = "Keyboard_wall";
-            this.Keyboard_wall.Size = new System.Drawing.Size(98, 55);
+            this.Keyboard_wall.Size = new System.Drawing.Size(98, 56);
             this.Keyboard_wall.TabIndex = 15;
             this.Keyboard_wall.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -843,7 +844,7 @@ namespace WindowsFormsApp1
             this.Fire_wall.Location = new System.Drawing.Point(958, 0);
             this.Fire_wall.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Fire_wall.Name = "Fire_wall";
-            this.Fire_wall.Size = new System.Drawing.Size(106, 55);
+            this.Fire_wall.Size = new System.Drawing.Size(107, 56);
             this.Fire_wall.TabIndex = 9;
             this.Fire_wall.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -859,7 +860,7 @@ namespace WindowsFormsApp1
             this.label10.Location = new System.Drawing.Point(852, 0);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(98, 55);
+            this.label10.Size = new System.Drawing.Size(98, 56);
             this.label10.TabIndex = 14;
             this.label10.Text = "FIREWALL";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -892,8 +893,8 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(1068, 55);
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(1069, 56);
             this.tableLayoutPanel4.TabIndex = 12;
             // 
             // tableLayoutPanel5
@@ -915,7 +916,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(438, 168);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(439, 168);
             this.tableLayoutPanel5.TabIndex = 5;
             // 
             // button4
@@ -1052,7 +1053,7 @@ namespace WindowsFormsApp1
             this.groupBox1.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.groupBox1.Location = new System.Drawing.Point(1351, 513);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(456, 647);
+            this.groupBox1.Size = new System.Drawing.Size(456, 646);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "LOG";
@@ -1064,7 +1065,7 @@ namespace WindowsFormsApp1
             this.groupBox2.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.groupBox2.Location = new System.Drawing.Point(17, 306);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1319, 313);
+            this.groupBox2.Size = new System.Drawing.Size(1319, 314);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "계좌보유 현황";
@@ -1089,7 +1090,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(1302, 42);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(1301, 42);
             this.tableLayoutPanel7.TabIndex = 11;
             // 
             // textBox5
@@ -1097,7 +1098,7 @@ namespace WindowsFormsApp1
             this.textBox5.BackColor = System.Drawing.SystemColors.Menu;
             this.textBox5.Location = new System.Drawing.Point(3, 3);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(156, 30);
+            this.textBox5.Size = new System.Drawing.Size(154, 30);
             this.textBox5.TabIndex = 0;
             this.textBox5.Text = "수익률 주기";
             // 
@@ -1106,7 +1107,7 @@ namespace WindowsFormsApp1
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(165, 3);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(156, 28);
+            this.comboBox1.Size = new System.Drawing.Size(154, 28);
             this.comboBox1.TabIndex = 1;
             // 
             // button1
@@ -1141,9 +1142,9 @@ namespace WindowsFormsApp1
             this.groupBox3.Controls.Add(this.tableLayoutPanel6);
             this.groupBox3.Controls.Add(this.dataGridView1);
             this.groupBox3.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox3.Location = new System.Drawing.Point(17, 625);
+            this.groupBox3.Location = new System.Drawing.Point(17, 626);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1319, 535);
+            this.groupBox3.Size = new System.Drawing.Size(1319, 536);
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "실시간 조건검색 현황";
@@ -1167,7 +1168,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel6.Controls.Add(this.button6, 4, 0);
             this.tableLayoutPanel6.Controls.Add(this.textBox1, 1, 0);
             this.tableLayoutPanel6.Controls.Add(this.textBox3, 5, 0);
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(6, 29);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(6, 28);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 1;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -1178,28 +1179,28 @@ namespace WindowsFormsApp1
             // 
             this.textBox4.Location = new System.Drawing.Point(1144, 3);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(159, 30);
+            this.textBox4.Size = new System.Drawing.Size(158, 30);
             this.textBox4.TabIndex = 13;
             // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(492, 3);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(157, 30);
+            this.textBox2.Size = new System.Drawing.Size(155, 30);
             this.textBox2.TabIndex = 11;
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(166, 3);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(157, 30);
+            this.textBox1.Size = new System.Drawing.Size(155, 30);
             this.textBox1.TabIndex = 10;
             // 
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(818, 3);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(157, 30);
+            this.textBox3.Size = new System.Drawing.Size(155, 30);
             this.textBox3.TabIndex = 12;
             // 
             // groupBox4
@@ -1217,7 +1218,7 @@ namespace WindowsFormsApp1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1830, 1176);
+            this.ClientSize = new System.Drawing.Size(1830, 1180);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -1232,9 +1233,10 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.axKHOpenAPI1);
             this.Controls.Add(this.time);
             this.MainMenuStrip = this.menu;
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Trade_Auto";
             this.Text = "Trade_Auto";
+            this.Load += new System.EventHandler(this.Trade_Auto_Load);
             ((System.ComponentModel.ISupportInitialize)(this.axKHOpenAPI1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);

@@ -12,6 +12,8 @@ namespace WindowsFormsApp1
 {
     public partial class Trade_Auto : Form
     {
+        static public string[] arrCondition;
+        static public string[] account;
         //Main
         public Trade_Auto()
         {
@@ -137,10 +139,10 @@ namespace WindowsFormsApp1
                 string 계좌목록 = axKHOpenAPI1.GetLoginInfo("ACCLIST").Trim();
                 //계좌목록은 ';'문자로 분리된 문자열
                 //분리된 계좌를 ComboBox에 추가 
-                string[] 사용자계좌 = 계좌목록.Split(';');
-                for (int i = 0; i < 사용자계좌.Length; i++)
+                account = 계좌목록.Split(';');
+                for (int i = 0; i < account.Length; i++)
                 {
-                    User_account_list.Items.Add(사용자계좌[i]);
+                    User_account_list.Items.Add(account[i]);
                 }
                 //사용자 id를 UserId 라벨에 추가
                 string 사용자id = axKHOpenAPI1.GetLoginInfo("USER_ID");
@@ -230,7 +232,7 @@ namespace WindowsFormsApp1
             conditionInfo.Clear();
             //사용자 조건식을 조건식의 고유번호와 조건식 이름을 한 쌍으로 하는 문자열
             // ';' 구분
-            string[] arrCondition = axKHOpenAPI1.GetConditionNameList().Trim().Split(';');
+            arrCondition = axKHOpenAPI1.GetConditionNameList().Trim().Split(';');
             foreach (var cond in arrCondition)
             {
                 if (string.IsNullOrEmpty(cond)) continue;
@@ -349,6 +351,7 @@ namespace WindowsFormsApp1
         private void trade_setting(object sender, EventArgs e)
         {
             Setting newform2 = new Setting();
+            newform2.onReceiveConditionVer(account, arrCondition);
             newform2.ShowDialog(); //form2 닫기 전까지 form1 제어 불가능
         }
 
@@ -545,6 +548,11 @@ namespace WindowsFormsApp1
         }
 
         private void Login_btn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Trade_Auto_Load(object sender, EventArgs e)
         {
 
         }
