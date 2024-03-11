@@ -351,7 +351,6 @@ namespace WindowsFormsApp1
         private void trade_setting(object sender, EventArgs e)
         {
             Setting newform2 = new Setting();
-            newform2.onReceiveConditionVer(account, arrCondition);
             newform2.ShowDialog(); //form2 닫기 전까지 form1 제어 불가능
         }
 
