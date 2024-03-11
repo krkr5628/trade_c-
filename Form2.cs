@@ -45,7 +45,68 @@ namespace WindowsFormsApp1
 
         private void setting_save(object sender, EventArgs e)
         {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Title = "파일 저장 경로 지정하세요";
+            saveFileDialog.Filter = "텍스트 파일 (*.txt)|*.txt";
+            //
+            if (!String.IsNullOrEmpty(account_list.Text))
+            {
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // 사용자가 선택한 파일 경로
+                    string filePath = saveFileDialog.FileName;
 
+                    //임시저장
+                    List<String> tmp = new List<String>();
+
+                    tmp.Add("자동실행/" + Convert.ToString(auto_trade_allow.Checked));
+                    tmp.Add("자동운영시간/" + market_start_time.Text + "/" + market_end_time.Text);
+                    tmp.Add("계좌번호/" + account_list.Text);
+                    tmp.Add("초기자산/" + initial_balance.Text);
+                    tmp.Add("종목당매수금액/" + Convert.ToString(buy_per_price.Checked) + "/" + buy_per_price_text.Text);
+                    tmp.Add("종목당매수수량/" + Convert.ToString(buy_per_amount.Checked) + "/" + buy_per_amount_text.Text);
+                    tmp.Add("종목당매수비율/" + Convert.ToString(buy_per_percent.Checked) + "/" + buy_per_percent_text.Text);
+                    tmp.Add("매수종목수/" + maxbuy.Text);
+                    tmp.Add("종목최소매수가/" + min_price.Text);
+                    tmp.Add("종목최대매수가/" + max_price.Text);
+                    tmp.Add("최대보유종목수/" + Convert.ToString(max_hold.Checked) + "/" + max_hold_text.Text);
+                    tmp.Add("당일중복매수금지/" + Convert.ToString(duplication_deny.Checked));
+                    tmp.Add("보유종목매수금지/" + Convert.ToString(hold_deny.Checked));
+                    tmp.Add("매수시간전검출매수금지/" + Convert.ToString(before_time_deny.Checked));
+                    tmp.Add("매수조건/" + Convert.ToString(buy_condition.Checked) + "/" + buy_condition_start.Text + "/" + buy_condition_end.Text + "/" + Convert.ToString(Fomula_list_buy.SelectedIndex) + "/" + Convert.ToString(buy_and.Checked));
+                    tmp.Add("매도조건/" + Convert.ToString(sell_condition.Checked) + "/" + sell_condition_start.Text + "/" + sell_condition_end.Text + "/" + Convert.ToString(Fomula_list_sell.SelectedIndex));
+                    tmp.Add("익절/" + Convert.ToString(profit_percent.Checked) + "/" + profit_percent_text.Text);
+                    tmp.Add("손절/" + Convert.ToString(loss_percent.Checked) + "/" + loss_percent_text.Text);
+                    tmp.Add("익절TS/" + Convert.ToString(profit_ts.Checked) + "/" + profit_ts_text.Text);
+                    tmp.Add("익절원/" + Convert.ToString(profit_won.Checked) + "/" + profit_won_text.Text);
+                    tmp.Add("손절원/" + Convert.ToString(loss_won.Checked) + "/" + loss_won_text.Text);
+                    tmp.Add("전체청산/" + Convert.ToString(clear_sell.Checked) + "/" + clear_sell_start.Text + "/" + clear_sell_end.Text + "/" + Convert.ToString(clear_sell_market.Checked));
+                    tmp.Add("청산익절/" + Convert.ToString(clear_sell_profit.Checked) + "/" + clear_sell_profit_text.Text);
+                    tmp.Add("동시호가익절/" + Convert.ToString(after_market_profit.Checked));
+                    tmp.Add("동시호가손절/" + Convert.ToString(after_market_loss.Checked));
+                    tmp.Add("종목매수텀/" + Convert.ToString(term_for_buy.Checked) + "/" + term_for_buy_text.Text);
+                    tmp.Add("미체결매수취소/" + Convert.ToString(term_for_non_buy.Checked) + "/" + term_for_non_buy_text.Text);
+                    tmp.Add("매수설정/" + Convert.ToString(buy_set1.SelectedIndex) + "/" + Convert.ToString(buy_set2.SelectedIndex));
+                    tmp.Add("매도설정/" + Convert.ToString(sell_set1.SelectedIndex) + "/" + Convert.ToString(sell_set2.SelectedIndex));
+                    tmp.Add("코스피지수/" + Convert.ToString(kospi_index.Checked) + "/" + kospi_index_start.Text + "/" + kospi_index_end.Text);
+                    tmp.Add("코스닥지수/" + Convert.ToString(kosdak_index.Checked) + "/" + kosdak_index_start.Text + "/" + kosdak_index_end.Text);
+                    tmp.Add("코스피선물/" + Convert.ToString(kospi_commodity.Checked) + "/" + kospi_commodity_start.Text + "/" + kospi_commodity_end.Text);
+                    tmp.Add("코스닥선물/" + Convert.ToString(kosdak_commodity.Checked) + "/" + kosdak_commodity_start.Text + "/" + kosdak_commodity_end.Text);
+                    tmp.Add("텔레그램ID/" + telegram_user_id.Text);
+                    tmp.Add("텔레그램token/" + telegram_token.Text);
+
+                    //텍스트 합치기
+                    string textToSave = string.Join("\r\n", tmp);
+
+                    //파일에 텍스트 저장
+                    System.IO.File.WriteAllText(filePath, textToSave);
+                    MessageBox.Show("파일이 저장되었습니다: " + filePath);
+                }
+            }
+            else
+            {
+                MessageBox.Show("계좌번호를설정해주세요");
+            }
         }
         private void setting_load(object sender, EventArgs e)
         {
@@ -85,17 +146,17 @@ namespace WindowsFormsApp1
             String[] balance_tmp = reader.ReadLine().Split('/');
             initial_balance.Text = balance_tmp[1];
 
-            //종목당매수금액 / 매수수량 / 매수비율
+            //종목당매수금액
             String[] buy_per_price_tmp = reader.ReadLine().Split('/');
             buy_per_price.Checked = Convert.ToBoolean(buy_per_price_tmp[1]);
             buy_per_price_text.Text = buy_per_price_tmp[2];
 
-            //매수수량
+            //종목당매수수량
             String[] buy_per_amount_tmp = reader.ReadLine().Split('/');
             buy_per_amount.Checked = Convert.ToBoolean(buy_per_amount_tmp[1]);
             buy_per_amount_text.Text = buy_per_amount_tmp[2];
 
-            //매수비율
+            //종목당매수비율
             String[] buy_per_percemt_tmp = reader.ReadLine().Split('/');
             buy_per_percent.Checked = Convert.ToBoolean(buy_per_percemt_tmp[1]);
             buy_per_percent_text.Text = buy_per_percemt_tmp[2];
@@ -176,12 +237,12 @@ namespace WindowsFormsApp1
             clear_sell_end.Text = clear_sell_tmp[3];
             clear_sell_market.Checked = Convert.ToBoolean(clear_sell_tmp[4]);
 
-            //청산시장가
+            //청산익절
             String[] clear_sell_profit_tmp = reader.ReadLine().Split('/');
             clear_sell_profit.Checked = Convert.ToBoolean(clear_sell_profit_tmp[1]);
             clear_sell_profit_text.Text = clear_sell_profit_tmp[2];
 
-            //청산익절
+            //청산손절
             String[] clear_sell_loss_tmp = reader.ReadLine().Split('/');
             clear_sell_loss.Checked = Convert.ToBoolean(clear_sell_loss_tmp[1]);
             clear_sell_loss_text.Text = clear_sell_loss_tmp[2];

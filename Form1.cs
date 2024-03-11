@@ -12,8 +12,10 @@ namespace WindowsFormsApp1
 {
     public partial class Trade_Auto : Form
     {
+        //공용 신호
         static public string[] arrCondition;
         static public string[] account;
+
         //Main
         public Trade_Auto()
         {
