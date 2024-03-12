@@ -111,6 +111,8 @@ namespace WindowsFormsApp1
             this.Fomula_list_buy = new System.Windows.Forms.ComboBox();
             this.Fomula_list_sell = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
+            this.term_for_non_buy = new System.Windows.Forms.CheckBox();
+            this.term_for_buy = new System.Windows.Forms.CheckBox();
             this.term_for_buy_text = new System.Windows.Forms.TextBox();
             this.term_for_non_buy_text = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -147,8 +149,6 @@ namespace WindowsFormsApp1
             this.telegram_token = new System.Windows.Forms.TextBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.term_for_buy = new System.Windows.Forms.CheckBox();
-            this.term_for_non_buy = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -250,6 +250,7 @@ namespace WindowsFormsApp1
             this.textBox37.BackColor = System.Drawing.SystemColors.Menu;
             this.textBox37.Location = new System.Drawing.Point(3, 3);
             this.textBox37.Name = "textBox37";
+            this.textBox37.ReadOnly = true;
             this.textBox37.Size = new System.Drawing.Size(164, 30);
             this.textBox37.TabIndex = 4;
             this.textBox37.Text = "계좌번호";
@@ -260,6 +261,7 @@ namespace WindowsFormsApp1
             this.textBox4.BackColor = System.Drawing.SystemColors.MenuBar;
             this.textBox4.Location = new System.Drawing.Point(3, 299);
             this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
             this.textBox4.Size = new System.Drawing.Size(185, 30);
             this.textBox4.TabIndex = 7;
             this.textBox4.Text = "종목 최대 매수가";
@@ -278,6 +280,7 @@ namespace WindowsFormsApp1
             this.textBox3.BackColor = System.Drawing.SystemColors.MenuBar;
             this.textBox3.Location = new System.Drawing.Point(3, 262);
             this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(185, 30);
             this.textBox3.TabIndex = 6;
             this.textBox3.Text = "종목 최소 매수가";
@@ -296,6 +299,7 @@ namespace WindowsFormsApp1
             this.textBox2.BackColor = System.Drawing.SystemColors.MenuBar;
             this.textBox2.Location = new System.Drawing.Point(3, 225);
             this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(185, 30);
             this.textBox2.TabIndex = 5;
             this.textBox2.Text = "매수 종목 수";
@@ -347,8 +351,10 @@ namespace WindowsFormsApp1
             // label_initial
             // 
             this.label_initial.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.label_initial.HideSelection = false;
             this.label_initial.Location = new System.Drawing.Point(3, 77);
             this.label_initial.Name = "label_initial";
+            this.label_initial.ReadOnly = true;
             this.label_initial.Size = new System.Drawing.Size(185, 30);
             this.label_initial.TabIndex = 4;
             this.label_initial.Text = "초기 자산";
@@ -367,6 +373,7 @@ namespace WindowsFormsApp1
             this.label_account.BackColor = System.Drawing.SystemColors.Menu;
             this.label_account.Location = new System.Drawing.Point(3, 40);
             this.label_account.Name = "label_account";
+            this.label_account.ReadOnly = true;
             this.label_account.Size = new System.Drawing.Size(185, 30);
             this.label_account.TabIndex = 10;
             this.label_account.Text = "계좌번호(설정값)";
@@ -454,6 +461,7 @@ namespace WindowsFormsApp1
             this.textBox15.BackColor = System.Drawing.SystemColors.Menu;
             this.textBox15.Location = new System.Drawing.Point(3, 3);
             this.textBox15.Name = "textBox15";
+            this.textBox15.ReadOnly = true;
             this.textBox15.Size = new System.Drawing.Size(90, 30);
             this.textBox15.TabIndex = 2;
             this.textBox15.Text = "운영시간";
@@ -535,7 +543,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.90253F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.43321F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.53069F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 161F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 164F));
             this.tableLayoutPanel5.Controls.Add(this.setting_allowed, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.setting_open, 3, 0);
             this.tableLayoutPanel5.Controls.Add(this.save_button, 2, 0);
@@ -555,7 +563,7 @@ namespace WindowsFormsApp1
             this.setting_allowed.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_allowed.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_allowed.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_allowed.Location = new System.Drawing.Point(1100, 3);
+            this.setting_allowed.Location = new System.Drawing.Point(1099, 3);
             this.setting_allowed.Name = "setting_allowed";
             this.setting_allowed.Size = new System.Drawing.Size(147, 44);
             this.setting_allowed.TabIndex = 8;
@@ -567,7 +575,7 @@ namespace WindowsFormsApp1
             this.setting_open.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_open.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_open.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_open.Location = new System.Drawing.Point(941, 3);
+            this.setting_open.Location = new System.Drawing.Point(940, 3);
             this.setting_open.Name = "setting_open";
             this.setting_open.Size = new System.Drawing.Size(153, 44);
             this.setting_open.TabIndex = 7;
@@ -579,7 +587,7 @@ namespace WindowsFormsApp1
             this.save_button.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.save_button.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.save_button.ForeColor = System.Drawing.Color.SpringGreen;
-            this.save_button.Location = new System.Drawing.Point(772, 3);
+            this.save_button.Location = new System.Drawing.Point(771, 3);
             this.save_button.Name = "save_button";
             this.save_button.Size = new System.Drawing.Size(163, 44);
             this.save_button.TabIndex = 6;
@@ -590,7 +598,8 @@ namespace WindowsFormsApp1
             // 
             this.setting_name.Location = new System.Drawing.Point(213, 3);
             this.setting_name.Name = "setting_name";
-            this.setting_name.Size = new System.Drawing.Size(553, 28);
+            this.setting_name.ReadOnly = true;
+            this.setting_name.Size = new System.Drawing.Size(552, 28);
             this.setting_name.TabIndex = 1;
             // 
             // textBox13
@@ -649,6 +658,7 @@ namespace WindowsFormsApp1
             this.textBox40.BackColor = System.Drawing.SystemColors.Menu;
             this.textBox40.Location = new System.Drawing.Point(319, 3);
             this.textBox40.Name = "textBox40";
+            this.textBox40.ReadOnly = true;
             this.textBox40.Size = new System.Drawing.Size(30, 30);
             this.textBox40.TabIndex = 20;
             this.textBox40.Text = "~";
@@ -785,6 +795,7 @@ namespace WindowsFormsApp1
             this.textBox39.BackColor = System.Drawing.SystemColors.Menu;
             this.textBox39.Location = new System.Drawing.Point(319, 3);
             this.textBox39.Name = "textBox39";
+            this.textBox39.ReadOnly = true;
             this.textBox39.Size = new System.Drawing.Size(30, 30);
             this.textBox39.TabIndex = 19;
             this.textBox39.Text = "~";
@@ -1089,6 +1100,28 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel11.Size = new System.Drawing.Size(669, 116);
             this.tableLayoutPanel11.TabIndex = 11;
+            // 
+            // term_for_non_buy
+            // 
+            this.term_for_non_buy.AutoSize = true;
+            this.term_for_non_buy.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.term_for_non_buy.Location = new System.Drawing.Point(337, 3);
+            this.term_for_non_buy.Name = "term_for_non_buy";
+            this.term_for_non_buy.Size = new System.Drawing.Size(135, 24);
+            this.term_for_non_buy.TabIndex = 21;
+            this.term_for_non_buy.Text = "미체결취소";
+            this.term_for_non_buy.UseVisualStyleBackColor = true;
+            // 
+            // term_for_buy
+            // 
+            this.term_for_buy.AutoSize = true;
+            this.term_for_buy.ForeColor = System.Drawing.Color.Crimson;
+            this.term_for_buy.Location = new System.Drawing.Point(3, 3);
+            this.term_for_buy.Name = "term_for_buy";
+            this.term_for_buy.Size = new System.Drawing.Size(135, 24);
+            this.term_for_buy.TabIndex = 21;
+            this.term_for_buy.Text = "종목매수텀";
+            this.term_for_buy.UseVisualStyleBackColor = true;
             // 
             // term_for_buy_text
             // 
@@ -1444,28 +1477,6 @@ namespace WindowsFormsApp1
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // term_for_buy
-            // 
-            this.term_for_buy.AutoSize = true;
-            this.term_for_buy.ForeColor = System.Drawing.Color.Crimson;
-            this.term_for_buy.Location = new System.Drawing.Point(3, 3);
-            this.term_for_buy.Name = "term_for_buy";
-            this.term_for_buy.Size = new System.Drawing.Size(135, 24);
-            this.term_for_buy.TabIndex = 21;
-            this.term_for_buy.Text = "종목매수텀";
-            this.term_for_buy.UseVisualStyleBackColor = true;
-            // 
-            // term_for_non_buy
-            // 
-            this.term_for_non_buy.AutoSize = true;
-            this.term_for_non_buy.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.term_for_non_buy.Location = new System.Drawing.Point(337, 3);
-            this.term_for_non_buy.Name = "term_for_non_buy";
-            this.term_for_non_buy.Size = new System.Drawing.Size(135, 24);
-            this.term_for_non_buy.TabIndex = 21;
-            this.term_for_non_buy.Text = "미체결취소";
-            this.term_for_non_buy.UseVisualStyleBackColor = true;
             // 
             // Setting
             // 

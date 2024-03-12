@@ -29,13 +29,13 @@ namespace WindowsFormsApp1
             //조건식 로딩
             onReceiveConditionVer(Trade_Auto.account, Trade_Auto.arrCondition);
 
-            //auto load
+            //초기값세팅
             setting_load_auto();
 
             //save & load
             save_button.Click += setting_save;
             setting_open.Click += setting_load;
-
+            setting_allowed.Click += setting_allow;
 
             //TELEGRAM TEST
             telegram_test_button.Click += telegram_test;
@@ -82,6 +82,7 @@ namespace WindowsFormsApp1
                     tmp.Add("손절원/" + Convert.ToString(loss_won.Checked) + "/" + loss_won_text.Text);
                     tmp.Add("전체청산/" + Convert.ToString(clear_sell.Checked) + "/" + clear_sell_start.Text + "/" + clear_sell_end.Text + "/" + Convert.ToString(clear_sell_market.Checked));
                     tmp.Add("청산익절/" + Convert.ToString(clear_sell_profit.Checked) + "/" + clear_sell_profit_text.Text);
+                    tmp.Add("청산손절/" + Convert.ToString(clear_sell_loss.Checked) + "/" + clear_sell_loss_text.Text);
                     tmp.Add("동시호가익절/" + Convert.ToString(after_market_profit.Checked));
                     tmp.Add("동시호가손절/" + Convert.ToString(after_market_loss.Checked));
                     tmp.Add("종목매수텀/" + Convert.ToString(term_for_buy.Checked) + "/" + term_for_buy_text.Text);
@@ -114,16 +115,33 @@ namespace WindowsFormsApp1
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 String filepath = openFileDialog1.FileName;
-                load_auto(filepath);
+                if (utility.auto_load(filepath))
+                {
+                    match(filepath);
+                }
             }
         }
-        private void setting_load_auto()
+
+        private void setting_allow(object sender, EventArgs e)
         {
-            //windows server 2022 영문 기준 바탕화면에 파일을 해제했을 떄 기준으로 주소 변경
-            String filepath = "C:\\Users\\krkr5\\OneDrive\\바탕 화면\\project\\kiwoom2\\setting.txt";
-            load_auto(filepath);
+            //form1 전체 중단 코드
+
+            //파일 주소 확인의 값을 system 주소로 변경
+            utility.system_route = setting_name.Text;
+
+            //utility 항목의 재로딩 시작
+            if (utility.setting_load_auto())
+            {
+                MessageBox.Show("반영이 완료되었습니다.");
+            }
+  
         }
-        private void load_auto(String filepath)
+        public void setting_load_auto()
+        {
+            match(utility.system_route);
+        }
+
+        private void match(string filepath)
         {
             StreamReader reader = new StreamReader(filepath);
             //파일 주소 확인

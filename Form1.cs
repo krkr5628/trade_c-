@@ -38,6 +38,12 @@ namespace WindowsFormsApp1
             //[자동]조건식 조회
             axKHOpenAPI1.OnReceiveConditionVer += onReceiveConditionVer;
 
+            //기존 세팅 로드
+            if (utility.setting_load_auto()) 
+            {
+                WriteLog("저장된 세팅 로딩 완료\n");
+            };
+
             //TR조회(공용기능)
             axKHOpenAPI1.OnReceiveTrData += onReceiveTrData;
 
@@ -352,8 +358,14 @@ namespace WindowsFormsApp1
         //설정창 실행
         private void trade_setting(object sender, EventArgs e)
         {
+            if (!utility.load_check)
+            {
+                MessageBox.Show("로딩중입니다.");
+                return;
+            }
             Setting newform2 = new Setting();
             newform2.ShowDialog(); //form2 닫기 전까지 form1 제어 불가능
+
         }
 
         //종목 조회
