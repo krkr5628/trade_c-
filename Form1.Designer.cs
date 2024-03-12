@@ -37,7 +37,7 @@ namespace WindowsFormsApp1
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label6 = new System.Windows.Forms.Label();
-            this.User_money = new System.Windows.Forms.TextBox();
+            this.extra = new System.Windows.Forms.TextBox();
             this.total_balance = new System.Windows.Forms.Label();
             this.current_balance = new System.Windows.Forms.Label();
             this.total_profit = new System.Windows.Forms.Label();
@@ -86,25 +86,33 @@ namespace WindowsFormsApp1
             this.button10 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.sell_condtion_method = new System.Windows.Forms.TextBox();
+            this.buy_condtion_method = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.total_money = new System.Windows.Forms.TextBox();
+            this.User_money = new System.Windows.Forms.TextBox();
+            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.buy_condition = new System.Windows.Forms.ComboBox();
+            this.sell_condtion = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.axKHOpenAPI1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -185,8 +193,17 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.Controls.Add(this.textBox13, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.textBox12, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.User_money, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.total_money, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.textBox9, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.textBox8, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.textBox7, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.textBox6, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.textBox1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label6, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.User_money, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.extra, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.total_balance, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.current_balance, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.total_profit, 2, 0);
@@ -222,15 +239,18 @@ namespace WindowsFormsApp1
             this.label6.Text = "예수금";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // User_money
+            // extra
             // 
-            this.User_money.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.User_money.Location = new System.Drawing.Point(397, 47);
-            this.User_money.Margin = new System.Windows.Forms.Padding(4);
-            this.User_money.Name = "User_money";
-            this.User_money.ReadOnly = true;
-            this.User_money.Size = new System.Drawing.Size(121, 28);
-            this.User_money.TabIndex = 16;
+            this.extra.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.extra.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.extra.Location = new System.Drawing.Point(1183, 47);
+            this.extra.Margin = new System.Windows.Forms.Padding(4);
+            this.extra.Name = "extra";
+            this.extra.ReadOnly = true;
+            this.extra.Size = new System.Drawing.Size(132, 28);
+            this.extra.TabIndex = 16;
             // 
             // total_balance
             // 
@@ -982,70 +1002,6 @@ namespace WindowsFormsApp1
             this.button13.Text = "손실(%)";
             this.button13.UseVisualStyleBackColor = false;
             // 
-            // button5
-            // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.BackColor = System.Drawing.Color.LightBlue;
-            this.button5.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button5.ForeColor = System.Drawing.Color.Transparent;
-            this.button5.Location = new System.Drawing.Point(0, 0);
-            this.button5.Margin = new System.Windows.Forms.Padding(0);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(163, 36);
-            this.button5.TabIndex = 6;
-            this.button5.Text = "매수조건";
-            this.button5.UseVisualStyleBackColor = false;
-            // 
-            // button6
-            // 
-            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button6.BackColor = System.Drawing.Color.OrangeRed;
-            this.button6.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button6.ForeColor = System.Drawing.Color.Transparent;
-            this.button6.Location = new System.Drawing.Point(652, 0);
-            this.button6.Margin = new System.Windows.Forms.Padding(0);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(163, 36);
-            this.button6.TabIndex = 7;
-            this.button6.Text = "매도조건";
-            this.button6.UseVisualStyleBackColor = false;
-            // 
-            // button7
-            // 
-            this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button7.BackColor = System.Drawing.Color.LightBlue;
-            this.button7.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button7.ForeColor = System.Drawing.Color.Transparent;
-            this.button7.Location = new System.Drawing.Point(326, 0);
-            this.button7.Margin = new System.Windows.Forms.Padding(0);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(163, 36);
-            this.button7.TabIndex = 8;
-            this.button7.Text = "매매방식";
-            this.button7.UseVisualStyleBackColor = false;
-            // 
-            // button8
-            // 
-            this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button8.BackColor = System.Drawing.Color.OrangeRed;
-            this.button8.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button8.ForeColor = System.Drawing.Color.Transparent;
-            this.button8.Location = new System.Drawing.Point(978, 0);
-            this.button8.Margin = new System.Windows.Forms.Padding(0);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(163, 36);
-            this.button8.TabIndex = 9;
-            this.button8.Text = "매매방식";
-            this.button8.UseVisualStyleBackColor = false;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.log_window);
@@ -1080,11 +1036,10 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel7.Controls.Add(this.textBox5, 0, 0);
-            this.tableLayoutPanel7.Controls.Add(this.comboBox1, 1, 0);
             this.tableLayoutPanel7.Controls.Add(this.button1, 4, 0);
             this.tableLayoutPanel7.Controls.Add(this.button9, 5, 0);
             this.tableLayoutPanel7.Controls.Add(this.button11, 6, 0);
+            this.tableLayoutPanel7.Controls.Add(this.label15, 0, 0);
             this.tableLayoutPanel7.Location = new System.Drawing.Point(7, 27);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
@@ -1092,25 +1047,11 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel7.Size = new System.Drawing.Size(1301, 42);
             this.tableLayoutPanel7.TabIndex = 11;
             // 
-            // textBox5
-            // 
-            this.textBox5.BackColor = System.Drawing.SystemColors.Menu;
-            this.textBox5.Location = new System.Drawing.Point(3, 3);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(154, 30);
-            this.textBox5.TabIndex = 0;
-            this.textBox5.Text = "수익률 주기";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(165, 3);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(154, 28);
-            this.comboBox1.TabIndex = 1;
-            // 
             // button1
             // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Location = new System.Drawing.Point(651, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(156, 36);
@@ -1120,6 +1061,9 @@ namespace WindowsFormsApp1
             // 
             // button9
             // 
+            this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.button9.Location = new System.Drawing.Point(813, 3);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(156, 36);
@@ -1129,12 +1073,28 @@ namespace WindowsFormsApp1
             // 
             // button11
             // 
+            this.button11.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.button11.Location = new System.Drawing.Point(975, 3);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(156, 36);
             this.button11.TabIndex = 4;
             this.button11.Text = "손실 청산";
             this.button11.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(3, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(156, 42);
+            this.label15.TabIndex = 14;
+            this.label15.Text = "갱신주기";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox3
             // 
@@ -1159,14 +1119,14 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel6.Controls.Add(this.textBox4, 7, 0);
-            this.tableLayoutPanel6.Controls.Add(this.textBox2, 3, 0);
-            this.tableLayoutPanel6.Controls.Add(this.button5, 0, 0);
-            this.tableLayoutPanel6.Controls.Add(this.button8, 6, 0);
-            this.tableLayoutPanel6.Controls.Add(this.button7, 2, 0);
-            this.tableLayoutPanel6.Controls.Add(this.button6, 4, 0);
-            this.tableLayoutPanel6.Controls.Add(this.textBox1, 1, 0);
-            this.tableLayoutPanel6.Controls.Add(this.textBox3, 5, 0);
+            this.tableLayoutPanel6.Controls.Add(this.sell_condtion, 5, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label19, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label18, 6, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label17, 4, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label16, 2, 0);
+            this.tableLayoutPanel6.Controls.Add(this.sell_condtion_method, 7, 0);
+            this.tableLayoutPanel6.Controls.Add(this.buy_condtion_method, 3, 0);
+            this.tableLayoutPanel6.Controls.Add(this.buy_condition, 1, 0);
             this.tableLayoutPanel6.Location = new System.Drawing.Point(6, 28);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 1;
@@ -1174,33 +1134,81 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel6.Size = new System.Drawing.Size(1306, 36);
             this.tableLayoutPanel6.TabIndex = 11;
             // 
-            // textBox4
+            // label19
             // 
-            this.textBox4.Location = new System.Drawing.Point(1144, 3);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(158, 30);
-            this.textBox4.TabIndex = 13;
+            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label19.AutoSize = true;
+            this.label19.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.label19.ForeColor = System.Drawing.Color.Crimson;
+            this.label19.Location = new System.Drawing.Point(3, 0);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(157, 36);
+            this.label19.TabIndex = 15;
+            this.label19.Text = "매수조건";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox2
+            // label18
             // 
-            this.textBox2.Location = new System.Drawing.Point(492, 3);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(155, 30);
-            this.textBox2.TabIndex = 11;
+            this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label18.AutoSize = true;
+            this.label18.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.label18.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.label18.Location = new System.Drawing.Point(981, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(157, 36);
+            this.label18.TabIndex = 17;
+            this.label18.Text = "매도방식";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox1
+            // label17
             // 
-            this.textBox1.Location = new System.Drawing.Point(166, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(155, 30);
-            this.textBox1.TabIndex = 10;
+            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label17.AutoSize = true;
+            this.label17.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.label17.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.label17.Location = new System.Drawing.Point(655, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(157, 36);
+            this.label17.TabIndex = 16;
+            this.label17.Text = "매도조건";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox3
+            // label16
             // 
-            this.textBox3.Location = new System.Drawing.Point(818, 3);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(155, 30);
-            this.textBox3.TabIndex = 12;
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label16.AutoSize = true;
+            this.label16.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.label16.ForeColor = System.Drawing.Color.Crimson;
+            this.label16.Location = new System.Drawing.Point(329, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(157, 36);
+            this.label16.TabIndex = 15;
+            this.label16.Text = "매수방식";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // sell_condtion_method
+            // 
+            this.sell_condtion_method.Location = new System.Drawing.Point(1144, 3);
+            this.sell_condtion_method.Name = "sell_condtion_method";
+            this.sell_condtion_method.ReadOnly = true;
+            this.sell_condtion_method.Size = new System.Drawing.Size(158, 30);
+            this.sell_condtion_method.TabIndex = 13;
+            // 
+            // buy_condtion_method
+            // 
+            this.buy_condtion_method.Location = new System.Drawing.Point(492, 3);
+            this.buy_condtion_method.Name = "buy_condtion_method";
+            this.buy_condtion_method.ReadOnly = true;
+            this.buy_condtion_method.Size = new System.Drawing.Size(155, 30);
+            this.buy_condtion_method.TabIndex = 11;
             // 
             // groupBox4
             // 
@@ -1212,6 +1220,141 @@ namespace WindowsFormsApp1
             this.groupBox4.TabIndex = 17;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "설정 요약";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.textBox1.Location = new System.Drawing.Point(659, 47);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(123, 28);
+            this.textBox1.TabIndex = 26;
+            // 
+            // textBox6
+            // 
+            this.textBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox6.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.textBox6.Location = new System.Drawing.Point(1052, 47);
+            this.textBox6.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.ReadOnly = true;
+            this.textBox6.Size = new System.Drawing.Size(123, 28);
+            this.textBox6.TabIndex = 27;
+            // 
+            // textBox7
+            // 
+            this.textBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox7.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.textBox7.Location = new System.Drawing.Point(921, 47);
+            this.textBox7.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.ReadOnly = true;
+            this.textBox7.Size = new System.Drawing.Size(123, 28);
+            this.textBox7.TabIndex = 28;
+            // 
+            // textBox8
+            // 
+            this.textBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox8.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.textBox8.Location = new System.Drawing.Point(790, 47);
+            this.textBox8.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.ReadOnly = true;
+            this.textBox8.Size = new System.Drawing.Size(123, 28);
+            this.textBox8.TabIndex = 29;
+            // 
+            // textBox9
+            // 
+            this.textBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox9.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.textBox9.Location = new System.Drawing.Point(135, 47);
+            this.textBox9.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.ReadOnly = true;
+            this.textBox9.Size = new System.Drawing.Size(123, 28);
+            this.textBox9.TabIndex = 30;
+            // 
+            // total_money
+            // 
+            this.total_money.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.total_money.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.total_money.Location = new System.Drawing.Point(4, 47);
+            this.total_money.Margin = new System.Windows.Forms.Padding(4);
+            this.total_money.Name = "total_money";
+            this.total_money.ReadOnly = true;
+            this.total_money.Size = new System.Drawing.Size(123, 28);
+            this.total_money.TabIndex = 31;
+            // 
+            // User_money
+            // 
+            this.User_money.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.User_money.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.User_money.Location = new System.Drawing.Point(397, 47);
+            this.User_money.Margin = new System.Windows.Forms.Padding(4);
+            this.User_money.Name = "User_money";
+            this.User_money.ReadOnly = true;
+            this.User_money.Size = new System.Drawing.Size(123, 28);
+            this.User_money.TabIndex = 32;
+            // 
+            // textBox12
+            // 
+            this.textBox12.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox12.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.textBox12.Location = new System.Drawing.Point(266, 47);
+            this.textBox12.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox12.Name = "textBox12";
+            this.textBox12.ReadOnly = true;
+            this.textBox12.Size = new System.Drawing.Size(123, 28);
+            this.textBox12.TabIndex = 33;
+            // 
+            // textBox13
+            // 
+            this.textBox13.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox13.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.textBox13.Location = new System.Drawing.Point(528, 47);
+            this.textBox13.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox13.Name = "textBox13";
+            this.textBox13.ReadOnly = true;
+            this.textBox13.Size = new System.Drawing.Size(123, 28);
+            this.textBox13.TabIndex = 34;
+            // 
+            // buy_condition
+            // 
+            this.buy_condition.Enabled = false;
+            this.buy_condition.FormattingEnabled = true;
+            this.buy_condition.Location = new System.Drawing.Point(166, 3);
+            this.buy_condition.Name = "buy_condition";
+            this.buy_condition.Size = new System.Drawing.Size(157, 28);
+            this.buy_condition.TabIndex = 18;
+            // 
+            // sell_condtion
+            // 
+            this.sell_condtion.Enabled = false;
+            this.sell_condtion.FormattingEnabled = true;
+            this.sell_condtion.Location = new System.Drawing.Point(818, 3);
+            this.sell_condtion.Name = "sell_condtion";
+            this.sell_condtion.Size = new System.Drawing.Size(157, 28);
+            this.sell_condtion.TabIndex = 19;
             // 
             // Trade_Auto
             // 
@@ -1286,7 +1429,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Button Real_time_stop_btn;
         private System.Windows.Forms.ComboBox Fomula_list;
         private System.Windows.Forms.TextBox Stock_code;
-        private System.Windows.Forms.TextBox User_money;
+        private System.Windows.Forms.TextBox extra;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.MenuStrip menu;
         private System.Windows.Forms.ToolStripMenuItem Main_menu;
@@ -1315,29 +1458,37 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox sell_condtion_method;
+        private System.Windows.Forms.TextBox buy_condtion_method;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.TextBox User_money;
+        private System.Windows.Forms.TextBox total_money;
+        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ComboBox sell_condtion;
+        private System.Windows.Forms.ComboBox buy_condition;
     }
 }
 

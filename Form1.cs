@@ -6,78 +6,55 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net;
+using System.IO;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
     public partial class Trade_Auto : Form
     {
-        //공용 신호
+        //---------------공용 신호-------------------
         static public string[] arrCondition;
         static public string[] account;
 
-        //Main
+        //---------------Main---------------------
         public Trade_Auto()
         {
             InitializeComponent();
 
-            //[자동] 로그인
-            axKHOpenAPI1.CommConnect();
+            //----초기동작----
+            if (utility.setting_load_auto()) { WriteLog("저장된 세팅 로딩 완료\n"); }; //기존 세팅 로드
+            axKHOpenAPI1.CommConnect(); //로그인
+            axKHOpenAPI1.OnEventConnect += onEventConnect; //로그인 상태 확인(ID,NAME,계좌번호,KEYBOARD,FIREWALL,조건식) 및 조건식 조회
+            axKHOpenAPI1.OnReceiveConditionVer += onReceiveConditionVer; //조건식 로드 및 기존 세팅 반영
+            User_account_list.SelectedIndexChanged += selectedIndexChange; //예수금 조회
+            timer1.Start(); //시간 표시
+            //[자동] 전체 종목 업데이트
+            //if (utility.auto_trade_allow) { auto_allow(); }; //자동 세팅 반영
 
-            //[수동] 로그인
-            Login_btn.Click += login_btn;
+            //----공용동작----
+            axKHOpenAPI1.OnReceiveTrData += onReceiveTrData; //TR조회
 
-            //[자동] 로그인 상태 확인
-            axKHOpenAPI1.OnEventConnect += onEventConnect;
+            //----버튼----
+            Login_btn.Click += login_btn; //로그인
+            Trade_setting.Click += trade_setting; //설정창
+            Stock_search_btn.Click += stock_search_btn; //종목조회
+            Normal_search_btn.Click += normal_search_btn; //조건식 일반 검색
+            axKHOpenAPI1.OnReceiveTrCondition += onReceiveTrCondition; //조건식 일반 검색 조건식 등록
 
-            //[자동]실시간 시간 표시
-            timer1.Start();
-
-            //전체 종목 업데이트
-
-            //[자동]조건식 조회
-            axKHOpenAPI1.OnReceiveConditionVer += onReceiveConditionVer;
-
-            //기존 세팅 로드
-            if (utility.setting_load_auto()) 
-            {
-                WriteLog("저장된 세팅 로딩 완료\n");
-            };
-
-            //TR조회(공용기능)
-            axKHOpenAPI1.OnReceiveTrData += onReceiveTrData;
-
-            //예수금 조회
-            User_account_list.SelectedIndexChanged += selectedIndexChange;
-
-            //설정창 실행
-            Trade_setting.Click += trade_setting;
-
-            //종목 조회
-            Stock_search_btn.Click += stock_search_btn;
-
-            //조건식 일반 검색
-            Normal_search_btn.Click += normal_search_btn;
-            axKHOpenAPI1.OnReceiveTrCondition += onReceiveTrCondition;
-
-            //조건식 실시간 검색
-            Real_time_search_btn.Click += real_time_search_btn;
-            axKHOpenAPI1.OnReceiveRealCondition += onReceiveRealCondition;
-
-            //실시간 시세 등록
-            axKHOpenAPI1.OnReceiveRealData += onReceiveRealData;
-
+            Real_time_search_btn.Click += real_time_search_btn; //조건식 실시간 검색
+            axKHOpenAPI1.OnReceiveRealCondition += onReceiveRealCondition; //조건식 실시간 검색 조건식 등록
+            axKHOpenAPI1.OnReceiveRealData += onReceiveRealData; //조건식 실시간 검색 시세 등록 편출입
             //실시간 시세 해지
 
-            //조건식 실시간 중단
-            Real_time_stop_btn.Click += real_time_stop_btn;
+            Real_time_stop_btn.Click += real_time_stop_btn; //조건식 실시간 전체 중단
 
-            //
-            Main_menu.Click += main_menu;
+            Main_menu.Click += main_menu; //메인메뉴
 
         }
 
-
+        //---------------공용기능---------------------
         //화면번호
         private int _screenNo = 1001;
         private string GetScreenNo()
@@ -118,6 +95,14 @@ namespace WindowsFormsApp1
             log_window.AppendText($@"{message}");
         }
 
+        //telegram
+        private void telegram_chat(string message)
+        {
+            string urlString = $"https://api.telegram.org/bot{utility.telegram_token}/sendMessage?chat_id={utility.telegram_user_id}&text={message}";
+            WebRequest request = WebRequest.Create(urlString);
+            Stream stream = request.GetResponse().GetResponseStream();
+        }
+
 
         //시간 표시
         private void ClockEvent(object sender, EventArgs e)
@@ -129,6 +114,7 @@ namespace WindowsFormsApp1
         //실시간 조건 검색 용 테이블(누적 저장)
         private DataTable dtCondStock = new DataTable();
 
+        //---------------초기 로그인---------------------
 
         //로그인
         private void login_btn(object sender, EventArgs e)
@@ -142,6 +128,7 @@ namespace WindowsFormsApp1
             {
                 // 정상 처리
                 WriteLog("로그인 성공\n");
+                telegram_chat("로그인 성공\n");
                 //"ACCOUNT_CNT" : 보유계좌 갯수
                 //"ACCLIST" 또는 "ACCNO" : 구분자 ';', 보유계좌 목록                
                 string 계좌목록 = axKHOpenAPI1.GetLoginInfo("ACCLIST").Trim();
@@ -197,10 +184,12 @@ namespace WindowsFormsApp1
                 if(axKHOpenAPI1.GetConditionLoad() == 1)
                 {
                     WriteLog("조건식 검색 성공\n");
+                    telegram_chat("조건식 검색 성공\n");
                 }
                 else
                 {
                     WriteLog("조건식 검색 실패\n");
+                    telegram_chat("조건식 검색 실패\n");
                 }
             }
             else
@@ -222,44 +211,7 @@ namespace WindowsFormsApp1
 
         }
 
-
-        //조건식 검색
-        class ConditionInfo
-        {
-            public int Index { get; set; }
-            public string Name { get; set; }
-            public DateTime? LastRequestTime { get; set; }
-        }
-
-        private List<ConditionInfo> conditionInfo = new List<ConditionInfo>();
-
-        private void onReceiveConditionVer(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveConditionVerEvent e)
-        {
-            if (e.lRet != 1) return;
-            Fomula_list.Items.Clear();
-            conditionInfo.Clear();
-            //사용자 조건식을 조건식의 고유번호와 조건식 이름을 한 쌍으로 하는 문자열
-            // ';' 구분
-            arrCondition = axKHOpenAPI1.GetConditionNameList().Trim().Split(';');
-            foreach (var cond in arrCondition)
-            {
-                if (string.IsNullOrEmpty(cond)) continue;
-                // '^' 구분 ex) 001^조건식1
-                var item = cond.Split('^');
-                conditionInfo.Add(new ConditionInfo
-                {
-                    Index = Convert.ToInt32(item[0]),
-                    Name = item[1]
-                });
-            }
-            Fomula_list.Items.AddRange(arrCondition);
-            if (Fomula_list.Items.Count > 0)
-            {
-                Fomula_list.SelectedIndex = 0;
-            }
-            WriteLog("조건식 조회 성공\n");
-        }
-
+        //---------------TR TABLE---------------------
 
         //데이터 조회(예수금, 유가증권, 조건식, 일반 검색, 실시간 검색 등)
         private void onReceiveTrData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e)
@@ -331,6 +283,49 @@ namespace WindowsFormsApp1
             }
         }
 
+        //---------------로드---------------------
+
+        //조건식 검색
+        class ConditionInfo
+        {
+            public int Index { get; set; }
+            public string Name { get; set; }
+            public DateTime? LastRequestTime { get; set; }
+        }
+
+        private List<ConditionInfo> conditionInfo = new List<ConditionInfo>();
+
+        private void onReceiveConditionVer(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveConditionVerEvent e)
+        {
+            if (e.lRet != 1) return;
+            Fomula_list.Items.Clear();
+            conditionInfo.Clear();
+            //사용자 조건식을 조건식의 고유번호와 조건식 이름을 한 쌍으로 하는 문자열
+            // ';' 구분
+            arrCondition = axKHOpenAPI1.GetConditionNameList().Trim().Split(';');
+            foreach (var cond in arrCondition)
+            {
+                if (string.IsNullOrEmpty(cond)) continue;
+                // '^' 구분 ex) 001^조건식1
+                var item = cond.Split('^');
+                conditionInfo.Add(new ConditionInfo
+                {
+                    Index = Convert.ToInt32(item[0]),
+                    Name = item[1]
+                });
+            }
+            Fomula_list.Items.AddRange(arrCondition);
+            buy_condition.Items.AddRange(arrCondition);
+            sell_condtion.Items.AddRange(arrCondition);
+            if (Fomula_list.Items.Count > 0)
+            {
+                Fomula_list.SelectedIndex = 0;
+                initial_allow();
+            }
+            WriteLog("조건식 조회 성공\n");
+            //telegram_chat("조건식 조회 성공\n");
+        }
+
         //예수금 조회
         private void selectedIndexChange(object sender, EventArgs e)
         {
@@ -352,8 +347,37 @@ namespace WindowsFormsApp1
             GetErrorMessage(result);
         }
 
-        //초기 설정 등록
+        //초기 설정 반영
+        private void initial_allow()
+        {
+            string[] mode = { "지정가", "시장가" };
+            string[] hoo = { "5호가", "4호가", "3호가", "2호가", "1호가", "현재가", "시장가", "-1호가", "-2호가", "-3호가", "-4호가", "-5호가" };
+            total_money.Text = utility.initial_balance;
+            buy_condition.SelectedIndex = 0;
+            buy_condtion_method.Text = mode[utility.buy_set1] + " - " + hoo[utility.buy_set2];
+            sell_condtion.SelectedIndex = utility.Fomula_list_sell;
+            sell_condtion_method.Text = mode[utility.sell_set1] + " - " + hoo[utility.sell_set2];
+        }
 
+        //초기 매매 설정
+        private void auto_allow()
+        {
+
+        }
+
+        //즉시 반영
+        public static bool immediate_allow()
+        {
+            return true;
+        }
+
+        //---------------BUTTON 모음---------------------
+
+        //main menu
+        private void main_menu(object sender, EventArgs e)
+        {
+
+        }
 
         //설정창 실행
         private void trade_setting(object sender, EventArgs e)
@@ -422,6 +446,14 @@ namespace WindowsFormsApp1
             else
                 WriteLog("조건식 일반 검색 실패\n");
         }
+
+        //전체 청산
+
+        //수익 청산
+
+        //손실 청산
+
+        //---------------자동 거래 모음---------------------
 
         //조건식 실시간 검색
         private void real_time_search_btn(object sender, EventArgs e)
@@ -554,11 +586,7 @@ namespace WindowsFormsApp1
             axKHOpenAPI1.SetRealRemove("ALL", "ALL");
         }
 
-
-        private void main_menu(object sender, EventArgs e)
-        {
-            
-        }
+        //---------------불필요 기능---------------------
 
         private void Login_btn_Click(object sender, EventArgs e)
         {
