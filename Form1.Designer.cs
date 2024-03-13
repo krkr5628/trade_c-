@@ -36,6 +36,15 @@ namespace WindowsFormsApp1
             this.axKHOpenAPI1 = new AxKHOpenAPILib.AxKHOpenAPI();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.User_money = new System.Windows.Forms.TextBox();
+            this.total_money = new System.Windows.Forms.TextBox();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.extra = new System.Windows.Forms.TextBox();
             this.total_balance = new System.Windows.Forms.Label();
@@ -95,24 +104,15 @@ namespace WindowsFormsApp1
             this.label15 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.sell_condtion = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.sell_condtion_method = new System.Windows.Forms.TextBox();
             this.buy_condtion_method = new System.Windows.Forms.TextBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.total_money = new System.Windows.Forms.TextBox();
-            this.User_money = new System.Windows.Forms.TextBox();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.textBox13 = new System.Windows.Forms.TextBox();
             this.buy_condition = new System.Windows.Forms.ComboBox();
-            this.sell_condtion = new System.Windows.Forms.ComboBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.axKHOpenAPI1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -221,6 +221,123 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1319, 87);
             this.tableLayoutPanel1.TabIndex = 4;
+            // 
+            // textBox13
+            // 
+            this.textBox13.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox13.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.textBox13.Location = new System.Drawing.Point(528, 47);
+            this.textBox13.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox13.Name = "textBox13";
+            this.textBox13.ReadOnly = true;
+            this.textBox13.Size = new System.Drawing.Size(123, 28);
+            this.textBox13.TabIndex = 34;
+            // 
+            // textBox12
+            // 
+            this.textBox12.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox12.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.textBox12.Location = new System.Drawing.Point(266, 47);
+            this.textBox12.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox12.Name = "textBox12";
+            this.textBox12.ReadOnly = true;
+            this.textBox12.Size = new System.Drawing.Size(123, 28);
+            this.textBox12.TabIndex = 33;
+            // 
+            // User_money
+            // 
+            this.User_money.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.User_money.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.User_money.Location = new System.Drawing.Point(397, 47);
+            this.User_money.Margin = new System.Windows.Forms.Padding(4);
+            this.User_money.Name = "User_money";
+            this.User_money.ReadOnly = true;
+            this.User_money.Size = new System.Drawing.Size(123, 28);
+            this.User_money.TabIndex = 32;
+            // 
+            // total_money
+            // 
+            this.total_money.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.total_money.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.total_money.Location = new System.Drawing.Point(4, 47);
+            this.total_money.Margin = new System.Windows.Forms.Padding(4);
+            this.total_money.Name = "total_money";
+            this.total_money.ReadOnly = true;
+            this.total_money.Size = new System.Drawing.Size(123, 28);
+            this.total_money.TabIndex = 31;
+            // 
+            // textBox9
+            // 
+            this.textBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox9.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.textBox9.Location = new System.Drawing.Point(135, 47);
+            this.textBox9.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.ReadOnly = true;
+            this.textBox9.Size = new System.Drawing.Size(123, 28);
+            this.textBox9.TabIndex = 30;
+            // 
+            // textBox8
+            // 
+            this.textBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox8.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.textBox8.Location = new System.Drawing.Point(790, 47);
+            this.textBox8.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.ReadOnly = true;
+            this.textBox8.Size = new System.Drawing.Size(123, 28);
+            this.textBox8.TabIndex = 29;
+            // 
+            // textBox7
+            // 
+            this.textBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox7.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.textBox7.Location = new System.Drawing.Point(921, 47);
+            this.textBox7.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.ReadOnly = true;
+            this.textBox7.Size = new System.Drawing.Size(123, 28);
+            this.textBox7.TabIndex = 28;
+            // 
+            // textBox6
+            // 
+            this.textBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox6.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.textBox6.Location = new System.Drawing.Point(1052, 47);
+            this.textBox6.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.ReadOnly = true;
+            this.textBox6.Size = new System.Drawing.Size(123, 28);
+            this.textBox6.TabIndex = 27;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.textBox1.Location = new System.Drawing.Point(659, 47);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(123, 28);
+            this.textBox1.TabIndex = 26;
             // 
             // label6
             // 
@@ -1134,6 +1251,15 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel6.Size = new System.Drawing.Size(1306, 36);
             this.tableLayoutPanel6.TabIndex = 11;
             // 
+            // sell_condtion
+            // 
+            this.sell_condtion.Enabled = false;
+            this.sell_condtion.FormattingEnabled = true;
+            this.sell_condtion.Location = new System.Drawing.Point(818, 3);
+            this.sell_condtion.Name = "sell_condtion";
+            this.sell_condtion.Size = new System.Drawing.Size(157, 28);
+            this.sell_condtion.TabIndex = 19;
+            // 
             // label19
             // 
             this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1210,6 +1336,15 @@ namespace WindowsFormsApp1
             this.buy_condtion_method.Size = new System.Drawing.Size(155, 30);
             this.buy_condtion_method.TabIndex = 11;
             // 
+            // buy_condition
+            // 
+            this.buy_condition.Enabled = false;
+            this.buy_condition.FormattingEnabled = true;
+            this.buy_condition.Location = new System.Drawing.Point(166, 3);
+            this.buy_condition.Name = "buy_condition";
+            this.buy_condition.Size = new System.Drawing.Size(157, 28);
+            this.buy_condition.TabIndex = 18;
+            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.tableLayoutPanel5);
@@ -1220,141 +1355,6 @@ namespace WindowsFormsApp1
             this.groupBox4.TabIndex = 17;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "설정 요약";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.textBox1.Location = new System.Drawing.Point(659, 47);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(123, 28);
-            this.textBox1.TabIndex = 26;
-            // 
-            // textBox6
-            // 
-            this.textBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox6.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.textBox6.Location = new System.Drawing.Point(1052, 47);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.ReadOnly = true;
-            this.textBox6.Size = new System.Drawing.Size(123, 28);
-            this.textBox6.TabIndex = 27;
-            // 
-            // textBox7
-            // 
-            this.textBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox7.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.textBox7.Location = new System.Drawing.Point(921, 47);
-            this.textBox7.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.ReadOnly = true;
-            this.textBox7.Size = new System.Drawing.Size(123, 28);
-            this.textBox7.TabIndex = 28;
-            // 
-            // textBox8
-            // 
-            this.textBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox8.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.textBox8.Location = new System.Drawing.Point(790, 47);
-            this.textBox8.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.ReadOnly = true;
-            this.textBox8.Size = new System.Drawing.Size(123, 28);
-            this.textBox8.TabIndex = 29;
-            // 
-            // textBox9
-            // 
-            this.textBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox9.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.textBox9.Location = new System.Drawing.Point(135, 47);
-            this.textBox9.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.ReadOnly = true;
-            this.textBox9.Size = new System.Drawing.Size(123, 28);
-            this.textBox9.TabIndex = 30;
-            // 
-            // total_money
-            // 
-            this.total_money.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.total_money.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.total_money.Location = new System.Drawing.Point(4, 47);
-            this.total_money.Margin = new System.Windows.Forms.Padding(4);
-            this.total_money.Name = "total_money";
-            this.total_money.ReadOnly = true;
-            this.total_money.Size = new System.Drawing.Size(123, 28);
-            this.total_money.TabIndex = 31;
-            // 
-            // User_money
-            // 
-            this.User_money.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.User_money.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.User_money.Location = new System.Drawing.Point(397, 47);
-            this.User_money.Margin = new System.Windows.Forms.Padding(4);
-            this.User_money.Name = "User_money";
-            this.User_money.ReadOnly = true;
-            this.User_money.Size = new System.Drawing.Size(123, 28);
-            this.User_money.TabIndex = 32;
-            // 
-            // textBox12
-            // 
-            this.textBox12.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox12.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.textBox12.Location = new System.Drawing.Point(266, 47);
-            this.textBox12.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.ReadOnly = true;
-            this.textBox12.Size = new System.Drawing.Size(123, 28);
-            this.textBox12.TabIndex = 33;
-            // 
-            // textBox13
-            // 
-            this.textBox13.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox13.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.textBox13.Location = new System.Drawing.Point(528, 47);
-            this.textBox13.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.ReadOnly = true;
-            this.textBox13.Size = new System.Drawing.Size(123, 28);
-            this.textBox13.TabIndex = 34;
-            // 
-            // buy_condition
-            // 
-            this.buy_condition.Enabled = false;
-            this.buy_condition.FormattingEnabled = true;
-            this.buy_condition.Location = new System.Drawing.Point(166, 3);
-            this.buy_condition.Name = "buy_condition";
-            this.buy_condition.Size = new System.Drawing.Size(157, 28);
-            this.buy_condition.TabIndex = 18;
-            // 
-            // sell_condtion
-            // 
-            this.sell_condtion.Enabled = false;
-            this.sell_condtion.FormattingEnabled = true;
-            this.sell_condtion.Location = new System.Drawing.Point(818, 3);
-            this.sell_condtion.Name = "sell_condtion";
-            this.sell_condtion.Size = new System.Drawing.Size(157, 28);
-            this.sell_condtion.TabIndex = 19;
             // 
             // Trade_Auto
             // 

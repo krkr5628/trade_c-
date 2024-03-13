@@ -92,13 +92,16 @@ namespace WindowsFormsApp1
         //로그창
         private void WriteLog(string message)
         {
-            log_window.AppendText($@"{message}");
+            string time = DateTime.Now.ToString("HH:mm:ss");
+            log_window.AppendText($@"{"[" + time + "] " + message}");
         }
 
-        //telegram
+        //telegram(초당 1개씩 전송)
         private void telegram_chat(string message)
         {
-            string urlString = $"https://api.telegram.org/bot{utility.telegram_token}/sendMessage?chat_id={utility.telegram_user_id}&text={message}";
+            string time = DateTime.Now.ToString("HH:mm:ss");
+            string message_edtied = "[" + time + "] " + message;
+            string urlString = $"https://api.telegram.org/bot{utility.telegram_token}/sendMessage?chat_id={utility.telegram_user_id}&text={message_edtied}";
             WebRequest request = WebRequest.Create(urlString);
             Stream stream = request.GetResponse().GetResponseStream();
         }
