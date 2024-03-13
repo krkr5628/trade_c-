@@ -31,6 +31,7 @@ namespace WindowsFormsApp1
             timer1.Start(); //시간 표시
             //[자동] 전체 종목 업데이트
             //if (utility.auto_trade_allow) { auto_allow(); }; //자동 세팅 반영
+            //보유 종목 개수 확인
 
             //----공용동작----
             axKHOpenAPI1.OnReceiveTrData += onReceiveTrData; //TR조회
@@ -266,6 +267,9 @@ namespace WindowsFormsApp1
                     }
                     dtCondStock = dataTable;
                     dataGridView1.DataSource = dtCondStock;
+
+                    //매수 감시
+
                     break;
                 //실시간 조건 검색(상태(편입, 이탈, 매수, 매도), 종목코드, 종목명, 등락표시, 현재가, 등락율, 거래량, 편입가, 편입대비, 수익률, 편입시간, 매수조건식, 매도조건식) => 상태, 종목코드, 대비기호, 현재가. 등락율, 거래량
                 case "조건실시간검색":
@@ -273,14 +277,48 @@ namespace WindowsFormsApp1
                         "편입",
                         axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목코드").Trim(),
                         axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목명").Trim(),
-                        //axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "대비기호").Trim(),
                         string.Format("{0:#,##0}", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "현재가").Trim())),
                         string.Format("{0:#,##0.00}%", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "등락율").Trim())),
                         string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "거래량").Trim())),
                         DateTime.Now
                     );
                     dataGridView1.DataSource = dtCondStock;
-                    break; 
+
+                    //매수 감시
+
+                    break;
+                case "계좌평가현황요청":
+                    DataTable dataTable2 = new DataTable();
+                    dataTable2.Columns.Add("종목코드", typeof(string));
+                    dataTable2.Columns.Add("종목명", typeof(string));
+                    dataTable2.Columns.Add("현재가", typeof(string));
+                    dataTable2.Columns.Add("보유수량", typeof(string));
+                    dataTable2.Columns.Add("평균단가", typeof(string));
+                    dataTable2.Columns.Add("평가금액", typeof(string));
+                    dataTable2.Columns.Add("손익률", typeof(string));
+                    dataTable2.Columns.Add("손익금액", typeof(string));
+                    dataTable2.Columns.Add("금일매도수량", typeof(string));
+                    int count2 = axKHOpenAPI1.GetRepeatCnt(e.sTrCode, e.sRQName);
+                    for (int i = 0; i < count2; i++)
+                    {
+                        dataTable2.Rows.Add(
+                            axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "종목코드").Trim(),
+                            axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "종목명").Trim(),
+                            string.Format("{0:#,##0}", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "현재가").Trim())),
+                            string.Format("{0:#,##0}", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "보유수량").Trim())),
+                            string.Format("{0:#,##0}", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "평균단가").Trim())),
+                            string.Format("{0:#,##0}", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "평가금액").Trim())),
+                            string.Format("{0:#,##0.00}%", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "손익률").Trim())),
+                            string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "손익금액").Trim())),
+                            string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "금일매도수량").Trim()))
+                        );
+                    }
+                    dtCondStock_hold = dataTable2;
+                    dataGridView2.DataSource = dtCondStock_hold;
+
+                    //매도 감시
+
+                    break;
             }
         }
 
@@ -373,7 +411,11 @@ namespace WindowsFormsApp1
         //초기 매매 설정
         private void auto_allow()
         {
+            //1. 자동 설정 여부 확인
 
+            //2. 1s 마다 작동 시간 확인
+
+            //3. 실시간 조건식 등록
         }
 
         //---------------BUTTON 모음---------------------
@@ -494,12 +536,6 @@ namespace WindowsFormsApp1
             axKHOpenAPI1.SetRealRemove("ALL", "ALL");
         }
 
-        //전체 청산
-
-        //수익 청산
-
-        //손실 청산
-
         //--------------실시간 조건---------------------
 
         //조건식 초기 검색(일반, 실시간)
@@ -547,7 +583,7 @@ namespace WindowsFormsApp1
                     findRows[0]["편입"] = "이탈";
                     dtCondStock.AcceptChanges();
                     dataGridView1.DataSource = dtCondStock;
-                    //실시간 시세 중단
+                    //실시간 시세 중단(보유 중인 종목일 경우 미실시)
                     WriteLog("[실시간시세-해지] : " + e.sTrCode + "\n");
                     axKHOpenAPI1.SetRealRemove("ALL", e.sTrCode);
                     break;
@@ -586,7 +622,52 @@ namespace WindowsFormsApp1
             }
             //dtCondStock.AcceptChanges();
             //dataGridView1.DataSource = dtCondStock;
+
+            //매도 감시
         }
+
+        //--------------실시간 매수---------------------
+
+        //1. 1s 마다 dtCondStock에 편입 상태인 종목이 있는지 파악
+
+        //2. 실시간 종목 편입에 대하여 확인
+
+        //3. 매수 시간 확인
+
+        //4. 매수 횟수 확인
+
+        //5. 매수 보유 확인
+
+        //6. 매수 중복 확인
+
+        //7. 일반, 시장가에 대하여 주문 가능 개수 계산
+
+        //8. 매수 주문
+
+        //9. 매수 미체결 취소 확인
+
+        //10. 매수 주문 확인
+
+
+        //--------------실시간 매도 및 청산---------------------
+
+        //1. 실시간 가격에 대해 확인
+
+        //2. 1s 마다 청산 시간 확인
+
+        //3. 매도 주문
+
+        //4. 매도 종목 실시간 시세 해지
+
+        //5. 매도 미체결 취소 확인
+
+        //6. 매도 주문 확인
+
+        //7. 매매내역 업데이트
+
+        //8. 당일 손익 및 손익률 계산
+
+        //9. 예수금 업데이트
 
         //---------------1s 마다 실행할 함수 지정---------------------
         private void ClockEvent(object sender, EventArgs e)
@@ -594,8 +675,41 @@ namespace WindowsFormsApp1
             //시간 표시
             timetimer.Text = DateTime.Now.ToString("yy MM-dd (ddd) HH:mm:ss");
             //계좌 업데이트
-
+            account_real();
         }
+
+        //실시간 잔고 조회(0346)
+        private void account_real()
+        {
+            axKHOpenAPI1.SetInputValue("계좌번호", utility.setting_account_number);
+            axKHOpenAPI1.SetInputValue("상장폐지조회구분", "0");
+            axKHOpenAPI1.SetInputValue("비밀번호입력매체구분", "00");
+            int result = axKHOpenAPI1.CommRqData("계좌평가현황요청", "OPW00004", 0, GetScreenNo());
+            GetErrorMessage(result);
+        }
+
+        //실시간 계좌 평가 손익과 손익률
+
+        //매도 감시
+
+        //---------------매매내역---------------------
+
+        //1. 당일 손익 및 손익률 계산
+
+        //2. 총수익 누계
+
+
+        //---------------업데이트 내역---------------------
+
+
+
+        //---------------동의사항---------------------
+
+
+
+        //---------------특별기능1(한국투자증권API)---------------------
+
+
 
         //---------------불필요 기능---------------------
 

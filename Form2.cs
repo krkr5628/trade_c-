@@ -378,6 +378,8 @@ namespace WindowsFormsApp1
             Stream stream = request.GetResponse().GetResponseStream();
         }
 
+        //---------------불필요 기능---------------------
+
         private void Setting_Load(object sender, EventArgs e)
         {
 
