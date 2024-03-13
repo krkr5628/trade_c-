@@ -1563,6 +1563,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.max_hoid.AutoSize = true;
+            this.max_hoid.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.max_hoid.Location = new System.Drawing.Point(489, 0);
             this.max_hoid.Name = "max_hoid";
             this.max_hoid.Size = new System.Drawing.Size(156, 42);

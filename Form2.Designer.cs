@@ -343,15 +343,19 @@ namespace WindowsFormsApp1
             // 
             // auto_trade_allow
             // 
+            this.auto_trade_allow.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.auto_trade_allow.AutoSize = true;
+            this.auto_trade_allow.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.auto_trade_allow.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.auto_trade_allow.Location = new System.Drawing.Point(3, 3);
             this.auto_trade_allow.Name = "auto_trade_allow";
-            this.auto_trade_allow.Size = new System.Drawing.Size(155, 24);
+            this.auto_trade_allow.Size = new System.Drawing.Size(179, 28);
             this.auto_trade_allow.TabIndex = 6;
             this.auto_trade_allow.Text = "자동실행허용";
             this.auto_trade_allow.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.auto_trade_allow.UseVisualStyleBackColor = true;
+            this.auto_trade_allow.UseVisualStyleBackColor = false;
             // 
             // tableLayoutPanel3
             // 
@@ -1587,6 +1591,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.label9.Location = new System.Drawing.Point(3, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(91, 34);
