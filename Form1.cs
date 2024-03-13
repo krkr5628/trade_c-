@@ -28,7 +28,6 @@ namespace WindowsFormsApp1
             axKHOpenAPI1.CommConnect(); //로그인
             axKHOpenAPI1.OnEventConnect += onEventConnect; //로그인 상태 확인(ID,NAME,계좌번호,KEYBOARD,FIREWALL,조건식) 및 조건식 조회
             axKHOpenAPI1.OnReceiveConditionVer += onReceiveConditionVer; //조건식 로드 및 기존 세팅 반영
-            User_account_list.SelectedIndexChanged += selectedIndexChange; //예수금 조회
             timer1.Start(); //시간 표시
             //[자동] 전체 종목 업데이트
             //if (utility.auto_trade_allow) { auto_allow(); }; //자동 세팅 반영
@@ -139,10 +138,6 @@ namespace WindowsFormsApp1
                 //계좌목록은 ';'문자로 분리된 문자열
                 //분리된 계좌를 ComboBox에 추가 
                 account = 계좌목록.Split(';');
-                for (int i = 0; i < account.Length; i++)
-                {
-                    User_account_list.Items.Add(account[i]);
-                }
                 //사용자 id를 UserId 라벨에 추가
                 string 사용자id = axKHOpenAPI1.GetLoginInfo("USER_ID");
                 User_id.Text = 사용자id;
@@ -153,11 +148,11 @@ namespace WindowsFormsApp1
                 string 접속서버구분 = axKHOpenAPI1.GetLoginInfo("GetServerGubun");
                 if (접속서버구분.Equals("1"))
                 {
-                    User_connection.Text = "모의투자\n";
+                    User_connection.Text = "모의\n";
                 }
                 else
                 {
-                    User_connection.Text = "실제투자\n";
+                    User_connection.Text = "실제\n";
                 }
                 //"KEY_BSECGB" : 키보드 보안 해지여부(0 : 정상, 1 : 해지)
                 string 키보드보안 = axKHOpenAPI1.GetLoginInfo("KEY_BSECGB");
@@ -195,6 +190,7 @@ namespace WindowsFormsApp1
                     WriteLog("조건식 검색 실패\n");
                     telegram_chat("조건식 검색 실패\n");
                 }
+
             }
             else
             {
@@ -225,6 +221,7 @@ namespace WindowsFormsApp1
                 //예수금 데이터 조회
                 case "예수금상세현황":
                     User_money.Text = string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "예수금").Trim()));
+                    WriteLog("예수금 조회 완료\n");
                     break;
                 //개별 증권 데이터 조회
                 case "주식기본정보":
@@ -289,7 +286,7 @@ namespace WindowsFormsApp1
 
         //---------------로드---------------------
 
-        //조건식 검색
+        //조건식 검색(조건식이 있어야 initial 작동 / initial을 통해 계좌를 받아와야 GetCashInfo)
         class ConditionInfo
         {
             public int Index { get; set; }
@@ -328,15 +325,12 @@ namespace WindowsFormsApp1
                 initial_allow();
             }
             WriteLog("조건식 조회 성공\n");
+            //예수금 받아오기
+            GetCashInfo(acc_text.Text.Trim());
             //telegram_chat("조건식 조회 성공\n");
         }
 
         //예수금 조회
-        private void selectedIndexChange(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(User_account_list.Text.Trim()))
-                GetCashInfo(User_account_list.Text.Trim());
-        }
         private void GetCashInfo(string acctNo)
         {
             //SetInputValue : 계좌번호, 비밀번호입력매체구분, 조회구분
@@ -357,7 +351,19 @@ namespace WindowsFormsApp1
         {
             string[] mode = { "지정가", "시장가" };
             string[] hoo = { "5호가", "4호가", "3호가", "2호가", "1호가", "현재가", "시장가", "-1호가", "-2호가", "-3호가", "-4호가", "-5호가" };
-            total_money.Text = utility.initial_balance;
+
+            //초기 세팅
+            acc_text.Text = utility.setting_account_number;
+            total_money.Text = string.Format("{0:#,##0}", Convert.ToDecimal(utility.initial_balance));
+            max_hoid.Text = utility.maxbuy_acc;
+            operation_start.Text = utility.market_start_time;
+            operation_stop.Text = utility.market_end_time;
+            search_start.Text = utility.buy_condition_start;
+            search_stop.Text = utility.buy_condition_end;
+            clear_sell.Text = Convert.ToString(utility.clear_sell);
+            clear_sell_time.Text = utility.clear_sell_start + "~";
+            profit.Text = utility.profit_percent_text;
+            loss.Text = utility.loss_percent_text;
             buy_condition.SelectedIndex = utility.Fomula_list_buy;
             buy_condtion_method.Text = mode[utility.buy_set1] + " - " + hoo[utility.buy_set2];
             sell_condtion.SelectedIndex = utility.Fomula_list_sell;
@@ -381,7 +387,7 @@ namespace WindowsFormsApp1
         //설정창 실행
         private void trade_setting(object sender, EventArgs e)
         {
-            if (!utility.load_check)
+            if (!utility.load_check || account.Length == 0)
             {
                 MessageBox.Show("로딩중입니다.");
                 return;
@@ -599,6 +605,16 @@ namespace WindowsFormsApp1
         }
 
         private void Trade_Auto_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void total_money_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label35_Click(object sender, EventArgs e)
         {
 
         }

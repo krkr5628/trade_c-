@@ -15,7 +15,6 @@ namespace WindowsFormsApp1
         public static bool load_check = false;
 
         //global 변수
-        public static string setting_name;
         public static bool auto_trade_allow;
         public static string market_start_time;
         public static string market_end_time;
@@ -103,8 +102,6 @@ namespace WindowsFormsApp1
         public static bool auto_load(string filepath)
         {
             StreamReader reader = new StreamReader(filepath);
-            //파일 주소 확인
-            setting_name = filepath;
 
             //자동실행
             String[] auto_trade_allow_tmp = reader.ReadLine().Split('/');
