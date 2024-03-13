@@ -11,7 +11,7 @@ namespace WindowsFormsApp1
     class utility
     {
         //check 변수
-        public static string system_route = "C:\\Users\\krkr5\\OneDrive\\바탕 화면\\project\\kiwoom2\\setting.txt";
+        public static string system_route = "C:\\Users\\krkr5\\OneDrive\\바탕 화면\\project\\password\\setting.txt";
         public static bool load_check = false;
 
         //global 변수
@@ -28,6 +28,7 @@ namespace WindowsFormsApp1
         public static bool buy_per_percent;
         public static string buy_per_percent_text;
         public static string maxbuy;
+        public static string maxbuy_acc;
         public static string min_price;
         public static string max_price;
         public static bool max_hold;
@@ -137,9 +138,13 @@ namespace WindowsFormsApp1
             buy_per_percent = Convert.ToBoolean(buy_per_percemt_tmp[1]);
             buy_per_percent_text = buy_per_percemt_tmp[2];
 
-            //매수종목수
+            //종목당최대매수금액
             String[] maxbuy_tmp = reader.ReadLine().Split('/');
             maxbuy = maxbuy_tmp[1];
+
+            //매수종목수
+            String[] maxbuy_acc_tmp = reader.ReadLine().Split('/');
+            maxbuy_acc = maxbuy_acc_tmp[1];
 
             //종목최소매수가
             String[] min_price_tmp = reader.ReadLine().Split('/');

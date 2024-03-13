@@ -35,6 +35,8 @@ namespace WindowsFormsApp1
             //save & load
             save_button.Click += setting_save;
             setting_open.Click += setting_load;
+
+            //즉시반영
             setting_allowed.Click += setting_allow;
 
             //TELEGRAM TEST
@@ -43,6 +45,7 @@ namespace WindowsFormsApp1
 
         }
 
+        //settubg  저장
         private void setting_save(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -66,9 +69,10 @@ namespace WindowsFormsApp1
                     tmp.Add("종목당매수금액/" + Convert.ToString(buy_per_price.Checked) + "/" + buy_per_price_text.Text);
                     tmp.Add("종목당매수수량/" + Convert.ToString(buy_per_amount.Checked) + "/" + buy_per_amount_text.Text);
                     tmp.Add("종목당매수비율/" + Convert.ToString(buy_per_percent.Checked) + "/" + buy_per_percent_text.Text);
-                    tmp.Add("매수종목수/" + maxbuy.Text);
-                    tmp.Add("종목최소매수가/" + min_price.Text);
-                    tmp.Add("종목최대매수가/" + max_price.Text);
+                    tmp.Add("종목당최대매수금액/" + maxbuy.Text);
+                    tmp.Add("매수종목수/" + maxbuy_acc.Text);
+                    tmp.Add("종목최소매수가/" + maxbuy_acc.Text);
+                    tmp.Add("종목최대매수가/" + min_price.Text);
                     tmp.Add("최대보유종목수/" + Convert.ToString(max_hold.Checked) + "/" + max_hold_text.Text);
                     tmp.Add("당일중복매수금지/" + Convert.ToString(duplication_deny.Checked));
                     tmp.Add("보유종목매수금지/" + Convert.ToString(hold_deny.Checked));
@@ -109,6 +113,8 @@ namespace WindowsFormsApp1
                 MessageBox.Show("계좌번호를설정해주세요");
             }
         }
+
+        //setting 열기
         private void setting_load(object sender, EventArgs e)
         {
             //다이얼로그 창 뜨고 선택
@@ -122,9 +128,9 @@ namespace WindowsFormsApp1
             }
         }
 
+        //즉시 반영(수정중)
         private void setting_allow(object sender, EventArgs e)
         {
-            //form1 전체 중단 코드
 
             //파일 주소 확인의 값을 system 주소로 변경
             utility.system_route = setting_name.Text;
@@ -132,15 +138,26 @@ namespace WindowsFormsApp1
             //utility 항목의 재로딩 시작
             if (utility.setting_load_auto())
             {
-                MessageBox.Show("반영이 완료되었습니다.");
+                //Trade_Auto의 initial_allow 재기동
+                Trade_Auto trade_auto1 = Application.OpenForms.OfType<Trade_Auto>().FirstOrDefault();
+                if (trade_auto1 != null) 
+                {
+                    trade_auto1.initial_allow();
+                }
             }
-  
+
+            //재기동 후
+            MessageBox.Show("반영이 완료되었습니다.");
+
         }
+
+        //초기 자동 실행
         public void setting_load_auto()
         {
             match(utility.system_route);
         }
 
+        //매칭
         private void match(string filepath)
         {
             StreamReader reader = new StreamReader(filepath);
@@ -179,9 +196,13 @@ namespace WindowsFormsApp1
             buy_per_percent.Checked = Convert.ToBoolean(buy_per_percemt_tmp[1]);
             buy_per_percent_text.Text = buy_per_percemt_tmp[2];
 
-            //매수종목수
+            //종목당최대매수금액
             String[] maxbuy_tmp = reader.ReadLine().Split('/');
             maxbuy.Text = maxbuy_tmp[1];
+
+            //매수종목수
+            String[] maxbuy_acc_tmp = reader.ReadLine().Split('/');
+            maxbuy_acc.Text = maxbuy_acc_tmp[1];
 
             //종목최소매수가
             String[] min_price_tmp = reader.ReadLine().Split('/');

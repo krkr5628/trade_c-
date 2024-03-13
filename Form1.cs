@@ -36,6 +36,9 @@ namespace WindowsFormsApp1
             //----공용동작----
             axKHOpenAPI1.OnReceiveTrData += onReceiveTrData; //TR조회
 
+            //----시간 동작----
+            timer1.Start(); //시간 표시 + 기타 초 마다 실행하는 함수 실행
+
             //----버튼----
             Login_btn.Click += login_btn; //로그인
             Trade_setting.Click += trade_setting; //설정창
@@ -106,16 +109,14 @@ namespace WindowsFormsApp1
             Stream stream = request.GetResponse().GetResponseStream();
         }
 
-
-        //시간 표시
-        private void ClockEvent(object sender, EventArgs e)
-        {
-            timetimer.Text = DateTime.Now.ToString("yy MM-dd (ddd) HH:mm:ss");
-        }
-
+        //telegram용 초당 1회 전송 저장소
+        private Queue<String> telegram_save = new Queue<string>();
 
         //실시간 조건 검색 용 테이블(누적 저장)
         private DataTable dtCondStock = new DataTable();
+
+        //실시간 계좌 보유 현황 용 테이블(누적 저장)
+        private DataTable dtCondStock_hold = new DataTable();
 
         //---------------초기 로그인---------------------
 
@@ -323,6 +324,7 @@ namespace WindowsFormsApp1
             if (Fomula_list.Items.Count > 0)
             {
                 Fomula_list.SelectedIndex = 0;
+                //조건식 검색 후 초기 세팅을 시작한다.
                 initial_allow();
             }
             WriteLog("조건식 조회 성공\n");
@@ -350,13 +352,13 @@ namespace WindowsFormsApp1
             GetErrorMessage(result);
         }
 
-        //초기 설정 반영
-        private void initial_allow()
+        //초기 설정 반영 & 즉시 반영
+        public void initial_allow()
         {
             string[] mode = { "지정가", "시장가" };
             string[] hoo = { "5호가", "4호가", "3호가", "2호가", "1호가", "현재가", "시장가", "-1호가", "-2호가", "-3호가", "-4호가", "-5호가" };
             total_money.Text = utility.initial_balance;
-            buy_condition.SelectedIndex = 0;
+            buy_condition.SelectedIndex = utility.Fomula_list_buy;
             buy_condtion_method.Text = mode[utility.buy_set1] + " - " + hoo[utility.buy_set2];
             sell_condtion.SelectedIndex = utility.Fomula_list_sell;
             sell_condtion_method.Text = mode[utility.sell_set1] + " - " + hoo[utility.sell_set2];
@@ -366,12 +368,6 @@ namespace WindowsFormsApp1
         private void auto_allow()
         {
 
-        }
-
-        //즉시 반영
-        public static bool immediate_allow()
-        {
-            return true;
         }
 
         //---------------BUTTON 모음---------------------
@@ -420,7 +416,6 @@ namespace WindowsFormsApp1
             GetErrorMessage(result);
         }
 
-
         //조건식 일반 검색
         private void normal_search_btn(object sender, EventArgs e)
         {
@@ -450,15 +445,6 @@ namespace WindowsFormsApp1
                 WriteLog("조건식 일반 검색 실패\n");
         }
 
-        //전체 청산
-
-        //수익 청산
-
-        //손실 청산
-
-        //---------------자동 거래 모음---------------------
-
-        //조건식 실시간 검색
         private void real_time_search_btn(object sender, EventArgs e)
         {
             //검색된 조건식이 없을시
@@ -487,6 +473,28 @@ namespace WindowsFormsApp1
                 WriteLog("조건식 실시간 검색 실패\n");
         }
 
+        //조건식 실시간 중단
+        private void real_time_stop_btn(object sender, EventArgs e)
+        {
+            // 검색된 조건식이 없을시
+            if (string.IsNullOrEmpty(Fomula_list.SelectedItem.ToString())) return;
+            //검색된 조건식이 있을시
+            string[] condition = Fomula_list.SelectedItem.ToString().Split('^');
+            //실시간 조건검색 중지
+            WriteLog("[조건식검색-전체중단]\n");
+            axKHOpenAPI1.SendConditionStop(GetScreenNo(), condition[1], Convert.ToInt32(condition[0]));
+            //실시간 시세 중단
+            WriteLog("[실시간시세-전체중단]\n");
+            axKHOpenAPI1.SetRealRemove("ALL", "ALL");
+        }
+
+        //전체 청산
+
+        //수익 청산
+
+        //손실 청산
+
+        //--------------실시간 조건---------------------
 
         //조건식 초기 검색(일반, 실시간)
         private void onReceiveTrCondition(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrConditionEvent e)
@@ -574,19 +582,13 @@ namespace WindowsFormsApp1
             //dataGridView1.DataSource = dtCondStock;
         }
 
-        //조건식 실시간 중단
-        private void real_time_stop_btn(object sender, EventArgs e)
+        //---------------1s 마다 실행할 함수 지정---------------------
+        private void ClockEvent(object sender, EventArgs e)
         {
-            // 검색된 조건식이 없을시
-            if (string.IsNullOrEmpty(Fomula_list.SelectedItem.ToString())) return;
-            //검색된 조건식이 있을시
-            string[] condition = Fomula_list.SelectedItem.ToString().Split('^');
-            //실시간 조건검색 중지
-            WriteLog("[조건식검색-전체중단]\n");
-            axKHOpenAPI1.SendConditionStop(GetScreenNo(), condition[1], Convert.ToInt32(condition[0]));
-            //실시간 시세 중단
-            WriteLog("[실시간시세-전체중단]\n");
-            axKHOpenAPI1.SetRealRemove("ALL", "ALL");
+            //시간 표시
+            timetimer.Text = DateTime.Now.ToString("yy MM-dd (ddd) HH:mm:ss");
+            //계좌 업데이트
+
         }
 
         //---------------불필요 기능---------------------

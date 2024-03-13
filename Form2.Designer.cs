@@ -34,11 +34,8 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.account_list = new System.Windows.Forms.ComboBox();
             this.textBox37 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.max_price = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.min_price = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.maxbuy_acc = new System.Windows.Forms.TextBox();
             this.maxbuy = new System.Windows.Forms.TextBox();
             this.buy_per_percent = new System.Windows.Forms.RadioButton();
             this.buy_per_percent_text = new System.Windows.Forms.TextBox();
@@ -66,7 +63,6 @@ namespace WindowsFormsApp1
             this.setting_open = new System.Windows.Forms.Button();
             this.save_button = new System.Windows.Forms.Button();
             this.setting_name = new System.Windows.Forms.TextBox();
-            this.textBox13 = new System.Windows.Forms.TextBox();
             this.buy_condition = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.buy_condition_end = new System.Windows.Forms.TextBox();
@@ -149,6 +145,12 @@ namespace WindowsFormsApp1
             this.telegram_token = new System.Windows.Forms.TextBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.max_price = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -176,7 +178,7 @@ namespace WindowsFormsApp1
             // buy_per_price
             // 
             this.buy_per_price.AutoSize = true;
-            this.buy_per_price.Location = new System.Drawing.Point(3, 114);
+            this.buy_per_price.Location = new System.Drawing.Point(3, 117);
             this.buy_per_price.Name = "buy_per_price";
             this.buy_per_price.Size = new System.Drawing.Size(188, 24);
             this.buy_per_price.TabIndex = 0;
@@ -188,7 +190,7 @@ namespace WindowsFormsApp1
             // buy_per_amount
             // 
             this.buy_per_amount.AutoSize = true;
-            this.buy_per_amount.Location = new System.Drawing.Point(3, 151);
+            this.buy_per_amount.Location = new System.Drawing.Point(3, 155);
             this.buy_per_amount.Name = "buy_per_amount";
             this.buy_per_amount.Size = new System.Drawing.Size(188, 24);
             this.buy_per_amount.TabIndex = 1;
@@ -202,13 +204,14 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.97297F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.02703F));
+            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.max_price, 1, 9);
             this.tableLayoutPanel1.Controls.Add(this.account_list, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBox37, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.textBox4, 0, 8);
-            this.tableLayoutPanel1.Controls.Add(this.max_price, 1, 8);
-            this.tableLayoutPanel1.Controls.Add(this.textBox3, 0, 7);
-            this.tableLayoutPanel1.Controls.Add(this.min_price, 1, 7);
-            this.tableLayoutPanel1.Controls.Add(this.textBox2, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.min_price, 1, 8);
+            this.tableLayoutPanel1.Controls.Add(this.maxbuy_acc, 1, 7);
             this.tableLayoutPanel1.Controls.Add(this.maxbuy, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.buy_per_percent, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.buy_per_percent_text, 1, 5);
@@ -220,21 +223,22 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel1.Controls.Add(this.initial_balance, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label_account, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.setting_account_number, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 9);
             this.tableLayoutPanel1.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 28);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 9;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(370, 334);
+            this.tableLayoutPanel1.RowCount = 10;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(370, 381);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // account_list
@@ -256,59 +260,26 @@ namespace WindowsFormsApp1
             this.textBox37.Text = "계좌번호";
             this.textBox37.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBox4
-            // 
-            this.textBox4.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.textBox4.Location = new System.Drawing.Point(3, 299);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(185, 30);
-            this.textBox4.TabIndex = 7;
-            this.textBox4.Text = "종목 최대 매수가";
-            this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // max_price
-            // 
-            this.max_price.BackColor = System.Drawing.SystemColors.Window;
-            this.max_price.Location = new System.Drawing.Point(198, 299);
-            this.max_price.Name = "max_price";
-            this.max_price.Size = new System.Drawing.Size(167, 30);
-            this.max_price.TabIndex = 15;
-            // 
-            // textBox3
-            // 
-            this.textBox3.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.textBox3.Location = new System.Drawing.Point(3, 262);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(185, 30);
-            this.textBox3.TabIndex = 6;
-            this.textBox3.Text = "종목 최소 매수가";
-            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // min_price
             // 
             this.min_price.BackColor = System.Drawing.SystemColors.Window;
-            this.min_price.Location = new System.Drawing.Point(198, 262);
+            this.min_price.Location = new System.Drawing.Point(198, 307);
             this.min_price.Name = "min_price";
             this.min_price.Size = new System.Drawing.Size(167, 30);
-            this.min_price.TabIndex = 13;
+            this.min_price.TabIndex = 15;
             // 
-            // textBox2
+            // maxbuy_acc
             // 
-            this.textBox2.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.textBox2.Location = new System.Drawing.Point(3, 225);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(185, 30);
-            this.textBox2.TabIndex = 5;
-            this.textBox2.Text = "매수 종목 수";
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.maxbuy_acc.BackColor = System.Drawing.SystemColors.Window;
+            this.maxbuy_acc.Location = new System.Drawing.Point(198, 269);
+            this.maxbuy_acc.Name = "maxbuy_acc";
+            this.maxbuy_acc.Size = new System.Drawing.Size(167, 30);
+            this.maxbuy_acc.TabIndex = 13;
             // 
             // maxbuy
             // 
             this.maxbuy.BackColor = System.Drawing.SystemColors.Window;
-            this.maxbuy.Location = new System.Drawing.Point(198, 225);
+            this.maxbuy.Location = new System.Drawing.Point(198, 231);
             this.maxbuy.Name = "maxbuy";
             this.maxbuy.Size = new System.Drawing.Size(167, 30);
             this.maxbuy.TabIndex = 12;
@@ -316,7 +287,7 @@ namespace WindowsFormsApp1
             // buy_per_percent
             // 
             this.buy_per_percent.AutoSize = true;
-            this.buy_per_percent.Location = new System.Drawing.Point(3, 188);
+            this.buy_per_percent.Location = new System.Drawing.Point(3, 193);
             this.buy_per_percent.Name = "buy_per_percent";
             this.buy_per_percent.Size = new System.Drawing.Size(188, 24);
             this.buy_per_percent.TabIndex = 2;
@@ -327,7 +298,7 @@ namespace WindowsFormsApp1
             // 
             // buy_per_percent_text
             // 
-            this.buy_per_percent_text.Location = new System.Drawing.Point(198, 188);
+            this.buy_per_percent_text.Location = new System.Drawing.Point(198, 193);
             this.buy_per_percent_text.Name = "buy_per_percent_text";
             this.buy_per_percent_text.Size = new System.Drawing.Size(167, 30);
             this.buy_per_percent_text.TabIndex = 9;
@@ -335,7 +306,7 @@ namespace WindowsFormsApp1
             // buy_per_amount_text
             // 
             this.buy_per_amount_text.BackColor = System.Drawing.SystemColors.Window;
-            this.buy_per_amount_text.Location = new System.Drawing.Point(198, 151);
+            this.buy_per_amount_text.Location = new System.Drawing.Point(198, 155);
             this.buy_per_amount_text.Name = "buy_per_amount_text";
             this.buy_per_amount_text.Size = new System.Drawing.Size(167, 30);
             this.buy_per_amount_text.TabIndex = 11;
@@ -343,7 +314,7 @@ namespace WindowsFormsApp1
             // buy_per_price_text
             // 
             this.buy_per_price_text.BackColor = System.Drawing.SystemColors.Window;
-            this.buy_per_price_text.Location = new System.Drawing.Point(198, 114);
+            this.buy_per_price_text.Location = new System.Drawing.Point(198, 117);
             this.buy_per_price_text.Name = "buy_per_price_text";
             this.buy_per_price_text.Size = new System.Drawing.Size(167, 30);
             this.buy_per_price_text.TabIndex = 10;
@@ -352,7 +323,7 @@ namespace WindowsFormsApp1
             // 
             this.label_initial.BackColor = System.Drawing.SystemColors.MenuBar;
             this.label_initial.HideSelection = false;
-            this.label_initial.Location = new System.Drawing.Point(3, 77);
+            this.label_initial.Location = new System.Drawing.Point(3, 79);
             this.label_initial.Name = "label_initial";
             this.label_initial.ReadOnly = true;
             this.label_initial.Size = new System.Drawing.Size(185, 30);
@@ -363,7 +334,7 @@ namespace WindowsFormsApp1
             // initial_balance
             // 
             this.initial_balance.BackColor = System.Drawing.SystemColors.Window;
-            this.initial_balance.Location = new System.Drawing.Point(198, 77);
+            this.initial_balance.Location = new System.Drawing.Point(198, 79);
             this.initial_balance.Name = "initial_balance";
             this.initial_balance.Size = new System.Drawing.Size(167, 30);
             this.initial_balance.TabIndex = 16;
@@ -371,7 +342,7 @@ namespace WindowsFormsApp1
             // label_account
             // 
             this.label_account.BackColor = System.Drawing.SystemColors.Menu;
-            this.label_account.Location = new System.Drawing.Point(3, 40);
+            this.label_account.Location = new System.Drawing.Point(3, 41);
             this.label_account.Name = "label_account";
             this.label_account.ReadOnly = true;
             this.label_account.Size = new System.Drawing.Size(185, 30);
@@ -382,7 +353,7 @@ namespace WindowsFormsApp1
             // setting_account_number
             // 
             this.setting_account_number.BackColor = System.Drawing.SystemColors.Window;
-            this.setting_account_number.Location = new System.Drawing.Point(198, 40);
+            this.setting_account_number.Location = new System.Drawing.Point(198, 41);
             this.setting_account_number.Name = "setting_account_number";
             this.setting_account_number.Size = new System.Drawing.Size(167, 30);
             this.setting_account_number.TabIndex = 9;
@@ -478,15 +449,14 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel4.Controls.Add(this.hold_deny, 0, 2);
             this.tableLayoutPanel4.Controls.Add(this.before_time_deny, 0, 3);
             this.tableLayoutPanel4.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(6, 27);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(6, 29);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 5;
+            this.tableLayoutPanel4.RowCount = 4;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(370, 196);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(370, 145);
             this.tableLayoutPanel4.TabIndex = 5;
             // 
             // max_hold
@@ -502,7 +472,7 @@ namespace WindowsFormsApp1
             // duplication_deny
             // 
             this.duplication_deny.AutoSize = true;
-            this.duplication_deny.Location = new System.Drawing.Point(3, 42);
+            this.duplication_deny.Location = new System.Drawing.Point(3, 39);
             this.duplication_deny.Name = "duplication_deny";
             this.duplication_deny.Size = new System.Drawing.Size(216, 24);
             this.duplication_deny.TabIndex = 8;
@@ -519,7 +489,7 @@ namespace WindowsFormsApp1
             // hold_deny
             // 
             this.hold_deny.AutoSize = true;
-            this.hold_deny.Location = new System.Drawing.Point(3, 81);
+            this.hold_deny.Location = new System.Drawing.Point(3, 75);
             this.hold_deny.Name = "hold_deny";
             this.hold_deny.Size = new System.Drawing.Size(216, 24);
             this.hold_deny.TabIndex = 10;
@@ -529,7 +499,7 @@ namespace WindowsFormsApp1
             // before_time_deny
             // 
             this.before_time_deny.AutoSize = true;
-            this.before_time_deny.Location = new System.Drawing.Point(3, 120);
+            this.before_time_deny.Location = new System.Drawing.Point(3, 111);
             this.before_time_deny.Name = "before_time_deny";
             this.before_time_deny.Size = new System.Drawing.Size(250, 24);
             this.before_time_deny.TabIndex = 11;
@@ -543,12 +513,12 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.90253F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.43321F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.53069F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 164F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 165F));
             this.tableLayoutPanel5.Controls.Add(this.setting_allowed, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.setting_open, 3, 0);
             this.tableLayoutPanel5.Controls.Add(this.save_button, 2, 0);
             this.tableLayoutPanel5.Controls.Add(this.setting_name, 1, 0);
-            this.tableLayoutPanel5.Controls.Add(this.textBox13, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.label5, 0, 0);
             this.tableLayoutPanel5.Location = new System.Drawing.Point(11, 26);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
@@ -563,7 +533,7 @@ namespace WindowsFormsApp1
             this.setting_allowed.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_allowed.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_allowed.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_allowed.Location = new System.Drawing.Point(1099, 3);
+            this.setting_allowed.Location = new System.Drawing.Point(1097, 3);
             this.setting_allowed.Name = "setting_allowed";
             this.setting_allowed.Size = new System.Drawing.Size(147, 44);
             this.setting_allowed.TabIndex = 8;
@@ -575,7 +545,7 @@ namespace WindowsFormsApp1
             this.setting_open.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_open.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_open.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_open.Location = new System.Drawing.Point(940, 3);
+            this.setting_open.Location = new System.Drawing.Point(938, 3);
             this.setting_open.Name = "setting_open";
             this.setting_open.Size = new System.Drawing.Size(153, 44);
             this.setting_open.TabIndex = 7;
@@ -587,7 +557,7 @@ namespace WindowsFormsApp1
             this.save_button.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.save_button.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.save_button.ForeColor = System.Drawing.Color.SpringGreen;
-            this.save_button.Location = new System.Drawing.Point(771, 3);
+            this.save_button.Location = new System.Drawing.Point(769, 3);
             this.save_button.Name = "save_button";
             this.save_button.Size = new System.Drawing.Size(163, 44);
             this.save_button.TabIndex = 6;
@@ -596,23 +566,14 @@ namespace WindowsFormsApp1
             // 
             // setting_name
             // 
-            this.setting_name.Location = new System.Drawing.Point(213, 3);
+            this.setting_name.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.setting_name.Location = new System.Drawing.Point(212, 3);
             this.setting_name.Name = "setting_name";
             this.setting_name.ReadOnly = true;
-            this.setting_name.Size = new System.Drawing.Size(552, 28);
+            this.setting_name.Size = new System.Drawing.Size(551, 28);
             this.setting_name.TabIndex = 1;
-            // 
-            // textBox13
-            // 
-            this.textBox13.BackColor = System.Drawing.SystemColors.Menu;
-            this.textBox13.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox13.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.textBox13.Location = new System.Drawing.Point(3, 3);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(203, 35);
-            this.textBox13.TabIndex = 0;
-            this.textBox13.Text = "전략명";
-            this.textBox13.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // buy_condition
             // 
@@ -1141,9 +1102,9 @@ namespace WindowsFormsApp1
             // 
             this.groupBox1.Controls.Add(this.tableLayoutPanel4);
             this.groupBox1.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox1.Location = new System.Drawing.Point(11, 602);
+            this.groupBox1.Location = new System.Drawing.Point(11, 652);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(381, 230);
+            this.groupBox1.Size = new System.Drawing.Size(381, 180);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "추가 옵션 설정";
@@ -1154,7 +1115,7 @@ namespace WindowsFormsApp1
             this.groupBox2.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.groupBox2.Location = new System.Drawing.Point(11, 219);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(381, 374);
+            this.groupBox2.Size = new System.Drawing.Size(381, 427);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "기본 설정";
@@ -1478,12 +1439,90 @@ namespace WindowsFormsApp1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // max_price
+            // 
+            this.max_price.BackColor = System.Drawing.SystemColors.Window;
+            this.max_price.Location = new System.Drawing.Point(198, 345);
+            this.max_price.Name = "max_price";
+            this.max_price.Size = new System.Drawing.Size(167, 30);
+            this.max_price.TabIndex = 18;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label1.Location = new System.Drawing.Point(3, 342);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(189, 39);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "종목 최대 매수가";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label2.Location = new System.Drawing.Point(3, 304);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(189, 38);
+            this.label2.TabIndex = 20;
+            this.label2.Text = "종목 최소 매수가";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label3.Location = new System.Drawing.Point(3, 266);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(189, 38);
+            this.label3.TabIndex = 21;
+            this.label3.Text = "매수 종목 수";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label4.Location = new System.Drawing.Point(3, 228);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(189, 38);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "종목당 최대 매수 금액";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("굴림", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label5.Location = new System.Drawing.Point(3, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(203, 50);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "전략명";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Setting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1523, 886);
+            this.ClientSize = new System.Drawing.Size(1523, 852);
             this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox8);
@@ -1544,8 +1583,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TextBox label_initial;
         private System.Windows.Forms.RadioButton buy_per_percent;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.CheckBox auto_trade_allow;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
@@ -1562,7 +1599,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Button setting_open;
         private System.Windows.Forms.Button save_button;
         private System.Windows.Forms.TextBox setting_name;
-        private System.Windows.Forms.TextBox textBox13;
         private System.Windows.Forms.CheckBox buy_condition;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.CheckBox buy_and;
@@ -1608,13 +1644,12 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.TextBox term_for_non_buy_text;
         private System.Windows.Forms.TextBox setting_account_number;
         private System.Windows.Forms.TextBox initial_balance;
-        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox buy_per_price_text;
         private System.Windows.Forms.TextBox buy_per_amount_text;
         private System.Windows.Forms.TextBox buy_per_percent_text;
         private System.Windows.Forms.TextBox maxbuy;
+        private System.Windows.Forms.TextBox maxbuy_acc;
         private System.Windows.Forms.TextBox min_price;
-        private System.Windows.Forms.TextBox max_price;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -1659,5 +1694,11 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.CheckBox term_for_non_buy;
         private System.Windows.Forms.CheckBox term_for_buy;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox max_price;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label5;
     }
 }
