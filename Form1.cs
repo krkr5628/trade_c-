@@ -28,10 +28,10 @@ namespace WindowsFormsApp1
             axKHOpenAPI1.CommConnect(); //로그인
             axKHOpenAPI1.OnEventConnect += onEventConnect; //로그인 상태 확인(ID,NAME,계좌번호,KEYBOARD,FIREWALL,조건식) 및 조건식 조회
             axKHOpenAPI1.OnReceiveConditionVer += onReceiveConditionVer; //조건식 로드 및 기존 세팅 반영
+            initial_Table(); //테이블 초기 세팅
 
             //[자동] 전체 종목 업데이트
             //if (utility.auto_trade_allow) { auto_allow(); }; //자동 세팅 반영
-            
 
             //----공용동작----
             axKHOpenAPI1.OnReceiveTrData += onReceiveTrData; //TR조회
@@ -125,6 +125,36 @@ namespace WindowsFormsApp1
 
         //실시간 계좌 보유 현황 용 테이블(누적 저장)
         private DataTable dtCondStock_hold = new DataTable();
+
+        //초기 Table 값 입력
+        private void initial_Table()
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add("편입", typeof(string));
+            dataTable.Columns.Add("종목코드", typeof(string));
+            dataTable.Columns.Add("종목명", typeof(string));
+            dataTable.Columns.Add("현재가", typeof(string));
+            dataTable.Columns.Add("등락율", typeof(string));
+            dataTable.Columns.Add("거래량", typeof(string));
+            dataTable.Columns.Add("편입가", typeof(string));
+            dataTable.Columns.Add("수익률", typeof(string));
+            dataTable.Columns.Add("조건식", typeof(string));
+            dataTable.Columns.Add("편입시간", typeof(string));
+            dtCondStock = dataTable;
+            dataGridView1.DataSource = dtCondStock;
+
+            DataTable dataTable2 = new DataTable();
+            dataTable2.Columns.Add("종목명", typeof(string));
+            dataTable2.Columns.Add("현재가", typeof(string));
+            dataTable2.Columns.Add("보유수량", typeof(string));
+            dataTable2.Columns.Add("평균단가", typeof(string));
+            dataTable2.Columns.Add("평가금액", typeof(string));
+            dataTable2.Columns.Add("손익률", typeof(string));
+            dataTable2.Columns.Add("손익금액", typeof(string));
+            dataTable2.Columns.Add("매도수량", typeof(string));
+            dtCondStock_hold = dataTable2;
+            dataGridView2.DataSource = dtCondStock_hold;
+        }
 
         //---------------초기 로그인---------------------
 
@@ -228,7 +258,14 @@ namespace WindowsFormsApp1
         //데이터 조회(예수금, 유가증권, 조건식, 일반 검색, 실시간 검색 등)
         private void onReceiveTrData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e)
         {
-            switch (e.sRQName)
+            string[] name_split = e.sRQName.Split('/');
+            string split_name = name_split[0];
+            string condition_name = "";
+            if (name_split.Length == 2)
+            {
+                condition_name = name_split[1];
+            }
+            switch (split_name)
             {
                 //예수금 데이터 조회
                 case "예수금상세현황":
@@ -262,45 +299,51 @@ namespace WindowsFormsApp1
                     dataTable.Columns.Add("현재가", typeof(string));
                     dataTable.Columns.Add("등락율", typeof(string));
                     dataTable.Columns.Add("거래량", typeof(string));
+                    dataTable.Columns.Add("편입가", typeof(string));
+                    dataTable.Columns.Add("수익률", typeof(string));
+                    dataTable.Columns.Add("조건식", typeof(string));
                     dataTable.Columns.Add("편입시간", typeof(string));
                     int count = axKHOpenAPI1.GetRepeatCnt(e.sTrCode, e.sRQName);
                     for (int i = 0; i < count; i++)
                     {
+                        int current_price = Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "현재가").Trim());
                         dataTable.Rows.Add(
                             "편입",
                             axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "종목코드").Trim(),
                             axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "종목명").Trim(),
-                            string.Format("{0:#,##0}", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "현재가").Trim())),
+                            string.Format("{0:#,##0}", current_price),
                             string.Format("{0:#,##0.00}%", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "등락율").Trim())),
                             string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "거래량").Trim())),
-                            DateTime.Now
+                            string.Format("{0:#,##0}", current_price),
+                            "0.00/%",
+                            condition_name,
+                            DateTime.Now.ToString("HH:mm:ss")
                         );
                     }
                     dtCondStock = dataTable;
                     dataGridView1.DataSource = dtCondStock;
 
-                    //매수 감시
-
                     break;
                 //실시간 조건 검색(상태(편입, 이탈, 매수, 매도), 종목코드, 종목명, 등락표시, 현재가, 등락율, 거래량, 편입가, 편입대비, 수익률, 편입시간, 매수조건식, 매도조건식) => 상태, 종목코드, 대비기호, 현재가. 등락율, 거래량
                 case "조건실시간검색":
+                    int current_price2 = Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "현재가").Trim());
                     dtCondStock.Rows.Add(
                         "편입",
-                        axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목코드").Trim(),
                         axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목명").Trim(),
-                        string.Format("{0:#,##0}", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "현재가").Trim())),
+                        axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목코드").Trim(),
+                        string.Format("{0:#,##0}", current_price2),
                         string.Format("{0:#,##0.00}%", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "등락율").Trim())),
                         string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "거래량").Trim())),
-                        DateTime.Now
+                        string.Format("{0:#,##0}", current_price2),
+                        "0.00/%",
+                        condition_name,
+                        DateTime.Now.ToString("HH:mm:ss")
                     );
                     dataGridView1.DataSource = dtCondStock;
-
-                    //매수 감시
 
                     break;
                 case "계좌평가현황요청":
                     DataTable dataTable2 = new DataTable();
-                    dataTable2.Columns.Add("종목코드", typeof(string));
                     dataTable2.Columns.Add("종목명", typeof(string));
                     dataTable2.Columns.Add("현재가", typeof(string));
                     dataTable2.Columns.Add("보유수량", typeof(string));
@@ -308,12 +351,11 @@ namespace WindowsFormsApp1
                     dataTable2.Columns.Add("평가금액", typeof(string));
                     dataTable2.Columns.Add("손익률", typeof(string));
                     dataTable2.Columns.Add("손익금액", typeof(string));
-                    dataTable2.Columns.Add("금일매도수량", typeof(string));
+                    dataTable2.Columns.Add("매도수량", typeof(string));
                     int count2 = axKHOpenAPI1.GetRepeatCnt(e.sTrCode, e.sRQName);
                     for (int i = 0; i < count2; i++)
                     {
                         dataTable2.Rows.Add(
-                            axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "종목코드").Trim(),
                             axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "종목명").Trim(),
                             string.Format("{0:#,##0}", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "현재가").Trim())),
                             string.Format("{0:#,##0}", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "보유수량").Trim())),
@@ -321,13 +363,11 @@ namespace WindowsFormsApp1
                             string.Format("{0:#,##0}", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "평가금액").Trim())),
                             string.Format("{0:#,##0.00}%", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "손익률").Trim())),
                             string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "손익금액").Trim())),
-                            string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "금일매도수량").Trim()))
+                            string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "매도수량").Trim()))
                         );
                     }
                     dtCondStock_hold = dataTable2;
                     dataGridView2.DataSource = dtCondStock_hold;
-
-                    //매도 감시
 
                     break;
             }
@@ -571,7 +611,7 @@ namespace WindowsFormsApp1
             }
             //종목 데이터
             //종목코드 리스트, 연속조회여부(기본값0만존재), 종목코드 갯수, 종목(0 주식, 3 선물옵션), 사용자 구분명, 화면번호
-            axKHOpenAPI1.CommKwRqData(code, 0, codeCount, 0, "조건일반검색", GetScreenNo());
+            axKHOpenAPI1.CommKwRqData(code, 0, codeCount, 0, "조건일반검색/"+ e.strConditionName, GetScreenNo());
         }
 
 
@@ -585,7 +625,7 @@ namespace WindowsFormsApp1
                     //일시 항목 출력
                     WriteLog("[신규종목-편입] : " + e.sTrCode + "\n");
                     axKHOpenAPI1.SetInputValue("종목코드", e.sTrCode);
-                    axKHOpenAPI1.CommRqData("조건실시간검색", "OPT10001", 0, GetScreenNo());
+                    axKHOpenAPI1.CommRqData("조건실시간검색/" + e.strConditionName, "OPT10001", 0, GetScreenNo());
                     //실시간 항목 등록(대비기호, 현재가. 등락율, 거래량)
                     WriteLog("[실시간시세-등록] : " + e.sTrCode + "\n");
                     axKHOpenAPI1.SetRealReg(GetScreenNo(), e.sTrCode, "10;12;13", "1");
@@ -619,30 +659,56 @@ namespace WindowsFormsApp1
             String price = string.Format("{0:#,##0}", axKHOpenAPI1.GetCommRealData(e.sRealKey, 10).Trim()); //새로운 현재가
             String updown = string.Format("{0:#,##0.00}%", axKHOpenAPI1.GetCommRealData(e.sRealKey, 12).Trim()); //새로운 등락율
             String amount = string.Format("{0:#,##0}", axKHOpenAPI1.GetCommRealData(e.sRealKey, 13).Trim()); //새로운 거래량
+            String percent = string.Format("{0:#,##0.00}%", (Convert.ToDecimal(price) / Convert.ToDecimal(findRows[0]["편입가"])) * 100);
             //
             if (!findRows[0]["현재가"].Equals(price))
             {
-                findRows[0]["현재가"] = string.Format("{0:#,##0}", axKHOpenAPI1.GetCommRealData(e.sRealKey, 10).Trim());
-                dtCondStock.AcceptChanges();
-                dataGridView1.DataSource = dtCondStock;
+                findRows[0]["현재가"] = price;
             }
             if (!findRows[0]["등락율"].Equals(updown))
             {
-                findRows[0]["등락율"] = string.Format("{0:#,##0.00}%", axKHOpenAPI1.GetCommRealData(e.sRealKey, 12).Trim());
-                dtCondStock.AcceptChanges();
-                dataGridView1.DataSource = dtCondStock;
+                findRows[0]["등락율"] = updown;
             }
             if (!findRows[0]["거래량"].Equals(amount))
             {
-                findRows[0]["거래량"] = string.Format("{0:#,##0}", axKHOpenAPI1.GetCommRealData(e.sRealKey, 13).Trim());
-                dtCondStock.AcceptChanges();
-                dataGridView1.DataSource = dtCondStock;
+                findRows[0]["거래량"] = amount;
             }
+            if (!findRows[0]["수익률"].Equals(percent))
+            {
+                findRows[0]["수익률"] = percent;
+            }
+            dtCondStock.AcceptChanges();
+            dataGridView1.DataSource = dtCondStock;
             //dtCondStock.AcceptChanges();
             //dataGridView1.DataSource = dtCondStock;
 
             //매도 감시
         }
+
+        //---------------1s 마다 실행할 함수 지정---------------------
+
+        private void Reload_Timer(object sender, EventArgs e)
+        {
+            if (utility.load_check)
+            {
+                account_real();
+            }
+        }
+
+        //실시간 잔고 조회(0346) 
+        private void account_real()
+        {
+            axKHOpenAPI1.SetInputValue("계좌번호", utility.setting_account_number);
+            axKHOpenAPI1.SetInputValue("상장폐지조회구분", "0");
+            axKHOpenAPI1.SetInputValue("비밀번호입력매체구분", "00");
+            int result = axKHOpenAPI1.CommRqData("계좌평가현황요청", "OPW00004", 2, GetScreenNo());
+            GetErrorMessage(result);
+        }
+
+
+        //실시간 계좌 평가 손익과 손익률
+
+        //매도 감시
 
         //--------------실시간 매수---------------------
 
@@ -686,30 +752,6 @@ namespace WindowsFormsApp1
         //8. 당일 손익 및 손익률 계산
 
         //9. 예수금 업데이트
-
-        //---------------1s 마다 실행할 함수 지정---------------------
-
-        private void Reload_Timer(object sender, EventArgs e)
-        {
-            if (utility.load_check)
-            {
-                account_real();
-            }
-        }
-
-        //실시간 잔고 조회(0346) 
-        private void account_real()
-        {
-            axKHOpenAPI1.SetInputValue("계좌번호", utility.setting_account_number);
-            axKHOpenAPI1.SetInputValue("상장폐지조회구분", "0");
-            axKHOpenAPI1.SetInputValue("비밀번호입력매체구분", "00");
-            int result = axKHOpenAPI1.CommRqData("계좌평가현황요청", "OPW00004", 2, GetScreenNo());
-            GetErrorMessage(result);
-        }
-
-        //실시간 계좌 평가 손익과 손익률
-
-        //매도 감시
 
         //---------------매매내역---------------------
 
