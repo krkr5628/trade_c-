@@ -38,7 +38,11 @@ namespace WindowsFormsApp1
 
             //----시간 동작----
             timer1.Start(); //시간 표시 - 1000ms
-            timer2.Start(); //함수 동작 - 1000ms
+            timer2.Start(); //보유 계좌 현황 - 1000ms
+            timer3.Start(); //편입 종목 감시 - 200ms
+
+            //----매매 동작----
+            axKHOpenAPI1.OnReceiveChejanData += onReceiveChejanData;
 
             //----버튼----
             Login_btn.Click += login_btn; //로그인
@@ -130,7 +134,8 @@ namespace WindowsFormsApp1
         private void initial_Table()
         {
             DataTable dataTable = new DataTable();
-            dataTable.Columns.Add("편입", typeof(string));
+            dataTable.Columns.Add("편입", typeof(string)); // '편입' '이탈'
+            dataTable.Columns.Add("상태", typeof(string)); // '대기' '매수중 '매수완료' '매도중' '매도완료'
             dataTable.Columns.Add("종목코드", typeof(string));
             dataTable.Columns.Add("종목명", typeof(string));
             dataTable.Columns.Add("현재가", typeof(string));
@@ -293,7 +298,8 @@ namespace WindowsFormsApp1
                 //일반 검색 데이터 조회
                 case "조건일반검색":
                     DataTable dataTable = new DataTable();
-                    dataTable.Columns.Add("편입", typeof(string));
+                    dataTable.Columns.Add("편입", typeof(string)); // '편입' '이탈'
+                    dataTable.Columns.Add("상태", typeof(string)); // '대기' '매수중 '매수완료' '매도중' '매도완료'
                     dataTable.Columns.Add("종목코드", typeof(string));
                     dataTable.Columns.Add("종목명", typeof(string));
                     dataTable.Columns.Add("현재가", typeof(string));
@@ -309,6 +315,7 @@ namespace WindowsFormsApp1
                         int current_price = Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "현재가").Trim());
                         dataTable.Rows.Add(
                             "편입",
+                            "대기",
                             axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "종목코드").Trim(),
                             axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "종목명").Trim(),
                             string.Format("{0:#,##0}", current_price),
@@ -329,6 +336,7 @@ namespace WindowsFormsApp1
                     int current_price2 = Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "현재가").Trim());
                     dtCondStock.Rows.Add(
                         "편입",
+                        "대기",
                         axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목명").Trim(),
                         axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목코드").Trim(),
                         string.Format("{0:#,##0}", current_price2),
@@ -462,11 +470,11 @@ namespace WindowsFormsApp1
         //초기 매매 설정
         private void auto_allow()
         {
-            //1. 자동 설정 여부 확인
-
-            //2. 1s 마다 작동 시간 확인
-
-            //3. 실시간 조건식 등록
+            //자동 설정 여부 확인
+            if (utility.auto_trade_allow)
+            {
+                real_time_search_btn(this, EventArgs.Empty);
+            }
         }
 
         //---------------BUTTON 모음---------------------
@@ -477,6 +485,7 @@ namespace WindowsFormsApp1
 
         }
 
+        //계좌 보유 현황 갱신 주기
         private void acc_interval(object sender, EventArgs e)
         {
             timer2.Interval = Convert.ToInt32(update_interval.Text);
@@ -550,9 +559,12 @@ namespace WindowsFormsApp1
         }
 
         //실시간 검색
-
         private void real_time_search_btn(object sender, EventArgs e)
         {
+            //실시간 검색이 시작되면 '일반 검색'이 불가능해 진다.
+            Real_time_stop_btn.Enabled = true; ;
+            Normal_search_btn.Enabled = false;
+            Real_time_search_btn.Enabled = false;
             //검색된 조건식이 없을시
             if (string.IsNullOrEmpty(Fomula_list.SelectedItem.ToString())) return;
             //검색된 조건식이 있을시
@@ -582,6 +594,10 @@ namespace WindowsFormsApp1
         //조건식 실시간 중단
         private void real_time_stop_btn(object sender, EventArgs e)
         {
+            //실시간 중단이 선언되면 '실시간시작'과 '일반검색'이 가능해진다.
+            Real_time_stop_btn.Enabled = false;
+            Normal_search_btn.Enabled = true;
+            Real_time_search_btn.Enabled = true;
             // 검색된 조건식이 없을시
             if (string.IsNullOrEmpty(Fomula_list.SelectedItem.ToString())) return;
             //검색된 조건식이 있을시
@@ -652,14 +668,19 @@ namespace WindowsFormsApp1
         //실시간 시세 등록(지속적 발생)(대비기호, 현재가. 등락율, 거래량)
         private void onReceiveRealData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveRealDataEvent e)
         {
-            //FID값 업데이트
+            //종목 확인
             DataRow[] findRows = dtCondStock.Select($"종목코드 = {e.sRealKey}");
+
+            //검출 종목이 아니거나 검출 후 시세 해지 못한 종목 => 불필요한듯
             if (findRows.Length == 0) return;
-            //findRows[0]["대비기호"] = axKHOpenAPI1.GetCommRealData(e.sRealKey, 25);
+
+            //
             String price = string.Format("{0:#,##0}", axKHOpenAPI1.GetCommRealData(e.sRealKey, 10).Trim()); //새로운 현재가
+            String percent = string.Format("{0:#,##0.00}%", (Convert.ToDecimal(price) / Convert.ToDecimal(findRows[0]["편입가"])) * 100); //새로운 수익률
+            //
+            check(findRows[0]["상태"].ToString(), findRows[0]["편입"].ToString(), findRows[0]["종목코드"].ToString(), percent);
             String updown = string.Format("{0:#,##0.00}%", axKHOpenAPI1.GetCommRealData(e.sRealKey, 12).Trim()); //새로운 등락율
             String amount = string.Format("{0:#,##0}", axKHOpenAPI1.GetCommRealData(e.sRealKey, 13).Trim()); //새로운 거래량
-            String percent = string.Format("{0:#,##0.00}%", (Convert.ToDecimal(price) / Convert.ToDecimal(findRows[0]["편입가"])) * 100);
             //
             if (!findRows[0]["현재가"].Equals(price))
             {
@@ -679,13 +700,11 @@ namespace WindowsFormsApp1
             }
             dtCondStock.AcceptChanges();
             dataGridView1.DataSource = dtCondStock;
-            //dtCondStock.AcceptChanges();
-            //dataGridView1.DataSource = dtCondStock;
 
             //매도 감시
         }
 
-        //---------------1s 마다 실행할 함수 지정---------------------
+        //---------------계좌 보유 종목 갱신---------------------
 
         private void Reload_Timer(object sender, EventArgs e)
         {
@@ -705,59 +724,101 @@ namespace WindowsFormsApp1
             GetErrorMessage(result);
         }
 
+        //--------------실시간 편입에 따른 매수 감시(200ms)---------------------
+        private void Transfer_Timer(object sender, EventArgs e)
+        {
+            //특저 열 추출
+            DataColumn columnEditColumn = dtCondStock.Columns["편입"];
+            DataColumn columnStateColumn = dtCondStock.Columns["상태"];
+            //AsEnumerable()은 DataTable의 행을 열거형으로 변환
+            var filteredRows = dtCondStock.AsEnumerable()
+                                        .Where(row => row.Field<string>(columnEditColumn) == "편입" &&
+                                                      row.Field<string>(columnStateColumn) == "대기")
+                                        .ToList();
+            //검출 종목이 없음
+            if (filteredRows.Count == 0) return;
 
-        //실시간 계좌 평가 손익과 손익률
+            //검출 종목
+            foreach (DataRow row in filteredRows)
+            {
+                buy_check(row.Field<string>("종목코드"));
+            }
 
-        //매도 감시
+            //매수 및 매도 지연에 따른 정정 확인
+        }
+
+        //--------------실시간 가격에 따른 매수 매도 감시---------------------
+        private void check(string status, string transfer, string code, string percent)
+        {
+            if (transfer.Equals("편입") && status.Equals("대기")) buy_check(code);
+            else if(status.Equals("매수완료")) sell_check(percent);
+        }
 
         //--------------실시간 매수---------------------
 
-        //1. 1s 마다 dtCondStock에 편입 상태인 종목이 있는지 파악
+        //매수 가능한 상태인지 확인
+        private void buy_check(string code)
+        {
+            //매수 시간 확인
 
-        //2. 실시간 종목 편입에 대하여 확인
+            //매수 횟수 확인
 
-        //3. 매수 시간 확인
+            //매수 보유 확인
 
-        //4. 매수 횟수 확인
+            //매수 중복 확인
 
-        //5. 매수 보유 확인
+            //편입 차트 상태 '매수중' 변경
 
-        //6. 매수 중복 확인
+            //주문
 
-        //7. 일반, 시장가에 대하여 주문 가능 개수 계산
+        }
 
-        //8. 매수 주문
+        //매수 주문
+        private void buy_order(string code)
+        {
+            //일반에 대하여 주문 가능 개수 계산
 
-        //9. 매수 미체결 취소 확인
+            //시장가에 대하여 주문 가능 개수 계산
 
-        //10. 매수 주문 확인
+            //매수 주문
+
+        }
 
 
         //--------------실시간 매도 및 청산---------------------
 
-        //1. 실시간 가격에 대해 확인
+        //실시간 가격에 대해 조건 확인 및 청산 시간 확인
+        private void sell_check(String percent)
+        {
 
-        //2. 1s 마다 청산 시간 확인
+        }
 
-        //3. 매도 주문
+        //매도 주문
+        private void sell_order(string code)
+        {
 
-        //4. 매도 종목 실시간 시세 해지
+        }
 
-        //5. 매도 미체결 취소 확인
+        //------------주문 상태 확인---------------------
+        private void onReceiveChejanData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveChejanDataEvent e)
+        {
+            //매수
 
-        //6. 매도 주문 확인
+            //매수 미체결
 
-        //7. 매매내역 업데이트
+            //매도
 
-        //8. 당일 손익 및 손익률 계산
+            //매도 미체결
 
-        //9. 예수금 업데이트
+            //매도 종목 실시간 시세 해지
+
+        }
+
+        //매도 동작(매매내역 업데이트, 당일 손익 및 손익률 계산, 예수금 업데이트)
+
 
         //---------------매매내역---------------------
 
-        //1. 당일 손익 및 손익률 계산
-
-        //2. 총수익 누계
 
 
         //---------------업데이트 내역---------------------
@@ -771,28 +832,6 @@ namespace WindowsFormsApp1
         //---------------특별기능1(한국투자증권API)---------------------
 
 
-
-        //---------------불필요 기능---------------------
-
-        private void Login_btn_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Trade_Auto_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void total_money_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label35_Click(object sender, EventArgs e)
-        {
-
-        }
 
     }
 }
