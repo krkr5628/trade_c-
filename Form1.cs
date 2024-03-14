@@ -28,20 +28,23 @@ namespace WindowsFormsApp1
             axKHOpenAPI1.CommConnect(); //로그인
             axKHOpenAPI1.OnEventConnect += onEventConnect; //로그인 상태 확인(ID,NAME,계좌번호,KEYBOARD,FIREWALL,조건식) 및 조건식 조회
             axKHOpenAPI1.OnReceiveConditionVer += onReceiveConditionVer; //조건식 로드 및 기존 세팅 반영
-            timer1.Start(); //시간 표시
+
             //[자동] 전체 종목 업데이트
             //if (utility.auto_trade_allow) { auto_allow(); }; //자동 세팅 반영
-            //보유 종목 개수 확인
+            
 
             //----공용동작----
             axKHOpenAPI1.OnReceiveTrData += onReceiveTrData; //TR조회
 
             //----시간 동작----
-            timer1.Start(); //시간 표시 + 기타 초 마다 실행하는 함수 실행
+            timer1.Start(); //시간 표시 - 1000ms
+            timer2.Start(); //함수 동작 - 1000ms
 
             //----버튼----
             Login_btn.Click += login_btn; //로그인
             Trade_setting.Click += trade_setting; //설정창
+            update_interval.SelectedIndexChanged += acc_interval; //계좌 조회 인터벌 변경
+
             Stock_search_btn.Click += stock_search_btn; //종목조회
             Normal_search_btn.Click += normal_search_btn; //조건식 일반 검색
             axKHOpenAPI1.OnReceiveTrCondition += onReceiveTrCondition; //조건식 일반 검색 조건식 등록
@@ -91,6 +94,11 @@ namespace WindowsFormsApp1
             }
         }
 
+        //시간 표시
+        private void ClockEvent(object sender, EventArgs e)
+        {
+            timetimer.Text = DateTime.Now.ToString("yy MM-dd (ddd) HH:mm:ss");
+        }
 
         //로그창
         private void WriteLog(string message)
@@ -191,6 +199,9 @@ namespace WindowsFormsApp1
                     WriteLog("조건식 검색 실패\n");
                     telegram_chat("조건식 검색 실패\n");
                 }
+                //갱신 주기
+                string[] ms = { "200", "400", "500", "1000", "2000", "5000"};
+                update_interval.Items.AddRange(ms);
 
             }
             else
@@ -426,6 +437,11 @@ namespace WindowsFormsApp1
 
         }
 
+        private void acc_interval(object sender, EventArgs e)
+        {
+            timer2.Interval = Convert.ToInt32(update_interval.Text);
+        }
+
         //설정창 실행
         private void trade_setting(object sender, EventArgs e)
         {
@@ -492,6 +508,8 @@ namespace WindowsFormsApp1
             else
                 WriteLog("조건식 일반 검색 실패\n");
         }
+
+        //실시간 검색
 
         private void real_time_search_btn(object sender, EventArgs e)
         {
@@ -670,21 +688,22 @@ namespace WindowsFormsApp1
         //9. 예수금 업데이트
 
         //---------------1s 마다 실행할 함수 지정---------------------
-        private void ClockEvent(object sender, EventArgs e)
+
+        private void Reload_Timer(object sender, EventArgs e)
         {
-            //시간 표시
-            timetimer.Text = DateTime.Now.ToString("yy MM-dd (ddd) HH:mm:ss");
-            //계좌 업데이트
-            account_real();
+            if (utility.load_check)
+            {
+                account_real();
+            }
         }
 
-        //실시간 잔고 조회(0346)
+        //실시간 잔고 조회(0346) 
         private void account_real()
         {
             axKHOpenAPI1.SetInputValue("계좌번호", utility.setting_account_number);
             axKHOpenAPI1.SetInputValue("상장폐지조회구분", "0");
             axKHOpenAPI1.SetInputValue("비밀번호입력매체구분", "00");
-            int result = axKHOpenAPI1.CommRqData("계좌평가현황요청", "OPW00004", 0, GetScreenNo());
+            int result = axKHOpenAPI1.CommRqData("계좌평가현황요청", "OPW00004", 2, GetScreenNo());
             GetErrorMessage(result);
         }
 
@@ -732,5 +751,6 @@ namespace WindowsFormsApp1
         {
 
         }
+
     }
 }

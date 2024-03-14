@@ -84,6 +84,9 @@ namespace WindowsFormsApp1
         public static bool kosdak_commodity;
         public static string kosdak_commodity_start;
         public static string kosdak_commodity_end;
+        public static string KIS_appkey;
+        public static string KIS_appsecret;
+        public static string KIS_amount;
         public static string telegram_user_id;
         public static string telegram_token;
 
@@ -276,6 +279,18 @@ namespace WindowsFormsApp1
             kosdak_commodity = Convert.ToBoolean(kosdak_commodity_tmp[1]);
             kosdak_commodity_start = kosdak_commodity_tmp[2];
             kosdak_commodity_end = kosdak_commodity_tmp[3];
+
+            //한국투자증권appkey
+            String[] KIS_appkey_tmp = reader.ReadLine().Split('/');
+            KIS_appkey = KIS_appkey_tmp[1];
+
+            //한국투자증권appsecret
+            String[] KIS_appsecret_tmp = reader.ReadLine().Split('/');
+            KIS_appsecret = KIS_appsecret_tmp[1];
+
+            //한국투자증권KIS_amount
+            String[] KIS_amount_tmp = reader.ReadLine().Split('/');
+            KIS_amount = KIS_amount_tmp[1];
 
             //텔레그램ID
             String[] telegram_user_id_tmp = reader.ReadLine().Split('/');

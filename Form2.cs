@@ -97,6 +97,9 @@ namespace WindowsFormsApp1
                     tmp.Add("코스닥지수/" + Convert.ToString(kosdak_index.Checked) + "/" + kosdak_index_start.Text + "/" + kosdak_index_end.Text);
                     tmp.Add("코스피선물/" + Convert.ToString(kospi_commodity.Checked) + "/" + kospi_commodity_start.Text + "/" + kospi_commodity_end.Text);
                     tmp.Add("코스닥선물/" + Convert.ToString(kosdak_commodity.Checked) + "/" + kosdak_commodity_start.Text + "/" + kosdak_commodity_end.Text);
+                    tmp.Add("KIS_appkey/" + appkey.Text);
+                    tmp.Add("KIS_appsecret/" + appsecret.Text);
+                    tmp.Add("KIS_amount/" + kis_amount.Text);
                     tmp.Add("텔레그램ID/" + telegram_user_id.Text);
                     tmp.Add("텔레그램token/" + telegram_token.Text);
 
@@ -338,6 +341,18 @@ namespace WindowsFormsApp1
             kosdak_commodity_start.Text = kosdak_commodity_tmp[2];
             kosdak_commodity_end.Text = kosdak_commodity_tmp[3];
 
+            //한국투자증권appkey
+            String[] KIS_appkey_tmp = reader.ReadLine().Split('/');
+            appkey.Text = KIS_appkey_tmp[1];
+
+            //한국투자증권appsecret
+            String[] KIS_appsecret_tmp = reader.ReadLine().Split('/');
+            appsecret.Text = KIS_appsecret_tmp[1];
+
+            //한국투자증권appsecret
+            String[] KIS_amount_tmp = reader.ReadLine().Split('/');
+            kis_amount.Text = KIS_amount_tmp[1];
+
             //텔레그램ID
             String[] telegram_user_id_tmp = reader.ReadLine().Split('/');
             telegram_user_id.Text = telegram_user_id_tmp[1];
@@ -386,6 +401,11 @@ namespace WindowsFormsApp1
         }
 
         private void label11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox10_Enter(object sender, EventArgs e)
         {
 
         }
