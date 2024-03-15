@@ -15,63 +15,72 @@ namespace WindowsFormsApp1
         public static bool load_check = false;
 
         //global 변수
-        public static bool auto_trade_allow;
-        public static string market_start_time;
-        public static string market_end_time;
-        public static string setting_account_number;
-        public static string initial_balance;
-        public static bool buy_per_price;
-        public static string buy_per_price_text;
+        public static bool auto_trade_allow; //자동실행 여부
+        public static string market_start_time; //자동 운영 시간
+        public static string market_end_time; //계좌 번호
+        public static string setting_account_number; //계좌 번호
+        public static string initial_balance; //초기 자산
+        public static bool buy_per_price; 
+
+        public static string buy_per_price_text;//종목당매수금액
         public static bool buy_per_amount;
-        public static string buy_per_amount_text;
-        public static bool buy_per_percent;
-        public static string buy_per_percent_text;
-        public static string maxbuy;
-        public static string maxbuy_acc;
-        public static string min_price;
-        public static string max_price;
-        public static bool max_hold;
-        public static string max_hold_text;
-        public static bool duplication_deny;
-        public static bool hold_deny;
-        public static bool before_time_deny;
-        public static bool buy_condition;
+        public static string buy_per_amount_text;//종목당매수수량
+        public static bool buy_per_percent; 
+        public static string buy_per_percent_text;//종목당매수비율
+        public static string maxbuy; //종목당최대매수금액
+        public static string maxbuy_acc;//매수종목수
+        public static string min_price;//종목최소매수가
+        public static string max_price;//종목최대매수가
+
+        public static bool max_hold; 
+        public static string max_hold_text;//최대보유종목수
+        public static bool duplication_deny;//당일중복매수금지
+        public static bool hold_deny;//보유종목매수금지
+        public static bool before_time_deny;//매수시간전검출매수금지
+
+        public static bool buy_condition; //매수조건
         public static string buy_condition_start;
         public static string buy_condition_end;
         public static int Fomula_list_buy;
         public static bool buy_and;
-        public static bool sell_condition;
+
+        public static bool sell_condition; //매도조건
         public static string sell_condition_start;
         public static string sell_condition_end;
         public static int Fomula_list_sell;
+
         public static bool profit_percent;
-        public static string profit_percent_text;
+        public static string profit_percent_text; //익절
         public static bool loss_percent;
-        public static string loss_percent_text;
+        public static string loss_percent_text; //손절
         public static bool profit_ts;
-        public static string profit_ts_text;
+        public static string profit_ts_text; //익절TS
         public static bool profit_won;
-        public static string profit_won_text;
+        public static string profit_won_text; //익절원
         public static bool loss_won;
-        public static string loss_won_text;
-        public static bool clear_sell;
+        public static string loss_won_text; //손절원
+
+        public static bool clear_sell; //전체청산
         public static string clear_sell_start;
         public static string clear_sell_end;
-        public static bool clear_sell_market;
-        public static bool clear_sell_profit;
-        public static string clear_sell_profit_text;
+        public static bool clear_sell_market; 
+        public static bool clear_sell_profit; 
+        public static string clear_sell_profit_text; //청산익절
         public static bool clear_sell_loss;
-        public static string clear_sell_loss_text;
-        public static bool after_market_profit;
-        public static bool after_market_loss;
+        public static string clear_sell_loss_text;//청산손절
+        public static bool after_market_profit; //동시호가익절
+        public static bool after_market_loss;//동시호가손절
+
         public static bool term_for_buy;
-        public static string term_for_buy_text;
+        public static string term_for_buy_text;//종목매수텀
         public static bool term_for_non_buy;
-        public static string term_for_non_buy_text;
-        public static int buy_set1;
+        public static string term_for_non_buy_text; //미체결매수취소
+
+        public static int buy_set1; //매수설정
         public static int buy_set2;
-        public static int sell_set1;
+        public static int sell_set1; //매도설정
         public static int sell_set2;
+
         public static bool kospi_index;
         public static string kospi_index_start;
         public static string kospi_index_end;
@@ -84,10 +93,12 @@ namespace WindowsFormsApp1
         public static bool kosdak_commodity;
         public static string kosdak_commodity_start;
         public static string kosdak_commodity_end;
+
         public static bool KIS_Allow;
         public static string KIS_appkey;
         public static string KIS_appsecret;
         public static string KIS_amount;
+
         public static bool Telegram_Allow;
         public static string telegram_user_id;
         public static string telegram_token;

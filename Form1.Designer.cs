@@ -178,7 +178,7 @@ namespace WindowsFormsApp1
             this.log_window.AcceptsTab = true;
             this.log_window.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.log_window.Location = new System.Drawing.Point(7, 28);
-            this.log_window.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.log_window.Margin = new System.Windows.Forms.Padding(4);
             this.log_window.Name = "log_window";
             this.log_window.ReadOnly = true;
             this.log_window.Size = new System.Drawing.Size(443, 604);
@@ -189,7 +189,7 @@ namespace WindowsFormsApp1
             // 
             this.axKHOpenAPI1.Enabled = true;
             this.axKHOpenAPI1.Location = new System.Drawing.Point(1104, 50);
-            this.axKHOpenAPI1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.axKHOpenAPI1.Margin = new System.Windows.Forms.Padding(4);
             this.axKHOpenAPI1.Name = "axKHOpenAPI1";
             this.axKHOpenAPI1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axKHOpenAPI1.OcxState")));
             this.axKHOpenAPI1.Size = new System.Drawing.Size(337, 168);
@@ -228,7 +228,7 @@ namespace WindowsFormsApp1
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.Location = new System.Drawing.Point(6, 72);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
@@ -279,7 +279,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel1.Controls.Add(this.label14, 9, 0);
             this.tableLayoutPanel1.Controls.Add(this.total_money, 0, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(17, 198);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -682,7 +682,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel2.Controls.Add(this.Real_time_stop_btn, 2, 2);
             this.tableLayoutPanel2.Controls.Add(this.Stock_code, 1, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(1444, 126);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -699,7 +699,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Fomula_list.FormattingEnabled = true;
             this.Fomula_list.Location = new System.Drawing.Point(155, 57);
-            this.Fomula_list.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Fomula_list.Margin = new System.Windows.Forms.Padding(4);
             this.Fomula_list.Name = "Fomula_list";
             this.Fomula_list.Size = new System.Drawing.Size(144, 26);
             this.Fomula_list.TabIndex = 12;
@@ -825,7 +825,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Stock_code.Location = new System.Drawing.Point(155, 4);
-            this.Stock_code.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Stock_code.Margin = new System.Windows.Forms.Padding(4);
             this.Stock_code.Name = "Stock_code";
             this.Stock_code.Size = new System.Drawing.Size(144, 28);
             this.Stock_code.TabIndex = 13;
@@ -844,7 +844,6 @@ namespace WindowsFormsApp1
             this.Main_menu});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Padding = new System.Windows.Forms.Padding(6, 2, 0, 2);
             this.menu.Size = new System.Drawing.Size(1927, 33);
             this.menu.TabIndex = 7;
             this.menu.Text = "menuStrip1";
@@ -1691,7 +1690,7 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.time);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menu;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Trade_Auto";
             this.Text = "Trade_Auto";
             ((System.ComponentModel.ISupportInitialize)(this.axKHOpenAPI1)).EndInit();

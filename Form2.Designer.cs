@@ -617,7 +617,7 @@ namespace WindowsFormsApp1
             this.before_time_deny.Name = "before_time_deny";
             this.before_time_deny.Size = new System.Drawing.Size(250, 32);
             this.before_time_deny.TabIndex = 11;
-            this.before_time_deny.Text = "매수 시간전 검출 매수 금지";
+            this.before_time_deny.Text = "시간전 검출 매수 금지";
             this.before_time_deny.UseVisualStyleBackColor = false;
             // 
             // tableLayoutPanel5
@@ -627,7 +627,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.90253F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.43321F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.53069F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 174F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 176F));
             this.tableLayoutPanel5.Controls.Add(this.setting_allowed, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.setting_open, 3, 0);
             this.tableLayoutPanel5.Controls.Add(this.save_button, 2, 0);
@@ -647,7 +647,7 @@ namespace WindowsFormsApp1
             this.setting_allowed.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_allowed.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_allowed.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_allowed.Location = new System.Drawing.Point(1088, 3);
+            this.setting_allowed.Location = new System.Drawing.Point(1086, 3);
             this.setting_allowed.Name = "setting_allowed";
             this.setting_allowed.Size = new System.Drawing.Size(147, 44);
             this.setting_allowed.TabIndex = 8;
@@ -659,7 +659,7 @@ namespace WindowsFormsApp1
             this.setting_open.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_open.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_open.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_open.Location = new System.Drawing.Point(931, 3);
+            this.setting_open.Location = new System.Drawing.Point(929, 3);
             this.setting_open.Name = "setting_open";
             this.setting_open.Size = new System.Drawing.Size(151, 44);
             this.setting_open.TabIndex = 7;
@@ -671,7 +671,7 @@ namespace WindowsFormsApp1
             this.save_button.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.save_button.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.save_button.ForeColor = System.Drawing.Color.SpringGreen;
-            this.save_button.Location = new System.Drawing.Point(764, 3);
+            this.save_button.Location = new System.Drawing.Point(762, 3);
             this.save_button.Name = "save_button";
             this.save_button.Size = new System.Drawing.Size(161, 44);
             this.save_button.TabIndex = 6;
@@ -683,10 +683,10 @@ namespace WindowsFormsApp1
             this.setting_name.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.setting_name.Location = new System.Drawing.Point(211, 3);
+            this.setting_name.Location = new System.Drawing.Point(210, 3);
             this.setting_name.Name = "setting_name";
             this.setting_name.ReadOnly = true;
-            this.setting_name.Size = new System.Drawing.Size(547, 28);
+            this.setting_name.Size = new System.Drawing.Size(546, 28);
             this.setting_name.TabIndex = 1;
             // 
             // label5
@@ -698,7 +698,7 @@ namespace WindowsFormsApp1
             this.label5.Font = new System.Drawing.Font("굴림", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label5.Location = new System.Drawing.Point(3, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(202, 50);
+            this.label5.Size = new System.Drawing.Size(201, 50);
             this.label5.TabIndex = 9;
             this.label5.Text = "전략명";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1620,9 +1620,9 @@ namespace WindowsFormsApp1
             this.Telegram_Allow.AutoSize = true;
             this.Telegram_Allow.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Telegram_Allow.Location = new System.Drawing.Point(9, 32);
-            this.Telegram_Allow.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Telegram_Allow.Margin = new System.Windows.Forms.Padding(4);
             this.Telegram_Allow.Name = "Telegram_Allow";
-            this.Telegram_Allow.Size = new System.Drawing.Size(237, 32);
+            this.Telegram_Allow.Size = new System.Drawing.Size(158, 21);
             this.Telegram_Allow.TabIndex = 2;
             this.Telegram_Allow.Text = "Telegram_Allow";
             this.Telegram_Allow.UseVisualStyleBackColor = true;
@@ -1715,9 +1715,9 @@ namespace WindowsFormsApp1
             this.KIS_Allow.AutoSize = true;
             this.KIS_Allow.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.KIS_Allow.Location = new System.Drawing.Point(9, 24);
-            this.KIS_Allow.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.KIS_Allow.Margin = new System.Windows.Forms.Padding(4);
             this.KIS_Allow.Name = "KIS_Allow";
-            this.KIS_Allow.Size = new System.Drawing.Size(165, 32);
+            this.KIS_Allow.Size = new System.Drawing.Size(110, 21);
             this.KIS_Allow.TabIndex = 1;
             this.KIS_Allow.Text = "KIS_Allow";
             this.KIS_Allow.UseVisualStyleBackColor = true;
