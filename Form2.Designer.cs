@@ -143,14 +143,15 @@ namespace WindowsFormsApp1
             this.kosdak_index_start = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.telegram_test_button = new System.Windows.Forms.Button();
+            this.Telegram_Allow = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.textBox21 = new System.Windows.Forms.TextBox();
             this.textBox45 = new System.Windows.Forms.TextBox();
             this.telegram_user_id = new System.Windows.Forms.TextBox();
             this.telegram_token = new System.Windows.Forms.TextBox();
+            this.telegram_test_button = new System.Windows.Forms.Button();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.KIS_Allow = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
             this.appkey_text = new System.Windows.Forms.Label();
             this.kis_amount_text = new System.Windows.Forms.Label();
@@ -158,6 +159,7 @@ namespace WindowsFormsApp1
             this.label13 = new System.Windows.Forms.Label();
             this.appsecret = new System.Windows.Forms.TextBox();
             this.kis_amount = new System.Windows.Forms.TextBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -545,14 +547,14 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel4.Controls.Add(this.hold_deny, 0, 2);
             this.tableLayoutPanel4.Controls.Add(this.before_time_deny, 0, 3);
             this.tableLayoutPanel4.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(6, 29);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(6, 28);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 4;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(370, 145);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(370, 146);
             this.tableLayoutPanel4.TabIndex = 5;
             // 
             // max_hold
@@ -613,7 +615,7 @@ namespace WindowsFormsApp1
             this.before_time_deny.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.before_time_deny.Location = new System.Drawing.Point(3, 111);
             this.before_time_deny.Name = "before_time_deny";
-            this.before_time_deny.Size = new System.Drawing.Size(250, 31);
+            this.before_time_deny.Size = new System.Drawing.Size(250, 32);
             this.before_time_deny.TabIndex = 11;
             this.before_time_deny.Text = "매수 시간전 검출 매수 금지";
             this.before_time_deny.UseVisualStyleBackColor = false;
@@ -625,7 +627,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.90253F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.43321F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.53069F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 167F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 174F));
             this.tableLayoutPanel5.Controls.Add(this.setting_allowed, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.setting_open, 3, 0);
             this.tableLayoutPanel5.Controls.Add(this.save_button, 2, 0);
@@ -645,7 +647,7 @@ namespace WindowsFormsApp1
             this.setting_allowed.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_allowed.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_allowed.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_allowed.Location = new System.Drawing.Point(1094, 3);
+            this.setting_allowed.Location = new System.Drawing.Point(1088, 3);
             this.setting_allowed.Name = "setting_allowed";
             this.setting_allowed.Size = new System.Drawing.Size(147, 44);
             this.setting_allowed.TabIndex = 8;
@@ -657,9 +659,9 @@ namespace WindowsFormsApp1
             this.setting_open.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_open.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_open.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_open.Location = new System.Drawing.Point(936, 3);
+            this.setting_open.Location = new System.Drawing.Point(931, 3);
             this.setting_open.Name = "setting_open";
-            this.setting_open.Size = new System.Drawing.Size(152, 44);
+            this.setting_open.Size = new System.Drawing.Size(151, 44);
             this.setting_open.TabIndex = 7;
             this.setting_open.Text = "전량열기";
             this.setting_open.UseVisualStyleBackColor = false;
@@ -669,9 +671,9 @@ namespace WindowsFormsApp1
             this.save_button.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.save_button.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.save_button.ForeColor = System.Drawing.Color.SpringGreen;
-            this.save_button.Location = new System.Drawing.Point(768, 3);
+            this.save_button.Location = new System.Drawing.Point(764, 3);
             this.save_button.Name = "save_button";
-            this.save_button.Size = new System.Drawing.Size(162, 44);
+            this.save_button.Size = new System.Drawing.Size(161, 44);
             this.save_button.TabIndex = 6;
             this.save_button.Text = "전량저장";
             this.save_button.UseVisualStyleBackColor = false;
@@ -681,10 +683,10 @@ namespace WindowsFormsApp1
             this.setting_name.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.setting_name.Location = new System.Drawing.Point(212, 3);
+            this.setting_name.Location = new System.Drawing.Point(211, 3);
             this.setting_name.Name = "setting_name";
             this.setting_name.ReadOnly = true;
-            this.setting_name.Size = new System.Drawing.Size(550, 28);
+            this.setting_name.Size = new System.Drawing.Size(547, 28);
             this.setting_name.TabIndex = 1;
             // 
             // label5
@@ -696,7 +698,7 @@ namespace WindowsFormsApp1
             this.label5.Font = new System.Drawing.Font("굴림", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label5.Location = new System.Drawing.Point(3, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(203, 50);
+            this.label5.Size = new System.Drawing.Size(202, 50);
             this.label5.TabIndex = 9;
             this.label5.Text = "전략명";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1319,7 +1321,7 @@ namespace WindowsFormsApp1
             this.groupBox2.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.groupBox2.Location = new System.Drawing.Point(11, 219);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(381, 427);
+            this.groupBox2.Size = new System.Drawing.Size(381, 428);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "기본 설정";
@@ -1603,26 +1605,27 @@ namespace WindowsFormsApp1
             // 
             // groupBox9
             // 
-            this.groupBox9.Controls.Add(this.telegram_test_button);
+            this.groupBox9.Controls.Add(this.Telegram_Allow);
             this.groupBox9.Controls.Add(this.tableLayoutPanel13);
             this.groupBox9.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox9.Location = new System.Drawing.Point(1129, 611);
+            this.groupBox9.Location = new System.Drawing.Point(1129, 634);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(381, 212);
+            this.groupBox9.Size = new System.Drawing.Size(381, 196);
             this.groupBox9.TabIndex = 22;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "TELEGRAM";
             // 
-            // telegram_test_button
+            // Telegram_Allow
             // 
-            this.telegram_test_button.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.telegram_test_button.ForeColor = System.Drawing.Color.MediumSpringGreen;
-            this.telegram_test_button.Location = new System.Drawing.Point(132, 158);
-            this.telegram_test_button.Name = "telegram_test_button";
-            this.telegram_test_button.Size = new System.Drawing.Size(137, 46);
-            this.telegram_test_button.TabIndex = 1;
-            this.telegram_test_button.Text = "테스트";
-            this.telegram_test_button.UseVisualStyleBackColor = false;
+            this.Telegram_Allow.AutoSize = true;
+            this.Telegram_Allow.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Telegram_Allow.Location = new System.Drawing.Point(9, 32);
+            this.Telegram_Allow.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Telegram_Allow.Name = "Telegram_Allow";
+            this.Telegram_Allow.Size = new System.Drawing.Size(237, 32);
+            this.Telegram_Allow.TabIndex = 2;
+            this.Telegram_Allow.Text = "Telegram_Allow";
+            this.Telegram_Allow.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel13
             // 
@@ -1632,7 +1635,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel13.Controls.Add(this.textBox45, 0, 2);
             this.tableLayoutPanel13.Controls.Add(this.telegram_user_id, 0, 1);
             this.tableLayoutPanel13.Controls.Add(this.telegram_token, 0, 3);
-            this.tableLayoutPanel13.Location = new System.Drawing.Point(9, 29);
+            this.tableLayoutPanel13.Location = new System.Drawing.Point(9, 68);
             this.tableLayoutPanel13.Name = "tableLayoutPanel13";
             this.tableLayoutPanel13.RowCount = 4;
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -1640,7 +1643,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel13.Size = new System.Drawing.Size(367, 121);
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(367, 122);
             this.tableLayoutPanel13.TabIndex = 0;
             // 
             // textBox21
@@ -1683,21 +1686,41 @@ namespace WindowsFormsApp1
             this.telegram_token.Size = new System.Drawing.Size(360, 30);
             this.telegram_token.TabIndex = 3;
             // 
+            // telegram_test_button
+            // 
+            this.telegram_test_button.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.telegram_test_button.ForeColor = System.Drawing.Color.MediumSpringGreen;
+            this.telegram_test_button.Location = new System.Drawing.Point(1311, 27);
+            this.telegram_test_button.Name = "telegram_test_button";
+            this.telegram_test_button.Size = new System.Drawing.Size(137, 46);
+            this.telegram_test_button.TabIndex = 1;
+            this.telegram_test_button.Text = "테스트";
+            this.telegram_test_button.UseVisualStyleBackColor = false;
+            // 
             // groupBox10
             // 
+            this.groupBox10.Controls.Add(this.KIS_Allow);
             this.groupBox10.Controls.Add(this.tableLayoutPanel14);
             this.groupBox10.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox10.Location = new System.Drawing.Point(1129, 443);
+            this.groupBox10.Location = new System.Drawing.Point(1129, 442);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(381, 162);
+            this.groupBox10.Size = new System.Drawing.Size(381, 186);
             this.groupBox10.TabIndex = 23;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "KIS";
             this.groupBox10.Enter += new System.EventHandler(this.groupBox10_Enter);
             // 
-            // openFileDialog1
+            // KIS_Allow
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.KIS_Allow.AutoSize = true;
+            this.KIS_Allow.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.KIS_Allow.Location = new System.Drawing.Point(9, 24);
+            this.KIS_Allow.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.KIS_Allow.Name = "KIS_Allow";
+            this.KIS_Allow.Size = new System.Drawing.Size(165, 32);
+            this.KIS_Allow.TabIndex = 1;
+            this.KIS_Allow.Text = "KIS_Allow";
+            this.KIS_Allow.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel14
             // 
@@ -1710,13 +1733,13 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel14.Controls.Add(this.label13, 0, 1);
             this.tableLayoutPanel14.Controls.Add(this.appsecret, 1, 1);
             this.tableLayoutPanel14.Controls.Add(this.kis_amount, 1, 2);
-            this.tableLayoutPanel14.Location = new System.Drawing.Point(13, 22);
+            this.tableLayoutPanel14.Location = new System.Drawing.Point(9, 56);
             this.tableLayoutPanel14.Name = "tableLayoutPanel14";
             this.tableLayoutPanel14.RowCount = 3;
             this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel14.Size = new System.Drawing.Size(359, 124);
+            this.tableLayoutPanel14.Size = new System.Drawing.Size(367, 124);
             this.tableLayoutPanel14.TabIndex = 0;
             // 
             // appkey_text
@@ -1726,9 +1749,10 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.appkey_text.AutoSize = true;
             this.appkey_text.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.appkey_text.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.appkey_text.Location = new System.Drawing.Point(3, 0);
             this.appkey_text.Name = "appkey_text";
-            this.appkey_text.Size = new System.Drawing.Size(107, 41);
+            this.appkey_text.Size = new System.Drawing.Size(115, 41);
             this.appkey_text.TabIndex = 0;
             this.appkey_text.Text = "appkey";
             this.appkey_text.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1740,18 +1764,19 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kis_amount_text.AutoSize = true;
             this.kis_amount_text.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.kis_amount_text.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.kis_amount_text.Location = new System.Drawing.Point(3, 82);
             this.kis_amount_text.Name = "kis_amount_text";
-            this.kis_amount_text.Size = new System.Drawing.Size(107, 42);
+            this.kis_amount_text.Size = new System.Drawing.Size(115, 42);
             this.kis_amount_text.TabIndex = 1;
             this.kis_amount_text.Text = "amount";
             this.kis_amount_text.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // appkey
             // 
-            this.appkey.Location = new System.Drawing.Point(116, 3);
+            this.appkey.Location = new System.Drawing.Point(124, 3);
             this.appkey.Name = "appkey";
-            this.appkey.Size = new System.Drawing.Size(240, 30);
+            this.appkey.Size = new System.Drawing.Size(238, 30);
             this.appkey.TabIndex = 4;
             // 
             // label13
@@ -1761,9 +1786,10 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label13.AutoSize = true;
             this.label13.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.label13.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label13.Location = new System.Drawing.Point(3, 41);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(107, 41);
+            this.label13.Size = new System.Drawing.Size(115, 41);
             this.label13.TabIndex = 5;
             this.label13.Text = "appsecret";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1773,7 +1799,7 @@ namespace WindowsFormsApp1
             this.appsecret.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.appsecret.Location = new System.Drawing.Point(116, 44);
+            this.appsecret.Location = new System.Drawing.Point(124, 44);
             this.appsecret.Name = "appsecret";
             this.appsecret.Size = new System.Drawing.Size(240, 30);
             this.appsecret.TabIndex = 6;
@@ -1783,17 +1809,22 @@ namespace WindowsFormsApp1
             this.kis_amount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kis_amount.Location = new System.Drawing.Point(116, 85);
+            this.kis_amount.Location = new System.Drawing.Point(124, 85);
             this.kis_amount.Name = "kis_amount";
             this.kis_amount.Size = new System.Drawing.Size(240, 30);
             this.kis_amount.TabIndex = 7;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Setting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1015, 568);
+            this.ClientSize = new System.Drawing.Size(1531, 849);
+            this.Controls.Add(this.telegram_test_button);
             this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox8);
@@ -1805,6 +1836,7 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tableLayoutPanel5);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Setting";
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.Setting_Load);
@@ -1841,9 +1873,11 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel12.ResumeLayout(false);
             this.tableLayoutPanel12.PerformLayout();
             this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
             this.tableLayoutPanel13.ResumeLayout(false);
             this.tableLayoutPanel13.PerformLayout();
             this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
             this.tableLayoutPanel14.ResumeLayout(false);
             this.tableLayoutPanel14.PerformLayout();
             this.ResumeLayout(false);
@@ -1981,5 +2015,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox appsecret;
         private System.Windows.Forms.TextBox kis_amount;
+        private System.Windows.Forms.CheckBox Telegram_Allow;
+        private System.Windows.Forms.CheckBox KIS_Allow;
     }
 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1
@@ -138,7 +139,7 @@ namespace WindowsFormsApp1
             dataTable.Columns.Add("상태", typeof(string)); // '대기' '매수중 '매수완료' '매도중' '매도완료'
             dataTable.Columns.Add("종목코드", typeof(string));
             dataTable.Columns.Add("종목명", typeof(string));
-            dataTable.Columns.Add("현재가", typeof(string));
+            dataTable.Columns.Add("현재가", typeof(string)); // + - 부호를 통해 매수호가인지 매도 호가인지 현재가인지 파악한다.
             dataTable.Columns.Add("등락율", typeof(string));
             dataTable.Columns.Add("거래량", typeof(string));
             dataTable.Columns.Add("편입가", typeof(string));
@@ -302,7 +303,7 @@ namespace WindowsFormsApp1
                     dataTable.Columns.Add("상태", typeof(string)); // '대기' '매수중 '매수완료' '매도중' '매도완료'
                     dataTable.Columns.Add("종목코드", typeof(string));
                     dataTable.Columns.Add("종목명", typeof(string));
-                    dataTable.Columns.Add("현재가", typeof(string));
+                    dataTable.Columns.Add("현재가", typeof(string)); // + - 부호를 통해 매수호가인지 매도 호가인지 현재가인지 파악한다.
                     dataTable.Columns.Add("등락율", typeof(string));
                     dataTable.Columns.Add("거래량", typeof(string));
                     dataTable.Columns.Add("편입가", typeof(string));
@@ -312,7 +313,7 @@ namespace WindowsFormsApp1
                     int count = axKHOpenAPI1.GetRepeatCnt(e.sTrCode, e.sRQName);
                     for (int i = 0; i < count; i++)
                     {
-                        int current_price = Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "현재가").Trim());
+                        int current_price = Math.Abs(Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "현재가").Trim()));
                         dataTable.Rows.Add(
                             "편입",
                             "대기",
@@ -322,7 +323,7 @@ namespace WindowsFormsApp1
                             string.Format("{0:#,##0.00}%", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "등락율").Trim())),
                             string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "거래량").Trim())),
                             string.Format("{0:#,##0}", current_price),
-                            "0.00/%",
+                            "0.00%",
                             condition_name,
                             DateTime.Now.ToString("HH:mm:ss")
                         );
@@ -333,7 +334,7 @@ namespace WindowsFormsApp1
                     break;
                 //실시간 조건 검색(상태(편입, 이탈, 매수, 매도), 종목코드, 종목명, 등락표시, 현재가, 등락율, 거래량, 편입가, 편입대비, 수익률, 편입시간, 매수조건식, 매도조건식) => 상태, 종목코드, 대비기호, 현재가. 등락율, 거래량
                 case "조건실시간검색":
-                    int current_price2 = Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "현재가").Trim());
+                    int current_price2 = Math.Abs(Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "현재가").Trim()));
                     dtCondStock.Rows.Add(
                         "편입",
                         "대기",
@@ -343,7 +344,7 @@ namespace WindowsFormsApp1
                         string.Format("{0:#,##0.00}%", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "등락율").Trim())),
                         string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "거래량").Trim())),
                         string.Format("{0:#,##0}", current_price2),
-                        "0.00/%",
+                        "0.00%",
                         condition_name,
                         DateTime.Now.ToString("HH:mm:ss")
                     );
@@ -663,9 +664,9 @@ namespace WindowsFormsApp1
                     break;
             }
         }
+        
 
-
-        //실시간 시세 등록(지속적 발생)(대비기호, 현재가. 등락율, 거래량)
+        //실시간 시세(지속적 발생)(현재가. 등락율, 거래량, 수익률)
         private void onReceiveRealData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveRealDataEvent e)
         {
             //종목 확인
@@ -674,34 +675,46 @@ namespace WindowsFormsApp1
             //검출 종목이 아니거나 검출 후 시세 해지 못한 종목 => 불필요한듯
             if (findRows.Length == 0) return;
 
-            //
-            String price = string.Format("{0:#,##0}", axKHOpenAPI1.GetCommRealData(e.sRealKey, 10).Trim()); //새로운 현재가
-            String percent = string.Format("{0:#,##0.00}%", (Convert.ToDecimal(price) / Convert.ToDecimal(findRows[0]["편입가"])) * 100); //새로운 수익률
-            //
-            check(findRows[0]["상태"].ToString(), findRows[0]["편입"].ToString(), findRows[0]["종목코드"].ToString(), percent);
-            String updown = string.Format("{0:#,##0.00}%", axKHOpenAPI1.GetCommRealData(e.sRealKey, 12).Trim()); //새로운 등락율
-            String amount = string.Format("{0:#,##0}", axKHOpenAPI1.GetCommRealData(e.sRealKey, 13).Trim()); //새로운 거래량
-            //
-            if (!findRows[0]["현재가"].Equals(price))
+            //신규 값 받기
+            string price = Regex.Replace(axKHOpenAPI1.GetCommRealData(e.sRealKey, 10).Trim(), @"[\+\-]", ""); //새로운 현재가
+            string updown = axKHOpenAPI1.GetCommRealData(e.sRealKey, 12).Trim(); //새로운 등락율
+            string amount = axKHOpenAPI1.GetCommRealData(e.sRealKey, 13).Trim(); //새로운 거래량
+            string percent;
+
+            //[우선] 수익률 계산
+            if (!price.Equals(""))
             {
-                findRows[0]["현재가"] = price;
-            }
-            if (!findRows[0]["등락율"].Equals(updown))
-            {
-                findRows[0]["등락율"] = updown;
-            }
-            if (!findRows[0]["거래량"].Equals(amount))
-            {
-                findRows[0]["거래량"] = amount;
-            }
-            if (!findRows[0]["수익률"].Equals(percent))
-            {
+                double native_price = Convert.ToDouble(price);
+                double native_percent = (native_price - Convert.ToDouble(findRows[0]["편입가"].ToString().Replace(",", ""))) / Convert.ToDouble(findRows[0]["편입가"].ToString().Replace(",", "")) * 100;
+                percent = string.Format("{0:#,##0.00}%", Convert.ToDecimal(native_percent)); //새로운 수익률
                 findRows[0]["수익률"] = percent;
             }
+            else
+            {
+                percent = findRows[0]["수익률"].ToString(); //기존 수익률
+                findRows[0]["수익률"] = percent;
+            }
+
+            //실시간 가격을 바탕으로 매수 매도 처리
+            //check(findRows[0]["상태"].ToString(), findRows[0]["편입"].ToString(), findRows[0]["종목코드"].ToString(), percent);
+
+            //신규 값 빈값 확인
+            if (!price.Equals(""))
+            {
+                findRows[0]["현재가"] = string.Format("{0:#,##0}", Convert.ToInt32(price)); //새로운 현재가
+            }
+            if (!updown.Equals(""))
+            {
+                findRows[0]["등락율"] = string.Format("{0:#,##0.00}%", Convert.ToDecimal(updown)); //새로운 등락율
+            }
+            if (!amount.Equals(""))
+            {
+                findRows[0]["거래량"] = string.Format("{0:#,##0}", Convert.ToInt32(amount)); //새로운 거래량
+            }
+
+            //적용
             dtCondStock.AcceptChanges();
             dataGridView1.DataSource = dtCondStock;
-
-            //매도 감시
         }
 
         //---------------계좌 보유 종목 갱신---------------------
@@ -748,7 +761,7 @@ namespace WindowsFormsApp1
         }
 
         //--------------실시간 가격에 따른 매수 매도 감시---------------------
-        private void check(string status, string transfer, string code, string percent)
+        private void check(string transfer, string status, string code, string percent)
         {
             if (transfer.Equals("편입") && status.Equals("대기")) buy_check(code);
             else if(status.Equals("매수완료")) sell_check(percent);
