@@ -15,11 +15,12 @@ namespace WindowsFormsApp1
 {
     public partial class Trade_Auto : Form
     {
-        //---------------공용 신호-------------------
+        //-----------------------------------공용 신호----------------------------------------
+
         static public string[] arrCondition;
         static public string[] account;
 
-        //---------------Main---------------------
+        //-----------------------------------------------Main------------------------------------------------
         public Trade_Auto()
         {
             InitializeComponent();
@@ -65,7 +66,19 @@ namespace WindowsFormsApp1
 
         }
 
-        //---------------공용기능---------------------
+        //-----------------------------------storage----------------------------------------
+
+        //telegram용 초당 1회 전송 저장소
+        private Queue<String> telegram_chat = new Queue<string>();
+
+        //실시간 조건 검색 용 테이블(누적 저장)
+        private DataTable dtCondStock = new DataTable();
+
+        //실시간 계좌 보유 현황 용 테이블(누적 저장)
+        private DataTable dtCondStock_hold = new DataTable();
+
+        //------------------------------------------공용기능-------------------------------------------
+
         //화면번호
         private int _screenNo = 1001;
         private string GetScreenNo()
@@ -99,40 +112,76 @@ namespace WindowsFormsApp1
             }
         }
 
-        //시간 표시
+        //timer1(1000ms)
         private void ClockEvent(object sender, EventArgs e)
         {
+            //시간표시
             timetimer.Text = DateTime.Now.ToString("yy MM-dd (ddd) HH:mm:ss");
+
+            //Telegram 전송
+            if (utility.Telegram_Allow && telegram_chat.Count() != 0)
+            {
+                telegram_send(telegram_chat.Dequeue());
+            }
         }
 
         //로그창
         private void WriteLog(string message)
         {
-            if (utility.Telegram_Allow)
-            {
                 string time = DateTime.Now.ToString("HH:mm:ss");
                 log_window.AppendText($@"{"[" + time + "] " + message}");
-            }
         }
 
-        //telegram(초당 1개씩 전송)
-        private void telegram_chat(string message)
+        //telegram_chat
+        private void telegram_message(string message)
         {
             string time = DateTime.Now.ToString("HH:mm:ss");
             string message_edtied = "[" + time + "] " + message;
-            string urlString = $"https://api.telegram.org/bot{utility.telegram_token}/sendMessage?chat_id={utility.telegram_user_id}&text={message_edtied}";
-            WebRequest request = WebRequest.Create(urlString);
-            Stream stream = request.GetResponse().GetResponseStream();
+            telegram_chat.Append(message_edtied);
         }
 
-        //telegram용 초당 1회 전송 저장소
-        private Queue<String> telegram_save = new Queue<string>();
+        //telegram_send(초당 1개씩 전송)
+        private void telegram_send(string message)
+        {
+            string urlString = $"https://api.telegram.org/bot{utility.telegram_token}/sendMessage?chat_id={utility.telegram_user_id}&text={message}";
+            WebRequest request = WebRequest.Create(urlString);
+            Stream stream = request.GetResponse().GetResponseStream();
 
-        //실시간 조건 검색 용 테이블(누적 저장)
-        private DataTable dtCondStock = new DataTable();
+        }
+        
+        //-----------------------------------------initial-------------------------------------
 
-        //실시간 계좌 보유 현황 용 테이블(누적 저장)
-        private DataTable dtCondStock_hold = new DataTable();
+        //초기 설정 반영 & 즉시 반영
+        public void initial_allow()
+        {
+            string[] mode = { "지정가", "시장가" };
+            string[] hoo = { "5호가", "4호가", "3호가", "2호가", "1호가", "현재가", "시장가", "-1호가", "-2호가", "-3호가", "-4호가", "-5호가" };
+
+            //초기 세팅
+            acc_text.Text = utility.setting_account_number;
+            total_money.Text = string.Format("{0:#,##0}", Convert.ToDecimal(utility.initial_balance));
+            max_hoid.Text = utility.maxbuy_acc;
+            operation_start.Text = utility.market_start_time;
+            operation_stop.Text = utility.market_end_time;
+            search_start.Text = utility.buy_condition_start;
+            search_stop.Text = utility.buy_condition_end;
+            clear_sell.Text = Convert.ToString(utility.clear_sell);
+            clear_sell_time.Text = utility.clear_sell_start + "~";
+            profit.Text = utility.profit_percent_text;
+            loss.Text = utility.loss_percent_text;
+            buy_condition.SelectedIndex = utility.Fomula_list_buy;
+            buy_condtion_method.Text = mode[utility.buy_set1] + " - " + hoo[utility.buy_set2];
+            sell_condtion.SelectedIndex = utility.Fomula_list_sell;
+            sell_condtion_method.Text = mode[utility.sell_set1] + " - " + hoo[utility.sell_set2];
+
+            //갱신 주기
+            string[] ms = { "200", "400", "500", "1000", "2000", "5000" };
+            update_interval.Items.AddRange(ms);
+
+            //한국투자증권API
+
+
+        }
 
         //초기 Table 값 입력
         private void initial_Table()
@@ -165,8 +214,6 @@ namespace WindowsFormsApp1
             dataGridView2.DataSource = dtCondStock_hold;
         }
 
-        //---------------초기 로그인---------------------
-
         //로그인
         private void login_btn(object sender, EventArgs e)
         {
@@ -179,19 +226,24 @@ namespace WindowsFormsApp1
             {
                 // 정상 처리
                 WriteLog("로그인 성공\n");
-                telegram_chat("로그인 성공\n");
+                telegram_message("로그인 성공\n");
+
                 //"ACCOUNT_CNT" : 보유계좌 갯수
                 //"ACCLIST" 또는 "ACCNO" : 구분자 ';', 보유계좌 목록                
                 string 계좌목록 = axKHOpenAPI1.GetLoginInfo("ACCLIST").Trim();
+
                 //계좌목록은 ';'문자로 분리된 문자열
                 //분리된 계좌를 ComboBox에 추가 
                 account = 계좌목록.Split(';');
+
                 //사용자 id를 UserId 라벨에 추가
                 string 사용자id = axKHOpenAPI1.GetLoginInfo("USER_ID");
                 User_id.Text = 사용자id;
+
                 //사용자 이름을 UserName 라벨에 추가
                 string 사용자이름 = axKHOpenAPI1.GetLoginInfo("USER_NAME");
                 User_name.Text = 사용자이름;
+
                 //접속서버 구분(1 : 모의투자, 나머지: 실거래서버)
                 string 접속서버구분 = axKHOpenAPI1.GetLoginInfo("GetServerGubun");
                 if (접속서버구분.Equals("1"))
@@ -202,6 +254,7 @@ namespace WindowsFormsApp1
                 {
                     User_connection.Text = "실제\n";
                 }
+
                 //"KEY_BSECGB" : 키보드 보안 해지여부(0 : 정상, 1 : 해지)
                 string 키보드보안 = axKHOpenAPI1.GetLoginInfo("KEY_BSECGB");
                 if (키보드보안.Equals("1"))
@@ -212,6 +265,7 @@ namespace WindowsFormsApp1
                 {
                     Keyboard_wall.Text = "해지\n";
                 }
+
                 //"FIREW_SECGB" : 방화벽 설정여부(0 : 미설정, 1 : 설정, 2 : 해지)
                 string 방화벽 = axKHOpenAPI1.GetLoginInfo("FIREW_SECGB");
                 if (방화벽.Equals("0"))
@@ -226,22 +280,22 @@ namespace WindowsFormsApp1
                 {
                     Fire_wall.Text = "해지\n";
                 }
+
+                //예수금 받아오기
+                GetCashInfo(acc_text.Text.Trim());
+
                 //조건식 검색
                 WriteLog("조건식 검색ing\n");
                 if(axKHOpenAPI1.GetConditionLoad() == 1)
                 {
                     WriteLog("조건식 검색 성공\n");
-                    telegram_chat("조건식 검색 성공\n");
+                    telegram_message("조건식 검색 성공\n");
                 }
                 else
                 {
                     WriteLog("조건식 검색 실패\n");
-                    telegram_chat("조건식 검색 실패\n");
+                    telegram_message("조건식 검색 실패\n");
                 }
-                //갱신 주기
-                string[] ms = { "200", "400", "500", "1000", "2000", "5000"};
-                update_interval.Items.AddRange(ms);
-
             }
             else
             {
@@ -249,12 +303,15 @@ namespace WindowsFormsApp1
                 {
                     case 100:
                         WriteLog("사용자 정보교환 실패\n");
+                        telegram_message("사용자 정보교환 실패\n");
                         break;
                     case 101:
                         WriteLog("서버접속 실패\n");
+                        telegram_message("서버접속 실패\n");
                         break;
                     case 102:
                         WriteLog("버전처리 실패\n");
+                        telegram_message("버전처리 실패\n");
                         break;
                 }
 
@@ -262,7 +319,88 @@ namespace WindowsFormsApp1
 
         }
 
-        //---------------TR TABLE---------------------
+        //예수금 조회
+        private void GetCashInfo(string acctNo)
+        {
+            //SetInputValue : 계좌번호, 비밀번호입력매체구분, 조회구분
+            //비밀번호입력매체구 : 기본(00), 일반조회(2). 추정조회(3)
+            //CommRqData(Request Name, TR CODE, 0, 화면 번호)
+            axKHOpenAPI1.SetInputValue("계좌번호", acctNo);
+            axKHOpenAPI1.SetInputValue("비밀번호입력매체구분", "00");
+            axKHOpenAPI1.SetInputValue("조회구분", "2");
+
+            //CommRqData(sRQName, sTRCode, nPreNext, sScreenNo)
+            //CommRqData(임의 사용자 구분명, TR목록, 연속조회여부, 화면번호)
+            //CommRqData를 하는 경우 KHOpenAPI Control의 OnReceiveTrData 이벤트가 호출
+            int result = axKHOpenAPI1.CommRqData("예수금상세현황", "OPW00001", 0, GetScreenNo());
+            GetErrorMessage(result);
+        }
+
+        //조건식 검색(조건식이 있어야 initial 작동 / initial을 통해 계좌를 받아와야 GetCashInfo)
+        class ConditionInfo
+        {
+            public int Index { get; set; }
+            public string Name { get; set; }
+            public DateTime? LastRequestTime { get; set; }
+        }
+
+        private List<ConditionInfo> conditionInfo = new List<ConditionInfo>();
+
+        private void onReceiveConditionVer(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveConditionVerEvent e)
+        {
+            if (e.lRet != 1) return;
+            Fomula_list.Items.Clear();
+            conditionInfo.Clear();
+            //사용자 조건식을 조건식의 고유번호와 조건식 이름을 한 쌍으로 하는 문자열
+            // ';' 구분
+            arrCondition = axKHOpenAPI1.GetConditionNameList().Trim().Split(';');
+            foreach (var cond in arrCondition)
+            {
+                if (string.IsNullOrEmpty(cond)) continue;
+                // '^' 구분 ex) 001^조건식1
+                var item = cond.Split('^');
+                conditionInfo.Add(new ConditionInfo
+                {
+                    Index = Convert.ToInt32(item[0]),
+                    Name = item[1]
+                });
+            }
+            Fomula_list.Items.AddRange(arrCondition);
+            buy_condition.Items.AddRange(arrCondition);
+            sell_condtion.Items.AddRange(arrCondition);
+            if (Fomula_list.Items.Count > 0)
+            {
+                Fomula_list.SelectedIndex = 0;
+                //조건식 검색 후 초기 세팅을 시작한다.
+                initial_allow();
+            }
+            WriteLog("조건식 조회 성공\n");  
+        }
+
+        //초기 보유 종목 테이블 업데이트
+
+
+        //timer2(1000ms)
+        private void Reload_Timer(object sender, EventArgs e)
+        {
+            //계좌 보유 종목 갱신
+            if (utility.load_check)
+            {
+                account_real();
+            }
+        }
+
+        //실시간 잔고 조회(0346) 
+        private void account_real()
+        {
+            axKHOpenAPI1.SetInputValue("계좌번호", utility.setting_account_number);
+            axKHOpenAPI1.SetInputValue("상장폐지조회구분", "0");
+            axKHOpenAPI1.SetInputValue("비밀번호입력매체구분", "00");
+            int result = axKHOpenAPI1.CommRqData("계좌평가현황요청", "OPW00004", 2, GetScreenNo());
+            GetErrorMessage(result);
+        }
+
+        //--------------------------------TR TABLE--------------------------------------------
 
         //데이터 조회(예수금, 유가증권, 조건식, 일반 검색, 실시간 검색 등)
         private void onReceiveTrData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e)
@@ -287,6 +425,9 @@ namespace WindowsFormsApp1
                 case "예수금상세현황":
                     User_money.Text = string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "예수금").Trim()));
                     WriteLog("예수금 조회 완료\n");
+                    telegram_message("예수금 조회 완료\n");
+                    WriteLog("예수금 : " + User_money.Text + "\n");
+                    telegram_message("예수금 : " + User_money.Text + "\n");
                     break;
 
                 //개별 증권 데이터 조회
@@ -405,94 +546,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        //---------------로드---------------------
-
-        //조건식 검색(조건식이 있어야 initial 작동 / initial을 통해 계좌를 받아와야 GetCashInfo)
-        class ConditionInfo
-        {
-            public int Index { get; set; }
-            public string Name { get; set; }
-            public DateTime? LastRequestTime { get; set; }
-        }
-
-        private List<ConditionInfo> conditionInfo = new List<ConditionInfo>();
-
-        private void onReceiveConditionVer(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveConditionVerEvent e)
-        {
-            if (e.lRet != 1) return;
-            Fomula_list.Items.Clear();
-            conditionInfo.Clear();
-            //사용자 조건식을 조건식의 고유번호와 조건식 이름을 한 쌍으로 하는 문자열
-            // ';' 구분
-            arrCondition = axKHOpenAPI1.GetConditionNameList().Trim().Split(';');
-            foreach (var cond in arrCondition)
-            {
-                if (string.IsNullOrEmpty(cond)) continue;
-                // '^' 구분 ex) 001^조건식1
-                var item = cond.Split('^');
-                conditionInfo.Add(new ConditionInfo
-                {
-                    Index = Convert.ToInt32(item[0]),
-                    Name = item[1]
-                });
-            }
-            Fomula_list.Items.AddRange(arrCondition);
-            buy_condition.Items.AddRange(arrCondition);
-            sell_condtion.Items.AddRange(arrCondition);
-            if (Fomula_list.Items.Count > 0)
-            {
-                Fomula_list.SelectedIndex = 0;
-                //조건식 검색 후 초기 세팅을 시작한다.
-                initial_allow();
-            }
-            WriteLog("조건식 조회 성공\n");
-            //예수금 받아오기
-            GetCashInfo(acc_text.Text.Trim());
-            //telegram_chat("조건식 조회 성공\n");
-        }
-
-        //예수금 조회
-        private void GetCashInfo(string acctNo)
-        {
-            //SetInputValue : 계좌번호, 비밀번호입력매체구분, 조회구분
-            //비밀번호입력매체구 : 기본(00), 일반조회(2). 추정조회(3)
-            //CommRqData(Request Name, TR CODE, 0, 화면 번호)
-            axKHOpenAPI1.SetInputValue("계좌번호", acctNo);
-            axKHOpenAPI1.SetInputValue("비밀번호입력매체구분", "00");
-            axKHOpenAPI1.SetInputValue("조회구분", "2");
-            //CommRqData(sRQName, sTRCode, nPreNext, sScreenNo)
-            //CommRqData(임의 사용자 구분명, TR목록, 연속조회여부, 화면번호)
-            //CommRqData를 하는 경우 KHOpenAPI Control의 OnReceiveTrData 이벤트가 호출
-            int result = axKHOpenAPI1.CommRqData("예수금상세현황", "OPW00001", 0, GetScreenNo());
-            GetErrorMessage(result);
-        }
-
-        //초기 설정 반영 & 즉시 반영
-        public void initial_allow()
-        {
-            string[] mode = { "지정가", "시장가" };
-            string[] hoo = { "5호가", "4호가", "3호가", "2호가", "1호가", "현재가", "시장가", "-1호가", "-2호가", "-3호가", "-4호가", "-5호가" };
-
-            //초기 세팅
-            acc_text.Text = utility.setting_account_number;
-            total_money.Text = string.Format("{0:#,##0}", Convert.ToDecimal(utility.initial_balance));
-            max_hoid.Text = utility.maxbuy_acc;
-            operation_start.Text = utility.market_start_time;
-            operation_stop.Text = utility.market_end_time;
-            search_start.Text = utility.buy_condition_start;
-            search_stop.Text = utility.buy_condition_end;
-            clear_sell.Text = Convert.ToString(utility.clear_sell);
-            clear_sell_time.Text = utility.clear_sell_start + "~";
-            profit.Text = utility.profit_percent_text;
-            loss.Text = utility.loss_percent_text;
-            buy_condition.SelectedIndex = utility.Fomula_list_buy;
-            buy_condtion_method.Text = mode[utility.buy_set1] + " - " + hoo[utility.buy_set2];
-            sell_condtion.SelectedIndex = utility.Fomula_list_sell;
-            sell_condtion_method.Text = mode[utility.sell_set1] + " - " + hoo[utility.sell_set2];
-
-            //기존 보유 종목 차트로 업데이트
-
-        }
+        //---------------LOAD---------------------
 
         //초기 매매 설정
         private void auto_allow()
@@ -513,18 +567,12 @@ namespace WindowsFormsApp1
             }
         }
 
-        //---------------BUTTON 모음---------------------
+        //------------------------------기본 BUTTON 모음-------------------------------------
 
-        //main menu
+        //main menu 실행
         private void main_menu(object sender, EventArgs e)
         {
 
-        }
-
-        //계좌 보유 현황 갱신 주기
-        private void acc_interval(object sender, EventArgs e)
-        {
-            timer2.Interval = Convert.ToInt32(update_interval.Text);
         }
 
         //설정창 실행
@@ -540,7 +588,25 @@ namespace WindowsFormsApp1
 
         }
 
-        //종목 조회
+        //매매내역 실행
+
+
+
+        //업데이트 및 사용동의 실행
+
+
+
+        //사용설명 실행
+
+
+        //계좌 보유 현황 갱신 주기 설정
+        private void acc_interval(object sender, EventArgs e)
+        {
+            timer2.Interval = Convert.ToInt32(update_interval.Text);
+        }
+
+
+        //종목 조회 실행
         private void stock_search_btn(object sender, EventArgs e)
         {
             if (axKHOpenAPI1.GetConnectState() == 0)
@@ -565,7 +631,9 @@ namespace WindowsFormsApp1
             GetErrorMessage(result);
         }
 
-        //조건식 일반 검색(매도 조건 검색 전용으로 전환, 버튼 제거)
+        //------------------------------실시간 실행 초기 시작 모음-------------------------------------
+
+        //조건식 일반 검색(매도 조건 검색 전용으로 전환)
         private void normal_search_btn(object sender, EventArgs e)
         {
             //검색된 조건식이 없을시
@@ -646,7 +714,7 @@ namespace WindowsFormsApp1
             axKHOpenAPI1.SetRealRemove("ALL", "ALL");
         }
 
-        //--------------실시간 조건---------------------
+        //-----------------------실시간 조건 검색------------------------------
 
         //조건식 초기 검색(일반, 실시간)
         private void onReceiveTrCondition(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrConditionEvent e)
@@ -749,27 +817,8 @@ namespace WindowsFormsApp1
             dataGridView1.DataSource = dtCondStock;
         }
 
-        //---------------계좌 보유 종목 갱신(1000ms)---------------------
-
-        private void Reload_Timer(object sender, EventArgs e)
-        {
-            if (utility.load_check)
-            {
-                account_real();
-            }
-        }
-
-        //실시간 잔고 조회(0346) 
-        private void account_real()
-        {
-            axKHOpenAPI1.SetInputValue("계좌번호", utility.setting_account_number);
-            axKHOpenAPI1.SetInputValue("상장폐지조회구분", "0");
-            axKHOpenAPI1.SetInputValue("비밀번호입력매체구분", "00");
-            int result = axKHOpenAPI1.CommRqData("계좌평가현황요청", "OPW00004", 2, GetScreenNo());
-            GetErrorMessage(result);
-        }
-
         //--------------편입 이후 매수 종목에 대한 감시(200ms)---------------------
+
         //09시 30분 이후 매수 시작인 것에 대하여 이전에 진입한 종목 중 편입 상태인 종목에 대한 매수
         private void Transfer_Timer(object sender, EventArgs e)
         {
@@ -867,7 +916,7 @@ namespace WindowsFormsApp1
 
         }
 
-        //------------주문 상태 확인---------------------
+        //------------주문 상태 확인 및 정정---------------------
         private void onReceiveChejanData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveChejanDataEvent e)
         {
             //매수
@@ -881,25 +930,5 @@ namespace WindowsFormsApp1
             //매도 종목 실시간 시세 해지
 
         }
-
-        //매도 동작(매매내역 업데이트, 당일 손익 및 손익률 계산, 예수금 업데이트)
-
-
-        //---------------매매내역---------------------
-
-
-
-        //---------------업데이트 내역---------------------
-
-
-
-        //---------------동의사항---------------------
-
-
-
-        //---------------특별기능1(한국투자증권API)---------------------
-
-
-
     }
 }

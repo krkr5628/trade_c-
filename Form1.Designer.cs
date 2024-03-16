@@ -986,7 +986,7 @@ namespace WindowsFormsApp1
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(106, 62);
             this.button14.TabIndex = 5;
-            this.button14.Text = "동의사항";
+            this.button14.Text = "업데이트동의사항";
             this.button14.UseVisualStyleBackColor = false;
             // 
             // button2
@@ -1002,7 +1002,7 @@ namespace WindowsFormsApp1
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(106, 62);
             this.button2.TabIndex = 3;
-            this.button2.Text = "업데이트  내역";
+            this.button2.Text = "사용설명";
             this.button2.UseVisualStyleBackColor = false;
             // 
             // User_connection
