@@ -77,8 +77,8 @@ namespace WindowsFormsApp1
                     tmp.Add("당일중복매수금지/" + Convert.ToString(duplication_deny.Checked));
                     tmp.Add("보유종목매수금지/" + Convert.ToString(hold_deny.Checked));
                     tmp.Add("매수시간전검출매수금지/" + Convert.ToString(before_time_deny.Checked));
-                    tmp.Add("매수조건/" + Convert.ToString(buy_condition.Checked) + "/" + buy_condition_start.Text + "/" + buy_condition_end.Text + "/" + Convert.ToString(Fomula_list_buy.SelectedIndex) + "/" + Convert.ToString(buy_and.Checked));
-                    tmp.Add("매도조건/" + Convert.ToString(sell_condition.Checked) + "/" + sell_condition_start.Text + "/" + sell_condition_end.Text + "/" + Convert.ToString(Fomula_list_sell.SelectedIndex));
+                    tmp.Add("매수조건/" + Convert.ToString(buy_condition.Checked) + "/" + buy_condition_start.Text + "/" + buy_condition_end.Text + "/" + Convert.ToString(Fomula_list_buy.SelectedIndex) + "/" + Fomula_list_buy.Text + "/" + Convert.ToString(buy_and.Checked));
+                    tmp.Add("매도조건/" + Convert.ToString(sell_condition.Checked) + "/" + sell_condition_start.Text + "/" + sell_condition_end.Text + "/" + Convert.ToString(Fomula_list_sell.SelectedIndex) + "/" + Fomula_list_sell.Text);
                     tmp.Add("익절/" + Convert.ToString(profit_percent.Checked) + "/" + profit_percent_text.Text);
                     tmp.Add("손절/" + Convert.ToString(loss_percent.Checked) + "/" + loss_percent_text.Text);
                     tmp.Add("익절TS/" + Convert.ToString(profit_ts.Checked) + "/" + profit_ts_text.Text);
@@ -133,27 +133,32 @@ namespace WindowsFormsApp1
             }
         }
 
-        //즉시 반영(수정중)
+        //즉시 반영
         private void setting_allow(object sender, EventArgs e)
         {
 
-            //파일 주소 확인의 값을 system 주소로 변경
-            utility.system_route = setting_name.Text;
-
-            //utility 항목의 재로딩 시작
-            if (utility.setting_load_auto())
+            if (route_change())
             {
-                //Trade_Auto의 initial_allow 재기동
-                Trade_Auto trade_auto1 = Application.OpenForms.OfType<Trade_Auto>().FirstOrDefault();
-                if (trade_auto1 != null) 
+                utility.setting_load_auto();
+                if (utility.load_check)
                 {
-                    trade_auto1.initial_allow();
+                    Trade_Auto trade_auto1 = Application.OpenForms.OfType<Trade_Auto>().FirstOrDefault();
+                    if (trade_auto1 != null)
+                    {
+                        trade_auto1.initial_allow();
+                    }
                 }
             }
 
             //재기동 후
             MessageBox.Show("반영이 완료되었습니다.");
 
+        }
+        
+        private bool route_change()
+        {
+            utility.system_route = setting_name.Text;
+            return true;
         }
 
         //초기 자동 실행
@@ -240,7 +245,8 @@ namespace WindowsFormsApp1
             buy_condition_start.Text = buy_condition_tmp[2];
             buy_condition_end.Text = buy_condition_tmp[3];
             Fomula_list_buy.SelectedIndex = Convert.ToInt32(buy_condition_tmp[4]);
-            buy_and.Checked = Convert.ToBoolean(buy_condition_tmp[5]);
+            Fomula_list_buy.Text = buy_condition_tmp[5];
+            buy_and.Checked = Convert.ToBoolean(buy_condition_tmp[6]);
 
             //매도조건
             String[] sell_condition_tmp = reader.ReadLine().Split('/');
@@ -248,6 +254,7 @@ namespace WindowsFormsApp1
             sell_condition_start.Text = sell_condition_tmp[2];
             sell_condition_end.Text = sell_condition_tmp[3];
             Fomula_list_sell.SelectedIndex = Convert.ToInt32(sell_condition_tmp[4]);
+            Fomula_list_sell.Text = sell_condition_tmp[5];
 
             //익절
             String[] profit_percent_tmp = reader.ReadLine().Split('/');

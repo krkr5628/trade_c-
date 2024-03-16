@@ -42,12 +42,14 @@ namespace WindowsFormsApp1
         public static string buy_condition_start;
         public static string buy_condition_end;
         public static int Fomula_list_buy;
+        public static string  Fomula_list_buy_text;
         public static bool buy_and;
 
         public static bool sell_condition; //매도조건
         public static string sell_condition_start;
         public static string sell_condition_end;
         public static int Fomula_list_sell;
+        public static string Fomula_list_sell_text;
 
         public static bool profit_percent;
         public static string profit_percent_text; //익절
@@ -104,16 +106,16 @@ namespace WindowsFormsApp1
         public static string telegram_token;
 
         //utility 목록
-        public static bool setting_load_auto()
+        public static void setting_load_auto()
         {
             //세팅진입불가
             load_check = false;
+
             //windows server 2022 영문 기준 바탕화면에 파일을 해제했을 떄 기준으로 주소 변경
             if (auto_load(system_route))
             { 
                load_check = true;
             }
-            return true;
         }
         public static bool auto_load(string filepath)
         {
@@ -190,7 +192,8 @@ namespace WindowsFormsApp1
             buy_condition_start = buy_condition_tmp[2];
             buy_condition_end = buy_condition_tmp[3];
             Fomula_list_buy = Convert.ToInt32(buy_condition_tmp[4]);
-            buy_and = Convert.ToBoolean(buy_condition_tmp[5]);
+            Fomula_list_buy_text = buy_condition_tmp[5];
+            buy_and = Convert.ToBoolean(buy_condition_tmp[6]);
 
             //매도조건
             String[] sell_condition_tmp = reader.ReadLine().Split('/');
@@ -198,6 +201,7 @@ namespace WindowsFormsApp1
             sell_condition_start = sell_condition_tmp[2];
             sell_condition_end = sell_condition_tmp[3];
             Fomula_list_sell= Convert.ToInt32(sell_condition_tmp[4]);
+            Fomula_list_sell_text = sell_condition_tmp[5];
 
             //익절
             String[] profit_percent_tmp = reader.ReadLine().Split('/');
@@ -258,6 +262,8 @@ namespace WindowsFormsApp1
             String[] term_for_non_buy_tmp = reader.ReadLine().Split('/');
             term_for_non_buy = Convert.ToBoolean(term_for_non_buy_tmp[1]);
             term_for_non_buy_text = term_for_non_buy_tmp[2];
+
+            //미체결매도취소
 
             //매수설정
             String[] buy_set_tmp = reader.ReadLine().Split('/');
