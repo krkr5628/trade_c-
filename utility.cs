@@ -106,18 +106,12 @@ namespace WindowsFormsApp1
         public static string telegram_token;
 
         //utility 목록
-        public static void setting_load_auto()
+        public static async Task setting_load_auto()
         {
-            //세팅진입불가
-            load_check = false;
-
             //windows server 2022 영문 기준 바탕화면에 파일을 해제했을 떄 기준으로 주소 변경
-            if (auto_load(system_route))
-            { 
-               load_check = true;
-            }
+            await auto_load(system_route);
         }
-        public static bool auto_load(string filepath)
+        public static async Task auto_load(string filepath)
         {
             StreamReader reader = new StreamReader(filepath);
 
@@ -327,7 +321,6 @@ namespace WindowsFormsApp1
             String[] telegram_token_tmp = reader.ReadLine().Split('/');
             telegram_token = telegram_token_tmp[1];
 
-            return true;
         }
     }
 }

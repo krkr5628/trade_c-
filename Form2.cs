@@ -18,17 +18,6 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
 
-            //매수매도방식
-            string[] mode = {"지정가","시장가"};
-            string[] hoo = {"5호가","4호가","3호가","2호가","1호가","현재가","시장가","-1호가","-2호가","-3호가","-4호가","-5호가"};
-            buy_set1.Items.AddRange(mode);
-            buy_set2.Items.AddRange(hoo);
-            sell_set1.Items.AddRange(mode);
-            sell_set2.Items.AddRange(hoo);
-
-            //조건식 로딩
-            onReceiveConditionVer(Trade_Auto.account, Trade_Auto.arrCondition);
-
             //초기값세팅
             setting_load_auto();
 
@@ -45,6 +34,37 @@ namespace WindowsFormsApp1
 
         }
 
+        //초기 자동 실행
+        private async Task setting_load_auto()
+        {
+            //조건식 로딩
+            await Task.Run(() =>
+            {
+                //조건식 로딩
+                onReceiveConditionVer(Trade_Auto.account, Trade_Auto.arrCondition);
+
+                //매도매수 목록 배치
+                mode_hoo();
+            });
+
+            await Task.Run(() =>
+            {
+                match(utility.system_route);
+            });
+
+        }
+
+        private void mode_hoo()
+        {
+            //매수매도방식
+            string[] mode = { "지정가", "시장가" };
+            string[] hoo = { "5호가", "4호가", "3호가", "2호가", "1호가", "현재가", "시장가", "-1호가", "-2호가", "-3호가", "-4호가", "-5호가" };
+            buy_set1.Items.AddRange(mode);
+            buy_set2.Items.AddRange(hoo);
+            sell_set1.Items.AddRange(mode);
+            sell_set2.Items.AddRange(hoo);
+        } 
+
         //settubg  저장
         private void setting_save(object sender, EventArgs e)
         {
@@ -56,9 +76,6 @@ namespace WindowsFormsApp1
             {
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    // 사용자가 선택한 파일 경로
-                    string filePath = saveFileDialog.FileName;
-
                     //임시저장
                     List<String> tmp = new List<String>();
 
@@ -108,6 +125,9 @@ namespace WindowsFormsApp1
                     //텍스트 합치기
                     string textToSave = string.Join("\r\n", tmp);
 
+                    // 사용자가 선택한 파일 경로
+                    string filePath = saveFileDialog.FileName;
+
                     //파일에 텍스트 저장
                     System.IO.File.WriteAllText(filePath, textToSave);
                     MessageBox.Show("파일이 저장되었습니다: " + filePath);
@@ -126,45 +146,28 @@ namespace WindowsFormsApp1
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 String filepath = openFileDialog1.FileName;
-                if (utility.auto_load(filepath))
-                {
-                    match(filepath);
-                }
+                match(filepath);
             }
         }
 
         //즉시 반영
         private void setting_allow(object sender, EventArgs e)
         {
+            setting_allow_after();
+        }
 
-            if (route_change())
+        private async Task setting_allow_after()
+        {
+            await Task.Run(() =>
             {
-                utility.setting_load_auto();
-                if (utility.load_check)
-                {
-                    Trade_Auto trade_auto1 = Application.OpenForms.OfType<Trade_Auto>().FirstOrDefault();
-                    if (trade_auto1 != null)
-                    {
-                        trade_auto1.initial_allow();
-                    }
-                }
-            }
-
-            //재기동 후
-            MessageBox.Show("반영이 완료되었습니다.");
-
-        }
-        
-        private bool route_change()
-        {
-            utility.system_route = setting_name.Text;
-            return true;
-        }
-
-        //초기 자동 실행
-        public void setting_load_auto()
-        {
-            match(utility.system_route);
+                utility.system_route = setting_name.Text;
+            });
+            await utility.setting_load_auto();
+            await Task.Run(() =>
+            {
+                Trade_Auto trade_auto1 = Application.OpenForms.OfType<Trade_Auto>().FirstOrDefault();
+                MessageBox.Show("반영이 완료되었습니다.");
+            });
         }
 
         //매칭
@@ -380,15 +383,6 @@ namespace WindowsFormsApp1
         }
 
         //계좌 및 조건식 리스트 받아오기
-        class ConditionInfo
-        {
-            public int Index { get; set; }
-            public string Name { get; set; }
-            public DateTime? LastRequestTime { get; set; }
-        }
-
-        private List<ConditionInfo> conditionInfo = new List<ConditionInfo>();
-
         public void onReceiveConditionVer(string[] user_account, string[] Condition)
         {
             //계좌 추가
@@ -402,6 +396,7 @@ namespace WindowsFormsApp1
             Fomula_list_sell.Items.AddRange(Condition);
         }
 
+        //Telegram 테스트
         private void telegram_test(object sender, EventArgs e)
         {
             string test_message = "TELEGRAM CONNECTION CHECK";

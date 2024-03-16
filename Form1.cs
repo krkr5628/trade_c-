@@ -30,10 +30,7 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
 
-
             //-------------------초기 동작-------------------
-            //기존 세팅 로드
-            utility.setting_load_auto();
 
             //테이블 초기 세팅
             initial_Table();
@@ -43,30 +40,9 @@ namespace WindowsFormsApp1
             timer2.Start(); //보유 계좌 현황 - 1000ms
             timer3.Start(); //편입 종목 감시 - 200ms
 
-            //기존 세팅 로드 이후
-            if (utility.load_check) 
-            {
-                WriteLog("저장된 세팅 로딩 완료\n");
-                telegram_message("저장된 세팅 로딩 완료\n");
+            //초기 실행(비동기)
+            Run();
 
-                //로그인
-                axKHOpenAPI1.CommConnect();
-
-                //로그인 상태 확인(ID,NAME,계좌번호,KEYBOARD,FIREWALL,조건식)
-                axKHOpenAPI1.OnEventConnect += onEventConnect;
-
-                //조건식 조회
-                axKHOpenAPI1.OnReceiveConditionVer += onReceiveConditionVer;
-
-                //초기세팅 반영
-                initial_allow();
-
-                //[자동] 전체 종목 업데이트
-
-                //실시간 조건 검색 시작
-                auto_allow();
-
-            };
 
             //TR조회
             axKHOpenAPI1.OnReceiveTrData += onReceiveTrData;
@@ -115,9 +91,15 @@ namespace WindowsFormsApp1
         {
             //시간표시
             timetimer.Text = DateTime.Now.ToString("yy MM-dd (ddd) HH:mm:ss");
+
+            //Telegram 전송
+            if (utility.Telegram_Allow && telegram_chat.Count > 0)
+            {
+                telegram_send(telegram_chat.Dequeue());
+            }
         }
 
-        //timer2(1500ms) : 실시간 잔고 조회(0346)  / 주기 변경 가능
+        //timer2(1000ms) : 실시간 잔고 조회(0346)  / 주기 변경 가능
         private void Reload_Timer(object sender, EventArgs e)
         {
             //계좌 보유 종목 갱신
@@ -128,15 +110,7 @@ namespace WindowsFormsApp1
                 axKHOpenAPI1.SetInputValue("비밀번호입력매체구분", "00");
                 int result = axKHOpenAPI1.CommRqData("계좌평가현황요청", "OPW00004", 2, GetScreenNo());
                 GetErrorMessage(result);
-            }
-
-            
-            //Telegram 전송
-            if (utility.Telegram_Allow && telegram_chat.Count > 0)
-            {
-                telegram_send(telegram_chat.Dequeue());
-            }
-            
+            }  
         }
 
         //화면번호
@@ -207,8 +181,39 @@ namespace WindowsFormsApp1
 
         //-----------------------------------------initial-------------------------------------
 
+        //초기 실행
+        private async Task Run()
+        {
+            //기존 세팅 로드
+            await utility.setting_load_auto();
+
+            //초기세팅 반영
+            await initial_allow();
+
+            await Task.Run(() =>
+            {
+                //로그인
+                axKHOpenAPI1.CommConnect();
+
+                //로그인 상태 확인(ID,NAME,계좌번호,KEYBOARD,FIREWALL,조건식)
+                axKHOpenAPI1.OnEventConnect += onEventConnect;
+
+                //조건식 조회
+                axKHOpenAPI1.OnReceiveConditionVer += onReceiveConditionVer;
+
+            }); 
+
+
+            //전체 종목 업데이트
+
+            //기존 종목 테이블에 추가
+
+            //실시간 조건 검색 시작
+            await auto_allow();
+        }
+
         //초기 설정 반영
-        public void initial_allow()
+        public async Task initial_allow()
         {
             string[] mode = { "지정가", "시장가" };
             string[] hoo = { "5호가", "4호가", "3호가", "2호가", "1호가", "현재가", "시장가", "-1호가", "-2호가", "-3호가", "-4호가", "-5호가" };
@@ -337,12 +342,9 @@ namespace WindowsFormsApp1
                     Fire_wall.Text = "해지\n";
                 }
 
-                //예수금 받아오기
-                GetCashInfo(acc_text.Text.Trim());
-
                 //조건식 검색
                 WriteLog("조건식 검색ing\n");
-                if(axKHOpenAPI1.GetConditionLoad() == 1)
+                if (axKHOpenAPI1.GetConditionLoad() == 1)
                 {
                     WriteLog("조건식 검색 성공\n");
                     telegram_message("조건식 검색 성공\n");
@@ -352,6 +354,10 @@ namespace WindowsFormsApp1
                     WriteLog("조건식 검색 실패\n");
                     telegram_message("조건식 검색 실패\n");
                 }
+
+                //예수금 받아오기
+                GetCashInfo(acc_text.Text.Trim());
+
             }
             else
             {
@@ -392,7 +398,7 @@ namespace WindowsFormsApp1
             GetErrorMessage(result);
         }
 
-        //조건식 검색(조건식이 있어야 initial 작동 / initial을 통해 계좌를 받아와야 GetCashInfo)
+        //조건식 조회(조건식이 있어야 initial 작동 / initial을 통해 계좌를 받아와야 GetCashInfo)
         class ConditionInfo
         {
             public int Index { get; set; }
@@ -582,7 +588,7 @@ namespace WindowsFormsApp1
         //---------------LOAD---------------------
 
         //초기 매매 설정
-        private void auto_allow()
+        private async Task auto_allow()
         {
             //자동 설정 여부
             if (utility.auto_trade_allow)
@@ -590,7 +596,7 @@ namespace WindowsFormsApp1
                 //자동 매수 조건식 설정 여부
                 if (utility.buy_condition)
                 {
-                    real_time_search_btn(null, EventArgs.Empty);
+                        real_time_search_btn(null, EventArgs.Empty);
                 }
                 else
                 {
@@ -603,6 +609,7 @@ namespace WindowsFormsApp1
                     WriteLog("실시간 조건식 매도 시작\n");
                     telegram_message("실시간 조건식 매도 시작\n");
                     real_time_search_btn(null, EventArgs.Empty);
+
                 }
                 else
                 {
@@ -717,7 +724,7 @@ namespace WindowsFormsApp1
         private void real_time_search_btn(object sender, EventArgs e)
         {
             //실시간 검색이 시작되면 '일반 검색'이 불가능해 진다.
-            Real_time_stop_btn.Enabled = true; ;
+            Real_time_stop_btn.Enabled = true;
             Real_time_search_btn.Enabled = false;
 
             //조건식이 로딩되었는지
@@ -762,7 +769,6 @@ namespace WindowsFormsApp1
 
             //종목 검색 요청
             //화면 번호, 조건식 이름, 조건식 번호, 조회 구분(0은 일반 검색, 1은 실시간 검색)
-            WriteLog("Check2\n");
             int result = axKHOpenAPI1.SendCondition(GetScreenNo(), condition[1], Convert.ToInt32(condition[0]), 1);
             if (result != 1)
             {
