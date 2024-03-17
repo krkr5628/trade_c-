@@ -32,13 +32,13 @@ namespace WindowsFormsApp1
 
             //-------------------초기 동작-------------------
 
-            //테이블 초기 세팅
-            initial_Table();
-
             //시간 동작
             timer1.Start(); //시간 표시 - 1000ms
             timer2.Start(); //보유 계좌 현황 - 1000ms
             timer3.Start(); //편입 종목 감시 - 200ms
+
+            //테이블 초기 세팅
+            initial_Table();
 
             //초기 실행(비동기)
             Run();
@@ -208,8 +208,6 @@ namespace WindowsFormsApp1
 
             //기존 종목 테이블에 추가
 
-            //실시간 조건 검색 시작
-            await auto_allow();
         }
 
         //초기 설정 반영
@@ -427,9 +425,10 @@ namespace WindowsFormsApp1
                     Name = item[1]
                 });
             }
-            Fomula_list.Items.AddRange(arrCondition);
             WriteLog("조건식 조회 성공\n");
             telegram_message("조건식 조회 성공\n");
+            //실시간 조건 검색 시작
+            auto_allow();
         }
 
         //초기 보유 종목 테이블 업데이트
