@@ -87,7 +87,7 @@ namespace WindowsFormsApp1
                     tmp.Add("종목당매수수량/" + Convert.ToString(buy_per_amount.Checked) + "/" + buy_per_amount_text.Text);
                     tmp.Add("종목당매수비율/" + Convert.ToString(buy_per_percent.Checked) + "/" + buy_per_percent_text.Text);
                     tmp.Add("종목당최대매수금액/" + maxbuy.Text);
-                    tmp.Add("매수종목수/" + maxbuy_acc.Text);
+                    tmp.Add("최대매수종목수/" + maxbuy_acc.Text);
                     tmp.Add("종목최소매수가/" + maxbuy_acc.Text);
                     tmp.Add("종목최대매수가/" + min_price.Text);
                     tmp.Add("최대보유종목수/" + Convert.ToString(max_hold.Checked) + "/" + max_hold_text.Text);
@@ -213,7 +213,7 @@ namespace WindowsFormsApp1
             String[] maxbuy_tmp = reader.ReadLine().Split('/');
             maxbuy.Text = maxbuy_tmp[1];
 
-            //매수종목수
+            //최대매수종목수
             String[] maxbuy_acc_tmp = reader.ReadLine().Split('/');
             maxbuy_acc.Text = maxbuy_acc_tmp[1];
 

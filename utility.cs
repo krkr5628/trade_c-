@@ -28,7 +28,7 @@ namespace WindowsFormsApp1
         public static bool buy_per_percent; 
         public static string buy_per_percent_text;//종목당매수비율
         public static string maxbuy; //종목당최대매수금액
-        public static string maxbuy_acc;//매수종목수
+        public static string maxbuy_acc;//최대매수종목수
         public static string min_price;//종목최소매수가
         public static string max_price;//종목최대매수가
 
@@ -155,7 +155,7 @@ namespace WindowsFormsApp1
             String[] maxbuy_tmp = reader.ReadLine().Split('/');
             maxbuy = maxbuy_tmp[1];
 
-            //매수종목수
+            //최대매수종목수
             String[] maxbuy_acc_tmp = reader.ReadLine().Split('/');
             maxbuy_acc = maxbuy_acc_tmp[1];
 
