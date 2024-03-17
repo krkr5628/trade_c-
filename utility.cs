@@ -110,6 +110,10 @@ namespace WindowsFormsApp1
         {
             //windows server 2022 영문 기준 바탕화면에 파일을 해제했을 떄 기준으로 주소 변경
             await auto_load(system_route);
+            await Task.Run(() =>
+            {
+                load_check = true;
+            });
         }
         public static async Task auto_load(string filepath)
         {

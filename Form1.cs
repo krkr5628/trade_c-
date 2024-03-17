@@ -187,8 +187,13 @@ namespace WindowsFormsApp1
             //기존 세팅 로드
             await utility.setting_load_auto();
 
-            //초기세팅 반영
+            //초기 설정 반영
             await initial_allow();
+
+            //기존 종목 테이블에 추가
+            await Hold_Update();
+
+            //전체 종목 업데이트
 
             await Task.Run(() =>
             {
@@ -201,13 +206,7 @@ namespace WindowsFormsApp1
                 //조건식 조회
                 axKHOpenAPI1.OnReceiveConditionVer += onReceiveConditionVer;
 
-            }); 
-
-
-            //전체 종목 업데이트
-
-            //기존 종목 테이블에 추가
-
+            });
         }
 
         //초기 설정 반영
@@ -261,6 +260,7 @@ namespace WindowsFormsApp1
             dataGridView1.DataSource = dtCondStock;
 
             DataTable dataTable2 = new DataTable();
+            dataTable2.Columns.Add("종목코드", typeof(string));
             dataTable2.Columns.Add("종목명", typeof(string));
             dataTable2.Columns.Add("현재가", typeof(string));
             dataTable2.Columns.Add("보유수량", typeof(string));
@@ -340,6 +340,9 @@ namespace WindowsFormsApp1
                     Fire_wall.Text = "해지\n";
                 }
 
+                //예수금 받아오기
+                GetCashInfo(acc_text.Text.Trim());
+
                 //조건식 검색
                 WriteLog("조건식 검색ing\n");
                 if (axKHOpenAPI1.GetConditionLoad() == 1)
@@ -352,9 +355,6 @@ namespace WindowsFormsApp1
                     WriteLog("조건식 검색 실패\n");
                     telegram_message("조건식 검색 실패\n");
                 }
-
-                //예수금 받아오기
-                GetCashInfo(acc_text.Text.Trim());
 
             }
             else
@@ -432,9 +432,42 @@ namespace WindowsFormsApp1
         }
 
         //초기 보유 종목 테이블 업데이트
+        private async Task Hold_Update()
+        {
+            //특저 열 모든 항목 추출
+            DataColumn columnEditColumn = dtCondStock.Columns["종목코드"];
 
+            //AsEnumerable()은 DataTable의 행을 열거형으로 변환
+            var filteredRows = dtCondStock.AsEnumerable().ToList();
 
-        //한국투자증권API
+            // 헤드 항목을 제외한 나머지 항목 개수 확인
+            int nonHeadItemCount = filteredRows.Count - 1;
+
+            //검출 종목
+            if (nonHeadItemCount > 1)
+            {
+                WriteLog("기존에 보유중인 종목이 있습니다.\n");
+                telegram_message("기존에 보유중인 종목이 있습니다.\n");
+                for (int i = 1; i <= nonHeadItemCount; i++)
+                {
+                    DataRow row = filteredRows[i];
+                    string Code = row.Field<string>("종목코드");
+
+                    // 각 항목 처리
+                    axKHOpenAPI1.SetInputValue("종목코드", Code);
+                    axKHOpenAPI1.CommRqData("조건실시간검색/" + "기존종목", "OPT10001", 0, GetScreenNo());
+                    //실시간 항목 등록(대비기호, 현재가. 등락율, 거래량)
+                    axKHOpenAPI1.SetRealReg(GetScreenNo(), Code, "10;12;13", "1");
+                }
+            }
+            else
+            {
+                WriteLog("기존에 보유중인 종목이 없습니다.\n");
+                telegram_message("기존에 보유중인 종목이 없습니다.\n");
+            }
+        }
+
+        //전체 종목 업데이트
 
         //--------------------------------TR TABLE--------------------------------------------
 
@@ -466,6 +499,7 @@ namespace WindowsFormsApp1
                 //계좌 보유 현황 조회
                 case "계좌평가현황요청":
                     DataTable dataTable2 = new DataTable();
+                    dataTable2.Columns.Add("종목코드", typeof(string));
                     dataTable2.Columns.Add("종목명", typeof(string));
                     dataTable2.Columns.Add("현재가", typeof(string));
                     dataTable2.Columns.Add("보유수량", typeof(string));
@@ -478,6 +512,7 @@ namespace WindowsFormsApp1
                     for (int i = 0; i < count2; i++)
                     {
                         dataTable2.Rows.Add(
+                            axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "종목코드").Trim(),
                             axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "종목명").Trim(),
                             string.Format("{0:#,##0}", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "현재가").Trim())),
                             string.Format("{0:#,##0}", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "보유수량").Trim())),
@@ -634,7 +669,7 @@ namespace WindowsFormsApp1
         //설정창 실행
         private void trade_setting(object sender, EventArgs e)
         {
-            if (!utility.load_check || account.Length == 0)
+            if (!utility.load_check)
             {
                 MessageBox.Show("로딩중입니다.");
                 return;
@@ -1015,5 +1050,7 @@ namespace WindowsFormsApp1
             //매도 종목 실시간 시세 해지
 
         }
+
+        //------------KIS 한국투자---------------------
     }
 }
