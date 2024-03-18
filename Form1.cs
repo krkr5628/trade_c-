@@ -22,7 +22,7 @@ namespace WindowsFormsApp1
     {
         //-----------------------------------공용 신호----------------------------------------
 
-        static public string[] arrCondition;
+        static public string[] arrCondition = { };
         static public string[] account;
 
         //-----------------------------------------------Main------------------------------------------------
@@ -51,9 +51,9 @@ namespace WindowsFormsApp1
             Login_btn.Click += login_btn; //로그인
             Main_menu.Click += main_menu; //메인메뉴
             Trade_setting.Click += trade_setting; //설정창
-            //매매정보
-            //업데이트 및 동의사항
-            //사용설명서
+            porfoilo_btn.Click += Porfoilo_btn_Click;//매매정보
+            update_agree_btn.Click += Update_agree_btn_Click;//업데이트 및 동의사항
+            explain_btn.Click += Explain_btn_Click;//사용설명서
 
             update_interval.SelectedIndexChanged += acc_interval; //계좌 조회 인터벌 변경
             Stock_search_btn.Click += stock_search_btn; //종목조회
@@ -61,6 +61,9 @@ namespace WindowsFormsApp1
             Real_time_search_btn.Click += real_time_search_btn; //실시간 조건식 등록
             Real_time_stop_btn.Click += real_time_stop_btn; //조건식 실시간 전체 중단
 
+            All_clear_btn.Click += All_clear_btn_Click;
+            profit_clear_btn.Click += Profit_clear_btn_Click;
+            loss_clear_btn.Click += Loss_clear_btn_Click;
 
             //----------------데이터 조회 이벤트 동작-------------------
             axKHOpenAPI1.OnReceiveTrData += onReceiveTrData; //TR조회
@@ -216,6 +219,7 @@ namespace WindowsFormsApp1
             //초기 세팅
             acc_text.Text = utility.setting_account_number;
             total_money.Text = string.Format("{0:#,##0}", Convert.ToDecimal(utility.initial_balance));
+            maxbuy_acc.Text = "0/" + utility.maxbuy_acc;
             operation_start.Text = utility.market_start_time;
             operation_stop.Text = utility.market_end_time;
             search_start.Text = utility.buy_condition_start;
@@ -251,8 +255,10 @@ namespace WindowsFormsApp1
             dataTable.Columns.Add("거래량", typeof(string));
             dataTable.Columns.Add("편입가", typeof(string));
             dataTable.Columns.Add("수익률", typeof(string));
+            dataTable.Columns.Add("보유수량", typeof(string)); //보유수량
             dataTable.Columns.Add("조건식", typeof(string));
             dataTable.Columns.Add("편입시간", typeof(string));
+            dataTable.Columns.Add("상한가", typeof(string)); //상한가 => 시장가 계산용
             dtCondStock = dataTable;
             dataGridView1.DataSource = dtCondStock;
 
@@ -398,7 +404,6 @@ namespace WindowsFormsApp1
         private void onReceiveConditionVer(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveConditionVerEvent e)
         {
             if (e.lRet != 1) return;
-            Fomula_list.Items.Clear();
             conditionInfo.Clear();
             //사용자 조건식을 조건식의 고유번호와 조건식 이름을 한 쌍으로 하는 문자열
             // ';' 구분
@@ -493,8 +498,6 @@ namespace WindowsFormsApp1
                 condition_name = name_split[1];
             }
 
-
-            //
             switch (split_name)
             {
                 //예수금 데이터 조회
@@ -561,6 +564,7 @@ namespace WindowsFormsApp1
                     string time3 = DateTime.Now.ToString("HH:mm:ss");
                     string code3 = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목코드").Trim();
                     string code_name3 = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목명").Trim();
+                    string high3 = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "상한가").Trim();
                     //
                     WriteLog("[기존종목/편입] : " + code3 + "-" + code_name3 + "\n");
                     telegram_message("[기존종목/편입] : " + code3 + "-" + code_name3 + "\n");
@@ -576,27 +580,34 @@ namespace WindowsFormsApp1
                         string.Format("{0:#,##0}", current_price3),
                         "0.00%",
                         condition_name,
-                        time3
-                    );
+                        time3,
+                        string.Format("{0:#,##0}", Convert.ToDecimal(high3))
+                    ); ;
                     dataGridView1.DataSource = dtCondStock;
                     break;
 
-                //실시간 조건 검색 초기 집인
+                //실시간 조건 검색 초기 진입
                 case "조건일반검색":
                     int count = axKHOpenAPI1.GetRepeatCnt(e.sTrCode, e.sRQName);
                     for (int i = 0; i < count; i++)
                     {
                         int current_price = Math.Abs(Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "현재가").Trim()));
+
+                        //최소 및 최대 매수가 확인
+                        if (current_price < Convert.ToInt32(utility.min_price) || current_price > Convert.ToInt32(utility.max_price)) continue;
+
+                        //
                         string time1 = DateTime.Now.ToString("HH:mm:ss");
                         string code = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "종목코드").Trim();
                         string code_name = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "종목명").Trim();
-                        //
+                        string high1 = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "상한가").Trim();
+
                         bool buy_initial = false;
                         lock (buy_lock)
                         {
                             if (!buy_runningCodes.ContainsKey(code))
                             {
-                                buy_initial = buy_check(code, code_name, time1);
+                                buy_initial = buy_check(code, code_name, string.Format("{0:#,##0}", current_price), time1, high1);
                             }
                         }
                         //
@@ -614,9 +625,11 @@ namespace WindowsFormsApp1
                             string.Format("{0:#,##0.00}%", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "등락율").Trim())),
                             string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "거래량").Trim())),
                             string.Format("{0:#,##0}", current_price),
-                            "0.00%",
+                            "00.00%",
+                            "0/0",
                             condition_name,
-                            time1
+                            time1,
+                            string.Format("{0:#,##0}", Convert.ToDecimal(high1))
                         );
                     }
                     dataGridView1.DataSource = dtCondStock;
@@ -625,16 +638,21 @@ namespace WindowsFormsApp1
                 //실시간 조건 검색(상태(편입, 이탈, 매수, 매도), 종목코드, 종목명, 등락표시, 현재가, 등락율, 거래량, 편입가, 편입대비, 수익률, 편입시간, 매수조건식, 매도조건식) => 상태, 종목코드, 대비기호, 현재가. 등락율, 거래량
                 case "조건실시간검색":
                     int current_price2 = Math.Abs(Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "현재가").Trim()));
+
+                    //최소 및 최대 매수가 확인
+                    if (current_price2 < Convert.ToInt32(utility.min_price) || current_price2 > Convert.ToInt32(utility.max_price)) break;
+
                     string time2 = DateTime.Now.ToString("HH:mm:ss");
                     string code2 = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목코드").Trim();
                     string code_name2 = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목명").Trim();
-                    //
+                    string high2 = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "상한가").Trim();
+
                     bool buy_initial2 = false;
                     lock (buy_lock)
                     {
                         if (!buy_runningCodes.ContainsKey(code2))
                         {
-                            buy_initial2 = buy_check(code2, code_name2, time2);
+                            buy_initial2 = buy_check(code2, code_name2, string.Format("{0:#,##0}", current_price2), time2, high2);
                         }
                     }
                     //
@@ -652,9 +670,11 @@ namespace WindowsFormsApp1
                         string.Format("{0:#,##0.00}%", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "등락율").Trim())),
                         string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "거래량").Trim())),
                         string.Format("{0:#,##0}", current_price2),
-                        "0.00%",
+                        "00.00%",
+                        "0/0",
                         condition_name,
-                        time2
+                        time2,
+                        string.Format("{0:#,##0}", Convert.ToDecimal(high2))
                     );
                     dataGridView1.DataSource = dtCondStock;
                     break;
@@ -705,7 +725,7 @@ namespace WindowsFormsApp1
         //main menu 실행
         private void main_menu(object sender, EventArgs e)
         {
-
+            MessageBox.Show("준비중입니다.");
         }
 
         //update
@@ -720,7 +740,12 @@ namespace WindowsFormsApp1
         {
             if (!utility.load_check)
             {
-                MessageBox.Show("로딩중입니다.");
+                MessageBox.Show("초기 세팅 반영중");
+                return;
+            }
+            if(arrCondition.Length == 0)
+            {
+                MessageBox.Show("조건식 로딩중");
                 return;
             }
             Setting newform2 = new Setting();
@@ -728,16 +753,23 @@ namespace WindowsFormsApp1
 
         }
 
-        //매매내역 실행
+        //매매내역 확인
+        private void Porfoilo_btn_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("준비중입니다.");
+        }
 
+        //업데이트 및 동의사항 확인
+        private void Update_agree_btn_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("준비중입니다.");
+        }
 
-
-        //업데이트 및 사용동의 실행
-
-
-
-        //사용설명 실행
-
+        //사용설명 확인
+        private void Explain_btn_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("준비중입니다.");
+        }
 
         //계좌 보유 현황 갱신 주기 설정
         private void acc_interval(object sender, EventArgs e)
@@ -784,10 +816,114 @@ namespace WindowsFormsApp1
             auto_allow();
         }
 
+        //조건식 실시간 중단
+        private void real_time_stop_btn(object sender, EventArgs e)
+        {
+            //실시간 중단이 선언되면 '실시간시작'이 가능해진다.
+            Real_time_stop_btn.Enabled = false;
+            Real_time_search_btn.Enabled = true;
+
+            // 검색된 조건식이 없을시
+            if (string.IsNullOrEmpty(buy_condition.Text)) return;
+
+            //검색된 조건식이 있을시
+            string[] condition = buy_condition.Text.Split('^');
+
+            //계좌 탐색 중단
+            timer3.Stop();
+
+            //실시간 중지
+            WriteLog("실시간조건식검색 : 중단\n");
+            telegram_message("실시간조건식검색 : 중단\n");
+            axKHOpenAPI1.SendConditionStop(GetScreenNo(), condition[1], Convert.ToInt32(condition[0])); //조건검색 중지
+            axKHOpenAPI1.SetRealRemove("ALL", "ALL"); //실시간 시세 중지
+        }
+
+        //전체 청산 버튼
+        private void All_clear_btn_Click(object sender, EventArgs e)
+        {
+            //실시간 중단
+            real_time_stop_btn(null, EventArgs.Empty);
+
+            //특저 열 추출
+            DataColumn columnStateColumn = dtCondStock.Columns["상태"];
+
+            //AsEnumerable()은 DataTable의 행을 열거형으로 변환
+            var filteredRows = dtCondStock.AsEnumerable()
+                                        .Where(row => row.Field<string>(columnStateColumn) == "매수완료")
+                                        .ToList();
+
+            //검출 종목에 대한 확인
+            if (filteredRows.Count > 1)
+            {
+                foreach (DataRow row in filteredRows)
+                {
+                    sell_transform(row.Field<string>("종목코드"), row.Field<string>("현재가"), "청산매도/일반");
+                }
+            }
+        }
+
+        //수익 종목 청산 버튼
+        private void Profit_clear_btn_Click(object sender, EventArgs e)
+        {
+            //실시간 중단
+            real_time_stop_btn(null, EventArgs.Empty);
+            //특저 열 추출
+            DataColumn columnStateColumn = dtCondStock.Columns["상태"];
+
+            //AsEnumerable()은 DataTable의 행을 열거형으로 변환
+            var filteredRows = dtCondStock.AsEnumerable()
+                                        .Where(row => row.Field<string>(columnStateColumn) == "매수완료")
+                                        .ToList();
+
+            //검출 종목에 대한 확인
+            if (filteredRows.Count > 1)
+            {
+                foreach (DataRow row in filteredRows)
+                {
+                    double percent_edit = double.Parse(row.Field<string>("수익률").TrimEnd('%')) / 100;
+
+                    if (percent_edit >= 0)
+                    {
+                        sell_transform(row.Field<string>("종목코드"), row.Field<string>("현재가"), "청산매도/수익");
+                    }
+                }
+            }
+        }
+
+        //손실 종목 청산 버튼
+        private void Loss_clear_btn_Click(object sender, EventArgs e)
+        {
+            //실시간 중단
+            real_time_stop_btn(null, EventArgs.Empty);
+
+            //특저 열 추출
+            DataColumn columnStateColumn = dtCondStock.Columns["상태"];
+
+            //AsEnumerable()은 DataTable의 행을 열거형으로 변환
+            var filteredRows = dtCondStock.AsEnumerable()
+                                        .Where(row => row.Field<string>(columnStateColumn) == "매수완료")
+                                        .ToList();
+
+            //검출 종목에 대한 확인
+            if (filteredRows.Count > 1)
+            {
+                foreach (DataRow row in filteredRows)
+                {
+                    double percent_edit = double.Parse(row.Field<string>("수익률").TrimEnd('%')) / 100;
+                    if (percent_edit < 0)
+                    {
+                        sell_transform(row.Field<string>("종목코드"), row.Field<string>("현재가"), "청산매도/손실");
+
+                    }
+                }
+            }
+        }
+
         //------------------------------실시간 실행 초기 시작 모음-------------------------------------
 
         //매도 전용 조건식 검색
-        private void normal_search_btn(object sender, EventArgs e)
+        private void normal_search(object sender, EventArgs e)
         {
             //검색된 조건식이 없을시
             if (string.IsNullOrEmpty(sell_condtion.Text)) return;
@@ -873,26 +1009,6 @@ namespace WindowsFormsApp1
             }
         }
 
-        //조건식 실시간 중단
-        private void real_time_stop_btn(object sender, EventArgs e)
-        {
-            //실시간 중단이 선언되면 '실시간시작'과 '일반검색'이 가능해진다.
-            Real_time_stop_btn.Enabled = false;
-            Real_time_search_btn.Enabled = true;
-
-            // 검색된 조건식이 없을시
-            if (string.IsNullOrEmpty(buy_condition.Text)) return;
-
-            //검색된 조건식이 있을시
-            string[] condition = buy_condition.Text.Split('^');
-
-            //실시간 중지
-            WriteLog("실시간조건식검색 : 중단\n");
-            telegram_message("실시간조건식검색 : 중단\n");
-            axKHOpenAPI1.SendConditionStop(GetScreenNo(), condition[1], Convert.ToInt32(condition[0])); //조건검색 중지
-            axKHOpenAPI1.SetRealRemove("ALL", "ALL"); //실시간 시세 중지
-        }
-
         //-----------------------실시간 조건 검색------------------------------
 
         //조건식 초기 검색(일반, 실시간)
@@ -976,13 +1092,16 @@ namespace WindowsFormsApp1
             }
 
             //매도 확인
-            lock (sell_lock)
+            if (findRows[0]["상태"].Equals("매수완료"))
             {
-                if (!sell_runningCodes.ContainsKey(e.sRealKey))
+                lock (sell_lock)
                 {
-                    sell_runningCodes[e.sRealKey] = true;
-                    sell_check_price(e.sRealKey, percent, time);
-                    sell_runningCodes.Remove(e.sRealKey);
+                    if (!sell_runningCodes.ContainsKey(e.sRealKey))
+                    {
+                        sell_runningCodes[e.sRealKey] = true;
+                        sell_check_price(e.sRealKey, price.Equals("") ? findRows[0]["현재가"].ToString() : string.Format("{0:#,##0}", Convert.ToInt32(price)), percent, time);
+                        sell_runningCodes.Remove(e.sRealKey);
+                    }
                 }
             }
 
@@ -1014,7 +1133,10 @@ namespace WindowsFormsApp1
             account_check_buy();
 
             //매도 완료 종목에 대한 청산 검증
-            account_check_sell();
+            if (utility.clear_sell)
+            {
+                account_check_sell();
+            }
         }
 
         private void account_check_buy()
@@ -1042,10 +1164,6 @@ namespace WindowsFormsApp1
                     {
                         if (t_code.CompareTo(t_start) < 0) continue;
                     }
-                    else
-                    {
-                        if (t_code.CompareTo(t_start) >= 0) continue;
-                    }
 
                     //중복 
                     lock (buy_lock)
@@ -1054,7 +1172,7 @@ namespace WindowsFormsApp1
                         if (!buy_runningCodes.ContainsKey(code))
                         {
                             buy_runningCodes[code] = true;
-                            buy_check(code, row.Field<string>("종목명"), time);
+                            buy_check(code, row.Field<string>("종목명"), row.Field<string>("현재가").Replace(",",""), time, row.Field<string>("상한가"));
                             buy_runningCodes.Remove(code);
                         }
                     }
@@ -1085,7 +1203,7 @@ namespace WindowsFormsApp1
                         if (!sell_runningCodes.ContainsKey(code))
                         {
                             sell_runningCodes[code] = true;
-                            sell_check_clear(code, row.Field<string>("수익률"), time);
+                            sell_check_clear(code, time);
                             sell_runningCodes.Remove(code);
                         }
                     }
@@ -1096,7 +1214,7 @@ namespace WindowsFormsApp1
         //--------------실시간 매수 조건 확인---------------------
 
         //매수 가능한 상태인지 확인
-        private bool buy_check(string code, string code_name, string time)
+        private bool buy_check(string code, string code_name, string price, string time, string high)
         {
 
             //매수 시간 확인
@@ -1118,9 +1236,11 @@ namespace WindowsFormsApp1
             int hold_max = Convert.ToInt32(hold_status[1]);
             if (hold >= hold_max) return false;
 
-            //기존 보유 종목 확인
-
-            //자동 시간전 검출 매수 확인
+            //매매 횟수 확인
+            string[] trade_status = maxbuy_acc.Text.Split('/');
+            int trade_status_already = Convert.ToInt32(trade_status[0]);
+            int trade_status_limit = Convert.ToInt32(trade_status[1]);
+            if (trade_status_already >= trade_status_limit) return false;
 
             //이전 종목 매수와의 TERM
 
@@ -1132,7 +1252,7 @@ namespace WindowsFormsApp1
             dataGridView1.DataSource = dtCondStock; 
 
             //매수주문
-            //buy_order(code);
+            buy_order(code, price, high);
 
             return true;
         }
@@ -1140,7 +1260,7 @@ namespace WindowsFormsApp1
         //--------------실시간 매도 조건 확인---------------------
 
         //조건식 매도
-        private void sell_check_condition(String code, String percent, string time)
+        private void sell_check_condition(string code, string price, string percent, string time)
         {
             TimeSpan t_code = TimeSpan.Parse(time);
             TimeSpan t_start = TimeSpan.Parse(utility.sell_condition_start);
@@ -1155,24 +1275,32 @@ namespace WindowsFormsApp1
                 return;
             }
 
-            sell_transform(code, percent, time, "조건식매도");
+            sell_transform(code, price, "조건식매도");
         }
 
         //청산 매도
-        private void sell_check_clear(String code, String percent, string time)
+        private void sell_check_clear(string code, string time)
         {
+            //청산 매도 시간 확인
             TimeSpan t_code = TimeSpan.Parse(time);
             TimeSpan t_start = TimeSpan.Parse(utility.clear_sell_start);
             TimeSpan t_end = TimeSpan.Parse(utility.clear_sell_end);
 
             if (t_code.CompareTo(t_start) < 0 || t_code.CompareTo(t_end) > 0) return;
 
-            sell_transform(code, percent, time, "청산매도");
+            sell_transform(code, "Nan", "청산매도/시간");
         }
 
         //실시간 가격 매도
-        private void sell_check_price(String code, String percent, string time)
+        private void sell_check_price(string code, string price, string percent, string time)
         {
+            //운영시간 확인
+            TimeSpan t_code = TimeSpan.Parse(time);
+            TimeSpan t_start = TimeSpan.Parse(utility.market_start_time);
+            TimeSpan t_end = TimeSpan.Parse(utility.market_end_time);
+
+            if (t_code.CompareTo(t_start) < 0 || t_code.CompareTo(t_end) > 0) return;
+
             //익절
             if (utility.profit_percent)
             {
@@ -1180,7 +1308,7 @@ namespace WindowsFormsApp1
                 double profit = double.Parse(utility.profit_percent_text);
                 if(percent_edit >= profit)
                 {
-                    sell_transform(code, percent, time, "익절매도");
+                    sell_transform(code, price, "익절매도");
                     return;
                 }
             }
@@ -1192,7 +1320,7 @@ namespace WindowsFormsApp1
                 double loss = double.Parse(utility.profit_percent_text);
                 if (percent_edit <= -loss)
                 {
-                    sell_transform(code, percent, time, "손절매도");
+                    sell_transform(code, price, "손절매도");
                     return;
                 }
             }
@@ -1200,24 +1328,24 @@ namespace WindowsFormsApp1
             //익절TS
             if (utility.profit_ts)
             {
-                sell_transform(code, percent, time, "익절TS");
+                sell_transform(code, price, "익절TS");
             }
 
             //익절원
             if (utility.profit_won)
             {
-                sell_transform(code, percent, time, "익절원");
+                sell_transform(code, price, "익절원");
             }
 
             //손절원
             if (utility.loss_won)
             {
-                sell_transform(code, percent, time, "손절원");
+                sell_transform(code, price, "손절원");
             }
         }
 
         //매도중 상태로 변경
-        private void sell_transform(String code, String percent, string time, string sell_message)
+        private void sell_transform(String code, string price, string sell_message)
         {
             //메시지
             WriteLog("[" + sell_message + "/ 충족] : " + code + " - " + sell_message + "가 충족되었습니다." + "\n");
@@ -1230,30 +1358,29 @@ namespace WindowsFormsApp1
             dataGridView1.DataSource = dtCondStock;
 
             //주문
-            sell_order(code, sell_message);
+            sell_order(code, price, sell_message);
         }
 
         //--------------실시간 매수 매도 주문---------------------
 
-        //매수 주문
-        private void buy_order(string code)
+        //매수 주문(1초에 5회)
+        private void buy_order(string code, string price, string high)
         {
-            //일반에 대하여 주문 가능 개수 계산 => 기억해야 함 / 종목당매수금액 / 종목당매수수량 / 종목당매수비율 / 종목당최대매수금액
-            int order_acc = 5;
-
-            //시장가에 대하여 주문 가능 개수 계산 => 기억해야 함 / 종목당매수금액 / 종목당매수수량 / 종목당매수비율 / 종목당최대매수금액
-            int order_acc_market = 5;
-
             //주문 방식 구분
-            string[] order_method = buy_condtion_method.Text.Split('-');
+            string[] order_method = buy_condtion_method.Text.Split('/');
 
             //시장가 주문
-            if (order_method[0].Equals("시장가"))
+            if (utility.buy_set1.Equals("시장가"))
             {
                 WriteLog("[매수주문/시장가] : " + code + " - " + "주문이 접수되었습니다.\n");
                 telegram_message("[매수주문/시장가] : " + code + " - " + "주문이 접수되었습니다.\n");
-                //int error = axKHOpenAPI1.SendOrder("시장가매도", GetScreenNo(), utility.setting_account_number, 2, code, order_acc_market, 0, "00", "");
-                int error = 0;
+
+                //시장가에 대하여 주문 가능 개수 계산 => 기억해야 함 / 종목당매수금액 / 종목당매수수량 / 종목당매수비율 / 종목당최대매수금액
+                //User_money.Text;
+                int order_acc_market = buy_order_cal(high);
+
+                int error = axKHOpenAPI1.SendOrder("시장가매수", GetScreenNo(), utility.setting_account_number, 2, code, order_acc_market, 0, "00", "");
+
                 if (error == 0)
                 {
                     //보유 종목 수 확인
@@ -1261,61 +1388,167 @@ namespace WindowsFormsApp1
                     int hold = Convert.ToInt32(hold_status[0]);
                     int hold_max = Convert.ToInt32(hold_status[1]);
                     max_hoid.Text = (hold + 1) + "/" + hold_max;
+
+                    //보유수량계산
+                    DataRow[] findRows = dtCondStock.Select($"종목코드 = {code}");
+                    findRows[0]["보유수량"] = "0/" + order_acc_market;
+
                     //
-                    WriteLog("[매수주문/시장가] : " + code + " - " + "주문이 성공하였습니다.\n");
-                    telegram_message("[매수주문/시장가] : " + code + " - " + "주문이 성공하였습니다.\n");
+                    WriteLog("[매수주문/시장가] : " + code + " - " + order_acc_market + "개 " + "주문을 성공하였습니다.\n");
+                    telegram_message("[매수주문/시장가] : " + code + " - " + order_acc_market + "개 " + "주문을 성공하였습니다.\n");
 
                 }
                 else if (error == -308)
                 {
+                    //편입 차트 상태 '매수완료' 변경
+                    DataRow[] findRows2 = dtCondStock.Select($"종목코드 = {code}");
+                    findRows2[0]["상태"] = "대기";
+                    dtCondStock.AcceptChanges();
+                    dataGridView1.DataSource = dtCondStock;
+
                     WriteLog("[매수주문/시장가] : " + code + " - " + "1초에 5회 이상 주문하며 실패되었습니다.\n");
                     telegram_message("[매수주문/시장가] : " + code + " - " + "1초에 5회 이상 주문하며 실패되었습니다.\n");
                 }
                 else
                 {
+                    //편입 차트 상태 '매수완료' 변경
+                    DataRow[] findRows2 = dtCondStock.Select($"종목코드 = {code}");
+                    findRows2[0]["상태"] = "대기";
+                    dtCondStock.AcceptChanges();
+                    dataGridView1.DataSource = dtCondStock;
+
+                    //
                     WriteLog("[매수주문/시장가] : " + code + " - 에러코드(" + error + ")로 인하여 주문이 실패되었습니다.\n");
                     telegram_message("[매수주문/시장가] : " + code + " - 에러코드(" + error + ")로 인하여 주문이 실패되었습니다.\n");
                 }
                 return;
             }
-
             //지정가 주문
+            else
+            {
+                //지정가에 대하여 주문 가능 개수 계산 => 기억해야 함 / 종목당매수금액 / 종목당매수수량 / 종목당매수비율 / 종목당최대매수금액
+                int order_acc = buy_order_cal(price);
+            }
+        }
 
+        //매수 주문 수량 계산
+        private int buy_order_cal(string price)
+        {
+            int price_edit = Convert.ToInt32(price.Replace(",", ""));
+            int current_balance = Convert.ToInt32(User_money.Text);
+            //
+            if (utility.buy_per_percent)
+            {
+                //매수비율
+                int ratio = Convert.ToInt32(utility.buy_per_percent_text);
+
+                // 예수금 활용 비율 계산 (0.XX 형태로 변환)
+                double buy_Percent = ratio / 100.0;
+
+                // 주문 가능 금액 계산 (예수금 * 활용 비율)
+                double order_Amount = current_balance * buy_Percent;
+
+                // 상한가 기준 최대 주문 가능 수량 계산 (내림)
+                int quantity = (int)Math.Floor(order_Amount / (double)price_edit);
+
+                // 실제 주문 금액 계산
+                double actual_Order_Amount = quantity * price_edit;
+
+                // 실제 주문 금액이 주문 가능 금액을 초과하는 경우 수량 조정
+                if (actual_Order_Amount > (double)order_Amount)
+                {
+                    quantity--;
+                }
+
+                return quantity;
+            }
+            else if (utility.buy_per_amount)
+            {
+                //매수개수
+                int max_amount = Convert.ToInt32(utility.buy_per_amount_text);
+
+                // 상한가 기준 최대 주문 가능 금액 계산
+                double max_Order_Amount = max_amount* price_edit;
+
+                // 예수금과 최대 주문 가능 금액 중 작은 값으로 실제 주문 가능 금액 결정
+                double order_Amount = Math.Min(current_balance, (int)max_Order_Amount);
+
+                // 실제 주문 가능 수량 계산 (내림)
+                return (int)Math.Floor(order_Amount / price_edit);
+            }
+            else
+            {
+                //매수금액
+                int max_amount = Convert.ToInt32(utility.buy_per_price_text);
+
+                // 예수금과 최대 주문 가능 금액 중 작은 값으로 실제 주문 가능 금액 결정
+                double order_Amount = Math.Min(current_balance, max_amount);
+
+                // 실제 주문 가능 수량 계산 (내림)
+                return (int)Math.Floor(order_Amount / price_edit);
+            }
+            //
+            return 0;
         }
 
         //매도 주문(1초에 5회)
-        private void sell_order(string code, string sell_message)
+        private void sell_order(string code, string price, string sell_message)
         {
-            //주문 가능 개수 확인
-            int order_acc = 5;
+            //보유수량계산
+            DataRow[] findRows = dtCondStock.Select($"종목코드 = {code}");
+            string[] tmp = findRows[0]["보유수량"].ToString().Split('/');
+            int order_acc = Convert.ToInt32(tmp[0]);
 
-            //청산 무조건 시장가 주문
-            if (sell_message.Equals("청산매도") && utility.clear_sell_market)
+            //주문 방식 구분
+            string[] order_method = buy_condtion_method.Text.Split('/');
+
+            //
+            string[] tmp2 = sell_message.Split('/');
+
+            //청산 주문
+            if (sell_message.Equals(tmp2[0]) || utility.sell_set1.Equals("시장가"))
             {
                 WriteLog("[매도주문/" + sell_message + "] : " + code + " - " + "주문이 접수되었습니다.\n");
                 telegram_message("[매도주문/" + sell_message + "] : " + code + " - " + "주문이 접수되었습니다.\n");
+
                 int error = axKHOpenAPI1.SendOrder("시장가매도", GetScreenNo(), utility.setting_account_number, 2, code, order_acc, 0, "03", "");
-                if(error == 0)
+
+                if (error == 0)
                 {
-                    WriteLog("[매도주문/" + sell_message + "] : " + code + " - " + "주문이 성공하였습니다.\n");
-                    telegram_message("[매도주문/" + sell_message + "] : " + code + " - " + "주문이 성공하였습니다.\n");
+                    WriteLog("[매도주문/" + sell_message + "] : " + code + " - " + order_acc + "개 "+ "주문을 성공하였습니다.\n");
+                    telegram_message("[매도주문/" + sell_message + "] : " + code + " - " + order_acc + "개 " + "주문을 성공하였습니다.\n");
                 }
-                else if(error == -308)
+                else if (error == -308)
                 {
+                    //편입 차트 상태 '매수완료' 변경
+                    DataRow[] findRows2 = dtCondStock.Select($"종목코드 = {code}");
+                    findRows2[0]["상태"] = "매수완료";
+                    dtCondStock.AcceptChanges();
+                    dataGridView1.DataSource = dtCondStock;
+
+                    //
                     WriteLog("[매도주문/" + sell_message + "] : " + code + " - " + "1초에 5회 이상 주문하며 실패되었습니다.\n");
                     telegram_message("[매도주문/" + sell_message + "] : " + code + " - " + "1초에 5회 이상 주문하며 실패되었습니다.\n");
                 }
                 else
                 {
+                    //편입 차트 상태 '매수완료' 변경
+                    DataRow[] findRows2 = dtCondStock.Select($"종목코드 = {code}");
+                    findRows2[0]["상태"] = "매수완료";
+                    dtCondStock.AcceptChanges();
+                    dataGridView1.DataSource = dtCondStock;
+
+                    //
                     WriteLog("[매도주문/" + sell_message + "] : " + code + " - 에러코드(" + error + ")로 인하여 주문이 실패되었습니다.\n");
                     telegram_message("[매도주문/" + sell_message + "] : " + code + " - 에러코드(" + error + ")로 인하여 주문이 실패되었습니다.\n");
                 }
                 return;
             }
-
             //지정가 주문
+            else
+            {
 
-
+            }
         }
 
         //------------주문 상태 확인 및 정정---------------------
@@ -1327,16 +1560,57 @@ namespace WindowsFormsApp1
                 //매도수구분
                 string Gubun = axKHOpenAPI1.GetChejanData(907);
 
-                //종목코드
+                //추가로드- 종목코드
                 string code = axKHOpenAPI1.GetChejanData(9001);
+
+                //체결수량
+                int partial = Convert.ToInt32(axKHOpenAPI1.GetChejanData(911));
 
                 //미체결수량
                 string left_Acc = axKHOpenAPI1.GetChejanData(902);
 
+                //보유수량계산
+                DataRow[] findRows = dtCondStock.Select($"종목코드 = {code}");
+                string[] tmp = findRows[0]["보유수량"].ToString().Split('/');
+                int order_acc = Convert.ToInt32(tmp[1]);
+
+                //매수확인
                 if (Gubun.Equals("1"))
                 {
                     //매수 확인 => 원주문 수량과 누적합 체결량을 비교
-                    if (!left_Acc.Equals("0")) return;
+                    if (!left_Acc.Equals("0"))
+                    {
+                        findRows[0]["보유수량"] = (partial + Convert.ToInt32(tmp[0])) + "/" + order_acc;
+                        return;
+                    }
+
+                    //매수완료 처리
+                    findRows[0]["보유수량"] = (partial + Convert.ToInt32(tmp[0])) + "/" + order_acc;
+
+                    //추가로드 - 종목이름
+                    string code_name = axKHOpenAPI1.GetChejanData(302);
+
+                    //보유 종목 수 확인
+                    string[] hold_status = max_hoid.Text.Split('/');
+                    int hold = Convert.ToInt32(hold_status[0]);
+                    int hold_max = Convert.ToInt32(hold_status[1]);
+                    max_hoid.Text = (hold - 1) + "/" + hold_max;
+
+                    //매수완료
+                    if (partial + Convert.ToInt32(tmp[0]) != order_acc)
+                    {
+                        WriteLog("[매수주문/비정상완료] : " + code_name + "(" + code + ") - " + "매수가 비정상 완료되었습니다.\n");
+                        WriteLog("[매수주문/비정상완료] : " + code_name + "(" + code + ") - " + (partial + Convert.ToInt32(tmp[0])) + "/" + order_acc + "\n");
+                        telegram_message("[매수주문/비정상완료] : " + code_name + "(" + code + ") - " + "매수가 비정상 완료되었습니다.\n");
+                        telegram_message("[매수주문/비정상완료] : " + code_name + "(" + code + ") - " + (partial + Convert.ToInt32(tmp[0])) + "/" + order_acc + "\n");
+                    }
+                    else
+                    {
+                        WriteLog("[매수주문/정상완료] : " + code_name + "(" + code + ") - " + "매수가 정상 완료되었습니다.\n");
+                        WriteLog("[매수주문/정상완료] : " + code_name + "(" + code + ") - " + (partial + Convert.ToInt32(tmp[0])) + "/" + order_acc + "\n");
+                        telegram_message("[매수주문/정상완료] : " + code_name + "(" + code + ") - " + "매수가 정상 완료되었습니다.\n");
+                        telegram_message("[매수주문/정상완료] : " + code_name + "(" + code + ") - " + (partial + Convert.ToInt32(tmp[0])) + "/" + order_acc + "\n");
+                    }
 
                     //편입 차트 상태 '매수완료' 변경
                     DataRow[] findRows1 = dtCondStock.Select($"종목코드 = {code}");
@@ -1344,10 +1618,44 @@ namespace WindowsFormsApp1
                     dtCondStock.AcceptChanges();
                     dataGridView1.DataSource = dtCondStock;
                 }
+                //매도확인
                 else
                 {
                     //매도 확인 => 원주문 수량과 누적합 체결량을 비교
-                    if(!left_Acc.Equals("0")) return;
+                    if (!left_Acc.Equals("0"))
+                    {
+                        findRows[0]["보유수량"] = (Convert.ToInt32(tmp[0]) - partial) + "/" + order_acc;
+                        return;
+                    }
+
+                    //매도완료 처리
+                    findRows[0]["보유수량"] = (Convert.ToInt32(tmp[0]) - partial) + "/" + order_acc;
+
+                    //추가로드 - 종목이름
+                    string code_name = axKHOpenAPI1.GetChejanData(302);
+
+                    //보유 종목 수 확인
+                    string[] hold_status = max_hoid.Text.Split('/');
+                    int hold = Convert.ToInt32(hold_status[0]);
+                    int hold_max = Convert.ToInt32(hold_status[1]);
+                    max_hoid.Text = (hold - 1) + "/" + hold_max;
+
+                    //매도완료
+                    if (Convert.ToInt32(tmp[0]) - partial != 0)
+                    {
+                        WriteLog("[매도주문/비정상완료] : " + code_name + "(" + code + ") - " + "매도가 비정상 완료되었습니다.\n");
+                        WriteLog("[매도주문/비정상완료] : " + code_name + "(" + code + ") - " + (Convert.ToInt32(tmp[0]) - partial) + "/" + order_acc + "\n");
+                        telegram_message("[매도주문/비정상완료] : " + code_name + "(" + code + ") - " + "매도가 비정상 완료되었습니다.\n");
+                        telegram_message("[매도주문/비정상완료] : " + code_name + "(" + code + ") - " + (Convert.ToInt32(tmp[0]) - partial) + "/" + order_acc + "\n");
+                    }
+                    else
+                    {
+                        WriteLog("[매도주문/정상완료] : " + code_name + "(" + code + ") - " + "매도가 정상 완료되었습니다.\n");
+                        WriteLog("[매도주문/정상완료] : " + code_name + "(" + code + ") - " + (Convert.ToInt32(tmp[0]) - partial) + "/" + order_acc + "\n");
+                        telegram_message("[매도주문/정상완료] : " + code_name + "(" + code + ") - " + "매도가 정상 완료되었습니다.\n");
+                        telegram_message("[매도주문/정상완료] : " + code_name + "(" + code + ") - " + (Convert.ToInt32(tmp[0]) - partial) + "/" + order_acc + "\n");
+                    }
+
 
                     //모든 화면에서 "code"종목 실시간 해지
                     axKHOpenAPI1.SetRealRemove("ALL", code);
@@ -1362,6 +1670,7 @@ namespace WindowsFormsApp1
                         dataGridView1.DataSource = dtCondStock;
                         return;
                     }
+
                     //편입 차트 상태 '매도완료' 변경
                     DataRow[] findRows3 = dtCondStock.Select($"종목코드 = {code}");
                     findRows3[0]["상태"] = "매도완료";

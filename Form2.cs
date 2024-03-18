@@ -38,19 +38,12 @@ namespace WindowsFormsApp1
         private async Task setting_load_auto()
         {
             //조건식 로딩
-            await Task.Run(() =>
-            {
-                //조건식 로딩
-                onReceiveConditionVer(Trade_Auto.account, Trade_Auto.arrCondition);
+            onReceiveConditionVer(Trade_Auto.account, Trade_Auto.arrCondition);
 
-                //매도매수 목록 배치
-                mode_hoo();
-            });
+            //매도매수 목록 배치
+            mode_hoo();
 
-            await Task.Run(() =>
-            {
-                match(utility.system_route);
-            });
+            match(utility.system_route);
 
         }
 
@@ -174,6 +167,7 @@ namespace WindowsFormsApp1
         private void match(string filepath)
         {
             StreamReader reader = new StreamReader(filepath);
+
             //파일 주소 확인
             setting_name.Text = filepath;
 
