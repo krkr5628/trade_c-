@@ -1132,7 +1132,7 @@ namespace WindowsFormsApp1
             dataGridView1.DataSource = dtCondStock; 
 
             //매수주문
-            buy_order(code);
+            //buy_order(code);
 
             return true;
         }
@@ -1252,11 +1252,19 @@ namespace WindowsFormsApp1
             {
                 WriteLog("[매수주문/시장가] : " + code + " - " + "주문이 접수되었습니다.\n");
                 telegram_message("[매수주문/시장가] : " + code + " - " + "주문이 접수되었습니다.\n");
-                int error = axKHOpenAPI1.SendOrder("시장가매도", GetScreenNo(), utility.setting_account_number, 2, code, order_acc_market, 0, "00", "");
+                //int error = axKHOpenAPI1.SendOrder("시장가매도", GetScreenNo(), utility.setting_account_number, 2, code, order_acc_market, 0, "00", "");
+                int error = 0;
                 if (error == 0)
                 {
+                    //보유 종목 수 확인
+                    string[] hold_status = max_hoid.Text.Split('/');
+                    int hold = Convert.ToInt32(hold_status[0]);
+                    int hold_max = Convert.ToInt32(hold_status[1]);
+                    max_hoid.Text = (hold + 1) + "/" + hold_max;
+                    //
                     WriteLog("[매수주문/시장가] : " + code + " - " + "주문이 성공하였습니다.\n");
                     telegram_message("[매수주문/시장가] : " + code + " - " + "주문이 성공하였습니다.\n");
+
                 }
                 else if (error == -308)
                 {
