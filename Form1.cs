@@ -1418,7 +1418,13 @@ namespace WindowsFormsApp1
 
                 if (error == 0)
                 {
-                    //보유 종목 수 확인
+                    //매매 수량 업데이트
+                    string[] trade_status = maxbuy_acc.Text.Split('/');
+                    int trade_status_already = Convert.ToInt32(trade_status[0]);
+                    int trade_status_limit = Convert.ToInt32(trade_status[1]);
+                    maxbuy_acc.Text = trade_status_already + 1 + "/" + trade_status_limit;
+
+                    //보유 수량 업데이트
                     string[] hold_status = max_hoid.Text.Split('/');
                     int hold = Convert.ToInt32(hold_status[0]);
                     int hold_max = Convert.ToInt32(hold_status[1]);
@@ -1664,12 +1670,6 @@ namespace WindowsFormsApp1
                     //추가로드 - 종목이름
                     string code_name = axKHOpenAPI1.GetChejanData(302);
 
-                    //보유 종목 수 확인
-                    string[] hold_status = max_hoid.Text.Split('/');
-                    int hold = Convert.ToInt32(hold_status[0]);
-                    int hold_max = Convert.ToInt32(hold_status[1]);
-                    max_hoid.Text = (hold - 1) + "/" + hold_max;
-
                     //매수완료
                     if (partial + Convert.ToInt32(tmp[0]) != order_acc)
                     {
@@ -1708,7 +1708,7 @@ namespace WindowsFormsApp1
                     //추가로드 - 종목이름
                     string code_name = axKHOpenAPI1.GetChejanData(302);
 
-                    //보유 종목 수 확인
+                    //보유 수량 업데이트
                     string[] hold_status = max_hoid.Text.Split('/');
                     int hold = Convert.ToInt32(hold_status[0]);
                     int hold_max = Convert.ToInt32(hold_status[1]);
