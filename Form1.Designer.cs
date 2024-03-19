@@ -31,36 +31,36 @@ namespace WindowsFormsApp1
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Trade_Auto));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Login_btn = new System.Windows.Forms.Button();
             this.log_window = new System.Windows.Forms.RichTextBox();
             this.axKHOpenAPI1 = new AxKHOpenAPILib.AxKHOpenAPI();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label21 = new System.Windows.Forms.Label();
+            this.all_profit = new System.Windows.Forms.Label();
             this.total_balance = new System.Windows.Forms.Label();
             this.total_profit = new System.Windows.Forms.Label();
             this.total_money = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.User_money = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
+            this.cal_buy_total = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
+            this.cal_profit = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
+            this.cal_profit_percent = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
+            this.today_profit = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
+            this.today_profit_percent = new System.Windows.Forms.Label();
             this.User_name = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -134,9 +134,9 @@ namespace WindowsFormsApp1
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.label12 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
+            this.all_profit_percent = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
+            this.Current_User_money = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.axKHOpenAPI1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -174,7 +174,7 @@ namespace WindowsFormsApp1
             // 
             this.log_window.AcceptsTab = true;
             this.log_window.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.log_window.Location = new System.Drawing.Point(7, 28);
+            this.log_window.Location = new System.Drawing.Point(11, 21);
             this.log_window.Margin = new System.Windows.Forms.Padding(4);
             this.log_window.Name = "log_window";
             this.log_window.ReadOnly = true;
@@ -185,7 +185,7 @@ namespace WindowsFormsApp1
             // axKHOpenAPI1
             // 
             this.axKHOpenAPI1.Enabled = true;
-            this.axKHOpenAPI1.Location = new System.Drawing.Point(1765, 50);
+            this.axKHOpenAPI1.Location = new System.Drawing.Point(1999, 50);
             this.axKHOpenAPI1.Margin = new System.Windows.Forms.Padding(4);
             this.axKHOpenAPI1.Name = "axKHOpenAPI1";
             this.axKHOpenAPI1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axKHOpenAPI1.OcxState")));
@@ -200,46 +200,46 @@ namespace WindowsFormsApp1
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.Location = new System.Drawing.Point(6, 72);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(1416, 453);
+            this.dataGridView1.Size = new System.Drawing.Size(1638, 453);
             this.dataGridView1.TabIndex = 3;
             // 
             // tableLayoutPanel1
@@ -255,26 +255,26 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.Controls.Add(this.label24, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.Current_User_money, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.total_balance, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.total_money, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label13, 9, 0);
             this.tableLayoutPanel1.Controls.Add(this.label14, 8, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label27, 9, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label28, 8, 1);
+            this.tableLayoutPanel1.Controls.Add(this.today_profit, 9, 1);
+            this.tableLayoutPanel1.Controls.Add(this.today_profit_percent, 8, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 5, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label23, 5, 1);
+            this.tableLayoutPanel1.Controls.Add(this.cal_buy_total, 5, 1);
             this.tableLayoutPanel1.Controls.Add(this.label6, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.label12, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.total_profit, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label21, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.all_profit, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.label7, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label20, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.all_profit_percent, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.User_money, 4, 1);
             this.tableLayoutPanel1.Controls.Add(this.label8, 7, 0);
             this.tableLayoutPanel1.Controls.Add(this.label11, 6, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label25, 7, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label26, 6, 1);
+            this.tableLayoutPanel1.Controls.Add(this.cal_profit, 7, 1);
+            this.tableLayoutPanel1.Controls.Add(this.cal_profit_percent, 6, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(17, 198);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -285,18 +285,18 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1319, 87);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
-            // label21
+            // all_profit
             // 
-            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.all_profit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label21.AutoSize = true;
-            this.label21.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label21.Location = new System.Drawing.Point(265, 43);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(125, 44);
-            this.label21.TabIndex = 28;
-            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.all_profit.AutoSize = true;
+            this.all_profit.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.all_profit.Location = new System.Drawing.Point(265, 43);
+            this.all_profit.Name = "all_profit";
+            this.all_profit.Size = new System.Drawing.Size(125, 44);
+            this.all_profit.TabIndex = 28;
+            this.all_profit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // total_balance
             // 
@@ -389,21 +389,21 @@ namespace WindowsFormsApp1
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(123, 43);
             this.label1.TabIndex = 20;
-            this.label1.Text = "매입금액";
+            this.label1.Text = "평가매입금액";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label23
+            // cal_buy_total
             // 
-            this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.cal_buy_total.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label23.AutoSize = true;
-            this.label23.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label23.Location = new System.Drawing.Point(658, 43);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(125, 44);
-            this.label23.TabIndex = 30;
-            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cal_buy_total.AutoSize = true;
+            this.cal_buy_total.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.cal_buy_total.Location = new System.Drawing.Point(658, 43);
+            this.cal_buy_total.Name = "cal_buy_total";
+            this.cal_buy_total.Size = new System.Drawing.Size(125, 44);
+            this.cal_buy_total.TabIndex = 30;
+            this.cal_buy_total.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label8
             // 
@@ -422,18 +422,18 @@ namespace WindowsFormsApp1
             this.label8.Text = "평가손익";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label25
+            // cal_profit
             // 
-            this.label25.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.cal_profit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label25.AutoSize = true;
-            this.label25.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label25.Location = new System.Drawing.Point(920, 43);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(125, 44);
-            this.label25.TabIndex = 32;
-            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cal_profit.AutoSize = true;
+            this.cal_profit.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.cal_profit.Location = new System.Drawing.Point(920, 43);
+            this.cal_profit.Name = "cal_profit";
+            this.cal_profit.Size = new System.Drawing.Size(125, 44);
+            this.cal_profit.TabIndex = 32;
+            this.cal_profit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label11
             // 
@@ -452,18 +452,18 @@ namespace WindowsFormsApp1
             this.label11.Text = "평가손익률";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label26
+            // cal_profit_percent
             // 
-            this.label26.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.cal_profit_percent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label26.AutoSize = true;
-            this.label26.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label26.Location = new System.Drawing.Point(789, 43);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(125, 44);
-            this.label26.TabIndex = 33;
-            this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cal_profit_percent.AutoSize = true;
+            this.cal_profit_percent.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.cal_profit_percent.Location = new System.Drawing.Point(789, 43);
+            this.cal_profit_percent.Name = "cal_profit_percent";
+            this.cal_profit_percent.Size = new System.Drawing.Size(125, 44);
+            this.cal_profit_percent.TabIndex = 33;
+            this.cal_profit_percent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label13
             // 
@@ -482,18 +482,18 @@ namespace WindowsFormsApp1
             this.label13.Text = "당일손익";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label27
+            // today_profit
             // 
-            this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.today_profit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label27.AutoSize = true;
-            this.label27.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label27.Location = new System.Drawing.Point(1182, 43);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(134, 44);
-            this.label27.TabIndex = 34;
-            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.today_profit.AutoSize = true;
+            this.today_profit.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.today_profit.Location = new System.Drawing.Point(1182, 43);
+            this.today_profit.Name = "today_profit";
+            this.today_profit.Size = new System.Drawing.Size(134, 44);
+            this.today_profit.TabIndex = 34;
+            this.today_profit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label14
             // 
@@ -512,18 +512,18 @@ namespace WindowsFormsApp1
             this.label14.Text = "당일손익률";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label28
+            // today_profit_percent
             // 
-            this.label28.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.today_profit_percent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label28.AutoSize = true;
-            this.label28.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label28.Location = new System.Drawing.Point(1051, 43);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(125, 44);
-            this.label28.TabIndex = 35;
-            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.today_profit_percent.AutoSize = true;
+            this.today_profit_percent.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.today_profit_percent.Location = new System.Drawing.Point(1051, 43);
+            this.today_profit_percent.Name = "today_profit_percent";
+            this.today_profit_percent.Size = new System.Drawing.Size(125, 44);
+            this.today_profit_percent.TabIndex = 35;
+            this.today_profit_percent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // User_name
             // 
@@ -615,7 +615,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel2.Controls.Add(this.Stock_code, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.Real_time_stop_btn, 2, 1);
             this.tableLayoutPanel2.Controls.Add(this.Real_time_search_btn, 1, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(1444, 198);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(1678, 198);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
@@ -716,14 +716,14 @@ namespace WindowsFormsApp1
             this.Main_menu});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(1927, 33);
+            this.menu.Size = new System.Drawing.Size(2148, 36);
             this.menu.TabIndex = 7;
             this.menu.Text = "menuStrip1";
             // 
             // Main_menu
             // 
             this.Main_menu.Name = "Main_menu";
-            this.Main_menu.Size = new System.Drawing.Size(64, 29);
+            this.Main_menu.Size = new System.Drawing.Size(64, 30);
             this.Main_menu.Text = "메인";
             // 
             // time
@@ -743,7 +743,7 @@ namespace WindowsFormsApp1
             this.timetimer.BackColor = System.Drawing.Color.DarkGreen;
             this.timetimer.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.timetimer.ForeColor = System.Drawing.Color.MediumAquamarine;
-            this.timetimer.Location = new System.Drawing.Point(1581, 126);
+            this.timetimer.Location = new System.Drawing.Point(1815, 126);
             this.timetimer.Margin = new System.Windows.Forms.Padding(0);
             this.timetimer.Name = "timetimer";
             this.timetimer.Size = new System.Drawing.Size(320, 60);
@@ -758,37 +758,37 @@ namespace WindowsFormsApp1
             this.dataGridView2.AllowUserToDeleteRows = false;
             this.dataGridView2.AllowUserToResizeColumns = false;
             this.dataGridView2.AllowUserToResizeRows = false;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView2.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView2.Location = new System.Drawing.Point(6, 74);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridView2.RowTemplate.Height = 30;
-            this.dataGridView2.Size = new System.Drawing.Size(1416, 222);
+            this.dataGridView2.Size = new System.Drawing.Size(1642, 222);
             this.dataGridView2.TabIndex = 10;
             // 
             // tableLayoutPanel3
@@ -886,10 +886,10 @@ namespace WindowsFormsApp1
             this.User_connection.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.User_connection.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.User_connection.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.User_connection.Location = new System.Drawing.Point(1444, 126);
+            this.User_connection.Location = new System.Drawing.Point(1678, 126);
             this.User_connection.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.User_connection.Name = "User_connection";
-            this.User_connection.Size = new System.Drawing.Size(133, 60);
+            this.User_connection.Size = new System.Drawing.Size(354, 60);
             this.User_connection.TabIndex = 13;
             this.User_connection.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -1246,7 +1246,7 @@ namespace WindowsFormsApp1
             // 
             this.groupBox1.Controls.Add(this.log_window);
             this.groupBox1.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox1.Location = new System.Drawing.Point(1451, 516);
+            this.groupBox1.Location = new System.Drawing.Point(1678, 517);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(456, 646);
             this.groupBox1.TabIndex = 14;
@@ -1260,7 +1260,7 @@ namespace WindowsFormsApp1
             this.groupBox2.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.groupBox2.Location = new System.Drawing.Point(17, 306);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1429, 314);
+            this.groupBox2.Size = new System.Drawing.Size(1655, 314);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "계좌보유 현황";
@@ -1412,7 +1412,7 @@ namespace WindowsFormsApp1
             this.groupBox3.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.groupBox3.Location = new System.Drawing.Point(17, 626);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1429, 537);
+            this.groupBox3.Size = new System.Drawing.Size(1655, 537);
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "실시간 조건검색 현황";
@@ -1559,7 +1559,7 @@ namespace WindowsFormsApp1
             // 
             this.groupBox4.Controls.Add(this.tableLayoutPanel5);
             this.groupBox4.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox4.Location = new System.Drawing.Point(1444, 306);
+            this.groupBox4.Location = new System.Drawing.Point(1678, 306);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(456, 201);
             this.groupBox4.TabIndex = 17;
@@ -1593,18 +1593,18 @@ namespace WindowsFormsApp1
             this.label12.Text = "총수익률";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label20
+            // all_profit_percent
             // 
-            this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.all_profit_percent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label20.AutoSize = true;
-            this.label20.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label20.Location = new System.Drawing.Point(396, 43);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(125, 44);
-            this.label20.TabIndex = 37;
-            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.all_profit_percent.AutoSize = true;
+            this.all_profit_percent.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.all_profit_percent.Location = new System.Drawing.Point(396, 43);
+            this.all_profit_percent.Name = "all_profit_percent";
+            this.all_profit_percent.Size = new System.Drawing.Size(125, 44);
+            this.all_profit_percent.TabIndex = 37;
+            this.all_profit_percent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label7
             // 
@@ -1623,25 +1623,25 @@ namespace WindowsFormsApp1
             this.label7.Text = "예수금";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label24
+            // Current_User_money
             // 
-            this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.Current_User_money.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label24.AutoSize = true;
-            this.label24.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label24.Location = new System.Drawing.Point(134, 43);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(125, 44);
-            this.label24.TabIndex = 39;
-            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Current_User_money.AutoSize = true;
+            this.Current_User_money.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.Current_User_money.Location = new System.Drawing.Point(134, 43);
+            this.Current_User_money.Name = "Current_User_money";
+            this.Current_User_money.Size = new System.Drawing.Size(125, 44);
+            this.Current_User_money.TabIndex = 39;
+            this.Current_User_money.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Trade_Auto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1927, 1172);
+            this.ClientSize = new System.Drawing.Size(2148, 1172);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -1747,13 +1747,13 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label acc_text;
         private System.Windows.Forms.Label total_money;
-        private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label today_profit_percent;
+        private System.Windows.Forms.Label today_profit;
+        private System.Windows.Forms.Label cal_profit_percent;
+        private System.Windows.Forms.Label cal_profit;
+        private System.Windows.Forms.Label cal_buy_total;
         private System.Windows.Forms.Label User_money;
-        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label all_profit;
         private System.Windows.Forms.Label loss;
         private System.Windows.Forms.Label label42;
         private System.Windows.Forms.Label profit;
@@ -1782,10 +1782,10 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label maxbuy_acc;
         private System.Windows.Forms.Label buy_condtion_method;
         private System.Windows.Forms.Label sell_condtion_method;
-        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label Current_User_money;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label all_profit_percent;
     }
 }
 
