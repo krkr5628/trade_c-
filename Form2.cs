@@ -81,8 +81,8 @@ namespace WindowsFormsApp1
                     tmp.Add("종목당매수비율/" + Convert.ToString(buy_per_percent.Checked) + "/" + buy_per_percent_text.Text);
                     tmp.Add("종목당최대매수금액/" + maxbuy.Text);
                     tmp.Add("최대매수종목수/" + maxbuy_acc.Text);
-                    tmp.Add("종목최소매수가/" + maxbuy_acc.Text);
-                    tmp.Add("종목최대매수가/" + min_price.Text);
+                    tmp.Add("종목최소매수가/" + min_price.Text);
+                    tmp.Add("종목최대매수가/" + max_price.Text);
                     tmp.Add("최대보유종목수/" + Convert.ToString(max_hold.Checked) + "/" + max_hold_text.Text);
                     tmp.Add("당일중복매수금지/" + Convert.ToString(duplication_deny.Checked));
                     tmp.Add("보유종목매수금지/" + Convert.ToString(hold_deny.Checked));
