@@ -844,9 +844,6 @@ namespace WindowsFormsApp1
         //전체 청산 버튼
         private void All_clear_btn_Click(object sender, EventArgs e)
         {
-            //실시간 중단
-            real_time_stop_btn(null, EventArgs.Empty);
-
             //특저 열 추출
             DataColumn columnStateColumn = dtCondStock.Columns["상태"];
 
@@ -868,8 +865,6 @@ namespace WindowsFormsApp1
         //수익 종목 청산 버튼
         private void Profit_clear_btn_Click(object sender, EventArgs e)
         {
-            //실시간 중단
-            real_time_stop_btn(null, EventArgs.Empty);
             //특저 열 추출
             DataColumn columnStateColumn = dtCondStock.Columns["상태"];
 
@@ -896,9 +891,6 @@ namespace WindowsFormsApp1
         //손실 종목 청산 버튼
         private void Loss_clear_btn_Click(object sender, EventArgs e)
         {
-            //실시간 중단
-            real_time_stop_btn(null, EventArgs.Empty);
-
             //특저 열 추출
             DataColumn columnStateColumn = dtCondStock.Columns["상태"];
 
