@@ -1085,7 +1085,6 @@ namespace WindowsFormsApp1
                     break;
             }
         }
-        
 
         //실시간 시세(지속적 발생)(현재가. 등락율, 거래량, 수익률)
         private void onReceiveRealData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveRealDataEvent e)
