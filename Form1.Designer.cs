@@ -52,11 +52,11 @@ namespace WindowsFormsApp1
             this.label6 = new System.Windows.Forms.Label();
             this.User_money = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.cal_buy_total = new System.Windows.Forms.Label();
+            this.today_tax = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.cal_profit = new System.Windows.Forms.Label();
+            this.today_profit_tax = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.cal_profit_percent = new System.Windows.Forms.Label();
+            this.today_profit_percent_tax = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.today_profit = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -258,12 +258,6 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel1.Controls.Add(this.Current_User_money, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.total_balance, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.total_money, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label13, 9, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label14, 8, 0);
-            this.tableLayoutPanel1.Controls.Add(this.today_profit, 9, 1);
-            this.tableLayoutPanel1.Controls.Add(this.today_profit_percent, 8, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 5, 0);
-            this.tableLayoutPanel1.Controls.Add(this.cal_buy_total, 5, 1);
             this.tableLayoutPanel1.Controls.Add(this.label6, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.label12, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.total_profit, 2, 0);
@@ -271,10 +265,16 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel1.Controls.Add(this.label7, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.all_profit_percent, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.User_money, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label8, 7, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label11, 6, 0);
-            this.tableLayoutPanel1.Controls.Add(this.cal_profit, 7, 1);
-            this.tableLayoutPanel1.Controls.Add(this.cal_profit_percent, 6, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label14, 5, 0);
+            this.tableLayoutPanel1.Controls.Add(this.today_profit_percent, 5, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label13, 6, 0);
+            this.tableLayoutPanel1.Controls.Add(this.today_profit, 6, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 7, 0);
+            this.tableLayoutPanel1.Controls.Add(this.today_tax, 7, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label8, 9, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label11, 8, 0);
+            this.tableLayoutPanel1.Controls.Add(this.today_profit_tax, 9, 1);
+            this.tableLayoutPanel1.Controls.Add(this.today_profit_percent_tax, 8, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(17, 198);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -384,26 +384,26 @@ namespace WindowsFormsApp1
             this.label1.BackColor = System.Drawing.Color.LightSlateGray;
             this.label1.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(659, 0);
+            this.label1.Location = new System.Drawing.Point(921, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(123, 43);
             this.label1.TabIndex = 20;
-            this.label1.Text = "평가매입금액";
+            this.label1.Text = "당일수수료";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // cal_buy_total
+            // today_tax
             // 
-            this.cal_buy_total.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.today_tax.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cal_buy_total.AutoSize = true;
-            this.cal_buy_total.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.cal_buy_total.Location = new System.Drawing.Point(658, 43);
-            this.cal_buy_total.Name = "cal_buy_total";
-            this.cal_buy_total.Size = new System.Drawing.Size(125, 44);
-            this.cal_buy_total.TabIndex = 30;
-            this.cal_buy_total.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.today_tax.AutoSize = true;
+            this.today_tax.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.today_tax.Location = new System.Drawing.Point(920, 43);
+            this.today_tax.Name = "today_tax";
+            this.today_tax.Size = new System.Drawing.Size(125, 44);
+            this.today_tax.TabIndex = 30;
+            this.today_tax.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label8
             // 
@@ -414,26 +414,26 @@ namespace WindowsFormsApp1
             this.label8.BackColor = System.Drawing.Color.LightSlateGray;
             this.label8.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(921, 0);
+            this.label8.Location = new System.Drawing.Point(1183, 0);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(123, 43);
+            this.label8.Size = new System.Drawing.Size(132, 43);
             this.label8.TabIndex = 22;
-            this.label8.Text = "평가손익";
+            this.label8.Text = "당일손익합  (-수수료)";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // cal_profit
+            // today_profit_tax
             // 
-            this.cal_profit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.today_profit_tax.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cal_profit.AutoSize = true;
-            this.cal_profit.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.cal_profit.Location = new System.Drawing.Point(920, 43);
-            this.cal_profit.Name = "cal_profit";
-            this.cal_profit.Size = new System.Drawing.Size(125, 44);
-            this.cal_profit.TabIndex = 32;
-            this.cal_profit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.today_profit_tax.AutoSize = true;
+            this.today_profit_tax.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.today_profit_tax.Location = new System.Drawing.Point(1182, 43);
+            this.today_profit_tax.Name = "today_profit_tax";
+            this.today_profit_tax.Size = new System.Drawing.Size(134, 44);
+            this.today_profit_tax.TabIndex = 32;
+            this.today_profit_tax.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label11
             // 
@@ -444,26 +444,26 @@ namespace WindowsFormsApp1
             this.label11.BackColor = System.Drawing.Color.LightSlateGray;
             this.label11.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(790, 0);
+            this.label11.Location = new System.Drawing.Point(1052, 0);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(123, 43);
             this.label11.TabIndex = 23;
-            this.label11.Text = "평가손익률";
+            this.label11.Text = "당일손익률 (-수수료)";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // cal_profit_percent
+            // today_profit_percent_tax
             // 
-            this.cal_profit_percent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.today_profit_percent_tax.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cal_profit_percent.AutoSize = true;
-            this.cal_profit_percent.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.cal_profit_percent.Location = new System.Drawing.Point(789, 43);
-            this.cal_profit_percent.Name = "cal_profit_percent";
-            this.cal_profit_percent.Size = new System.Drawing.Size(125, 44);
-            this.cal_profit_percent.TabIndex = 33;
-            this.cal_profit_percent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.today_profit_percent_tax.AutoSize = true;
+            this.today_profit_percent_tax.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.today_profit_percent_tax.Location = new System.Drawing.Point(1051, 43);
+            this.today_profit_percent_tax.Name = "today_profit_percent_tax";
+            this.today_profit_percent_tax.Size = new System.Drawing.Size(125, 44);
+            this.today_profit_percent_tax.TabIndex = 33;
+            this.today_profit_percent_tax.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label13
             // 
@@ -474,12 +474,12 @@ namespace WindowsFormsApp1
             this.label13.BackColor = System.Drawing.Color.LightSlateGray;
             this.label13.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(1183, 0);
+            this.label13.Location = new System.Drawing.Point(790, 0);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(132, 43);
+            this.label13.Size = new System.Drawing.Size(123, 43);
             this.label13.TabIndex = 24;
-            this.label13.Text = "당일손익";
+            this.label13.Text = "당일손익합";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // today_profit
@@ -489,9 +489,9 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.today_profit.AutoSize = true;
             this.today_profit.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.today_profit.Location = new System.Drawing.Point(1182, 43);
+            this.today_profit.Location = new System.Drawing.Point(789, 43);
             this.today_profit.Name = "today_profit";
-            this.today_profit.Size = new System.Drawing.Size(134, 44);
+            this.today_profit.Size = new System.Drawing.Size(125, 44);
             this.today_profit.TabIndex = 34;
             this.today_profit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -504,7 +504,7 @@ namespace WindowsFormsApp1
             this.label14.BackColor = System.Drawing.Color.LightSlateGray;
             this.label14.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label14.ForeColor = System.Drawing.Color.White;
-            this.label14.Location = new System.Drawing.Point(1052, 0);
+            this.label14.Location = new System.Drawing.Point(659, 0);
             this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(123, 43);
@@ -519,7 +519,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.today_profit_percent.AutoSize = true;
             this.today_profit_percent.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.today_profit_percent.Location = new System.Drawing.Point(1051, 43);
+            this.today_profit_percent.Location = new System.Drawing.Point(658, 43);
             this.today_profit_percent.Name = "today_profit_percent";
             this.today_profit_percent.Size = new System.Drawing.Size(125, 44);
             this.today_profit_percent.TabIndex = 35;
@@ -1749,9 +1749,9 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label total_money;
         private System.Windows.Forms.Label today_profit_percent;
         private System.Windows.Forms.Label today_profit;
-        private System.Windows.Forms.Label cal_profit_percent;
-        private System.Windows.Forms.Label cal_profit;
-        private System.Windows.Forms.Label cal_buy_total;
+        private System.Windows.Forms.Label today_profit_percent_tax;
+        private System.Windows.Forms.Label today_profit_tax;
+        private System.Windows.Forms.Label today_tax;
         private System.Windows.Forms.Label User_money;
         private System.Windows.Forms.Label all_profit;
         private System.Windows.Forms.Label loss;

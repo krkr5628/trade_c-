@@ -236,9 +236,9 @@ namespace WindowsFormsApp1
             //초기세팅2
             all_profit.Text = "0";
             all_profit_percent.Text = "00.00%";
-            cal_buy_total.Text = "0";
-            cal_profit_percent.Text = "00.00%";
-            cal_profit.Text = "0";
+            today_tax.Text = "0";
+            today_profit_percent_tax.Text = "00.00%";
+            today_profit_tax.Text = "0";
             today_profit_percent.Text = "00.00%";
             today_profit.Text = "0";
 
@@ -725,6 +725,24 @@ namespace WindowsFormsApp1
                         string.Format("{0:#,##0}", Convert.ToDecimal(high2))
                     );
                     dataGridView1.DataSource = dtCondStock;
+                    break;
+
+                case "당일실현손익상세요청" :
+                    int count3 = axKHOpenAPI1.GetRepeatCnt(e.sTrCode, e.sRQName);
+                    int sum_profit = 0;
+                    int sum_tax = 0;
+                    WriteLog("당일실현손익 CHECK " + count3 + "ㅏㅏ\n");
+                    for (int i = 0; i < count3; i++)
+                    {
+                        sum_profit += Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "당일매도손익").Trim());
+                        sum_tax += Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "당일매매수수료").Trim()) + Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "당일매매세금").Trim());
+                    }
+
+                    today_profit.Text = string.Format("{0:#,##0}", Convert.ToDecimal(sum_profit));
+                    today_tax.Text = string.Format("{0:#,##0.00}%", Convert.ToDecimal(sum_tax));
+                    today_profit_tax.Text = string.Format("{0:#,##0.00}%", Convert.ToDecimal(sum_profit - sum_tax));
+                    today_profit_percent.Text = string.Format("{0:#,##0.00}%", Convert.ToDecimal(Convert.ToDouble(sum_profit) / Convert.ToDouble(User_money.Text.Replace(",", "")) * 100));
+                    today_profit_percent_tax.Text = string.Format("{0:#,##0.00}%", Convert.ToDecimal(Convert.ToDouble(sum_profit - sum_tax) / Convert.ToDouble(User_money.Text.Replace(",", "")) * 100));
                     break;
             }
         }
@@ -1665,7 +1683,7 @@ namespace WindowsFormsApp1
         //------------주문 상태 확인 및 정정---------------------
         private void onReceiveChejanData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveChejanDataEvent e)
         {
-
+            WriteLog("이것은 무엇인가" + e.sFIdList + "\n");
             if (e.sGubun.Equals('0'))
             {
                 //매도수구분
@@ -1771,11 +1789,12 @@ namespace WindowsFormsApp1
 
                     DataRow[] findRows2 = dtCondStock.Select($"종목코드 = {code}");
 
-                    //당일 손익 및 당일 손일률 계산
-                    /*
-                    today_profit.Text = string.Format("{0:#,##0}", Convert.ToDecimal(utility.initial_balance));
-                    today_profit_percent.Text = string.Format("{0:#,##0.00}%", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "등락율").Trim()));
-                    */
+                    //당일 손익 + 당일 손일률 + 당일 수수료
+                    axKHOpenAPI1.SetInputValue("계좌번호", utility.setting_account_number);
+                    axKHOpenAPI1.SetInputValue("종목코드", "0");
+                    int result = axKHOpenAPI1.CommRqData("당일실현손익상세요청", "OPT10077", 2, GetScreenNo());
+                    GetErrorMessage(result);
+                  
 
                     //예수금 업데이트
                     GetCashInfo(acc_text.Text.Trim(), "예수금상세현황추가");
