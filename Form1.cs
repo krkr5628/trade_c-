@@ -38,11 +38,11 @@ namespace WindowsFormsApp1
             //메인 시간 동작
             timer1.Start(); //시간 표시 - 1000ms
 
+            //기존 세팅 로드
+            utility.setting_load_auto();
+
             //테이블 초기 세팅
             initial_Table();
-
-            //초기 실행(비동기)
-            Begin();
 
             //-------------------로그인 이벤트 동작-------------------
             axKHOpenAPI1.OnEventConnect += onEventConnect; //로그인 상태 확인(ID,NAME,계좌번호,KEYBOARD,FIREWALL,조건식)
@@ -102,12 +102,12 @@ namespace WindowsFormsApp1
             timetimer.Text = DateTime.Now.ToString("yy MM-dd (ddd) HH:mm:ss");
 
             //Telegram 전송
-            if (utility.Telegram_Allow && telegram_chat.Count > 0)
+            if (utility.load_check && utility.Telegram_Allow && telegram_chat.Count > 0)
             {
                 telegram_send(telegram_chat.Dequeue());
             }
 
-            if(Operation) Opeartion_Time();
+            if(Operation && utility.load_check) Opeartion_Time();
 
         }
 
@@ -127,12 +127,14 @@ namespace WindowsFormsApp1
             if(t_now.CompareTo(t_end) > 0)
             {
                 Operation = !Operation;
-                real_time_stop(true);
+                Begin();
+                //real_time_stop(true);
                 return;
             }
             if (Operation_start)
             {
                 Operation_start = !Operation_start;
+                //Begin();
                 timer3.Start(); //편입 종목 감시 - 200ms
             }
         }
@@ -208,8 +210,6 @@ namespace WindowsFormsApp1
         //초기 실행
         private async Task Begin()
         {
-            //기존 세팅 로드
-            await utility.setting_load_auto();
 
             //초기 설정 반영
             await initial_allow();
@@ -464,9 +464,8 @@ namespace WindowsFormsApp1
                 axKHOpenAPI1.SetInputValue("계좌번호", utility.setting_account_number);
                 axKHOpenAPI1.SetInputValue("상장폐지조회구분", "0");
                 axKHOpenAPI1.SetInputValue("비밀번호입력매체구분", "00");
-                axKHOpenAPI1.CommRqData("계좌평가현황요청", "OPW00004", 0, GetScreenNo());
+                axKHOpenAPI1.CommRqData("계좌평가현황요청/초기", "OPW00004", 0, GetScreenNo());
             }
-            Hold_Update();
         }
 
         //초기 보유 종목 테이블 업데이트
@@ -628,6 +627,11 @@ namespace WindowsFormsApp1
                     }
                     dtCondStock_hold = dataTable2;
                     dataGridView2.DataSource = dtCondStock_hold;
+                    if (condition_nameORcode.Equals("초기"))
+                    {
+                        WriteLog("CHECKEHCKECHSDKF\n");
+                        Hold_Update();
+                    }
                     break;
             
                 //개별 증권 데이터 조회
@@ -942,7 +946,6 @@ namespace WindowsFormsApp1
         private async Task reload()
         {
             initial_Table();
-            Hold_Update();
             auto_allow();
         }
 
@@ -1284,14 +1287,6 @@ namespace WindowsFormsApp1
             }
             else
             {
-                /*
-                dataTable2.Columns.Add("보유수량", typeof(string)); //고정
-                dataTable2.Columns.Add("평균단가", typeof(string)); //고정
-                dataTable2.Columns.Add("평가금액", typeof(string));
-                dataTable2.Columns.Add("수익률", typeof(string)); //실시간 변경
-                dataTable2.Columns.Add("손익금액", typeof(string));
-                dataTable2.Columns.Add("매도수량", typeof(string)); //고정
-                 */
                 if (!price.Equals(""))
                 {
                     findRows2[0]["현재가"] = string.Format("{0:#,##0}", Convert.ToInt32(price)); //새로운 현재가
