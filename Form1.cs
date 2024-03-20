@@ -33,9 +33,8 @@ namespace WindowsFormsApp1
 
             //-------------------초기 동작-------------------
 
-            //시간 동작
+            //메인 시간 동작
             timer1.Start(); //시간 표시 - 1000ms
-            timer3.Start(); //편입 종목 감시 - 200ms
 
             //테이블 초기 세팅
             initial_Table();
@@ -105,6 +104,19 @@ namespace WindowsFormsApp1
             {
                 telegram_send(telegram_chat.Dequeue());
             }
+        }
+
+        //운영시간 확인
+        private void Opeartion_Time()
+        {
+            //운영시간 확인
+            TimeSpan t_now = TimeSpan.Parse(DateTime.Now.ToString("HH:mm:ss"));
+            TimeSpan t_start = TimeSpan.Parse(utility.market_start_time);
+            TimeSpan t_end = TimeSpan.Parse(utility.market_end_time);
+
+            if (t_now.CompareTo(t_start) < 0 || t_now.CompareTo(t_end) > 0) return;
+
+            timer3.Start(); //편입 종목 감시 - 200ms
         }
 
         //화면번호
@@ -1193,8 +1205,6 @@ namespace WindowsFormsApp1
         //실시간 시세(지속적 발생)(현재가. 등락율, 거래량, 수익률)
         private void onReceiveRealData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveRealDataEvent e)
         {
-            //시세 발생시간
-            string time = DateTime.Now.ToString("HH:mm:ss");
 
             //종목 확인
             DataRow[] findRows = dtCondStock.Select($"종목코드 = {e.sRealKey}");
@@ -1225,7 +1235,7 @@ namespace WindowsFormsApp1
                         if (!sell_runningCodes.ContainsKey(e.sRealKey))
                         {
                             sell_runningCodes[e.sRealKey] = true;
-                            sell_check_price(e.sRealKey, price.Equals("") ? findRows[0]["현재가"].ToString() : string.Format("{0:#,##0}", Convert.ToInt32(price)), percent, time);
+                            sell_check_price(e.sRealKey, price.Equals("") ? findRows[0]["현재가"].ToString() : string.Format("{0:#,##0}", Convert.ToInt32(price)), percent);
                             sell_runningCodes.Remove(e.sRealKey);
                         }
                     }
@@ -1620,14 +1630,8 @@ namespace WindowsFormsApp1
         }
 
         //실시간 가격 매도
-        private void sell_check_price(string code, string price, string percent, string time)
+        private void sell_check_price(string code, string price, string percent)
         {
-            //운영시간 확인
-            TimeSpan t_code = TimeSpan.Parse(time);
-            TimeSpan t_start = TimeSpan.Parse(utility.market_start_time);
-            TimeSpan t_end = TimeSpan.Parse(utility.market_end_time);
-
-            if (t_code.CompareTo(t_start) < 0 || t_code.CompareTo(t_end) > 0) return;
 
             //익절
             if (utility.profit_percent)
