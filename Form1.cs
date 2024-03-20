@@ -916,15 +916,27 @@ namespace WindowsFormsApp1
             auto_allow();
         }
 
-        //조건식 실시간 중단
+        //조건식 실시간 중단 버튼
         private void real_time_stop_btn(object sender, EventArgs e)
+        {
+            real_time_stop(true);
+        }
+
+        private void real_time_stop(bool real_price_all_stop)
         {
             //실시간 중단이 선언되면 '실시간시작'이 가능해진다.
             Real_time_stop_btn.Enabled = false;
             Real_time_search_btn.Enabled = true;
 
             // 검색된 조건식이 없을시
-            if (string.IsNullOrEmpty(buy_condition.Text)) return;
+            if (string.IsNullOrEmpty(buy_condition.Text))
+            {
+                WriteLog("실시간조건식검색 : 중단실패(조건식없음)\n");
+                telegram_message("실시간조건식검색 : 중단실패(조건식없음)\n");
+                Real_time_stop_btn.Enabled = true;
+                Real_time_search_btn.Enabled = false;
+                return;
+            }
 
             //검색된 조건식이 있을시
             string[] condition = buy_condition.Text.Split('^');
@@ -936,7 +948,9 @@ namespace WindowsFormsApp1
             WriteLog("실시간조건식검색 : 중단\n");
             telegram_message("실시간조건식검색 : 중단\n");
             axKHOpenAPI1.SendConditionStop(GetScreenNo(), condition[1], Convert.ToInt32(condition[0])); //조건검색 중지
-            axKHOpenAPI1.SetRealRemove("ALL", "ALL"); //실시간 시세 중지
+            if(real_price_all_stop){
+                axKHOpenAPI1.SetRealRemove("ALL", "ALL"); //실시간 시세 중지
+            }
         }
 
         //전체 청산 버튼
@@ -1007,7 +1021,6 @@ namespace WindowsFormsApp1
                     if (percent_edit < 0)
                     {
                         sell_order(row.Field<string>("종목코드"), row.Field<string>("현재가"), "청산매도/손실");
-
                     }
                 }
             }
@@ -1475,6 +1488,12 @@ namespace WindowsFormsApp1
                     int trade_status_already_update = Convert.ToInt32(trade_status_update[0]);
                     int trade_status_limit_update = Convert.ToInt32(trade_status_update[1]);
                     maxbuy_acc.Text = trade_status_already_update + 1 + "/" + trade_status_limit_update;
+
+                    //매매 수량이 최대치에 도달했을 경우(실시간조건식검색중단/실시간 시세는 유지)
+                    if(trade_status_already_update + 1 == trade_status_limit_update)
+                    {
+                        real_time_stop(false);
+                    }
 
                     //보유 수량 업데이트
                     string[] hold_status_update = max_hoid.Text.Split('/');
