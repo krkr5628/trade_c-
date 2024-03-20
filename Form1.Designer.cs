@@ -71,11 +71,10 @@ namespace WindowsFormsApp1
             this.label5 = new System.Windows.Forms.Label();
             this.User_id = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.Stock_search_btn = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.Stock_code = new System.Windows.Forms.TextBox();
             this.Real_time_stop_btn = new System.Windows.Forms.Button();
             this.Real_time_search_btn = new System.Windows.Forms.Button();
+            this.Stock_code = new System.Windows.Forms.TextBox();
+            this.Stock_search_btn = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menu = new System.Windows.Forms.MenuStrip();
             this.Main_menu = new System.Windows.Forms.ToolStripMenuItem();
@@ -174,18 +173,18 @@ namespace WindowsFormsApp1
             // 
             this.log_window.AcceptsTab = true;
             this.log_window.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.log_window.Location = new System.Drawing.Point(11, 21);
+            this.log_window.Location = new System.Drawing.Point(6, 28);
             this.log_window.Margin = new System.Windows.Forms.Padding(4);
             this.log_window.Name = "log_window";
             this.log_window.ReadOnly = true;
-            this.log_window.Size = new System.Drawing.Size(443, 604);
+            this.log_window.Size = new System.Drawing.Size(443, 594);
             this.log_window.TabIndex = 2;
             this.log_window.Text = "";
             // 
             // axKHOpenAPI1
             // 
             this.axKHOpenAPI1.Enabled = true;
-            this.axKHOpenAPI1.Location = new System.Drawing.Point(1999, 50);
+            this.axKHOpenAPI1.Location = new System.Drawing.Point(670, 50);
             this.axKHOpenAPI1.Margin = new System.Windows.Forms.Padding(4);
             this.axKHOpenAPI1.Name = "axKHOpenAPI1";
             this.axKHOpenAPI1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axKHOpenAPI1.OcxState")));
@@ -239,7 +238,7 @@ namespace WindowsFormsApp1
             dataGridViewCellStyle5.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(1638, 453);
+            this.dataGridView1.Size = new System.Drawing.Size(1875, 453);
             this.dataGridView1.TabIndex = 3;
             // 
             // tableLayoutPanel1
@@ -670,12 +669,11 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel2.Controls.Add(this.Stock_search_btn, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label9, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.Stock_code, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.Real_time_stop_btn, 2, 1);
             this.tableLayoutPanel2.Controls.Add(this.Real_time_search_btn, 1, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(1678, 198);
+            this.tableLayoutPanel2.Controls.Add(this.Stock_code, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.Stock_search_btn, 1, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(1919, 198);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
@@ -684,51 +682,6 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(456, 87);
             this.tableLayoutPanel2.TabIndex = 6;
-            // 
-            // Stock_search_btn
-            // 
-            this.Stock_search_btn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Stock_search_btn.BackColor = System.Drawing.Color.OliveDrab;
-            this.Stock_search_btn.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.Stock_search_btn.ForeColor = System.Drawing.Color.Transparent;
-            this.Stock_search_btn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.Stock_search_btn.Location = new System.Drawing.Point(303, 0);
-            this.Stock_search_btn.Margin = new System.Windows.Forms.Padding(0);
-            this.Stock_search_btn.Name = "Stock_search_btn";
-            this.Stock_search_btn.Size = new System.Drawing.Size(153, 43);
-            this.Stock_search_btn.TabIndex = 7;
-            this.Stock_search_btn.Text = "종목 조회";
-            this.Stock_search_btn.UseVisualStyleBackColor = false;
-            // 
-            // label9
-            // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.Color.LightSlateGray;
-            this.label9.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(4, 0);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(143, 43);
-            this.label9.TabIndex = 1;
-            this.label9.Text = "종목 코드";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Stock_code
-            // 
-            this.Stock_code.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Stock_code.Location = new System.Drawing.Point(155, 4);
-            this.Stock_code.Margin = new System.Windows.Forms.Padding(4);
-            this.Stock_code.Name = "Stock_code";
-            this.Stock_code.Size = new System.Drawing.Size(144, 28);
-            this.Stock_code.TabIndex = 13;
             // 
             // Real_time_stop_btn
             // 
@@ -762,6 +715,34 @@ namespace WindowsFormsApp1
             this.Real_time_search_btn.Text = "실시간 시작";
             this.Real_time_search_btn.UseVisualStyleBackColor = false;
             // 
+            // Stock_code
+            // 
+            this.Stock_code.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Stock_code.Location = new System.Drawing.Point(4, 4);
+            this.Stock_code.Margin = new System.Windows.Forms.Padding(4);
+            this.Stock_code.Name = "Stock_code";
+            this.Stock_code.Size = new System.Drawing.Size(143, 28);
+            this.Stock_code.TabIndex = 13;
+            // 
+            // Stock_search_btn
+            // 
+            this.Stock_search_btn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Stock_search_btn.BackColor = System.Drawing.Color.OliveDrab;
+            this.Stock_search_btn.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Stock_search_btn.ForeColor = System.Drawing.Color.Transparent;
+            this.Stock_search_btn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Stock_search_btn.Location = new System.Drawing.Point(151, 0);
+            this.Stock_search_btn.Margin = new System.Windows.Forms.Padding(0);
+            this.Stock_search_btn.Name = "Stock_search_btn";
+            this.Stock_search_btn.Size = new System.Drawing.Size(152, 43);
+            this.Stock_search_btn.TabIndex = 7;
+            this.Stock_search_btn.Text = "종목 조회";
+            this.Stock_search_btn.UseVisualStyleBackColor = false;
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
@@ -776,7 +757,7 @@ namespace WindowsFormsApp1
             this.Main_menu});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(2148, 33);
+            this.menu.Size = new System.Drawing.Size(2400, 33);
             this.menu.TabIndex = 7;
             this.menu.Text = "menuStrip1";
             // 
@@ -803,7 +784,7 @@ namespace WindowsFormsApp1
             this.timetimer.BackColor = System.Drawing.Color.DarkGreen;
             this.timetimer.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.timetimer.ForeColor = System.Drawing.Color.MediumAquamarine;
-            this.timetimer.Location = new System.Drawing.Point(1815, 126);
+            this.timetimer.Location = new System.Drawing.Point(2056, 126);
             this.timetimer.Margin = new System.Windows.Forms.Padding(0);
             this.timetimer.Name = "timetimer";
             this.timetimer.Size = new System.Drawing.Size(320, 60);
@@ -848,7 +829,7 @@ namespace WindowsFormsApp1
             dataGridViewCellStyle9.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridView2.RowTemplate.Height = 30;
-            this.dataGridView2.Size = new System.Drawing.Size(1642, 222);
+            this.dataGridView2.Size = new System.Drawing.Size(1879, 222);
             this.dataGridView2.TabIndex = 10;
             // 
             // tableLayoutPanel3
@@ -946,10 +927,10 @@ namespace WindowsFormsApp1
             this.User_connection.Font = new System.Drawing.Font("맑은 고딕", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.User_connection.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.User_connection.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.User_connection.Location = new System.Drawing.Point(1678, 126);
+            this.User_connection.Location = new System.Drawing.Point(1919, 126);
             this.User_connection.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.User_connection.Name = "User_connection";
-            this.User_connection.Size = new System.Drawing.Size(354, 60);
+            this.User_connection.Size = new System.Drawing.Size(133, 60);
             this.User_connection.TabIndex = 13;
             this.User_connection.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -1306,9 +1287,9 @@ namespace WindowsFormsApp1
             // 
             this.groupBox1.Controls.Add(this.log_window);
             this.groupBox1.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox1.Location = new System.Drawing.Point(1678, 517);
+            this.groupBox1.Location = new System.Drawing.Point(1920, 534);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(456, 646);
+            this.groupBox1.Size = new System.Drawing.Size(456, 629);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "LOG";
@@ -1320,7 +1301,7 @@ namespace WindowsFormsApp1
             this.groupBox2.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.groupBox2.Location = new System.Drawing.Point(17, 306);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1655, 314);
+            this.groupBox2.Size = new System.Drawing.Size(1892, 314);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "계좌보유 현황";
@@ -1472,7 +1453,7 @@ namespace WindowsFormsApp1
             this.groupBox3.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.groupBox3.Location = new System.Drawing.Point(17, 626);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1655, 537);
+            this.groupBox3.Size = new System.Drawing.Size(1892, 537);
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "실시간 조건검색 현황";
@@ -1619,7 +1600,7 @@ namespace WindowsFormsApp1
             // 
             this.groupBox4.Controls.Add(this.tableLayoutPanel5);
             this.groupBox4.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox4.Location = new System.Drawing.Point(1678, 306);
+            this.groupBox4.Location = new System.Drawing.Point(1919, 333);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(456, 201);
             this.groupBox4.TabIndex = 17;
@@ -1629,7 +1610,6 @@ namespace WindowsFormsApp1
             // timer2
             // 
             this.timer2.Interval = 1000;
-            this.timer2.Tick += new System.EventHandler(this.Reload_Timer);
             // 
             // timer3
             // 
@@ -1641,7 +1621,7 @@ namespace WindowsFormsApp1
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(2148, 1172);
+            this.ClientSize = new System.Drawing.Size(2400, 1172);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -1703,7 +1683,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button Real_time_search_btn;
         private System.Windows.Forms.Button Stock_search_btn;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button Real_time_stop_btn;
         private System.Windows.Forms.TextBox Stock_code;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
