@@ -25,6 +25,8 @@ namespace WindowsFormsApp1
         static public string[] arrCondition = { };
         static public string[] account;
         static public int login_check = 1;
+        static public bool Operation = true;
+        static public bool Operation_start = true;
 
         //-----------------------------------------------Main------------------------------------------------
         public Trade_Auto()
@@ -104,6 +106,9 @@ namespace WindowsFormsApp1
             {
                 telegram_send(telegram_chat.Dequeue());
             }
+
+            if(Operation) Opeartion_Time();
+
         }
 
         //운영시간 확인
@@ -114,9 +119,22 @@ namespace WindowsFormsApp1
             TimeSpan t_start = TimeSpan.Parse(utility.market_start_time);
             TimeSpan t_end = TimeSpan.Parse(utility.market_end_time);
 
-            if (t_now.CompareTo(t_start) < 0 || t_now.CompareTo(t_end) > 0) return;
-
-            timer3.Start(); //편입 종목 감시 - 200ms
+            //운영시간 아님
+            if (t_now.CompareTo(t_start) < 0)
+            {
+                return;
+            }
+            if(t_now.CompareTo(t_end) > 0)
+            {
+                Operation = !Operation;
+                real_time_stop(true);
+                return;
+            }
+            if (Operation_start)
+            {
+                Operation_start = !Operation_start;
+                timer3.Start(); //편입 종목 감시 - 200ms
+            }
         }
 
         //화면번호
