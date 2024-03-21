@@ -29,10 +29,10 @@
 <img width="233" alt="image" src="https://github.com/krkr5628/trade_c-/assets/75410553/5de516e9-cdf4-46d1-8b39-cbd821ea8830">
 
 - FORM2 : 매매 확인
-<img width="1256" alt="image" src="https://github.com/krkr5628/trade_c-/assets/75410553/d2591ce1-44f5-4b2a-b5d1-b2efb2117d1a">
+<img width="1253" alt="image" src="https://github.com/krkr5628/trade_c-/assets/75410553/c50bb531-eb35-45ec-a376-28d40facef9a">
 
-- FORM3 : 매매 설
-<img width="797" alt="image" src="https://github.com/krkr5628/trade_c-/assets/75410553/dd767091-f31f-4ae2-9a81-9c7b24319112">
+- FORM3 : 매매 설정
+<img width="796" alt="image" src="https://github.com/krkr5628/trade_c-/assets/75410553/93d82459-ebd8-448b-a7b7-d2b95e95adb1">
 
 # 특징
 - 실시간 조건 검색을 통해 매수 매도를 할 수 있다.
