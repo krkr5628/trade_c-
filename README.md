@@ -27,8 +27,10 @@
 # 디자인
 - FORM1 : 자동실행 및 업데이트
 <img width="233" alt="image" src="https://github.com/krkr5628/trade_c-/assets/75410553/5de516e9-cdf4-46d1-8b39-cbd821ea8830">
+
 - FORM2 : 매매 확인
 <img width="1256" alt="image" src="https://github.com/krkr5628/trade_c-/assets/75410553/d2591ce1-44f5-4b2a-b5d1-b2efb2117d1a">
+
 - FORM3 : 매매 설
 <img width="797" alt="image" src="https://github.com/krkr5628/trade_c-/assets/75410553/dd767091-f31f-4ae2-9a81-9c7b24319112">
 
