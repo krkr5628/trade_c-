@@ -33,16 +33,16 @@ namespace WindowsFormsApp1
             this.Time_label = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.start_time = new System.Windows.Forms.Label();
             this.end_time = new System.Windows.Forms.Label();
             this.run_status = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.start_time = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.start_time_text = new System.Windows.Forms.TextBox();
+            this.end_time_text = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,11 +69,11 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.9604F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.70297F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.9604F));
+            this.tableLayoutPanel1.Controls.Add(this.end_time_text, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.end_time, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.start_time_text, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.run_status, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label5, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label6, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.label7, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.start_time, 1, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 102);
@@ -83,21 +83,6 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(425, 100);
             this.tableLayoutPanel1.TabIndex = 1;
-            // 
-            // start_time
-            // 
-            this.start_time.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.start_time.AutoSize = true;
-            this.start_time.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.start_time.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.start_time.Location = new System.Drawing.Point(57, 0);
-            this.start_time.Name = "start_time";
-            this.start_time.Size = new System.Drawing.Size(116, 50);
-            this.start_time.TabIndex = 0;
-            this.start_time.Text = "시작시각";
-            this.start_time.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // end_time
             // 
@@ -144,32 +129,6 @@ namespace WindowsFormsApp1
             this.label4.Text = "값";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label5.Location = new System.Drawing.Point(57, 50);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(116, 50);
-            this.label5.TabIndex = 4;
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label6
-            // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label6.Location = new System.Drawing.Point(179, 50);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(119, 50);
-            this.label6.TabIndex = 5;
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // label7
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -182,6 +141,21 @@ namespace WindowsFormsApp1
             this.label7.Size = new System.Drawing.Size(118, 50);
             this.label7.TabIndex = 6;
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // start_time
+            // 
+            this.start_time.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.start_time.AutoSize = true;
+            this.start_time.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.start_time.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.start_time.Location = new System.Drawing.Point(57, 0);
+            this.start_time.Name = "start_time";
+            this.start_time.Size = new System.Drawing.Size(116, 50);
+            this.start_time.TabIndex = 0;
+            this.start_time.Text = "시작시각";
+            this.start_time.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // checkBox1
             // 
@@ -215,6 +189,30 @@ namespace WindowsFormsApp1
             this.button2.Text = "설정저장";
             this.button2.UseVisualStyleBackColor = false;
             // 
+            // start_time_text
+            // 
+            this.start_time_text.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.start_time_text.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.start_time_text.Location = new System.Drawing.Point(57, 53);
+            this.start_time_text.Name = "start_time_text";
+            this.start_time_text.Size = new System.Drawing.Size(116, 30);
+            this.start_time_text.TabIndex = 5;
+            this.start_time_text.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // end_time_text
+            // 
+            this.end_time_text.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.end_time_text.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.end_time_text.Location = new System.Drawing.Point(179, 53);
+            this.end_time_text.Name = "end_time_text";
+            this.end_time_text.Size = new System.Drawing.Size(119, 30);
+            this.end_time_text.TabIndex = 6;
+            this.end_time_text.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // Auto_Run_Update
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
@@ -242,12 +240,12 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label end_time;
         private System.Windows.Forms.Label run_status;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label start_time;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox start_time_text;
+        private System.Windows.Forms.TextBox end_time_text;
     }
 }

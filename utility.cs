@@ -325,6 +325,7 @@ namespace WindowsFormsApp1
             String[] telegram_token_tmp = reader.ReadLine().Split('/');
             telegram_token = telegram_token_tmp[1];
 
+            reader.Close();
         }
     }
 }

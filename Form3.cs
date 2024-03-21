@@ -46,7 +46,7 @@ namespace WindowsFormsApp1
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                string textToSave = "자동실행/" + checkBox1.Checked.ToString() + "\n" + "자동실행/" + "자동운영시간/" + label5.Text + "/" + label6.Text;
+                string textToSave = "자동실행/" + checkBox1.Checked.ToString() + "\n" + "자동실행/" + "자동운영시간/" + start_time_text.Text + "/" + end_time_text.Text;
 
                 // 사용자가 선택한 파일 경로
                 string filePath = saveFileDialog.FileName;
@@ -80,9 +80,11 @@ namespace WindowsFormsApp1
             //자동 운영 시간
             String[] time_tmp = reader.ReadLine().Split('/');
             program_start = time_tmp[1];
-            label5.Text = time_tmp[1];
+            start_time_text.Text = time_tmp[1];
             program_stop = time_tmp[2];
-            label6.Text = time_tmp[2];
+            end_time_text.Text = time_tmp[2];
+
+            reader.Close();
             //
             load_complete = true;
         }

@@ -374,6 +374,8 @@ namespace WindowsFormsApp1
             //텔레그램TOKEN
             String[] telegram_token_tmp = reader.ReadLine().Split('/');
             telegram_token.Text = telegram_token_tmp[1];
+
+            reader.Close();
         }
 
         //계좌 및 조건식 리스트 받아오기
