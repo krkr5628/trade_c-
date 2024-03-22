@@ -41,9 +41,10 @@ namespace WindowsFormsApp1
         public static bool buy_condition; //매수조건
         public static string buy_condition_start;
         public static string buy_condition_end;
-        public static int Fomula_list_buy;
-        public static string  Fomula_list_buy_text;
-        public static bool buy_and;
+        public static string Fomula_list_buy_text;
+        public static bool buy_OR;
+        public static bool buy_AND;
+        public static bool buy_INDEPENDENT;
 
         public static bool sell_condition; //매도조건
         public static string sell_condition_start;
@@ -53,14 +54,22 @@ namespace WindowsFormsApp1
 
         public static bool profit_percent;
         public static string profit_percent_text; //익절
-        public static bool loss_percent;
-        public static string loss_percent_text; //손절
-        public static bool profit_ts;
-        public static string profit_ts_text; //익절TS
         public static bool profit_won;
         public static string profit_won_text; //익절원
+        public static bool profit_ts;
+        public static string profit_ts_text; //익절TS
+        //익정동시호가
+        //익절시간외단일가
+        public static bool loss_percent;
+        public static string loss_percent_text; //손절
         public static bool loss_won;
         public static string loss_won_text; //손절원
+        //손절동시호가
+        //손절시간외단일가
+        //매매코스피연동
+        //매매코스닥연동
+        //매매코스피선물연동
+        //매매코스닥선물연동
 
         public static bool clear_sell; //전체청산
         public static string clear_sell_start;
@@ -68,15 +77,24 @@ namespace WindowsFormsApp1
         public static bool clear_sell_market; 
         public static bool clear_sell_profit; 
         public static string clear_sell_profit_text; //청산익절
+        public static bool after_market_profit; //동시호가익절
+        //청산익절시간외단일가
         public static bool clear_sell_loss;
         public static string clear_sell_loss_text;//청산손절
-        public static bool after_market_profit; //동시호가익절
         public static bool after_market_loss;//동시호가손절
+        //청산익절시간외단일가
+        //청산코스피연동
+        //청산코스닥연동
+        //청산코스피선물연동
+        //청산코스닥선물연동
 
         public static bool term_for_buy;
         public static string term_for_buy_text;//종목매수텀
+        //종목매도텀
+        //종목매도텀
         public static bool term_for_non_buy;
         public static string term_for_non_buy_text; //미체결매수취소
+        //미체결매도취소
 
         public static int buy_set1; //매수설정
         public static int buy_set2;
@@ -189,9 +207,10 @@ namespace WindowsFormsApp1
             buy_condition = Convert.ToBoolean(buy_condition_tmp[1]);
             buy_condition_start = buy_condition_tmp[2];
             buy_condition_end = buy_condition_tmp[3];
-            Fomula_list_buy = Convert.ToInt32(buy_condition_tmp[4]);
-            Fomula_list_buy_text = buy_condition_tmp[5];
-            buy_and = Convert.ToBoolean(buy_condition_tmp[6]);
+            Fomula_list_buy_text = buy_condition_tmp[4];
+            buy_OR = Convert.ToBoolean(buy_condition_tmp[5]);
+            buy_AND = Convert.ToBoolean(buy_condition_tmp[6]);
+            buy_INDEPENDENT = Convert.ToBoolean(buy_condition_tmp[7]);
 
             //매도조건
             String[] sell_condition_tmp = reader.ReadLine().Split('/');
@@ -206,25 +225,41 @@ namespace WindowsFormsApp1
             profit_percent = Convert.ToBoolean(profit_percent_tmp[1]);
             profit_percent_text = profit_percent_tmp[2];
 
-            //손절
-            String[] loss_percent_tmp = reader.ReadLine().Split('/');
-            loss_percent = Convert.ToBoolean(loss_percent_tmp[1]);
-            loss_percent_text = loss_percent_tmp[2];
+            //익절원
+            String[] profit_won_tmp = reader.ReadLine().Split('/');
+            profit_won = Convert.ToBoolean(profit_won_tmp[1]);
+            profit_won_text = profit_won_tmp[2];
 
             //익절TS
             String[] profit_ts_tmp = reader.ReadLine().Split('/');
             profit_ts = Convert.ToBoolean(profit_ts_tmp[1]);
             profit_ts_text = profit_ts_tmp[2];
 
-            //익절원
-            String[] profit_won_tmp = reader.ReadLine().Split('/');
-            profit_won = Convert.ToBoolean(profit_won_tmp[1]);
-            profit_won_text = profit_won_tmp[2];
+            //익정동시호가
+
+            //익절시간외단일가
+
+            //손절
+            String[] loss_percent_tmp = reader.ReadLine().Split('/');
+            loss_percent = Convert.ToBoolean(loss_percent_tmp[1]);
+            loss_percent_text = loss_percent_tmp[2];
 
             //손절원
             String[] loss_won_tmp = reader.ReadLine().Split('/');
             loss_won = Convert.ToBoolean(loss_won_tmp[1]);
             loss_won_text = loss_won_tmp[2];
+
+            //손절동시호가
+
+            //손절시간외단일가
+
+            //매매코스피연동
+
+            //매매코스닥연동
+
+            //매매코스피선물연동
+
+            //매매코스닥선물연동
 
             //전체청산
             String[] clear_sell_tmp = reader.ReadLine().Split('/');
@@ -238,23 +273,37 @@ namespace WindowsFormsApp1
             clear_sell_profit = Convert.ToBoolean(clear_sell_profit_tmp[1]);
             clear_sell_profit_text = clear_sell_profit_tmp[2];
 
+            //청산익절동시호가
+            String[] after_market_profit_tmp = reader.ReadLine().Split('/');
+            after_market_profit = Convert.ToBoolean(after_market_profit_tmp[1]);
+
+            //청산익절시간외단일가
+
             //청산손절
             String[] clear_sell_loss_tmp = reader.ReadLine().Split('/');
             clear_sell_loss= Convert.ToBoolean(clear_sell_loss_tmp[1]);
             clear_sell_loss_text = clear_sell_loss_tmp[2];
 
-            //동시호가익절
-            String[] after_market_profit_tmp = reader.ReadLine().Split('/');
-            after_market_profit = Convert.ToBoolean(after_market_profit_tmp[1]);
-
-            //동시호가손절
+            //청산손절동시호가
             String[] after_market_loss_tmp = reader.ReadLine().Split('/');
             after_market_loss = Convert.ToBoolean(after_market_loss_tmp[1]);
+
+            //청산익절시간외단일가
+
+            //청산코스피연동
+
+            //청산코스닥연동
+
+            //청산코스피선물연동
+
+            //청산코스닥선물연동
 
             //종목매수텀
             String[] term_for_buy_tmp = reader.ReadLine().Split('/');
             term_for_buy = Convert.ToBoolean(term_for_buy_tmp[1]);
             term_for_buy_text = term_for_buy_tmp[2];
+
+            //종목매도텀
 
             //미체결매수취소
             String[] term_for_non_buy_tmp = reader.ReadLine().Split('/');

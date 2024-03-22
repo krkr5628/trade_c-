@@ -25,6 +25,15 @@ namespace WindowsFormsApp1
             save_button.Click += setting_save;
             setting_open.Click += setting_load;
 
+            //조건식 DropDown
+            Fomula_list_buy.DropDown += Fomula_list_buy_DropDown;
+
+            //조건식 MouseDown 
+            Fomula_list_buy_Checked_box.MouseLeave += Fomula_list_buy_Checked_box_MouseLeave;
+
+            //조건식 선택 
+            Fomula_list_buy_Checked_box.ItemCheck += Fomula_list_buy_Checked_box_ItemCheck;
+
             //즉시반영
             setting_allowed.Click += setting_allow;
 
@@ -32,6 +41,38 @@ namespace WindowsFormsApp1
             telegram_test_button.Click += telegram_test;
 
 
+        }
+
+        private void Fomula_list_buy_DropDown(object sender, EventArgs e)
+        {
+            //
+            Fomula_list_buy.DropDownHeight = 1;
+            Fomula_list_buy_Checked_box.Visible = true;
+            Fomula_list_buy_Checked_box.BringToFront();
+
+            // ComboBox의 위치와 크기
+            Point Fomula_list_buy_Location = Fomula_list_buy.Location;
+            int Fomula_list_buy_Height = Fomula_list_buy.Height;
+            Fomula_list_buy_Checked_box.Location = new Point(Fomula_list_buy_Location.X, Fomula_list_buy_Location.Y + Fomula_list_buy_Height);
+            Fomula_list_buy_Checked_box.BringToFront();
+        }
+
+        private void Fomula_list_buy_Checked_box_MouseLeave(object sender, EventArgs e)
+        {
+            Fomula_list_buy_Checked_box.Visible = false;
+        }
+        
+        private void Fomula_list_buy_Checked_box_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            List<String> SelectedIndexText_join_tmp = new List<string>();
+            for (int i = 0; i < Fomula_list_buy_Checked_box.Items.Count; i++)
+            {
+                if (Fomula_list_buy_Checked_box.GetItemChecked(i))
+                {
+                    SelectedIndexText_join_tmp.Add(Fomula_list_buy_Checked_box.Items[i].ToString());
+                }
+            }
+            Fomula_list_buy.Text = String.Join(",", SelectedIndexText_join_tmp);
         }
 
         //초기 자동 실행
@@ -87,20 +128,37 @@ namespace WindowsFormsApp1
                     tmp.Add("당일중복매수금지/" + Convert.ToString(duplication_deny.Checked));
                     tmp.Add("보유종목매수금지/" + Convert.ToString(hold_deny.Checked));
                     tmp.Add("매수시간전검출매수금지/" + Convert.ToString(before_time_deny.Checked));
-                    tmp.Add("매수조건/" + Convert.ToString(buy_condition.Checked) + "/" + buy_condition_start.Text + "/" + buy_condition_end.Text + "/" + Convert.ToString(Fomula_list_buy.SelectedIndex) + "/" + Fomula_list_buy.Text + "/" + Convert.ToString(buy_and.Checked));
+                    tmp.Add("매수조건/" + Convert.ToString(buy_condition.Checked) + "/" + buy_condition_start.Text + "/" + buy_condition_end.Text + "/" + (Fomula_list_buy.Text.Equals("") ? "9999" : Fomula_list_buy.Text) + "/" + Convert.ToString(buy_mode_or.Checked) + "/" + Convert.ToString(buy_mode_and.Checked) + "/" + Convert.ToString(buy_mode_independent.Checked));
                     tmp.Add("매도조건/" + Convert.ToString(sell_condition.Checked) + "/" + sell_condition_start.Text + "/" + sell_condition_end.Text + "/" + Convert.ToString(Fomula_list_sell.SelectedIndex) + "/" + Fomula_list_sell.Text);
                     tmp.Add("익절/" + Convert.ToString(profit_percent.Checked) + "/" + profit_percent_text.Text);
-                    tmp.Add("손절/" + Convert.ToString(loss_percent.Checked) + "/" + loss_percent_text.Text);
-                    tmp.Add("익절TS/" + Convert.ToString(profit_ts.Checked) + "/" + profit_ts_text.Text);
                     tmp.Add("익절원/" + Convert.ToString(profit_won.Checked) + "/" + profit_won_text.Text);
+                    tmp.Add("익절TS/" + Convert.ToString(profit_ts.Checked) + "/" + profit_ts_text.Text);
+                    //익정동시호가
+                    //익절시간외단일가
+                    tmp.Add("손절/" + Convert.ToString(loss_percent.Checked) + "/" + loss_percent_text.Text);
                     tmp.Add("손절원/" + Convert.ToString(loss_won.Checked) + "/" + loss_won_text.Text);
+                    //손절동시호가
+                    //손절시간외단일가
+                    //매매코스피연동
+                    //매매코스닥연동
+                    //매매코스피선물연동
+                    //매매코스닥선물연동
                     tmp.Add("전체청산/" + Convert.ToString(clear_sell.Checked) + "/" + clear_sell_start.Text + "/" + clear_sell_end.Text + "/" + Convert.ToString(clear_sell_market.Checked));
                     tmp.Add("청산익절/" + Convert.ToString(clear_sell_profit.Checked) + "/" + clear_sell_profit_text.Text);
-                    tmp.Add("청산손절/" + Convert.ToString(clear_sell_loss.Checked) + "/" + clear_sell_loss_text.Text);
                     tmp.Add("동시호가익절/" + Convert.ToString(after_market_profit.Checked));
+                    //청산익절시간외단일가
+                    tmp.Add("청산손절/" + Convert.ToString(clear_sell_loss.Checked) + "/" + clear_sell_loss_text.Text);
                     tmp.Add("동시호가손절/" + Convert.ToString(after_market_loss.Checked));
+                    //청산익절시간외단일가
+                    //청산코스피연동
+                    //청산코스닥연동
+                    //청산코스피선물연동
+                    //청산코스닥선물연동
                     tmp.Add("종목매수텀/" + Convert.ToString(term_for_buy.Checked) + "/" + term_for_buy_text.Text);
+                    //종목매도텀
+                    //종목매도텀
                     tmp.Add("미체결매수취소/" + Convert.ToString(term_for_non_buy.Checked) + "/" + term_for_non_buy_text.Text);
+                    //미체결매도취소
                     tmp.Add("매수설정/" + Convert.ToString(buy_set1.SelectedIndex) + "/" + Convert.ToString(buy_set2.SelectedIndex));
                     tmp.Add("매도설정/" + Convert.ToString(sell_set1.SelectedIndex) + "/" + Convert.ToString(sell_set2.SelectedIndex));
                     tmp.Add("코스피지수/" + Convert.ToString(kospi_index.Checked) + "/" + kospi_index_start.Text + "/" + kospi_index_end.Text);
@@ -241,9 +299,30 @@ namespace WindowsFormsApp1
             buy_condition.Checked = Convert.ToBoolean(buy_condition_tmp[1]);
             buy_condition_start.Text = buy_condition_tmp[2];
             buy_condition_end.Text = buy_condition_tmp[3];
-            Fomula_list_buy.SelectedIndex = Convert.ToInt32(buy_condition_tmp[4]);
-            Fomula_list_buy.Text = buy_condition_tmp[5];
-            buy_and.Checked = Convert.ToBoolean(buy_condition_tmp[6]);
+            //
+            if (!buy_condition_tmp[4].Equals("9999"))
+            {
+                string[] Selectedext_temp = buy_condition_tmp[4].Split(',');
+                string SelectedIndexTextJoin_temp = "";
+                for (int i = 0; i < Selectedext_temp.Length; i++)
+                {
+                    for (int j = 0; j < Fomula_list_buy_Checked_box.Items.Count; j++)
+                    {
+                        if (Fomula_list_buy_Checked_box.Items[j].ToString().Equals(Selectedext_temp[i]))
+                        {
+                            Fomula_list_buy_Checked_box.SetItemChecked(j, true);
+                            SelectedIndexTextJoin_temp += Selectedext_temp[i] + ",";
+                            break;
+                        }
+                    }
+                }
+                if (!SelectedIndexTextJoin_temp.Equals("")) SelectedIndexTextJoin_temp = SelectedIndexTextJoin_temp.Remove(SelectedIndexTextJoin_temp.Length - 1);
+                Fomula_list_buy.Text = SelectedIndexTextJoin_temp;
+            }
+            //
+            buy_mode_or.Checked = Convert.ToBoolean(buy_condition_tmp[5]);
+            buy_mode_and.Checked = Convert.ToBoolean(buy_condition_tmp[6]);
+            buy_mode_independent.Checked = Convert.ToBoolean(buy_condition_tmp[7]);
 
             //매도조건
             String[] sell_condition_tmp = reader.ReadLine().Split('/');
@@ -258,25 +337,41 @@ namespace WindowsFormsApp1
             profit_percent.Checked = Convert.ToBoolean(profit_percent_tmp[1]);
             profit_percent_text.Text = profit_percent_tmp[2];
 
-            //손절
-            String[] loss_percent_tmp = reader.ReadLine().Split('/');
-            loss_percent.Checked = Convert.ToBoolean(loss_percent_tmp[1]);
-            loss_percent_text.Text = loss_percent_tmp[2];
+            //익절원
+            String[] profit_won_tmp = reader.ReadLine().Split('/');
+            profit_won.Checked = Convert.ToBoolean(profit_won_tmp[1]);
+            profit_won_text.Text = profit_won_tmp[2];
 
             //익절TS
             String[] profit_ts_tmp = reader.ReadLine().Split('/');
             profit_ts.Checked = Convert.ToBoolean(profit_ts_tmp[1]);
             profit_ts_text.Text = profit_ts_tmp[2];
 
-            //익절원
-            String[] profit_won_tmp = reader.ReadLine().Split('/');
-            profit_won.Checked = Convert.ToBoolean(profit_won_tmp[1]);
-            profit_won_text.Text = profit_won_tmp[2];
+            //익정동시호가
+
+            //익절시간외단일가
+
+            //손절
+            String[] loss_percent_tmp = reader.ReadLine().Split('/');
+            loss_percent.Checked = Convert.ToBoolean(loss_percent_tmp[1]);
+            loss_percent_text.Text = loss_percent_tmp[2];
 
             //손절원
             String[] loss_won_tmp = reader.ReadLine().Split('/');
             loss_won.Checked = Convert.ToBoolean(loss_won_tmp[1]);
             loss_won_text.Text = loss_won_tmp[2];
+
+            //손절동시호가
+
+            //손절시간외단일가
+
+            //매매코스피연동
+
+            //매매코스닥연동
+
+            //매매코스피선물연동
+
+            //매매코스닥선물연동
 
             //전체청산
             String[] clear_sell_tmp = reader.ReadLine().Split('/');
@@ -290,23 +385,37 @@ namespace WindowsFormsApp1
             clear_sell_profit.Checked = Convert.ToBoolean(clear_sell_profit_tmp[1]);
             clear_sell_profit_text.Text = clear_sell_profit_tmp[2];
 
+            //동시호가익절
+            String[] after_market_profit_tmp = reader.ReadLine().Split('/');
+            after_market_profit.Checked = Convert.ToBoolean(after_market_profit_tmp[1]);
+
+            //청산익절시간외단일가
+
             //청산손절
             String[] clear_sell_loss_tmp = reader.ReadLine().Split('/');
             clear_sell_loss.Checked = Convert.ToBoolean(clear_sell_loss_tmp[1]);
             clear_sell_loss_text.Text = clear_sell_loss_tmp[2];
 
-            //동시호가익절
-            String[] after_market_profit_tmp = reader.ReadLine().Split('/');
-            after_market_profit.Checked = Convert.ToBoolean(after_market_profit_tmp[1]);
-
             //동시호가손절
             String[] after_market_loss_tmp = reader.ReadLine().Split('/');
             after_market_loss.Checked = Convert.ToBoolean(after_market_loss_tmp[1]);
+
+            //청산익절시간외단일가
+
+            //청산코스피연동
+
+            //청산코스닥연동
+
+            //청산코스피선물연동
+
+            //청산코스닥선물연동
 
             //종목매수텀
             String[] term_for_buy_tmp = reader.ReadLine().Split('/');
             term_for_buy.Checked = Convert.ToBoolean(term_for_buy_tmp[1]);
             term_for_buy_text.Text = term_for_buy_tmp[2];
+
+            //종목매도텀
 
             //미체결매수취소
             String[] term_for_non_buy_tmp = reader.ReadLine().Split('/');
@@ -386,11 +495,14 @@ namespace WindowsFormsApp1
             {
                 account_list.Items.Add(user_account[i]);
             }
-
-            //조건식 추가
-            Fomula_list_buy.Items.AddRange(Condition);
+            //매도 조건
             Fomula_list_sell.Items.AddRange(Condition);
+
+            //매수 조건
+            Fomula_list_buy_Checked_box.Items.AddRange(Condition);
         }
+
+
 
         //Telegram 테스트
         private void telegram_test(object sender, EventArgs e)
@@ -401,21 +513,5 @@ namespace WindowsFormsApp1
             Stream stream = request.GetResponse().GetResponseStream();
         }
 
-        //---------------불필요 기능---------------------
-
-        private void Setting_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox10_Enter(object sender, EventArgs e)
-        {
-
-        }
     }
 }

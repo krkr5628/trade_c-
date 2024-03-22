@@ -75,7 +75,6 @@ namespace WindowsFormsApp1
             this.buy_condition_end = new System.Windows.Forms.TextBox();
             this.textBox40 = new System.Windows.Forms.TextBox();
             this.buy_condition_start = new System.Windows.Forms.TextBox();
-            this.buy_and = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.buy_set1 = new System.Windows.Forms.ComboBox();
             this.sell_set1 = new System.Windows.Forms.ComboBox();
@@ -100,7 +99,6 @@ namespace WindowsFormsApp1
             this.loss_percent_text = new System.Windows.Forms.TextBox();
             this.loss_won_text = new System.Windows.Forms.TextBox();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
             this.checkBox8 = new System.Windows.Forms.CheckBox();
             this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
@@ -132,7 +130,6 @@ namespace WindowsFormsApp1
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
@@ -174,6 +171,13 @@ namespace WindowsFormsApp1
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.Fomula_list_buy_Checked_box = new System.Windows.Forms.CheckedListBox();
+            this.checkBox7 = new System.Windows.Forms.CheckBox();
+            this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
+            this.buy_mode_independent = new System.Windows.Forms.RadioButton();
+            this.buy_mode_and = new System.Windows.Forms.RadioButton();
+            this.buy_mode_or = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -199,6 +203,8 @@ namespace WindowsFormsApp1
             this.groupBox10.SuspendLayout();
             this.tableLayoutPanel14.SuspendLayout();
             this.groupBox11.SuspendLayout();
+            this.tableLayoutPanel15.SuspendLayout();
+            this.tableLayoutPanel16.SuspendLayout();
             this.SuspendLayout();
             // 
             // buy_per_price
@@ -642,7 +648,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.90253F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.43321F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.53069F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 203F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 211F));
             this.tableLayoutPanel5.Controls.Add(this.setting_allowed, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.setting_open, 3, 0);
             this.tableLayoutPanel5.Controls.Add(this.save_button, 2, 0);
@@ -662,7 +668,7 @@ namespace WindowsFormsApp1
             this.setting_allowed.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_allowed.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_allowed.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_allowed.Location = new System.Drawing.Point(1059, 3);
+            this.setting_allowed.Location = new System.Drawing.Point(1052, 3);
             this.setting_allowed.Name = "setting_allowed";
             this.setting_allowed.Size = new System.Drawing.Size(147, 44);
             this.setting_allowed.TabIndex = 8;
@@ -674,9 +680,9 @@ namespace WindowsFormsApp1
             this.setting_open.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_open.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_open.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_open.Location = new System.Drawing.Point(906, 3);
+            this.setting_open.Location = new System.Drawing.Point(900, 3);
             this.setting_open.Name = "setting_open";
-            this.setting_open.Size = new System.Drawing.Size(147, 44);
+            this.setting_open.Size = new System.Drawing.Size(146, 44);
             this.setting_open.TabIndex = 7;
             this.setting_open.Text = "전량열기";
             this.setting_open.UseVisualStyleBackColor = false;
@@ -686,9 +692,9 @@ namespace WindowsFormsApp1
             this.save_button.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.save_button.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.save_button.ForeColor = System.Drawing.Color.SpringGreen;
-            this.save_button.Location = new System.Drawing.Point(743, 3);
+            this.save_button.Location = new System.Drawing.Point(738, 3);
             this.save_button.Name = "save_button";
-            this.save_button.Size = new System.Drawing.Size(157, 44);
+            this.save_button.Size = new System.Drawing.Size(156, 44);
             this.save_button.TabIndex = 6;
             this.save_button.Text = "전량저장";
             this.save_button.UseVisualStyleBackColor = false;
@@ -698,10 +704,10 @@ namespace WindowsFormsApp1
             this.setting_name.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.setting_name.Location = new System.Drawing.Point(205, 3);
+            this.setting_name.Location = new System.Drawing.Point(204, 3);
             this.setting_name.Name = "setting_name";
             this.setting_name.ReadOnly = true;
-            this.setting_name.Size = new System.Drawing.Size(532, 28);
+            this.setting_name.Size = new System.Drawing.Size(528, 28);
             this.setting_name.TabIndex = 1;
             // 
             // label5
@@ -713,7 +719,7 @@ namespace WindowsFormsApp1
             this.label5.Font = new System.Drawing.Font("굴림", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label5.Location = new System.Drawing.Point(3, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(196, 50);
+            this.label5.Size = new System.Drawing.Size(195, 50);
             this.label5.TabIndex = 9;
             this.label5.Text = "전략명";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -745,7 +751,6 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel6.Controls.Add(this.textBox40, 2, 0);
             this.tableLayoutPanel6.Controls.Add(this.buy_condition, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.buy_condition_start, 1, 0);
-            this.tableLayoutPanel6.Controls.Add(this.buy_and, 4, 0);
             this.tableLayoutPanel6.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.tableLayoutPanel6.Location = new System.Drawing.Point(6, 32);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
@@ -778,20 +783,6 @@ namespace WindowsFormsApp1
             this.buy_condition_start.Name = "buy_condition_start";
             this.buy_condition_start.Size = new System.Drawing.Size(175, 30);
             this.buy_condition_start.TabIndex = 9;
-            // 
-            // buy_and
-            // 
-            this.buy_and.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buy_and.AutoSize = true;
-            this.buy_and.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.buy_and.Location = new System.Drawing.Point(536, 3);
-            this.buy_and.Name = "buy_and";
-            this.buy_and.Size = new System.Drawing.Size(130, 32);
-            this.buy_and.TabIndex = 8;
-            this.buy_and.Text = "AND 조건";
-            this.buy_and.UseVisualStyleBackColor = false;
             // 
             // tableLayoutPanel7
             // 
@@ -877,7 +868,6 @@ namespace WindowsFormsApp1
             this.label11.TabIndex = 26;
             this.label11.Text = "매도설정";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
             // tableLayoutPanel8
             // 
@@ -892,7 +882,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel8.Controls.Add(this.textBox39, 2, 0);
             this.tableLayoutPanel8.Controls.Add(this.sell_condition, 0, 0);
             this.tableLayoutPanel8.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(6, 116);
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(6, 158);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 1;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -950,17 +940,17 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel9.Controls.Add(this.profit_percent, 0, 0);
             this.tableLayoutPanel9.Controls.Add(this.profit_percent_text, 1, 0);
             this.tableLayoutPanel9.Controls.Add(this.loss_percent, 3, 0);
-            this.tableLayoutPanel9.Controls.Add(this.profit_won, 0, 2);
-            this.tableLayoutPanel9.Controls.Add(this.loss_won, 3, 2);
-            this.tableLayoutPanel9.Controls.Add(this.profit_ts, 0, 1);
-            this.tableLayoutPanel9.Controls.Add(this.profit_ts_text, 1, 1);
-            this.tableLayoutPanel9.Controls.Add(this.profit_won_text, 1, 2);
             this.tableLayoutPanel9.Controls.Add(this.loss_percent_text, 4, 0);
-            this.tableLayoutPanel9.Controls.Add(this.loss_won_text, 4, 2);
             this.tableLayoutPanel9.Controls.Add(this.checkBox6, 0, 3);
             this.tableLayoutPanel9.Controls.Add(this.checkBox7, 3, 3);
             this.tableLayoutPanel9.Controls.Add(this.checkBox8, 1, 3);
             this.tableLayoutPanel9.Controls.Add(this.checkBox9, 4, 3);
+            this.tableLayoutPanel9.Controls.Add(this.loss_won, 3, 1);
+            this.tableLayoutPanel9.Controls.Add(this.loss_won_text, 4, 1);
+            this.tableLayoutPanel9.Controls.Add(this.profit_ts_text, 1, 2);
+            this.tableLayoutPanel9.Controls.Add(this.profit_won, 0, 1);
+            this.tableLayoutPanel9.Controls.Add(this.profit_ts, 0, 2);
+            this.tableLayoutPanel9.Controls.Add(this.profit_won_text, 1, 1);
             this.tableLayoutPanel9.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.tableLayoutPanel9.Location = new System.Drawing.Point(6, 29);
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
@@ -1020,7 +1010,7 @@ namespace WindowsFormsApp1
             this.profit_won.AutoSize = true;
             this.profit_won.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.profit_won.ForeColor = System.Drawing.Color.Crimson;
-            this.profit_won.Location = new System.Drawing.Point(3, 79);
+            this.profit_won.Location = new System.Drawing.Point(3, 41);
             this.profit_won.Name = "profit_won";
             this.profit_won.Size = new System.Drawing.Size(133, 32);
             this.profit_won.TabIndex = 9;
@@ -1036,7 +1026,7 @@ namespace WindowsFormsApp1
             this.loss_won.AutoSize = true;
             this.loss_won.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.loss_won.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.loss_won.Location = new System.Drawing.Point(355, 79);
+            this.loss_won.Location = new System.Drawing.Point(355, 41);
             this.loss_won.Name = "loss_won";
             this.loss_won.Size = new System.Drawing.Size(135, 32);
             this.loss_won.TabIndex = 10;
@@ -1052,7 +1042,7 @@ namespace WindowsFormsApp1
             this.profit_ts.AutoSize = true;
             this.profit_ts.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.profit_ts.ForeColor = System.Drawing.Color.Crimson;
-            this.profit_ts.Location = new System.Drawing.Point(3, 41);
+            this.profit_ts.Location = new System.Drawing.Point(3, 79);
             this.profit_ts.Name = "profit_ts";
             this.profit_ts.Size = new System.Drawing.Size(133, 32);
             this.profit_ts.TabIndex = 11;
@@ -1062,14 +1052,14 @@ namespace WindowsFormsApp1
             // 
             // profit_ts_text
             // 
-            this.profit_ts_text.Location = new System.Drawing.Point(142, 41);
+            this.profit_ts_text.Location = new System.Drawing.Point(142, 79);
             this.profit_ts_text.Name = "profit_ts_text";
             this.profit_ts_text.Size = new System.Drawing.Size(168, 30);
             this.profit_ts_text.TabIndex = 14;
             // 
             // profit_won_text
             // 
-            this.profit_won_text.Location = new System.Drawing.Point(142, 79);
+            this.profit_won_text.Location = new System.Drawing.Point(142, 41);
             this.profit_won_text.Name = "profit_won_text";
             this.profit_won_text.Size = new System.Drawing.Size(168, 30);
             this.profit_won_text.TabIndex = 15;
@@ -1083,7 +1073,7 @@ namespace WindowsFormsApp1
             // 
             // loss_won_text
             // 
-            this.loss_won_text.Location = new System.Drawing.Point(496, 79);
+            this.loss_won_text.Location = new System.Drawing.Point(496, 41);
             this.loss_won_text.Name = "loss_won_text";
             this.loss_won_text.Size = new System.Drawing.Size(170, 30);
             this.loss_won_text.TabIndex = 17;
@@ -1103,22 +1093,6 @@ namespace WindowsFormsApp1
             this.checkBox6.Text = "동시호가";
             this.checkBox6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.checkBox6.UseVisualStyleBackColor = false;
-            // 
-            // checkBox7
-            // 
-            this.checkBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.checkBox7.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.checkBox7.Location = new System.Drawing.Point(355, 117);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(135, 32);
-            this.checkBox7.TabIndex = 19;
-            this.checkBox7.Text = "동시호가";
-            this.checkBox7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBox7.UseVisualStyleBackColor = false;
             // 
             // checkBox8
             // 
@@ -1353,16 +1327,16 @@ namespace WindowsFormsApp1
             // 
             this.Fomula_list_buy.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Fomula_list_buy.FormattingEnabled = true;
-            this.Fomula_list_buy.Location = new System.Drawing.Point(9, 75);
+            this.Fomula_list_buy.Location = new System.Drawing.Point(3, 3);
             this.Fomula_list_buy.Name = "Fomula_list_buy";
-            this.Fomula_list_buy.Size = new System.Drawing.Size(533, 28);
+            this.Fomula_list_buy.Size = new System.Drawing.Size(530, 28);
             this.Fomula_list_buy.TabIndex = 11;
             // 
             // Fomula_list_sell
             // 
             this.Fomula_list_sell.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Fomula_list_sell.FormattingEnabled = true;
-            this.Fomula_list_sell.Location = new System.Drawing.Point(9, 167);
+            this.Fomula_list_sell.Location = new System.Drawing.Point(6, 204);
             this.Fomula_list_sell.Name = "Fomula_list_sell";
             this.Fomula_list_sell.Size = new System.Drawing.Size(533, 28);
             this.Fomula_list_sell.TabIndex = 12;
@@ -1516,34 +1490,17 @@ namespace WindowsFormsApp1
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.checkBox1);
+            this.groupBox4.Controls.Add(this.tableLayoutPanel15);
             this.groupBox4.Controls.Add(this.tableLayoutPanel6);
             this.groupBox4.Controls.Add(this.tableLayoutPanel8);
-            this.groupBox4.Controls.Add(this.Fomula_list_buy);
             this.groupBox4.Controls.Add(this.Fomula_list_sell);
             this.groupBox4.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.groupBox4.Location = new System.Drawing.Point(421, 93);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(680, 205);
+            this.groupBox4.Size = new System.Drawing.Size(680, 258);
             this.groupBox4.TabIndex = 17;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "조건설정";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.checkBox1.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.checkBox1.Location = new System.Drawing.Point(548, 77);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(115, 24);
-            this.checkBox1.TabIndex = 13;
-            this.checkBox1.Text = "개별모드";
-            this.checkBox1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBox1.UseVisualStyleBackColor = false;
             // 
             // groupBox5
             // 
@@ -1560,7 +1517,7 @@ namespace WindowsFormsApp1
             // 
             this.groupBox6.Controls.Add(this.tableLayoutPanel10);
             this.groupBox6.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox6.Location = new System.Drawing.Point(421, 539);
+            this.groupBox6.Location = new System.Drawing.Point(421, 592);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(680, 181);
             this.groupBox6.TabIndex = 19;
@@ -1571,7 +1528,7 @@ namespace WindowsFormsApp1
             // 
             this.groupBox7.Controls.Add(this.tableLayoutPanel11);
             this.groupBox7.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox7.Location = new System.Drawing.Point(421, 719);
+            this.groupBox7.Location = new System.Drawing.Point(421, 772);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(680, 113);
             this.groupBox7.TabIndex = 20;
@@ -1900,7 +1857,6 @@ namespace WindowsFormsApp1
             this.groupBox10.TabIndex = 23;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "KIS";
-            this.groupBox10.Enter += new System.EventHandler(this.groupBox10_Enter);
             // 
             // KIS_Allow
             // 
@@ -2014,19 +1970,123 @@ namespace WindowsFormsApp1
             // 
             this.groupBox11.Controls.Add(this.tableLayoutPanel9);
             this.groupBox11.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox11.Location = new System.Drawing.Point(421, 304);
+            this.groupBox11.Location = new System.Drawing.Point(421, 357);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.Size = new System.Drawing.Size(680, 227);
             this.groupBox11.TabIndex = 24;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "매매설정";
             // 
+            // Fomula_list_buy_Checked_box
+            // 
+            this.Fomula_list_buy_Checked_box.FormattingEnabled = true;
+            this.Fomula_list_buy_Checked_box.Location = new System.Drawing.Point(421, 909);
+            this.Fomula_list_buy_Checked_box.Name = "Fomula_list_buy_Checked_box";
+            this.Fomula_list_buy_Checked_box.Size = new System.Drawing.Size(533, 79);
+            this.Fomula_list_buy_Checked_box.TabIndex = 25;
+            this.Fomula_list_buy_Checked_box.Visible = false;
+            // 
+            // checkBox7
+            // 
+            this.checkBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox7.AutoSize = true;
+            this.checkBox7.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.checkBox7.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.checkBox7.Location = new System.Drawing.Point(355, 117);
+            this.checkBox7.Name = "checkBox7";
+            this.checkBox7.Size = new System.Drawing.Size(135, 32);
+            this.checkBox7.TabIndex = 19;
+            this.checkBox7.Text = "동시호가";
+            this.checkBox7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBox7.UseVisualStyleBackColor = false;
+            // 
+            // tableLayoutPanel15
+            // 
+            this.tableLayoutPanel15.ColumnCount = 1;
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel15.Controls.Add(this.Fomula_list_buy, 0, 0);
+            this.tableLayoutPanel15.Controls.Add(this.tableLayoutPanel16, 0, 1);
+            this.tableLayoutPanel15.Location = new System.Drawing.Point(6, 77);
+            this.tableLayoutPanel15.Name = "tableLayoutPanel15";
+            this.tableLayoutPanel15.RowCount = 2;
+            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel15.Size = new System.Drawing.Size(536, 75);
+            this.tableLayoutPanel15.TabIndex = 14;
+            // 
+            // tableLayoutPanel16
+            // 
+            this.tableLayoutPanel16.ColumnCount = 3;
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel16.Controls.Add(this.buy_mode_or, 0, 0);
+            this.tableLayoutPanel16.Controls.Add(this.buy_mode_and, 1, 0);
+            this.tableLayoutPanel16.Controls.Add(this.buy_mode_independent, 2, 0);
+            this.tableLayoutPanel16.Location = new System.Drawing.Point(3, 40);
+            this.tableLayoutPanel16.Name = "tableLayoutPanel16";
+            this.tableLayoutPanel16.RowCount = 1;
+            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel16.Size = new System.Drawing.Size(530, 32);
+            this.tableLayoutPanel16.TabIndex = 12;
+            // 
+            // buy_mode_independent
+            // 
+            this.buy_mode_independent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buy_mode_independent.AutoSize = true;
+            this.buy_mode_independent.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.buy_mode_independent.Location = new System.Drawing.Point(355, 3);
+            this.buy_mode_independent.Name = "buy_mode_independent";
+            this.buy_mode_independent.Size = new System.Drawing.Size(172, 26);
+            this.buy_mode_independent.TabIndex = 15;
+            this.buy_mode_independent.TabStop = true;
+            this.buy_mode_independent.Text = "Independent";
+            this.buy_mode_independent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.buy_mode_independent.UseVisualStyleBackColor = false;
+            // 
+            // buy_mode_and
+            // 
+            this.buy_mode_and.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buy_mode_and.AutoSize = true;
+            this.buy_mode_and.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.buy_mode_and.Location = new System.Drawing.Point(179, 3);
+            this.buy_mode_and.Name = "buy_mode_and";
+            this.buy_mode_and.Size = new System.Drawing.Size(170, 26);
+            this.buy_mode_and.TabIndex = 16;
+            this.buy_mode_and.TabStop = true;
+            this.buy_mode_and.Text = "AND MODE";
+            this.buy_mode_and.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.buy_mode_and.UseVisualStyleBackColor = false;
+            // 
+            // buy_mode_or
+            // 
+            this.buy_mode_or.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buy_mode_or.AutoSize = true;
+            this.buy_mode_or.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.buy_mode_or.Location = new System.Drawing.Point(3, 3);
+            this.buy_mode_or.Name = "buy_mode_or";
+            this.buy_mode_or.Size = new System.Drawing.Size(170, 26);
+            this.buy_mode_or.TabIndex = 17;
+            this.buy_mode_or.TabStop = true;
+            this.buy_mode_or.Text = "OR MODE";
+            this.buy_mode_or.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.buy_mode_or.UseVisualStyleBackColor = false;
+            // 
             // Setting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1531, 849);
+            this.ClientSize = new System.Drawing.Size(1531, 1016);
+            this.Controls.Add(this.Fomula_list_buy_Checked_box);
             this.Controls.Add(this.groupBox11);
             this.Controls.Add(this.telegram_test_button);
             this.Controls.Add(this.groupBox10);
@@ -2043,7 +2103,6 @@ namespace WindowsFormsApp1
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Setting";
             this.Text = "Form2";
-            this.Load += new System.EventHandler(this.Setting_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -2070,7 +2129,6 @@ namespace WindowsFormsApp1
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
@@ -2086,6 +2144,9 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel14.ResumeLayout(false);
             this.tableLayoutPanel14.PerformLayout();
             this.groupBox11.ResumeLayout(false);
+            this.tableLayoutPanel15.ResumeLayout(false);
+            this.tableLayoutPanel16.ResumeLayout(false);
+            this.tableLayoutPanel16.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2113,7 +2174,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.TextBox setting_name;
         private System.Windows.Forms.CheckBox buy_condition;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
-        private System.Windows.Forms.CheckBox buy_and;
         private System.Windows.Forms.CheckBox before_time_deny;
         private System.Windows.Forms.CheckBox hold_deny;
         private System.Windows.Forms.TextBox buy_condition_end;
@@ -2225,7 +2285,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.CheckBox KIS_Allow;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.CheckBox checkBox6;
-        private System.Windows.Forms.CheckBox checkBox7;
         private System.Windows.Forms.CheckBox checkBox8;
         private System.Windows.Forms.CheckBox checkBox9;
         private System.Windows.Forms.CheckBox checkBox4;
@@ -2234,7 +2293,13 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.GroupBox groupBox11;
+        private System.Windows.Forms.CheckedListBox Fomula_list_buy_Checked_box;
+        private System.Windows.Forms.CheckBox checkBox7;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel15;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel16;
+        private System.Windows.Forms.RadioButton buy_mode_or;
+        private System.Windows.Forms.RadioButton buy_mode_and;
+        private System.Windows.Forms.RadioButton buy_mode_independent;
     }
 }
