@@ -33,7 +33,9 @@ namespace WindowsFormsApp1
             this.Time_label = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.end_time_text = new System.Windows.Forms.TextBox();
             this.end_time = new System.Windows.Forms.Label();
+            this.start_time_text = new System.Windows.Forms.TextBox();
             this.run_status = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -41,8 +43,6 @@ namespace WindowsFormsApp1
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.start_time_text = new System.Windows.Forms.TextBox();
-            this.end_time_text = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,6 +84,18 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel1.Size = new System.Drawing.Size(425, 100);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
+            // end_time_text
+            // 
+            this.end_time_text.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.end_time_text.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.end_time_text.Location = new System.Drawing.Point(179, 53);
+            this.end_time_text.Name = "end_time_text";
+            this.end_time_text.Size = new System.Drawing.Size(119, 30);
+            this.end_time_text.TabIndex = 6;
+            this.end_time_text.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // end_time
             // 
             this.end_time.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -98,6 +110,18 @@ namespace WindowsFormsApp1
             this.end_time.TabIndex = 1;
             this.end_time.Text = "종료시각";
             this.end_time.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // start_time_text
+            // 
+            this.start_time_text.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.start_time_text.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.start_time_text.Location = new System.Drawing.Point(57, 53);
+            this.start_time_text.Name = "start_time_text";
+            this.start_time_text.Size = new System.Drawing.Size(116, 30);
+            this.start_time_text.TabIndex = 5;
+            this.start_time_text.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // run_status
             // 
@@ -188,30 +212,6 @@ namespace WindowsFormsApp1
             this.button2.TabIndex = 4;
             this.button2.Text = "설정저장";
             this.button2.UseVisualStyleBackColor = false;
-            // 
-            // start_time_text
-            // 
-            this.start_time_text.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.start_time_text.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.start_time_text.Location = new System.Drawing.Point(57, 53);
-            this.start_time_text.Name = "start_time_text";
-            this.start_time_text.Size = new System.Drawing.Size(116, 30);
-            this.start_time_text.TabIndex = 5;
-            this.start_time_text.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // end_time_text
-            // 
-            this.end_time_text.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.end_time_text.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.end_time_text.Location = new System.Drawing.Point(179, 53);
-            this.end_time_text.Name = "end_time_text";
-            this.end_time_text.Size = new System.Drawing.Size(119, 30);
-            this.end_time_text.TabIndex = 6;
-            this.end_time_text.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Auto_Run_Update
             // 

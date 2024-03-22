@@ -364,7 +364,7 @@ namespace WindowsFormsApp1
                 //당일 손익 받기
                 today_profit_tax_load();
 
-                //초기 계좌 목록 받기 및 기존 종목 테이블 추가
+                //계좌 보유 현황 확인 => 초기 보유 종목 테이블 업데이트 => 실시간 조건 검색 시작
                 Account_before_initial(null, EventArgs.Empty);
 
                 //조건식 검색
@@ -480,6 +480,10 @@ namespace WindowsFormsApp1
                 {
                     max_hoid.Text = "0/10";
                 }
+                //실시간 조건 검색 시작
+                auto_allow();
+
+                return;
             }
 
             //
@@ -560,9 +564,7 @@ namespace WindowsFormsApp1
                     all_profit.Text = string.Format("{0:#,##0}", Convert.ToDecimal(Convert.ToInt32(Current_User_money.Text.Replace(",","")) - Convert.ToInt32(total_money.Text.Replace(",", "")))); //수익
                     all_profit_percent.Text = string.Format("{0:#,##0.00}%", Convert.ToDecimal(Convert.ToDouble(all_profit.Text.Replace(",", "")) / Convert.ToDouble(total_money.Text.Replace(",", "")) * 100)); //수익률
 
-                    WriteLog("예수금 조회 완료\n");
                     WriteLog("예수금 : " + User_money.Text + "\n");
-                    telegram_message("예수금 조회 완료\n");
                     telegram_message("예수금 : " + User_money.Text + "\n");
                     break;
 
@@ -576,9 +578,7 @@ namespace WindowsFormsApp1
                     all_profit_percent.Text = string.Format("{0:#,##0.00}%", Convert.ToDecimal(Convert.ToDouble(all_profit.Text.Replace(",", "")) / Convert.ToDouble(total_money.Text.Replace(",", "")) * 100)); //수익률수익률
 
                     //
-                    WriteLog("예수금 업데이트 완료\n");
                     WriteLog("예수금 : " + User_money.Text + "\n");
-                    telegram_message("예수금 업데이트 완료\n");
                     telegram_message("예수금 : " + User_money.Text + "\n");
                     break;
 
@@ -698,7 +698,6 @@ namespace WindowsFormsApp1
                         string code_name = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "종목명").Trim();
                         //
                         WriteLog("[신규종목/초기/" + condition_nameORcode + "] : " + code + "-" + code_name + "\n");
-                        telegram_message("[신규종목/초기/" + condition_nameORcode + "] : " + code + "-" + code_name + "\n");
                         //
                         string high1 = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "상한가").Trim();
                         string now_hold1 = "0";
@@ -751,7 +750,6 @@ namespace WindowsFormsApp1
                     string code_name2 = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목명").Trim();
                     //
                     WriteLog("[신규종목/편입/" + condition_nameORcode + "] : " + code2 + "-" + code_name2 + "\n");
-                    telegram_message("[신규종목/편입/" + condition_nameORcode + "] : " + code2 + "-" + code_name2 + "\n");
                     //
                     string high2 = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "상한가").Trim();
                     string now_hold2 = "0";
@@ -1138,6 +1136,7 @@ namespace WindowsFormsApp1
             condInfo.LastRequestTime = DateTime.Now;
 
             WriteLog("실시간 조건식 매수 시작\n");
+            WriteLog(condition[1] + " " + condition[0] + "\n");
             telegram_message("실시간 조건식 매수 시작\n");
 
             //종목 검색 요청
@@ -1145,8 +1144,8 @@ namespace WindowsFormsApp1
             int result = axKHOpenAPI1.SendCondition(GetScreenNo(), condition[1], Convert.ToInt32(condition[0]), 1);
             if (result != 1)
             {
-                WriteLog("실시간조건검색 : 실패\n");
-                telegram_message("실시간조건검색 : 실패\n");
+                WriteLog("실시간조건검색 : 실패(조건식 고유번호와 이름을 확인해주세요.\n");
+                telegram_message("실시간조건검색 : 실패(조건식 고유번호와 이름을 확인해주세요.\n");
             }
         }
 
@@ -1186,7 +1185,6 @@ namespace WindowsFormsApp1
                         dtCondStock.AcceptChanges();
 
                         WriteLog("[기존종목/재편입] : " + e.sTrCode + "\n");
-                        telegram_message("[기존종목/재편입]] : " + e.sTrCode + "\n");
 
                         //정렬
                         var sorted_Rows = from row in dtCondStock.AsEnumerable()
@@ -1214,7 +1212,6 @@ namespace WindowsFormsApp1
                     if (findRows[0]["상태"].Equals("대기") || findRows[0]["상태"].Equals("매도완료")) return;
 
                     WriteLog("[기존종목/이탈] : " + e.sTrCode + "\n");
-                    telegram_message("[기존종목/이탈] : " + e.sTrCode + "\n");
 
                     findRows[0]["편입"] = "이탈";
                     findRows[0]["이탈시각"] = DateTime.Now.ToString("HH:mm:ss");
@@ -1940,10 +1937,9 @@ namespace WindowsFormsApp1
                     {
                         //모든 화면에서 "code"종목 실시간 해지
                         axKHOpenAPI1.SetRealRemove("ALL", code);
-
-                        //편입 차트 상태 '매도완료' 변경
+                        string sell_time = axKHOpenAPI1.GetChejanData(908).Trim();
                         findRows[0]["상태"] = "매도완료";
-                        findRows[0]["매도시각"] = axKHOpenAPI1.GetChejanData(908);
+                        findRows[0]["매도시각"] = string.Format("{0:D2}:{1:D2}:{2:D2}", int.Parse(sell_time.Substring(0, 2)), int.Parse(sell_time.Substring(2, 2)), int.Parse(sell_time.Substring(4, 2)));
                         dtCondStock.AcceptChanges();
                         dataGridView1.DataSource = dtCondStock;
                     }

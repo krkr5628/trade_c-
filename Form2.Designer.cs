@@ -74,8 +74,8 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.buy_condition_end = new System.Windows.Forms.TextBox();
             this.textBox40 = new System.Windows.Forms.TextBox();
-            this.buy_and = new System.Windows.Forms.CheckBox();
             this.buy_condition_start = new System.Windows.Forms.TextBox();
+            this.buy_and = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.buy_set1 = new System.Windows.Forms.ComboBox();
             this.sell_set1 = new System.Windows.Forms.ComboBox();
@@ -99,6 +99,10 @@ namespace WindowsFormsApp1
             this.profit_won_text = new System.Windows.Forms.TextBox();
             this.loss_percent_text = new System.Windows.Forms.TextBox();
             this.loss_won_text = new System.Windows.Forms.TextBox();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.checkBox7 = new System.Windows.Forms.CheckBox();
+            this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.clear_sell_profit_text = new System.Windows.Forms.TextBox();
             this.clear_sell_market = new System.Windows.Forms.CheckBox();
@@ -111,17 +115,24 @@ namespace WindowsFormsApp1
             this.after_market_profit = new System.Windows.Forms.CheckBox();
             this.after_market_loss = new System.Windows.Forms.CheckBox();
             this.clear_sell_profit = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.Fomula_list_buy = new System.Windows.Forms.ComboBox();
             this.Fomula_list_sell = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
-            this.term_for_non_buy = new System.Windows.Forms.CheckBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.term_for_buy = new System.Windows.Forms.CheckBox();
             this.term_for_buy_text = new System.Windows.Forms.TextBox();
+            this.term_for_non_buy = new System.Windows.Forms.CheckBox();
             this.term_for_non_buy_text = new System.Windows.Forms.TextBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
@@ -162,18 +173,7 @@ namespace WindowsFormsApp1
             this.kis_amount = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
-            this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -642,7 +642,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.90253F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.43321F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.53069F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 193F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 203F));
             this.tableLayoutPanel5.Controls.Add(this.setting_allowed, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.setting_open, 3, 0);
             this.tableLayoutPanel5.Controls.Add(this.save_button, 2, 0);
@@ -662,7 +662,7 @@ namespace WindowsFormsApp1
             this.setting_allowed.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_allowed.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_allowed.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_allowed.Location = new System.Drawing.Point(1069, 3);
+            this.setting_allowed.Location = new System.Drawing.Point(1059, 3);
             this.setting_allowed.Name = "setting_allowed";
             this.setting_allowed.Size = new System.Drawing.Size(147, 44);
             this.setting_allowed.TabIndex = 8;
@@ -674,9 +674,9 @@ namespace WindowsFormsApp1
             this.setting_open.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_open.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_open.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_open.Location = new System.Drawing.Point(914, 3);
+            this.setting_open.Location = new System.Drawing.Point(906, 3);
             this.setting_open.Name = "setting_open";
-            this.setting_open.Size = new System.Drawing.Size(149, 44);
+            this.setting_open.Size = new System.Drawing.Size(147, 44);
             this.setting_open.TabIndex = 7;
             this.setting_open.Text = "전량열기";
             this.setting_open.UseVisualStyleBackColor = false;
@@ -686,9 +686,9 @@ namespace WindowsFormsApp1
             this.save_button.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.save_button.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.save_button.ForeColor = System.Drawing.Color.SpringGreen;
-            this.save_button.Location = new System.Drawing.Point(750, 3);
+            this.save_button.Location = new System.Drawing.Point(743, 3);
             this.save_button.Name = "save_button";
-            this.save_button.Size = new System.Drawing.Size(158, 44);
+            this.save_button.Size = new System.Drawing.Size(157, 44);
             this.save_button.TabIndex = 6;
             this.save_button.Text = "전량저장";
             this.save_button.UseVisualStyleBackColor = false;
@@ -698,10 +698,10 @@ namespace WindowsFormsApp1
             this.setting_name.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.setting_name.Location = new System.Drawing.Point(207, 3);
+            this.setting_name.Location = new System.Drawing.Point(205, 3);
             this.setting_name.Name = "setting_name";
             this.setting_name.ReadOnly = true;
-            this.setting_name.Size = new System.Drawing.Size(537, 28);
+            this.setting_name.Size = new System.Drawing.Size(532, 28);
             this.setting_name.TabIndex = 1;
             // 
             // label5
@@ -713,7 +713,7 @@ namespace WindowsFormsApp1
             this.label5.Font = new System.Drawing.Font("굴림", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label5.Location = new System.Drawing.Point(3, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(198, 50);
+            this.label5.Size = new System.Drawing.Size(196, 50);
             this.label5.TabIndex = 9;
             this.label5.Text = "전략명";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -772,6 +772,13 @@ namespace WindowsFormsApp1
             this.textBox40.Text = "~";
             this.textBox40.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // buy_condition_start
+            // 
+            this.buy_condition_start.Location = new System.Drawing.Point(136, 3);
+            this.buy_condition_start.Name = "buy_condition_start";
+            this.buy_condition_start.Size = new System.Drawing.Size(175, 30);
+            this.buy_condition_start.TabIndex = 9;
+            // 
             // buy_and
             // 
             this.buy_and.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -785,13 +792,6 @@ namespace WindowsFormsApp1
             this.buy_and.TabIndex = 8;
             this.buy_and.Text = "AND 조건";
             this.buy_and.UseVisualStyleBackColor = false;
-            // 
-            // buy_condition_start
-            // 
-            this.buy_condition_start.Location = new System.Drawing.Point(136, 3);
-            this.buy_condition_start.Name = "buy_condition_start";
-            this.buy_condition_start.Size = new System.Drawing.Size(175, 30);
-            this.buy_condition_start.TabIndex = 9;
             // 
             // tableLayoutPanel7
             // 
@@ -1088,6 +1088,70 @@ namespace WindowsFormsApp1
             this.loss_won_text.Size = new System.Drawing.Size(170, 30);
             this.loss_won_text.TabIndex = 17;
             // 
+            // checkBox6
+            // 
+            this.checkBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox6.AutoSize = true;
+            this.checkBox6.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.checkBox6.ForeColor = System.Drawing.Color.Crimson;
+            this.checkBox6.Location = new System.Drawing.Point(3, 117);
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.Size = new System.Drawing.Size(133, 32);
+            this.checkBox6.TabIndex = 18;
+            this.checkBox6.Text = "동시호가";
+            this.checkBox6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBox6.UseVisualStyleBackColor = false;
+            // 
+            // checkBox7
+            // 
+            this.checkBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox7.AutoSize = true;
+            this.checkBox7.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.checkBox7.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.checkBox7.Location = new System.Drawing.Point(355, 117);
+            this.checkBox7.Name = "checkBox7";
+            this.checkBox7.Size = new System.Drawing.Size(135, 32);
+            this.checkBox7.TabIndex = 19;
+            this.checkBox7.Text = "동시호가";
+            this.checkBox7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBox7.UseVisualStyleBackColor = false;
+            // 
+            // checkBox8
+            // 
+            this.checkBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox8.AutoSize = true;
+            this.checkBox8.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.checkBox8.ForeColor = System.Drawing.Color.Crimson;
+            this.checkBox8.Location = new System.Drawing.Point(142, 117);
+            this.checkBox8.Name = "checkBox8";
+            this.checkBox8.Size = new System.Drawing.Size(170, 32);
+            this.checkBox8.TabIndex = 20;
+            this.checkBox8.Text = "시간외단일가";
+            this.checkBox8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBox8.UseVisualStyleBackColor = false;
+            // 
+            // checkBox9
+            // 
+            this.checkBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox9.AutoSize = true;
+            this.checkBox9.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.checkBox9.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.checkBox9.Location = new System.Drawing.Point(496, 117);
+            this.checkBox9.Name = "checkBox9";
+            this.checkBox9.Size = new System.Drawing.Size(170, 32);
+            this.checkBox9.TabIndex = 21;
+            this.checkBox9.Text = "시간외단일가";
+            this.checkBox9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBox9.UseVisualStyleBackColor = false;
+            // 
             // tableLayoutPanel10
             // 
             this.tableLayoutPanel10.ColumnCount = 5;
@@ -1251,6 +1315,40 @@ namespace WindowsFormsApp1
             this.clear_sell_profit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.clear_sell_profit.UseVisualStyleBackColor = false;
             // 
+            // checkBox4
+            // 
+            this.checkBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.checkBox4.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.checkBox4.ForeColor = System.Drawing.Color.Crimson;
+            this.checkBox4.Location = new System.Drawing.Point(155, 75);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(152, 30);
+            this.checkBox4.TabIndex = 21;
+            this.checkBox4.Text = "시간외단일가";
+            this.checkBox4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBox4.UseVisualStyleBackColor = false;
+            // 
+            // checkBox5
+            // 
+            this.checkBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.checkBox5.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.checkBox5.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.checkBox5.Location = new System.Drawing.Point(501, 75);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(165, 30);
+            this.checkBox5.TabIndex = 22;
+            this.checkBox5.Text = "시간외단일가";
+            this.checkBox5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBox5.UseVisualStyleBackColor = false;
+            // 
             // Fomula_list_buy
             // 
             this.Fomula_list_buy.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
@@ -1294,20 +1392,12 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel11.Size = new System.Drawing.Size(669, 75);
             this.tableLayoutPanel11.TabIndex = 11;
             // 
-            // term_for_non_buy
+            // textBox2
             // 
-            this.term_for_non_buy.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.term_for_non_buy.AutoSize = true;
-            this.term_for_non_buy.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.term_for_non_buy.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.term_for_non_buy.Location = new System.Drawing.Point(337, 40);
-            this.term_for_non_buy.Name = "term_for_non_buy";
-            this.term_for_non_buy.Size = new System.Drawing.Size(161, 32);
-            this.term_for_non_buy.TabIndex = 21;
-            this.term_for_non_buy.Text = "미체결취소";
-            this.term_for_non_buy.UseVisualStyleBackColor = false;
+            this.textBox2.Location = new System.Drawing.Point(170, 40);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(160, 30);
+            this.textBox2.TabIndex = 25;
             // 
             // term_for_buy
             // 
@@ -1331,12 +1421,64 @@ namespace WindowsFormsApp1
             this.term_for_buy_text.Size = new System.Drawing.Size(160, 30);
             this.term_for_buy_text.TabIndex = 0;
             // 
+            // term_for_non_buy
+            // 
+            this.term_for_non_buy.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.term_for_non_buy.AutoSize = true;
+            this.term_for_non_buy.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.term_for_non_buy.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.term_for_non_buy.Location = new System.Drawing.Point(337, 40);
+            this.term_for_non_buy.Name = "term_for_non_buy";
+            this.term_for_non_buy.Size = new System.Drawing.Size(161, 32);
+            this.term_for_non_buy.TabIndex = 21;
+            this.term_for_non_buy.Text = "미체결취소";
+            this.term_for_non_buy.UseVisualStyleBackColor = false;
+            // 
             // term_for_non_buy_text
             // 
             this.term_for_non_buy_text.Location = new System.Drawing.Point(504, 40);
             this.term_for_non_buy_text.Name = "term_for_non_buy_text";
             this.term_for_non_buy_text.Size = new System.Drawing.Size(160, 30);
             this.term_for_non_buy_text.TabIndex = 3;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.checkBox2.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.checkBox2.Location = new System.Drawing.Point(337, 3);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(161, 31);
+            this.checkBox2.TabIndex = 22;
+            this.checkBox2.Text = "종목매도텀";
+            this.checkBox2.UseVisualStyleBackColor = false;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.checkBox3.ForeColor = System.Drawing.Color.Crimson;
+            this.checkBox3.Location = new System.Drawing.Point(3, 40);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(161, 32);
+            this.checkBox3.TabIndex = 23;
+            this.checkBox3.Text = "미체결취소";
+            this.checkBox3.UseVisualStyleBackColor = false;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(504, 3);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(160, 30);
+            this.textBox1.TabIndex = 24;
             // 
             // groupBox1
             // 
@@ -1386,6 +1528,22 @@ namespace WindowsFormsApp1
             this.groupBox4.TabIndex = 17;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "조건설정";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.checkBox1.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.checkBox1.Location = new System.Drawing.Point(548, 77);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(115, 24);
+            this.checkBox1.TabIndex = 13;
+            this.checkBox1.Text = "개별모드";
+            this.checkBox1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBox1.UseVisualStyleBackColor = false;
             // 
             // groupBox5
             // 
@@ -1852,22 +2010,6 @@ namespace WindowsFormsApp1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // checkBox1
-            // 
-            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.checkBox1.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.checkBox1.Location = new System.Drawing.Point(548, 77);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(115, 24);
-            this.checkBox1.TabIndex = 13;
-            this.checkBox1.Text = "개별모드";
-            this.checkBox1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBox1.UseVisualStyleBackColor = false;
-            // 
             // groupBox11
             // 
             this.groupBox11.Controls.Add(this.tableLayoutPanel9);
@@ -1878,148 +2020,6 @@ namespace WindowsFormsApp1
             this.groupBox11.TabIndex = 24;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "매매설정";
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.checkBox2.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.checkBox2.Location = new System.Drawing.Point(337, 3);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(161, 31);
-            this.checkBox2.TabIndex = 22;
-            this.checkBox2.Text = "종목매도텀";
-            this.checkBox2.UseVisualStyleBackColor = false;
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.checkBox3.ForeColor = System.Drawing.Color.Crimson;
-            this.checkBox3.Location = new System.Drawing.Point(3, 40);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(161, 32);
-            this.checkBox3.TabIndex = 23;
-            this.checkBox3.Text = "미체결취소";
-            this.checkBox3.UseVisualStyleBackColor = false;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(504, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(160, 30);
-            this.textBox1.TabIndex = 24;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(170, 40);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(160, 30);
-            this.textBox2.TabIndex = 25;
-            // 
-            // checkBox4
-            // 
-            this.checkBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.checkBox4.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.checkBox4.ForeColor = System.Drawing.Color.Crimson;
-            this.checkBox4.Location = new System.Drawing.Point(155, 75);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(152, 30);
-            this.checkBox4.TabIndex = 21;
-            this.checkBox4.Text = "시간외단일가";
-            this.checkBox4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBox4.UseVisualStyleBackColor = false;
-            // 
-            // checkBox5
-            // 
-            this.checkBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.checkBox5.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.checkBox5.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.checkBox5.Location = new System.Drawing.Point(501, 75);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(165, 30);
-            this.checkBox5.TabIndex = 22;
-            this.checkBox5.Text = "시간외단일가";
-            this.checkBox5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBox5.UseVisualStyleBackColor = false;
-            // 
-            // checkBox6
-            // 
-            this.checkBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.checkBox6.ForeColor = System.Drawing.Color.Crimson;
-            this.checkBox6.Location = new System.Drawing.Point(3, 117);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(133, 32);
-            this.checkBox6.TabIndex = 18;
-            this.checkBox6.Text = "동시호가";
-            this.checkBox6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBox6.UseVisualStyleBackColor = false;
-            // 
-            // checkBox7
-            // 
-            this.checkBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.checkBox7.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.checkBox7.Location = new System.Drawing.Point(355, 117);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(135, 32);
-            this.checkBox7.TabIndex = 19;
-            this.checkBox7.Text = "동시호가";
-            this.checkBox7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBox7.UseVisualStyleBackColor = false;
-            // 
-            // checkBox8
-            // 
-            this.checkBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox8.AutoSize = true;
-            this.checkBox8.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.checkBox8.ForeColor = System.Drawing.Color.Crimson;
-            this.checkBox8.Location = new System.Drawing.Point(142, 117);
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(170, 32);
-            this.checkBox8.TabIndex = 20;
-            this.checkBox8.Text = "시간외단일가";
-            this.checkBox8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBox8.UseVisualStyleBackColor = false;
-            // 
-            // checkBox9
-            // 
-            this.checkBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox9.AutoSize = true;
-            this.checkBox9.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.checkBox9.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.checkBox9.Location = new System.Drawing.Point(496, 117);
-            this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(170, 32);
-            this.checkBox9.TabIndex = 21;
-            this.checkBox9.Text = "시간외단일가";
-            this.checkBox9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBox9.UseVisualStyleBackColor = false;
             // 
             // Setting
             // 
