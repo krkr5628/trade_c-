@@ -28,7 +28,7 @@ namespace WindowsFormsApp1
             //조건식 DropDown
             Fomula_list_buy.DropDown += Fomula_list_buy_DropDown;
 
-            //조건식 MouseDown 
+            //조건식 MouseLeave
             Fomula_list_buy_Checked_box.MouseLeave += Fomula_list_buy_Checked_box_MouseLeave;
 
             //조건식 선택 
@@ -50,10 +50,7 @@ namespace WindowsFormsApp1
             Fomula_list_buy_Checked_box.Visible = true;
             Fomula_list_buy_Checked_box.BringToFront();
 
-            // ComboBox의 위치와 크기
-            Point Fomula_list_buy_Location = Fomula_list_buy.Location;
-            int Fomula_list_buy_Height = Fomula_list_buy.Height;
-            Fomula_list_buy_Checked_box.Location = new Point(Fomula_list_buy_Location.X, Fomula_list_buy_Location.Y + Fomula_list_buy_Height);
+            //430 203
             Fomula_list_buy_Checked_box.BringToFront();
         }
 
@@ -65,9 +62,16 @@ namespace WindowsFormsApp1
         private void Fomula_list_buy_Checked_box_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             List<String> SelectedIndexText_join_tmp = new List<string>();
-            for (int i = 0; i < Fomula_list_buy_Checked_box.Items.Count; i++)
+
+            if (e.NewValue == CheckState.Checked)
             {
-                if (Fomula_list_buy_Checked_box.GetItemChecked(i))
+                SelectedIndexText_join_tmp.Add(Fomula_list_buy_Checked_box.Items[e.Index].ToString());
+            }
+
+            //그 외 항목 중에서 체크 항목의 포함
+            for (int i = 0; i < Fomula_list_buy_Checked_box.Items.Count; i++)
+            {   
+                if (Fomula_list_buy_Checked_box.GetItemChecked(i) && i != e.Index)
                 {
                     SelectedIndexText_join_tmp.Add(Fomula_list_buy_Checked_box.Items[i].ToString());
                 }
@@ -302,16 +306,16 @@ namespace WindowsFormsApp1
             //
             if (!buy_condition_tmp[4].Equals("9999"))
             {
-                string[] Selectedext_temp = buy_condition_tmp[4].Split(',');
+                string[] Selectedtext_temp = buy_condition_tmp[4].Split(',');
                 string SelectedIndexTextJoin_temp = "";
-                for (int i = 0; i < Selectedext_temp.Length; i++)
+                for (int i = 0; i < Selectedtext_temp.Length; i++)
                 {
                     for (int j = 0; j < Fomula_list_buy_Checked_box.Items.Count; j++)
                     {
-                        if (Fomula_list_buy_Checked_box.Items[j].ToString().Equals(Selectedext_temp[i]))
+                        if (Fomula_list_buy_Checked_box.Items[j].ToString().Equals(Selectedtext_temp[i]))
                         {
                             Fomula_list_buy_Checked_box.SetItemChecked(j, true);
-                            SelectedIndexTextJoin_temp += Selectedext_temp[i] + ",";
+                            SelectedIndexTextJoin_temp += Selectedtext_temp[i] + ",";
                             break;
                         }
                     }
