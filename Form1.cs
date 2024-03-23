@@ -249,6 +249,19 @@ namespace WindowsFormsApp1
             today_profit_percent.Text = "00.00%";
             today_profit.Text = "0";
 
+            //초기세팅3
+            if (utility.buy_OR)
+            {
+                trading_mode.Text = "OR_모드";
+            }
+            else if (utility.buy_AND)
+            {
+                trading_mode.Text = "AND_모드";
+            }
+            else
+            {
+                trading_mode.Text = "독립_모드";
+            }
 
             //갱신 주기
             string[] ms = { "200", "400", "500", "1000", "2000", "5000" };

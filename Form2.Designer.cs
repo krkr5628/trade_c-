@@ -2091,7 +2091,7 @@ namespace WindowsFormsApp1
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1531, 1016);
+            this.ClientSize = new System.Drawing.Size(1531, 894);
             this.Controls.Add(this.Fomula_list_buy_Checked_box);
             this.Controls.Add(this.groupBox11);
             this.Controls.Add(this.telegram_test_button);

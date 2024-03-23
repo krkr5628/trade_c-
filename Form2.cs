@@ -34,6 +34,12 @@ namespace WindowsFormsApp1
             //조건식 선택 
             Fomula_list_buy_Checked_box.ItemCheck += Fomula_list_buy_Checked_box_ItemCheck;
 
+            //AND 모드 시 2개 이상 조건식 확인
+            buy_mode_and.Click += Buy_mode_and_Click;
+
+            //조건식 1개 인데 AND 모드인지 확인
+            Fomula_list_buy.TextChanged += Fomula_list_buy_TextChanged;
+
             //즉시반영
             setting_allowed.Click += setting_allow;
 
@@ -79,6 +85,26 @@ namespace WindowsFormsApp1
             Fomula_list_buy.Text = String.Join(",", SelectedIndexText_join_tmp);
         }
 
+        //
+        private void Buy_mode_and_Click(object sender, EventArgs e)
+        {
+            if(!(Fomula_list_buy.Text.Split(',').Length > 1))
+            {
+                buy_mode_or.Checked = true;
+                MessageBox.Show("AND_모드 저장하기 위해 조건식 2개 이상 설정해 주세요.");
+            }
+        }
+
+        //
+        private void Fomula_list_buy_TextChanged(object sender, EventArgs e)
+        {
+            if (!(Fomula_list_buy.Text.Split(',').Length > 1) && buy_mode_and.Checked)
+            {
+                buy_mode_or.Checked = true;
+                MessageBox.Show("AND_모드 저장하기 위해 조건식 2개 이상 설정해 주세요.");
+            }
+        }
+
         //초기 자동 실행
         private async Task setting_load_auto()
         {
@@ -110,7 +136,15 @@ namespace WindowsFormsApp1
             saveFileDialog.Title = "파일 저장 경로 지정하세요";
             saveFileDialog.Filter = "텍스트 파일 (*.txt)|*.txt";
             //
-            if (!String.IsNullOrEmpty(account_list.Text))
+            if (String.IsNullOrEmpty(account_list.Text))
+            {
+                MessageBox.Show("계좌번호를설정해주세요"); 
+            }
+            else if (Fomula_list_buy.Text.Split(',').Length > 1)
+            {
+                MessageBox.Show("AND_모드 저장하기 위해 조건식 2개 이상 설정해 주세요.");
+            }
+            else
             {
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
@@ -187,10 +221,6 @@ namespace WindowsFormsApp1
                     System.IO.File.WriteAllText(filePath, textToSave);
                     MessageBox.Show("파일이 저장되었습니다: " + filePath);
                 }
-            }
-            else
-            {
-                MessageBox.Show("계좌번호를설정해주세요");
             }
         }
 
