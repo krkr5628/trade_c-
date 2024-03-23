@@ -74,7 +74,6 @@ namespace WindowsFormsApp1
         public static bool clear_sell; //전체청산
         public static string clear_sell_start;
         public static string clear_sell_end;
-        public static bool clear_sell_market; 
         public static bool clear_sell_profit; 
         public static string clear_sell_profit_text; //청산익절
         public static bool after_market_profit; //동시호가익절
@@ -266,7 +265,6 @@ namespace WindowsFormsApp1
             clear_sell = Convert.ToBoolean(clear_sell_tmp[1]);
             clear_sell_start = clear_sell_tmp[2];
             clear_sell_end = clear_sell_tmp[3];
-            clear_sell_market= Convert.ToBoolean(clear_sell_tmp[4]);
 
             //청산익절
             String[] clear_sell_profit_tmp = reader.ReadLine().Split('/');

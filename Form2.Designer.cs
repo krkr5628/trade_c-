@@ -104,7 +104,6 @@ namespace WindowsFormsApp1
             this.profit_won_text = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.clear_sell_profit_text = new System.Windows.Forms.TextBox();
-            this.clear_sell_market = new System.Windows.Forms.CheckBox();
             this.clear_sell_end = new System.Windows.Forms.TextBox();
             this.textBox29 = new System.Windows.Forms.TextBox();
             this.clear_sell_start = new System.Windows.Forms.TextBox();
@@ -1157,7 +1156,6 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.90419F));
             this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.2994F));
             this.tableLayoutPanel10.Controls.Add(this.clear_sell_profit_text, 1, 1);
-            this.tableLayoutPanel10.Controls.Add(this.clear_sell_market, 4, 0);
             this.tableLayoutPanel10.Controls.Add(this.clear_sell_end, 3, 0);
             this.tableLayoutPanel10.Controls.Add(this.textBox29, 2, 0);
             this.tableLayoutPanel10.Controls.Add(this.clear_sell_start, 1, 0);
@@ -1186,20 +1184,6 @@ namespace WindowsFormsApp1
             this.clear_sell_profit_text.Name = "clear_sell_profit_text";
             this.clear_sell_profit_text.Size = new System.Drawing.Size(150, 30);
             this.clear_sell_profit_text.TabIndex = 17;
-            // 
-            // clear_sell_market
-            // 
-            this.clear_sell_market.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.clear_sell_market.AutoSize = true;
-            this.clear_sell_market.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.clear_sell_market.Location = new System.Drawing.Point(501, 3);
-            this.clear_sell_market.Name = "clear_sell_market";
-            this.clear_sell_market.Size = new System.Drawing.Size(165, 30);
-            this.clear_sell_market.TabIndex = 9;
-            this.clear_sell_market.Text = "청산시장가";
-            this.clear_sell_market.UseVisualStyleBackColor = false;
             // 
             // clear_sell_end
             // 
@@ -2211,7 +2195,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.CheckBox clear_sell_profit;
         private System.Windows.Forms.CheckBox clear_sell_loss;
         private System.Windows.Forms.CheckBox clear_sell;
-        private System.Windows.Forms.CheckBox clear_sell_market;
         private System.Windows.Forms.TextBox clear_sell_loss_text;
         private System.Windows.Forms.ComboBox Fomula_list_buy;
         private System.Windows.Forms.ComboBox Fomula_list_sell;

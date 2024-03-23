@@ -181,7 +181,7 @@ namespace WindowsFormsApp1
                     //매매코스닥연동
                     //매매코스피선물연동
                     //매매코스닥선물연동
-                    tmp.Add("전체청산/" + Convert.ToString(clear_sell.Checked) + "/" + clear_sell_start.Text + "/" + clear_sell_end.Text + "/" + Convert.ToString(clear_sell_market.Checked));
+                    tmp.Add("전체청산/" + Convert.ToString(clear_sell.Checked) + "/" + clear_sell_start.Text + "/" + clear_sell_end.Text);
                     tmp.Add("청산익절/" + Convert.ToString(clear_sell_profit.Checked) + "/" + clear_sell_profit_text.Text);
                     tmp.Add("동시호가익절/" + Convert.ToString(after_market_profit.Checked));
                     //청산익절시간외단일가
@@ -376,7 +376,7 @@ namespace WindowsFormsApp1
             profit_won.Checked = Convert.ToBoolean(profit_won_tmp[1]);
             profit_won_text.Text = profit_won_tmp[2];
 
-            //익절TS
+            //익절TS(대기)
             String[] profit_ts_tmp = reader.ReadLine().Split('/');
             profit_ts.Checked = Convert.ToBoolean(profit_ts_tmp[1]);
             profit_ts_text.Text = profit_ts_tmp[2];
@@ -412,7 +412,6 @@ namespace WindowsFormsApp1
             clear_sell.Checked = Convert.ToBoolean(clear_sell_tmp[1]);
             clear_sell_start.Text = clear_sell_tmp[2];
             clear_sell_end.Text = clear_sell_tmp[3];
-            clear_sell_market.Checked = Convert.ToBoolean(clear_sell_tmp[4]);
 
             //청산익절
             String[] clear_sell_profit_tmp = reader.ReadLine().Split('/');
