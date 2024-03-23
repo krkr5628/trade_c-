@@ -13,11 +13,11 @@ namespace WindowsFormsApp1
 {
     public partial class Auto_Run_Update : Form
     {
-        static public string filepath = "C:\\Users\\krkr5\\OneDrive\\바탕 화면\\project\\password\\system_setting.txt";
-        static public bool auto_run;
-        static public string program_start;
-        static public string program_stop;
-        static public bool load_complete = false;
+        public string filepath = "C:\\Users\\krkr5\\OneDrive\\바탕 화면\\project\\password\\system_setting.txt";
+        public bool auto_run;
+        public string program_start;
+        public string program_stop;
+        public bool load_complete = false;
 
         static public bool Operation = true;
         static public bool Operation_start = true;
@@ -31,11 +31,19 @@ namespace WindowsFormsApp1
             //
             button1.Click += Button1_Click;
             button2.Click += Button2_Click;
+
         }
+
         private void Button1_Click(object sender, EventArgs e)
         {
-            Trade_Auto trade_auto = new Trade_Auto();
+            trade_auto = new Trade_Auto();
+            trade_auto.FormClosed += Trade_auto_FormClosed;
             trade_auto.ShowDialog(); //form2 닫기 전까지 form1 제어 불가능
+        }
+
+        private void Trade_auto_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Form_close();
         }
 
         private void Button2_Click(object sender, EventArgs e)
@@ -89,31 +97,40 @@ namespace WindowsFormsApp1
             load_complete = true;
         }
 
+        private Trade_Auto trade_auto;
+        private bool isTradeAutoOpened = false;
+
         private void Opeartion_Time()
         {
             //운영시간 확인
-            TimeSpan t_now = TimeSpan.Parse(DateTime.Now.ToString("HH:mm:ss"));
-            TimeSpan t_start = TimeSpan.Parse(program_start);
-            TimeSpan t_end = TimeSpan.Parse(program_stop);
+            DateTime t_now = DateTime.Now;
+            DateTime t_start = DateTime.Parse(program_start);
+            DateTime t_end = DateTime.Parse(program_stop);
 
             //운영시간 아님
-            if (t_now.CompareTo(t_start) < 0)
+            if (!isTradeAutoOpened && trade_auto == null && t_now >= t_start && t_now <= t_end)
             {
-                return;
-            }
-            if (t_now.CompareTo(t_end) > 0)
-            {
-                Operation = !Operation;
-                Trade_Auto trade_auto = Application.OpenForms.OfType<Trade_Auto>().FirstOrDefault();
-                label7.Text = "종료";
-                return;
-            }
-            if (Operation_start)
-            {
-                Operation_start = !Operation_start;
-                Trade_Auto trade_auto = new Trade_Auto();
+                trade_auto = new Trade_Auto();
                 trade_auto.ShowDialog(); //form2 닫기 전까지 form1 제어 불가능
+                isTradeAutoOpened = true;
                 label7.Text = "실행";
+            }
+            else if (isTradeAutoOpened && trade_auto != null && t_now > t_end)
+            {
+                Form_close();
+                isTradeAutoOpened = false;
+                label7.Text = "종료";
+            }
+        }
+
+        private void Form_close()
+        {
+            if (trade_auto != null)
+            {
+                MessageBox.Show("이게마나");
+                trade_auto.Close(); //폼을 닫고 닫기 이벤트를 발생, 폼이 닫힌 후에도 폼 객체는 메모리에 남음
+                trade_auto.Dispose(); //폼이 사용한 모든 리소스(메모리, 핸들 등)를 해제
+                trade_auto = null; //폼 객체에 대한 참조를 제거하여 리소스 누수(memory leak)를 방지
             }
         }
     }

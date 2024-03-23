@@ -24,9 +24,8 @@ namespace WindowsFormsApp1
 
         static public string[] arrCondition = { };
         static public string[] account;
-        static public int login_check = 1;
-        static public bool Operation = true;
-        static public bool Operation_start = true;
+        public int login_check = 1;
+        private bool isRunned = false;
 
         //-----------------------------------------------Main------------------------------------------------
         public Trade_Auto()
@@ -107,7 +106,7 @@ namespace WindowsFormsApp1
                 telegram_send(telegram_chat.Dequeue());
             }
 
-            if(Operation && utility.load_check) Opeartion_Time();
+            if(utility.load_check) Opeartion_Time();
 
         }
 
@@ -115,27 +114,13 @@ namespace WindowsFormsApp1
         private async void Opeartion_Time()
         {
             //운영시간 확인
-            TimeSpan t_now = TimeSpan.Parse(DateTime.Now.ToString("HH:mm:ss"));
-            TimeSpan t_start = TimeSpan.Parse(utility.market_start_time);
-            TimeSpan t_end = TimeSpan.Parse(utility.market_end_time);
+            DateTime t_now = DateTime.Now;
+            DateTime t_start = DateTime.Parse(utility.market_start_time);
+            DateTime t_end = DateTime.Parse(utility.market_end_time);
 
             //운영시간 아님
-            if (t_now.CompareTo(t_start) < 0)
+            if (!isRunned && t_now >= t_start && t_now <= t_end)
             {
-                return;
-            }
-            if(t_now.CompareTo(t_end) > 0)
-            {
-                Operation = !Operation;
-                real_time_stop(true);
-                return;
-            }
-            if (Operation_start)
-            {
-                Operation_start = !Operation_start;
-
-                //axKHOpenAPI1.CommTerminate();
-
                 //초기 설정 반영
                 await initial_allow();
 
@@ -146,6 +131,13 @@ namespace WindowsFormsApp1
                 });
 
                 timer3.Start(); //편입 종목 감시 - 200ms
+
+                isRunned = true;
+            }
+            else if(isRunned && t_now > t_end)
+            {
+                real_time_stop(true);
+                isRunned = false;
             }
         }
 

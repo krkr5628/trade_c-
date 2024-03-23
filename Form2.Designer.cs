@@ -62,8 +62,8 @@ namespace WindowsFormsApp1
             this.max_hold = new System.Windows.Forms.CheckBox();
             this.duplication_deny = new System.Windows.Forms.CheckBox();
             this.max_hold_text = new System.Windows.Forms.TextBox();
-            this.hold_deny = new System.Windows.Forms.CheckBox();
             this.before_time_deny = new System.Windows.Forms.CheckBox();
+            this.hold_deny = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.setting_allowed = new System.Windows.Forms.Button();
             this.setting_open = new System.Windows.Forms.Button();
@@ -614,22 +614,6 @@ namespace WindowsFormsApp1
             this.max_hold_text.Size = new System.Drawing.Size(107, 30);
             this.max_hold_text.TabIndex = 6;
             // 
-            // hold_deny
-            // 
-            this.hold_deny.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.hold_deny.AutoSize = true;
-            this.hold_deny.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.hold_deny.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.hold_deny.Location = new System.Drawing.Point(3, 111);
-            this.hold_deny.Name = "hold_deny";
-            this.hold_deny.Size = new System.Drawing.Size(250, 32);
-            this.hold_deny.TabIndex = 10;
-            this.hold_deny.Text = "보유 종목 매수 금지(대기)";
-            this.hold_deny.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.hold_deny.UseVisualStyleBackColor = false;
-            // 
             // before_time_deny
             // 
             this.before_time_deny.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -645,6 +629,22 @@ namespace WindowsFormsApp1
             this.before_time_deny.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.before_time_deny.UseVisualStyleBackColor = false;
             // 
+            // hold_deny
+            // 
+            this.hold_deny.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.hold_deny.AutoSize = true;
+            this.hold_deny.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.hold_deny.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.hold_deny.Location = new System.Drawing.Point(3, 111);
+            this.hold_deny.Name = "hold_deny";
+            this.hold_deny.Size = new System.Drawing.Size(250, 32);
+            this.hold_deny.TabIndex = 10;
+            this.hold_deny.Text = "보유 종목 매수 금지";
+            this.hold_deny.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.hold_deny.UseVisualStyleBackColor = false;
+            // 
             // tableLayoutPanel5
             // 
             this.tableLayoutPanel5.ColumnCount = 5;
@@ -652,7 +652,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.90253F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.43321F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.53069F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 215F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 217F));
             this.tableLayoutPanel5.Controls.Add(this.setting_allowed, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.setting_open, 3, 0);
             this.tableLayoutPanel5.Controls.Add(this.save_button, 2, 0);
@@ -672,7 +672,7 @@ namespace WindowsFormsApp1
             this.setting_allowed.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_allowed.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_allowed.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_allowed.Location = new System.Drawing.Point(1047, 3);
+            this.setting_allowed.Location = new System.Drawing.Point(1045, 3);
             this.setting_allowed.Name = "setting_allowed";
             this.setting_allowed.Size = new System.Drawing.Size(147, 44);
             this.setting_allowed.TabIndex = 8;
@@ -684,7 +684,7 @@ namespace WindowsFormsApp1
             this.setting_open.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_open.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_open.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_open.Location = new System.Drawing.Point(896, 3);
+            this.setting_open.Location = new System.Drawing.Point(894, 3);
             this.setting_open.Name = "setting_open";
             this.setting_open.Size = new System.Drawing.Size(145, 44);
             this.setting_open.TabIndex = 7;
@@ -696,7 +696,7 @@ namespace WindowsFormsApp1
             this.save_button.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.save_button.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.save_button.ForeColor = System.Drawing.Color.SpringGreen;
-            this.save_button.Location = new System.Drawing.Point(735, 3);
+            this.save_button.Location = new System.Drawing.Point(733, 3);
             this.save_button.Name = "save_button";
             this.save_button.Size = new System.Drawing.Size(155, 44);
             this.save_button.TabIndex = 6;
@@ -708,10 +708,10 @@ namespace WindowsFormsApp1
             this.setting_name.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.setting_name.Location = new System.Drawing.Point(203, 3);
+            this.setting_name.Location = new System.Drawing.Point(202, 3);
             this.setting_name.Name = "setting_name";
             this.setting_name.ReadOnly = true;
-            this.setting_name.Size = new System.Drawing.Size(526, 28);
+            this.setting_name.Size = new System.Drawing.Size(525, 28);
             this.setting_name.TabIndex = 1;
             // 
             // label5
@@ -723,7 +723,7 @@ namespace WindowsFormsApp1
             this.label5.Font = new System.Drawing.Font("굴림", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label5.Location = new System.Drawing.Point(3, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(194, 50);
+            this.label5.Size = new System.Drawing.Size(193, 50);
             this.label5.TabIndex = 9;
             this.label5.Text = "전략명";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1130,13 +1130,13 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.profit_ts.AutoSize = true;
             this.profit_ts.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.profit_ts.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.profit_ts.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.profit_ts.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.profit_ts.ForeColor = System.Drawing.Color.Crimson;
             this.profit_ts.Location = new System.Drawing.Point(3, 79);
             this.profit_ts.Name = "profit_ts";
             this.profit_ts.Size = new System.Drawing.Size(133, 32);
             this.profit_ts.TabIndex = 11;
-            this.profit_ts.Text = "익절TS(준비)";
+            this.profit_ts.Text = "익절TS";
             this.profit_ts.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.profit_ts.UseVisualStyleBackColor = false;
             // 
@@ -1469,7 +1469,7 @@ namespace WindowsFormsApp1
             this.groupBox1.Size = new System.Drawing.Size(381, 180);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "추가 옵션 설정";
+            this.groupBox1.Text = "추가 옵션 설정(보유종목 불가)";
             // 
             // groupBox2
             // 
@@ -1606,7 +1606,7 @@ namespace WindowsFormsApp1
             this.groupBox6.Size = new System.Drawing.Size(680, 181);
             this.groupBox6.TabIndex = 19;
             this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "청산 설정";
+            this.groupBox6.Text = "청산 설정(동시, 시간외 불가)";
             // 
             // groupBox7
             // 
@@ -1617,7 +1617,7 @@ namespace WindowsFormsApp1
             this.groupBox7.Size = new System.Drawing.Size(680, 113);
             this.groupBox7.TabIndex = 20;
             this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "지연 설정(대기)";
+            this.groupBox7.Text = "지연 설정(불가)";
             // 
             // groupBox8
             // 
@@ -1628,7 +1628,7 @@ namespace WindowsFormsApp1
             this.groupBox8.Size = new System.Drawing.Size(381, 218);
             this.groupBox8.TabIndex = 21;
             this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "지수 선물 연동(대기)";
+            this.groupBox8.Text = "지수 선물 연동(불가)";
             // 
             // tableLayoutPanel12
             // 
@@ -2059,7 +2059,7 @@ namespace WindowsFormsApp1
             this.groupBox11.Size = new System.Drawing.Size(680, 227);
             this.groupBox11.TabIndex = 24;
             this.groupBox11.TabStop = false;
-            this.groupBox11.Text = "매매설정";
+            this.groupBox11.Text = "매매설정(TS, 동시, 시간외 불가)";
             // 
             // Fomula_list_buy_Checked_box
             // 
