@@ -884,7 +884,6 @@ namespace WindowsFormsApp1
             }
             Setting newform2 = new Setting();
             newform2.ShowDialog(); //form2 닫기 전까지 form1 제어 불가능
-
         }
 
         //매매내역 확인

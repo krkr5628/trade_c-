@@ -164,8 +164,8 @@ namespace WindowsFormsApp1
                     tmp.Add("종목최대매수가/" + max_price.Text);
                     tmp.Add("최대보유종목수/" + Convert.ToString(max_hold.Checked) + "/" + max_hold_text.Text);
                     tmp.Add("당일중복매수금지/" + Convert.ToString(duplication_deny.Checked));
-                    tmp.Add("보유종목매수금지/" + Convert.ToString(hold_deny.Checked));
                     tmp.Add("매수시간전검출매수금지/" + Convert.ToString(before_time_deny.Checked));
+                    tmp.Add("보유종목매수금지/" + Convert.ToString(hold_deny.Checked));
                     tmp.Add("매수조건/" + Convert.ToString(buy_condition.Checked) + "/" + buy_condition_start.Text + "/" + buy_condition_end.Text + "/" + (Fomula_list_buy.Text.Equals("") ? "9999" : Fomula_list_buy.Text) + "/" + Convert.ToString(buy_mode_or.Checked) + "/" + Convert.ToString(buy_mode_and.Checked) + "/" + Convert.ToString(buy_mode_independent.Checked));
                     tmp.Add("매도조건/" + Convert.ToString(sell_condition.Checked) + "/" + sell_condition_start.Text + "/" + sell_condition_end.Text + "/" + Convert.ToString(Fomula_list_sell.SelectedIndex) + "/" + Fomula_list_sell.Text);
                     tmp.Add("익절/" + Convert.ToString(profit_percent.Checked) + "/" + profit_percent_text.Text);
@@ -320,13 +320,13 @@ namespace WindowsFormsApp1
             String[] duplication_deny_tmp = reader.ReadLine().Split('/');
             duplication_deny.Checked = Convert.ToBoolean(duplication_deny_tmp[1]);
 
-            //보유종목매수금지
-            String[] hold_deny_tmp = reader.ReadLine().Split('/');
-            hold_deny.Checked = Convert.ToBoolean(hold_deny_tmp[1]);
-
             //매수시간전검출매수금지
             String[] before_time_deny_tmp = reader.ReadLine().Split('/');
             before_time_deny.Checked = Convert.ToBoolean(before_time_deny_tmp[1]);
+
+            //보유종목매수금지
+            String[] hold_deny_tmp = reader.ReadLine().Split('/');
+            hold_deny.Checked = Convert.ToBoolean(hold_deny_tmp[1]);
 
             //매수조건
             String[] buy_condition_tmp = reader.ReadLine().Split('/');
@@ -399,13 +399,13 @@ namespace WindowsFormsApp1
 
             //손절시간외단일가
 
-            //매매코스피연동
+            //매매코스피연동(대기)
 
-            //매매코스닥연동
+            //매매코스닥연동(대기)
 
-            //매매코스피선물연동
+            //매매코스피선물연동(대기)
 
-            //매매코스닥선물연동
+            //매매코스닥선물연동(대기)
 
             //전체청산
             String[] clear_sell_tmp = reader.ReadLine().Split('/');
@@ -436,22 +436,22 @@ namespace WindowsFormsApp1
 
             //청산익절시간외단일가
 
-            //청산코스피연동
+            //청산코스피연동(대기)
 
-            //청산코스닥연동
+            //청산코스닥연동(대기)
 
-            //청산코스피선물연동
+            //청산코스피선물연동(대기)
 
-            //청산코스닥선물연동
+            //청산코스닥선물연동(대기)
 
-            //종목매수텀
+            //종목매수텀(대기)
             String[] term_for_buy_tmp = reader.ReadLine().Split('/');
             term_for_buy.Checked = Convert.ToBoolean(term_for_buy_tmp[1]);
             term_for_buy_text.Text = term_for_buy_tmp[2];
 
-            //종목매도텀
+            //종목매도텀(대기)
 
-            //미체결매수취소
+            //미체결매수취소(대기)
             String[] term_for_non_buy_tmp = reader.ReadLine().Split('/');
             term_for_non_buy.Checked = Convert.ToBoolean(term_for_non_buy_tmp[1]);
             term_for_non_buy_text.Text = term_for_non_buy_tmp[2];
@@ -466,25 +466,25 @@ namespace WindowsFormsApp1
             sell_set1.SelectedIndex = Convert.ToInt32(sell_set_tmp[1]);
             sell_set2.SelectedIndex = Convert.ToInt32(sell_set_tmp[2]);
 
-            //코스피지수
+            //코스피지수(대기)
             String[] kospi_index_tmp = reader.ReadLine().Split('/');
             kospi_index.Checked = Convert.ToBoolean(kospi_index_tmp[1]);
             kospi_index_start.Text = kospi_index_tmp[2];
             kospi_index_end.Text = kospi_index_tmp[3];
 
-            //코스닥지수
+            //코스닥지수(대기)
             String[] kosdak_index_tmp = reader.ReadLine().Split('/');
             kosdak_index.Checked = Convert.ToBoolean(kosdak_index_tmp[1]);
             kosdak_index_start.Text = kosdak_index_tmp[2];
             kosdak_index_end.Text = kosdak_index_tmp[3];
 
-            //코스피선물
+            //코스피선물(대기)
             String[] kospi_commodity_tmp = reader.ReadLine().Split('/');
             kospi_commodity.Checked = Convert.ToBoolean(kospi_commodity_tmp[1]);
             kospi_commodity_start.Text = kospi_commodity_tmp[2];
             kospi_commodity_end.Text = kospi_commodity_tmp[3];
 
-            //코스닥선물
+            //코스닥선물(대기)
             String[] kosdak_commodity_tmp = reader.ReadLine().Split('/');
             kosdak_commodity.Checked = Convert.ToBoolean(kosdak_commodity_tmp[1]);
             kosdak_commodity_start.Text = kosdak_commodity_tmp[2];

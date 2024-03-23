@@ -565,8 +565,8 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel4.Controls.Add(this.max_hold, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.duplication_deny, 0, 1);
             this.tableLayoutPanel4.Controls.Add(this.max_hold_text, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.hold_deny, 0, 2);
-            this.tableLayoutPanel4.Controls.Add(this.before_time_deny, 0, 3);
+            this.tableLayoutPanel4.Controls.Add(this.before_time_deny, 0, 2);
+            this.tableLayoutPanel4.Controls.Add(this.hold_deny, 0, 3);
             this.tableLayoutPanel4.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.tableLayoutPanel4.Location = new System.Drawing.Point(6, 28);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -623,9 +623,9 @@ namespace WindowsFormsApp1
             this.hold_deny.AutoSize = true;
             this.hold_deny.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.hold_deny.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.hold_deny.Location = new System.Drawing.Point(3, 75);
+            this.hold_deny.Location = new System.Drawing.Point(3, 111);
             this.hold_deny.Name = "hold_deny";
-            this.hold_deny.Size = new System.Drawing.Size(250, 30);
+            this.hold_deny.Size = new System.Drawing.Size(250, 32);
             this.hold_deny.TabIndex = 10;
             this.hold_deny.Text = "보유 종목 매수 금지(대기)";
             this.hold_deny.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -638,9 +638,9 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.before_time_deny.AutoSize = true;
             this.before_time_deny.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.before_time_deny.Location = new System.Drawing.Point(3, 111);
+            this.before_time_deny.Location = new System.Drawing.Point(3, 75);
             this.before_time_deny.Name = "before_time_deny";
-            this.before_time_deny.Size = new System.Drawing.Size(250, 32);
+            this.before_time_deny.Size = new System.Drawing.Size(250, 30);
             this.before_time_deny.TabIndex = 11;
             this.before_time_deny.Text = "시간전 검출 매수 금지";
             this.before_time_deny.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
