@@ -1483,6 +1483,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.sell_condtion_method.AutoSize = true;
             this.sell_condtion_method.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.sell_condtion_method.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.sell_condtion_method.Location = new System.Drawing.Point(1667, 0);
             this.sell_condtion_method.Name = "sell_condtion_method";
             this.sell_condtion_method.Size = new System.Drawing.Size(205, 36);
@@ -1511,6 +1512,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.sell_condtion.AutoSize = true;
             this.sell_condtion.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.sell_condtion.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.sell_condtion.Location = new System.Drawing.Point(1251, 0);
             this.sell_condtion.Name = "sell_condtion";
             this.sell_condtion.Size = new System.Drawing.Size(202, 36);
@@ -1539,6 +1541,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buy_condtion_method.AutoSize = true;
             this.buy_condtion_method.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.buy_condtion_method.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.buy_condtion_method.Location = new System.Drawing.Point(835, 0);
             this.buy_condtion_method.Name = "buy_condtion_method";
             this.buy_condtion_method.Size = new System.Drawing.Size(202, 36);
@@ -1567,6 +1570,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buy_condition.AutoSize = true;
             this.buy_condition.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.buy_condition.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.buy_condition.Location = new System.Drawing.Point(419, 0);
             this.buy_condition.Name = "buy_condition";
             this.buy_condition.Size = new System.Drawing.Size(202, 36);

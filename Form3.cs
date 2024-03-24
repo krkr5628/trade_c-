@@ -127,7 +127,6 @@ namespace WindowsFormsApp1
         {
             if (trade_auto != null)
             {
-                MessageBox.Show("이게마나");
                 trade_auto.Close(); //폼을 닫고 닫기 이벤트를 발생, 폼이 닫힌 후에도 폼 객체는 메모리에 남음
                 trade_auto.Dispose(); //폼이 사용한 모든 리소스(메모리, 핸들 등)를 해제
                 trade_auto = null; //폼 객체에 대한 참조를 제거하여 리소스 누수(memory leak)를 방지

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Windows.Forms;
 
 
 namespace WindowsFormsApp1
@@ -58,42 +59,43 @@ namespace WindowsFormsApp1
         public static string profit_won_text; //익절원
         public static bool profit_ts;
         public static string profit_ts_text; //익절TS
-        //익정동시호가
-        //익절시간외단일가
+        public static bool profit_after1; //익정동시호가
+        public static bool profit_after2; //익절시간외단일가
+        public static bool profit_index_connection1; //익절 인덱스 연동1
+        public static bool profit_index_connection2; //익절 인덱스 연동2
+
         public static bool loss_percent;
         public static string loss_percent_text; //손절
         public static bool loss_won;
         public static string loss_won_text; //손절원
-        //손절동시호가
-        //손절시간외단일가
-        //매매코스피연동
-        //매매코스닥연동
-        //매매코스피선물연동
-        //매매코스닥선물연동
+        public static bool loss_after1; //손절동시호가
+        public static bool loss_after2; //손절시간외단일가
+        public static bool loss_index_connection1; //손절 인덱스 연동1
+        public static bool loss_index_connection2; //손절 인덱스 연동2
 
         public static bool clear_sell; //전체청산
+        public static bool clear_sell_mode; //개별청산
         public static string clear_sell_start;
         public static string clear_sell_end;
         public static bool clear_sell_profit; 
         public static string clear_sell_profit_text; //청산익절
-        public static bool after_market_profit; //동시호가익절
-        //청산익절시간외단일가
+        public static bool clear_sell_profit_after1; //동시호가익절
+        public static bool clear_sell_profit_after2;//청산익절시간외단일가
+        public static bool clear_sell_index_connection1; //일반 & 익절 인덱스 연동1
+        public static bool clear_sell_index_connection2; //일반 & 익절 인덱스 연동2
         public static bool clear_sell_loss;
         public static string clear_sell_loss_text;//청산손절
-        public static bool after_market_loss;//동시호가손절
-        //청산익절시간외단일가
-        //청산코스피연동
-        //청산코스닥연동
-        //청산코스피선물연동
-        //청산코스닥선물연동
+        public static bool clear_sell_loss_after1;//동시호가손절
+        public static bool clear_sell_loss_after2;//청산익절시간외단일가
+        public static bool clear_sell_loss_index_connection1; //청산 인덱스 연동1
+        public static bool clear_sell_loss_index_connection2; //청산 인덱스 연동2
 
         public static bool term_for_buy;
         public static string term_for_buy_text;//종목매수텀
-        //종목매도텀
-        //종목매도텀
-        public static bool term_for_non_buy;
-        public static string term_for_non_buy_text; //미체결매수취소
-        //미체결매도취소
+        public static bool term_for_sell;
+        public static string term_for_sell_text;//종목매도텀
+        public static bool term_for_non_buy; //미체결매수취소
+        public static bool term_for_non_sell;//미체결매도취소
 
         public static int buy_set1; //매수설정
         public static int buy_set2;
@@ -101,17 +103,22 @@ namespace WindowsFormsApp1
         public static int sell_set2;
 
         public static bool kospi_index;
-        public static string kospi_index_start;
-        public static string kospi_index_end;
         public static bool kosdak_index;
-        public static string kosdak_index_start;
-        public static string kosdak_index_end;
         public static bool kospi_commodity;
-        public static string kospi_commodity_start;
-        public static string kospi_commodity_end;
         public static bool kosdak_commodity;
-        public static string kosdak_commodity_start;
-        public static string kosdak_commodity_end;
+
+        public static string type1_selection;
+        public static string type1_start;
+        public static string type1_end;
+        public static string type2_selection;
+        public static string type2_start;
+        public static string type2_end;
+        public static string type3_selection;
+        public static string type3_start;
+        public static string type3_end;
+        public static string type4_selection;
+        public static string type4_start;
+        public static string type4_end;
 
         public static bool KIS_Allow;
         public static string KIS_appkey;
@@ -235,8 +242,20 @@ namespace WindowsFormsApp1
             profit_ts_text = profit_ts_tmp[2];
 
             //익정동시호가
+            String[] profit_after1_tmp = reader.ReadLine().Split('/');
+            profit_after1 = Convert.ToBoolean(profit_after1_tmp[1]);
 
             //익절시간외단일가
+            String[] profit_after2_tmp = reader.ReadLine().Split('/');
+            profit_after2 = Convert.ToBoolean(profit_after2_tmp[1]);
+
+            //익절인덱스연동1 
+            String[] profit_index_connection1_tmp = reader.ReadLine().Split('/');
+            profit_index_connection1 = Convert.ToBoolean(profit_index_connection1_tmp[1]);
+
+            //익절인덱스연동2
+            String[] profit_index_connection2_tmp = reader.ReadLine().Split('/');
+            profit_index_connection2 = Convert.ToBoolean(profit_index_connection2_tmp[1]);
 
             //손절
             String[] loss_percent_tmp = reader.ReadLine().Split('/');
@@ -249,16 +268,21 @@ namespace WindowsFormsApp1
             loss_won_text = loss_won_tmp[2];
 
             //손절동시호가
+            String[] loss_after1_tmp = reader.ReadLine().Split('/');
+            loss_after1 = Convert.ToBoolean(loss_after1_tmp[1]);
 
             //손절시간외단일가
+            String[] loss_after2_tmp = reader.ReadLine().Split('/');
+            loss_after2 = Convert.ToBoolean(loss_after2_tmp[1]);
 
-            //매매코스피연동(대기)
 
-            //매매코스닥연동(대기)
+            //손절인덱스연동1
+            String[] loss_index_connection1_tmp = reader.ReadLine().Split('/');
+            loss_index_connection1 = Convert.ToBoolean(loss_index_connection1_tmp[1]);
 
-            //매매코스피선물연동(대기)
-
-            //매매코스닥선물연동(대기)
+            //손절인덱스연동2
+            String[] loss_index_connection2_tmp = reader.ReadLine().Split('/');
+            loss_index_connection2 = Convert.ToBoolean(loss_index_connection2_tmp[1]);
 
             //전체청산
             String[] clear_sell_tmp = reader.ReadLine().Split('/');
@@ -266,16 +290,30 @@ namespace WindowsFormsApp1
             clear_sell_start = clear_sell_tmp[2];
             clear_sell_end = clear_sell_tmp[3];
 
+            //청산모드선택
+            String[] clear_sell_mode_tmp = reader.ReadLine().Split('/');
+            clear_sell_mode = Convert.ToBoolean(clear_sell_mode_tmp[1]);
+
             //청산익절
             String[] clear_sell_profit_tmp = reader.ReadLine().Split('/');
             clear_sell_profit = Convert.ToBoolean(clear_sell_profit_tmp[1]);
             clear_sell_profit_text = clear_sell_profit_tmp[2];
 
             //청산익절동시호가
-            String[] after_market_profit_tmp = reader.ReadLine().Split('/');
-            after_market_profit = Convert.ToBoolean(after_market_profit_tmp[1]);
+            String[] clear_sell_profit_after1_tmp = reader.ReadLine().Split('/');
+            clear_sell_profit_after1 = Convert.ToBoolean(clear_sell_profit_after1_tmp[1]);
 
             //청산익절시간외단일가
+            String[] clear_sell_profit_after2_tmp = reader.ReadLine().Split('/');
+            clear_sell_profit_after2 = Convert.ToBoolean(clear_sell_profit_after2_tmp[1]);
+
+            //청산일반익절인덱스연동1
+            String[] clear_sell_index_connection1_tmp = reader.ReadLine().Split('/');
+            clear_sell_index_connection1 = Convert.ToBoolean(clear_sell_index_connection1_tmp[1]);
+
+            //청산일반익절인덱스연동2
+            String[] clear_sell_index_connection2_tmp = reader.ReadLine().Split('/');
+            clear_sell_index_connection2 = Convert.ToBoolean(clear_sell_index_connection2_tmp[1]);
 
             //청산손절
             String[] clear_sell_loss_tmp = reader.ReadLine().Split('/');
@@ -283,18 +321,20 @@ namespace WindowsFormsApp1
             clear_sell_loss_text = clear_sell_loss_tmp[2];
 
             //청산손절동시호가
-            String[] after_market_loss_tmp = reader.ReadLine().Split('/');
-            after_market_loss = Convert.ToBoolean(after_market_loss_tmp[1]);
+            String[] clear_sell_loss_after1_tmp = reader.ReadLine().Split('/');
+            clear_sell_loss_after1 = Convert.ToBoolean(clear_sell_loss_after1_tmp[1]);
 
             //청산익절시간외단일가
+            String[] clear_sell_loss_after2_tmp = reader.ReadLine().Split('/');
+            clear_sell_loss_after2 = Convert.ToBoolean(clear_sell_loss_after2_tmp[1]);
 
-            //청산코스피연동(대기)
+            //청산손절인덱스연동1
+            String[] clear_sell_loss_index_connection1_tmp = reader.ReadLine().Split('/');
+            clear_sell_loss_index_connection1 = Convert.ToBoolean(clear_sell_loss_index_connection1_tmp[1]);
 
-            //청산코스닥연동(대기)
-
-            //청산코스피선물연동(대기)
-
-            //청산코스닥선물연동(대기)
+            //청산손절인덱스연동2
+            String[] clear_sell_loss_index_connection2_tmp = reader.ReadLine().Split('/');
+            clear_sell_loss_index_connection2 = Convert.ToBoolean(clear_sell_loss_index_connection2_tmp[1]);
 
             //종목매수텀(대기)
             String[] term_for_buy_tmp = reader.ReadLine().Split('/');
@@ -302,13 +342,17 @@ namespace WindowsFormsApp1
             term_for_buy_text = term_for_buy_tmp[2];
 
             //종목매도텀(대기)
+            String[] term_for_sell_tmp = reader.ReadLine().Split('/');
+            term_for_sell = Convert.ToBoolean(term_for_sell_tmp[1]);
+            term_for_sell_text = term_for_sell_tmp[2];
 
             //미체결매수취소(대기)
             String[] term_for_non_buy_tmp = reader.ReadLine().Split('/');
             term_for_non_buy = Convert.ToBoolean(term_for_non_buy_tmp[1]);
-            term_for_non_buy_text = term_for_non_buy_tmp[2];
 
             //미체결매도취소(대기)
+            String[] term_for_non_sell_tmp = reader.ReadLine().Split('/');
+            term_for_non_sell = Convert.ToBoolean(term_for_non_sell_tmp[1]);
 
             //매수설정
             String[] buy_set_tmp = reader.ReadLine().Split('/');
@@ -323,26 +367,42 @@ namespace WindowsFormsApp1
             //코스피지수
             String[] kospi_index_tmp = reader.ReadLine().Split('/');
             kospi_index = Convert.ToBoolean(kospi_index_tmp[1]);
-            kospi_index_start = kospi_index_tmp[2];
-            kospi_index_end = kospi_index_tmp[3];
 
             //코스닥지수
             String[] kosdak_index_tmp = reader.ReadLine().Split('/');
             kosdak_index = Convert.ToBoolean(kosdak_index_tmp[1]);
-            kosdak_index_start = kosdak_index_tmp[2];
-            kosdak_index_end = kosdak_index_tmp[3];
 
             //코스피선물
             String[] kospi_commodity_tmp = reader.ReadLine().Split('/');
             kospi_commodity = Convert.ToBoolean(kospi_commodity_tmp[1]);
-            kospi_commodity_start = kospi_commodity_tmp[2];
-            kospi_commodity_end = kospi_commodity_tmp[3];
 
             //코스닥선물
             String[] kosdak_commodity_tmp = reader.ReadLine().Split('/');
             kosdak_commodity = Convert.ToBoolean(kosdak_commodity_tmp[1]);
-            kosdak_commodity_start = kosdak_commodity_tmp[2];
-            kosdak_commodity_end = kosdak_commodity_tmp[3];
+
+            //#1
+            String[] type1_selection_tmp = reader.ReadLine().Split('/');
+            type1_selection = Convert.ToString(type1_selection_tmp[1]);
+            type1_start = Convert.ToString(type1_selection_tmp[2]);
+            type1_end = Convert.ToString(type1_selection_tmp[3]);
+
+            //#2
+            String[] type2_selection_tmp = reader.ReadLine().Split('/');
+            type2_selection = Convert.ToString(type2_selection_tmp[1]);
+            type2_start = Convert.ToString(type2_selection_tmp[2]);
+            type2_end = Convert.ToString(type2_selection_tmp[3]);
+
+            //#3
+            String[] type3_selection_tmp = reader.ReadLine().Split('/');
+            type3_selection = Convert.ToString(type3_selection_tmp[1]);
+            type3_start = Convert.ToString(type3_selection_tmp[2]);
+            type3_end = Convert.ToString(type3_selection_tmp[3]);
+
+            //#4
+            String[] type4_selection_tmp = reader.ReadLine().Split('/');
+            type4_selection = Convert.ToString(type4_selection_tmp[1]);
+            type4_start = Convert.ToString(type4_selection_tmp[2]);
+            type4_end = Convert.ToString(type4_selection_tmp[3]);
 
             //한국투자증권KIS_Allow
             String[] KIS_Allow_tmp = reader.ReadLine().Split('/');
@@ -373,6 +433,7 @@ namespace WindowsFormsApp1
             telegram_token = telegram_token_tmp[1];
 
             reader.Close();
+
         }
     }
 }

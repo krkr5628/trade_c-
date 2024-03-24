@@ -121,6 +121,7 @@ namespace WindowsFormsApp1
             //운영시간 아님
             if (!isRunned && t_now >= t_start && t_now <= t_end)
             {
+                isRunned = true;
                 //초기 설정 반영
                 await initial_allow();
 
@@ -132,12 +133,11 @@ namespace WindowsFormsApp1
 
                 timer3.Start(); //편입 종목 감시 - 200ms
 
-                isRunned = true;
             }
             else if(isRunned && t_now > t_end)
             {
-                real_time_stop(true);
                 isRunned = false;
+                real_time_stop(true);
             }
         }
 
