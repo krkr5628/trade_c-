@@ -162,22 +162,29 @@ namespace WindowsFormsApp1
             switch (errorcode)
             {
                 case 0:
-                    WriteLog("정상조회\n");
+                    WriteLog_System_Order("정상조회\n");
                     break;
                 case 200:
-                    WriteLog("시세과부화\n");
+                    WriteLog_System_Order("시세과부화\n");
                     break;
                 case 201:
-                    WriteLog("조회전문작성 에러\n");
+                    WriteLog_System_Order("조회전문작성 에러\n");
                     break;
             }
         }
 
-        //로그창
-        private void WriteLog(string message)
+        //로그창(System, Order)
+        private void WriteLog_System_Order(string message)
         {
                 string time = DateTime.Now.ToString("HH:mm:ss");
                 log_window.AppendText($@"{"[" + time + "] " + message}");
+        }
+
+        //로그창(Stock)
+        private void WriteLog_Stock(string message)
+        {
+            string time = DateTime.Now.ToString("HH:mm:ss");
+            log_window2.AppendText($@"{"[" + time + "] " + message}");
         }
 
         //telegram_chat
@@ -299,7 +306,7 @@ namespace WindowsFormsApp1
             initial_KIS();
 
             //
-            WriteLog("세팅 반영 완료\n");
+            WriteLog_System_Order("세팅 반영 완료\n");
             telegram_message("세팅 반영 완료\n");
         }
 
@@ -318,7 +325,7 @@ namespace WindowsFormsApp1
             if (login_check == 0)
             {
                 // 정상 처리
-                WriteLog("로그인 성공\n");
+                WriteLog_System_Order("로그인 성공\n");
                 telegram_message("로그인 성공\n");
 
                 //"ACCOUNT_CNT" : 보유계좌 갯수
@@ -381,15 +388,14 @@ namespace WindowsFormsApp1
                 today_profit_tax_load();
 
                 //조건식 검색 => 계좌 보유 현황 확인 => 초기 보유 종목 테이블 업데이트 => 실시간 조건 검색 시작
-                WriteLog("조건식 검색ing\n");
                 if (axKHOpenAPI1.GetConditionLoad() == 1)
                 {
-                    WriteLog("조건식 검색 성공\n");
+                    WriteLog_System_Order("조건식 검색 성공\n");
                     telegram_message("조건식 검색 성공\n");
                 }
                 else
                 {
-                    WriteLog("조건식 검색 실패\n");
+                    WriteLog_System_Order("조건식 검색 실패\n");
                     telegram_message("조건식 검색 실패\n");
                 }
 
@@ -399,15 +405,15 @@ namespace WindowsFormsApp1
                 switch (login_check)
                 {
                     case 100:
-                        WriteLog("사용자 정보교환 실패\n");
+                        WriteLog_System_Order("사용자 정보교환 실패\n");
                         telegram_message("사용자 정보교환 실패\n");
                         break;
                     case 101:
-                        WriteLog("서버접속 실패\n");
+                        WriteLog_System_Order("서버접속 실패\n");
                         telegram_message("서버접속 실패\n");
                         break;
                     case 102:
-                        WriteLog("버전처리 실패\n");
+                        WriteLog_System_Order("버전처리 실패\n");
                         telegram_message("버전처리 실패\n");
                         break;
                 }
@@ -459,7 +465,7 @@ namespace WindowsFormsApp1
                     Name = item[1]
                 });
             }
-            WriteLog("조건식 조회 성공\n");
+            WriteLog_System_Order("조건식 조회 성공\n");
             telegram_message("조건식 조회 성공\n");
 
             //계좌 보유 현황 확인 => 초기 보유 종목 테이블 업데이트 => 실시간 조건 검색 시작
@@ -484,7 +490,7 @@ namespace WindowsFormsApp1
         {
             if(dtCondStock_hold.Rows.Count == 0)
             {
-                WriteLog("기존에 보유중인 종목이 없습니다.\n");
+                WriteLog_System_Order("기존에 보유중인 종목이 없습니다.\n");
                 telegram_message("기존에 보유중인 종목이 없습니다.\n");
                 maxbuy_acc.Text = "0/" + utility.maxbuy_acc;
                 if (utility.max_hold)
@@ -502,7 +508,7 @@ namespace WindowsFormsApp1
             }
 
             //
-            WriteLog("기존에 보유중인 종목이 있습니다.\n");
+            WriteLog_System_Order("기존에 보유중인 종목이 있습니다.\n");
             telegram_message("기존에 보유중인 종목이 있습니다.\n");
 
             foreach (DataRow row in dtCondStock_hold.Rows)
@@ -544,27 +550,27 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    WriteLog("자동 조건식 매수 미설정\n");
+                    WriteLog_System_Order("자동 조건식 매수 미설정\n");
                     telegram_message("자동 조건식 매수 미설정\n");
                 }
 
                 //자동 매도 조건식 설정 여부
                 if (utility.sell_condition)
                 {
-                    WriteLog("실시간 조건식 매도 시작\n");
+                    WriteLog_System_Order("실시간 조건식 매도 시작\n");
                     telegram_message("실시간 조건식 매도 시작\n");
                     real_time_search(null, EventArgs.Empty);
 
                 }
                 else
                 {
-                    WriteLog("자동 조건식 매도 미설정\n");
+                    WriteLog_System_Order("자동 조건식 매도 미설정\n");
                     telegram_message("자동 조건식 매도 미설정\n");
                 }
             }
             else
             {
-                WriteLog("자동 실행 미설정\n");
+                WriteLog_System_Order("자동 실행 미설정\n");
                 telegram_message("자동 실행 미설정\n");
             }
         }
@@ -617,7 +623,7 @@ namespace WindowsFormsApp1
                     all_profit.Text = string.Format("{0:#,##0}", Convert.ToDecimal(Convert.ToInt32(Current_User_money.Text.Replace(",","")) - Convert.ToInt32(total_money.Text.Replace(",", "")))); //수익
                     all_profit_percent.Text = string.Format("{0:#,##0.00}%", Convert.ToDecimal(Convert.ToDouble(all_profit.Text.Replace(",", "")) / Convert.ToDouble(total_money.Text.Replace(",", "")) * 100)); //수익률
 
-                    WriteLog("예수금 : " + User_money.Text + "\n");
+                    WriteLog_System_Order("예수금 : " + User_money.Text + "\n");
                     telegram_message("예수금 : " + User_money.Text + "\n");
                     break;
 
@@ -631,7 +637,7 @@ namespace WindowsFormsApp1
                     all_profit_percent.Text = string.Format("{0:#,##0.00}%", Convert.ToDecimal(Convert.ToDouble(all_profit.Text.Replace(",", "")) / Convert.ToDouble(total_money.Text.Replace(",", "")) * 100)); //수익률수익률
 
                     //
-                    WriteLog("예수금 : " + User_money.Text + "\n");
+                    WriteLog_System_Order("예수금 : " + User_money.Text + "\n");
                     telegram_message("예수금 : " + User_money.Text + "\n");
                     break;
 
@@ -684,21 +690,21 @@ namespace WindowsFormsApp1
             
                 //개별 증권 데이터 조회
                 case "주식기본정보":
-                    WriteLog("------------------------------------\n");
-                    WriteLog(string.Format("종목코드: {0}\n", axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목코드").Trim()));
-                    WriteLog(string.Format("종목명: {0}\n", axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목명").Trim()));
-                    WriteLog(string.Format("연중최고: {0:#,##0}\n", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "연중최고").Trim())));
-                    WriteLog(string.Format("연중최저: {0:#,##0}\n", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "연중최저").Trim())));
-                    WriteLog(string.Format("PER: {0:#,##0.00}\n", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "PER").Trim())));
-                    WriteLog(string.Format("EPS: {0:#,##0}\n", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "EPS").Trim())));
-                    WriteLog(string.Format("ROE: {0:#,##0.00}\n", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "ROE").Trim())));
-                    WriteLog(string.Format("PBR: {0:#,##0.00}\n", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "PBR").Trim())));
-                    WriteLog(string.Format("EV: {0:#,##0.00}\n", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "EV").Trim())));
-                    WriteLog(string.Format("BPS: {0:#,##0}\n", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "BPS").Trim())));
-                    WriteLog(string.Format("신용비율: {0:#,##0.00}%\n", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "신용비율").Trim())));
-                    WriteLog(string.Format("외인소진률: {0:#,##0.00}%\n", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "외인소진률").Trim())));
-                    WriteLog(string.Format("거래량: {0:#,##0}\n", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "거래량").Trim())));
-                    WriteLog("------------------------------------\n");
+                    WriteLog_Stock("------------------------------------\n");
+                    WriteLog_Stock(string.Format("종목코드: {0}\n", axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목코드").Trim()));
+                    WriteLog_Stock(string.Format("종목명: {0}\n", axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목명").Trim()));
+                    WriteLog_Stock(string.Format("연중최고: {0:#,##0}\n", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "연중최고").Trim())));
+                    WriteLog_Stock(string.Format("연중최저: {0:#,##0}\n", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "연중최저").Trim())));
+                    WriteLog_Stock(string.Format("PER: {0:#,##0.00}\n", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "PER").Trim())));
+                    WriteLog_Stock(string.Format("EPS: {0:#,##0}\n", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "EPS").Trim())));
+                    WriteLog_Stock(string.Format("ROE: {0:#,##0.00}\n", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "ROE").Trim())));
+                    WriteLog_Stock(string.Format("PBR: {0:#,##0.00}\n", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "PBR").Trim())));
+                    WriteLog_Stock(string.Format("EV: {0:#,##0.00}\n", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "EV").Trim())));
+                    WriteLog_Stock(string.Format("BPS: {0:#,##0}\n", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "BPS").Trim())));
+                    WriteLog_Stock(string.Format("신용비율: {0:#,##0.00}%\n", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "신용비율").Trim())));
+                    WriteLog_Stock(string.Format("외인소진률: {0:#,##0.00}%\n", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "외인소진률").Trim())));
+                    WriteLog_Stock(string.Format("거래량: {0:#,##0}\n", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "거래량").Trim())));
+                    WriteLog_Stock("------------------------------------\n");
                     break;
 
                 //기존보유
@@ -709,7 +715,7 @@ namespace WindowsFormsApp1
                     string code_name3 = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목명").Trim();
                     string high3 = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "상한가").Trim();
                     //
-                    WriteLog("[기존종목/편입] : " + code3 + "-" + code_name3 + "\n");
+                    WriteLog_Stock("[기존종목/편입] : " + code3 + "-" + code_name3 + "\n");
                     telegram_message("[기존종목/편입] : " + code3 + "-" + code_name3 + "\n");
                     //
                     dtCondStock.Rows.Add(
@@ -750,7 +756,7 @@ namespace WindowsFormsApp1
 
                         string code_name = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "종목명").Trim();
                         //
-                        WriteLog("[신규종목/초기/" + condition_nameORcode + "] : " + code + "-" + code_name + "\n");
+                        WriteLog_Stock("[신규종목/초기/" + condition_nameORcode + "] : " + code + "-" + code_name + "\n");
                         //
                         string high1 = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "상한가").Trim();
                         string now_hold1 = "0";
@@ -802,7 +808,7 @@ namespace WindowsFormsApp1
                     string code2 = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목코드").Trim();
                     string code_name2 = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "종목명").Trim();
                     //
-                    WriteLog("[신규종목/편입/" + condition_nameORcode + "] : " + code2 + "-" + code_name2 + "\n");
+                    WriteLog_Stock("[신규종목/편입/" + condition_nameORcode + "] : " + code2 + "-" + code_name2 + "\n");
                     //
                     string high2 = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "상한가").Trim();
                     string now_hold2 = "0";
@@ -926,7 +932,7 @@ namespace WindowsFormsApp1
                 return;
             }
 
-            WriteLog("[종목 조회]\n");
+            WriteLog_System_Order("[종목 조회]\n");
             SearchStockInfo(Stock_code.Text.Trim());
 
         }
@@ -964,7 +970,7 @@ namespace WindowsFormsApp1
             // 검색된 조건식이 없을시
             if (string.IsNullOrEmpty(buy_condition.Text))
             {
-                WriteLog("실시간조건식검색 : 중단실패(조건식없음)\n");
+                WriteLog_System_Order("실시간조건식검색 : 중단실패(조건식없음)\n");
                 telegram_message("실시간조건식검색 : 중단실패(조건식없음)\n");
                 Real_time_stop_btn.Enabled = true;
                 Real_time_search_btn.Enabled = false;
@@ -978,7 +984,7 @@ namespace WindowsFormsApp1
             timer3.Stop();
 
             //실시간 중지
-            WriteLog("실시간조건식검색 : 중단\n");
+            WriteLog_System_Order("실시간조건식검색 : 중단\n");
             telegram_message("실시간조건식검색 : 중단\n");
             axKHOpenAPI1.SendConditionStop(GetScreenNo(), condition[1], Convert.ToInt32(condition[0])); //조건검색 중지
             if(real_price_all_stop){
@@ -1007,7 +1013,7 @@ namespace WindowsFormsApp1
             }
             else
             {
-                WriteLog("전체청산을 위한 종목이 없습니다.\n");
+                WriteLog_System_Order("전체청산을 위한 종목이 없습니다.\n");
                 telegram_message("전체청산을 위한 종목이 없습니다.\n");
             }
         }
@@ -1034,7 +1040,7 @@ namespace WindowsFormsApp1
             }
             else
             {
-                WriteLog("수익청산을 위한 종목이 없습니다.\n");
+                WriteLog_System_Order("수익청산을 위한 종목이 없습니다.\n");
                 telegram_message("수익청산을 위한 종목이 없습니다.\n");
             }
         }
@@ -1061,7 +1067,7 @@ namespace WindowsFormsApp1
             }
             else
             {
-                WriteLog("손실청산을 위한 종목이 없습니다.\n");
+                WriteLog_System_Order("손실청산을 위한 종목이 없습니다.\n");
                 telegram_message("손실청산을 위한 종목이 없습니다.\n");
             }
         }
@@ -1083,7 +1089,7 @@ namespace WindowsFormsApp1
             if (condInfo.LastRequestTime != null && condInfo.LastRequestTime >= DateTime.Now.AddSeconds(-60))
             {
                 int second = 60 - (DateTime.Now - condInfo.LastRequestTime.Value).Seconds;
-                WriteLog($"{second}초 후에 조회 가능합니다.\n");
+                WriteLog_System_Order($"{second}초 후에 조회 가능합니다.\n");
                 return;
             }
 
@@ -1093,9 +1099,9 @@ namespace WindowsFormsApp1
             //화면 번호, 조건식 이름, 조건식 번호, 조회 구분(0은 일반 검색, 1은 실시간 검색)
             int result = axKHOpenAPI1.SendCondition(GetScreenNo(), condition[1], Convert.ToInt32(condition[0]), 0);
             if (result == 1)
-                WriteLog("조건식 일반 검색 성공\n");
+                WriteLog_System_Order("조건식 일반 검색 성공\n");
             else
-                WriteLog("조건식 일반 검색 실패\n");
+                WriteLog_System_Order("조건식 일반 검색 실패\n");
         }
 
         //실시간 검색(조건식 로드 후 사용가능하다)
@@ -1108,7 +1114,7 @@ namespace WindowsFormsApp1
             //조건식이 로딩되었는지
             if (string.IsNullOrEmpty(buy_condition.Text))
             {
-                WriteLog("선택된 조건식이 없습니다.\n");
+                WriteLog_System_Order("선택된 조건식이 없습니다.\n");
                 telegram_message("선택된 조건식이 없습니다.\n");
                 Real_time_stop_btn.Enabled = false;
                 Real_time_search_btn.Enabled = true;
@@ -1122,7 +1128,7 @@ namespace WindowsFormsApp1
             //로드된 조건식 목록에 설정된 조건식이 존재하지 않는 경우 이탈
             if (condInfo == null)
             {
-                WriteLog("선택된 조건식이 조건색 리스트에 없습니다.\n");
+                WriteLog_System_Order("선택된 조건식이 조건색 리스트에 없습니다.\n");
                 telegram_message("선택된 조건식이 조건색 리스트에 없습니다.\n");
                 Real_time_stop_btn.Enabled = false;
                 Real_time_search_btn.Enabled = true;
@@ -1133,7 +1139,7 @@ namespace WindowsFormsApp1
             if (condInfo.LastRequestTime != null && condInfo.LastRequestTime >= DateTime.Now.AddSeconds(-60))
             {
                 int second = 60 - (DateTime.Now - condInfo.LastRequestTime.Value).Seconds;
-                WriteLog($"{second}초 후에 조회 가능합니다.\n");
+                WriteLog_System_Order($"{second}초 후에 조회 가능합니다.\n");
                 Real_time_stop_btn.Enabled = false;
                 Real_time_search_btn.Enabled = true;
                 return;
@@ -1142,7 +1148,7 @@ namespace WindowsFormsApp1
             //마지막 조건식 검색 시각 업데이트
             condInfo.LastRequestTime = DateTime.Now;
 
-            WriteLog("실시간 조건식 매수 시작\n");
+            WriteLog_System_Order("실시간 조건식 매수 시작\n");
             telegram_message("실시간 조건식 매수 시작\n");
 
             //종목 검색 요청
@@ -1150,7 +1156,7 @@ namespace WindowsFormsApp1
             int result = axKHOpenAPI1.SendCondition(GetScreenNo(), condition[1], Convert.ToInt32(condition[0]), 1);
             if (result != 1)
             {
-                WriteLog("실시간조건검색 : 실패(조건식 고유번호와 이름을 확인해주세요.\n");
+                WriteLog_System_Order("실시간조건검색 : 실패(조건식 고유번호와 이름을 확인해주세요.\n");
                 telegram_message("실시간조건검색 : 실패(조건식 고유번호와 이름을 확인해주세요.\n");
             }
         }
@@ -1160,7 +1166,7 @@ namespace WindowsFormsApp1
         //조건식 초기 검색(일반, 실시간)
         private void onReceiveTrCondition(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrConditionEvent e)
         {
-            WriteLog("실시간조건검색 : 시작\n");
+            WriteLog_System_Order("실시간조건검색 : 시작\n");
             telegram_message("실시간조건검색 : 시작\n");
 
             string code = e.strCodeList.Trim();
@@ -1191,7 +1197,7 @@ namespace WindowsFormsApp1
                         findRows1[0]["편입시각"] = DateTime.Now.ToString("HH:mm:ss");
                         dtCondStock.AcceptChanges();
 
-                        WriteLog("[기존종목/재편입] : " + e.sTrCode + "\n");
+                        WriteLog_Stock("[기존종목/재편입] : " + e.sTrCode + "\n");
 
                         //정렬
                         var sorted_Rows = from row in dtCondStock.AsEnumerable()
@@ -1217,7 +1223,7 @@ namespace WindowsFormsApp1
                     DataRow[] findRows = dtCondStock.Select($"종목코드 = {e.sTrCode}");
                     if (findRows.Length == 0) return;
 
-                    WriteLog("[기존종목/이탈] : " + e.sTrCode + "\n");
+                    WriteLog_Stock("[기존종목/이탈] : " + e.sTrCode + "\n");
 
                     findRows[0]["편입"] = "이탈";
                     findRows[0]["이탈시각"] = DateTime.Now.ToString("HH:mm:ss");
@@ -1488,7 +1494,7 @@ namespace WindowsFormsApp1
                 //User_money.Text;
                 int order_acc_market = buy_order_cal(Convert.ToInt32(high.Replace(",","")));
 
-                WriteLog("[매수주문/시장가] : " + code + " - " + order_acc_market + "개 " + "주문이 접수되었습니다.\n");
+                WriteLog_System_Order("[매수주문/시장가] : " + code + " - " + order_acc_market + "개 " + "주문이 접수되었습니다.\n");
                 telegram_message("[매수주문/시장가] : " + code + " - " + order_acc_market + "개 " + "주문이 접수되었습니다.\n");
 
                 int error = axKHOpenAPI1.SendOrder("시장가매수", GetScreenNo(), utility.setting_account_number, 1, code, order_acc_market, 0, "03", "");
@@ -1496,7 +1502,7 @@ namespace WindowsFormsApp1
                 if (error == 0)
                 {
                     //
-                    WriteLog("[매수주문/시장가] : " + code + " - " + order_acc_market + "개 " + "주문을 성공하였습니다.\n");
+                    WriteLog_System_Order("[매수주문/시장가] : " + code + " - " + order_acc_market + "개 " + "주문을 성공하였습니다.\n");
                     telegram_message("[매수주문/시장가] : " + code + " - " + order_acc_market + "개 " + "주문을 성공하였습니다.\n");
 
                     //매매 수량 업데이트
@@ -1516,13 +1522,13 @@ namespace WindowsFormsApp1
                 }
                 else if (error == -308)
                 {
-                    WriteLog("[매수주문/시장가] : " + code + " - " + "1초에 5회 이상 주문하며 실패되었습니다.\n");
+                    WriteLog_System_Order("[매수주문/시장가] : " + code + " - " + "1초에 5회 이상 주문하며 실패되었습니다.\n");
                     telegram_message("[매수주문/시장가] : " + code + " - " + "1초에 5회 이상 주문하며 실패되었습니다.\n");
                     return "대기/0";
                 }
                 else
                 {
-                    WriteLog("[매수주문/시장가] : " + code + " - 에러코드(" + error + ")로 인하여 주문이 실패되었습니다.\n");
+                    WriteLog_System_Order("[매수주문/시장가] : " + code + " - 에러코드(" + error + ")로 인하여 주문이 실패되었습니다.\n");
                     telegram_message("[매수주문/시장가] : " + code + " - 에러코드(" + error + ")로 인하여 주문이 실패되었습니다.\n");
                     return "대기/0";
                 }
@@ -1536,7 +1542,7 @@ namespace WindowsFormsApp1
                 //지정가에 대하여 주문 가능 개수 계산
                 int order_acc = buy_order_cal(edited_price_hoga);
 
-                WriteLog("[매수주문/지정가매수] : " + code + " - " + order_acc + "개를 " + price + "원에 주문이 접수되었습니다.\n");
+                WriteLog_System_Order("[매수주문/지정가매수] : " + code + " - " + order_acc + "개를 " + price + "원에 주문이 접수되었습니다.\n");
                 telegram_message("[매수주문/지정가매수] : " + code + " - " + order_acc + "개를 " + price + "원에  주문이 접수되었습니다.\n");
 
                 int error = axKHOpenAPI1.SendOrder("지정가매수", GetScreenNo(), utility.setting_account_number, 1, code, order_acc, edited_price_hoga, "00", "");
@@ -1544,7 +1550,7 @@ namespace WindowsFormsApp1
                 if (error == 0)
                 {
                     //
-                    WriteLog("[매수주문/지정가매수] : " + code + " - " + order_acc + "개를 " + price + "원에 주문을 성공하었습니다.\n");
+                    WriteLog_System_Order("[매수주문/지정가매수] : " + code + " - " + order_acc + "개를 " + price + "원에 주문을 성공하었습니다.\n");
                     telegram_message("[매수주문/지정가매수] : " + code + " - " + order_acc + "개를 " + price + "원에 주문을 성공하었습니다.\n");
 
                     //매매 수량 업데이트
@@ -1570,13 +1576,13 @@ namespace WindowsFormsApp1
                 }
                 else if (error == -308)
                 {
-                    WriteLog("[매수주문/지정가매수] : " + code + " - " + "1초에 5회 이상 주문하며 실패되었습니다.\n");
+                    WriteLog_System_Order("[매수주문/지정가매수] : " + code + " - " + "1초에 5회 이상 주문하며 실패되었습니다.\n");
                     telegram_message("[매수주문/지정가매수] : " + code + " - " + "1초에 5회 이상 주문하며 실패되었습니다.\n");
                     return "대기";
                 }
                 else
                 {
-                    WriteLog("[매수주문/지정가매수] : " + code + " - 에러코드(" + error + ")로 인하여 주문이 실패되었습니다.\n");
+                    WriteLog_System_Order("[매수주문/지정가매수] : " + code + " - 에러코드(" + error + ")로 인하여 주문이 실패되었습니다.\n");
                     telegram_message("[매수주문/지정가매수] : " + code + " - 에러코드(" + error + ")로 인하여 주문이 실패되었습니다.\n");
                     return "대기";
                 }
@@ -1657,8 +1663,8 @@ namespace WindowsFormsApp1
 
             if (t_code.CompareTo(t_start) < 0 || t_code.CompareTo(t_end) > 0)
             {
-                WriteLog("[조건식매도/미충족] : " + code + " - " + "조건식 매도 시간이 아닙니다." + "\n");
-                WriteLog("조건식매도시간 : " + utility.sell_condition_start + " ~ " + utility.sell_condition_end + "\n");
+                WriteLog_System_Order("[조건식매도/미충족] : " + code + " - " + "조건식 매도 시간이 아닙니다." + "\n");
+                WriteLog_System_Order("조건식매도시간 : " + utility.sell_condition_start + " ~ " + utility.sell_condition_end + "\n");
                 telegram_message("[조건식매도/미충족] : " + code + " - " + "조건식 매도 시간이 아닙니다." + "\n");
                 telegram_message("조건식매도시간 : " + utility.sell_condition_start + " ~ " + utility.sell_condition_end + "\n");
                 return;
@@ -1731,7 +1737,7 @@ namespace WindowsFormsApp1
         private void sell_order(string code, string price, string sell_message)
         {
             //메시지
-            WriteLog("[" + sell_message + "/ 충족] : " + code + " - " + sell_message + "가 충족되었습니다." + "\n");
+            WriteLog_System_Order("[" + sell_message + "/ 충족] : " + code + " - " + sell_message + "가 충족되었습니다." + "\n");
             telegram_message("[" + sell_message + "/ 충족] : " + code + " - " + sell_message + "가 충족되었습니다." + "\n");
 
             //편입 차트 상태 '매도중' 변경
@@ -1746,7 +1752,7 @@ namespace WindowsFormsApp1
             //주문 방식 구분
             string[] order_method = buy_condtion_method.Text.Split('/');
 
-            WriteLog("[매도주문/" + sell_message + "] : " + code + " - " + "주문이 접수되었습니다.\n");
+            WriteLog_System_Order("[매도주문/" + sell_message + "] : " + code + " - " + "주문이 접수되었습니다.\n");
             telegram_message("[매도주문/" + sell_message + "] : " + code + " - " + "주문이 접수되었습니다.\n");
 
             //시장가 주문 + 청산주문
@@ -1757,7 +1763,7 @@ namespace WindowsFormsApp1
 
                 if (error == 0)
                 {
-                    WriteLog("[매도주문/" + sell_message + "] : " + code + " - " + order_acc + "개 "+ "주문을 성공하였습니다.\n");
+                    WriteLog_System_Order("[매도주문/" + sell_message + "] : " + code + " - " + order_acc + "개 "+ "주문을 성공하였습니다.\n");
                     telegram_message("[매도주문/" + sell_message + "] : " + code + " - " + order_acc + "개 " + "주문을 성공하였습니다.\n");
                 }
                 else if (error == -308)
@@ -1766,7 +1772,7 @@ namespace WindowsFormsApp1
                     findRows[0]["상태"] = "매수완료";
 
                     //
-                    WriteLog("[매도주문/" + sell_message + "] : " + code + " - " + "1초에 5회 이상 주문하며 실패되었습니다.\n");
+                    WriteLog_System_Order("[매도주문/" + sell_message + "] : " + code + " - " + "1초에 5회 이상 주문하며 실패되었습니다.\n");
                     telegram_message("[매도주문/" + sell_message + "] : " + code + " - " + "1초에 5회 이상 주문하며 실패되었습니다.\n");
                 }
                 else
@@ -1775,7 +1781,7 @@ namespace WindowsFormsApp1
                     findRows[0]["상태"] = "매수완료";
 
                     //
-                    WriteLog("[매도주문/" + sell_message + "] : " + code + " - 에러코드(" + error + ")로 인하여 주문이 실패되었습니다.\n");
+                    WriteLog_System_Order("[매도주문/" + sell_message + "] : " + code + " - 에러코드(" + error + ")로 인하여 주문이 실패되었습니다.\n");
                     telegram_message("[매도주문/" + sell_message + "] : " + code + " - 에러코드(" + error + ")로 인하여 주문이 실패되었습니다.\n");
                 }
             }
@@ -1788,7 +1794,7 @@ namespace WindowsFormsApp1
 
                 if (error == 0)
                 {
-                    WriteLog("[매도주문/" + sell_message + "] : " + code + " - " + order_acc + "개 " + "주문을 성공하였습니다.\n");
+                    WriteLog_System_Order("[매도주문/" + sell_message + "] : " + code + " - " + order_acc + "개 " + "주문을 성공하였습니다.\n");
                     telegram_message("[매도주문/" + sell_message + "] : " + code + " - " + order_acc + "개 " + "주문을 성공하였습니다.\n");
                 }
                 else if (error == -308)
@@ -1797,7 +1803,7 @@ namespace WindowsFormsApp1
                     findRows[0]["상태"] = "매수완료";
 
                     //
-                    WriteLog("[매도주문/" + sell_message + "] : " + code + " - " + "1초에 5회 이상 주문하며 실패되었습니다.\n");
+                    WriteLog_System_Order("[매도주문/" + sell_message + "] : " + code + " - " + "1초에 5회 이상 주문하며 실패되었습니다.\n");
                     telegram_message("[매도주문/" + sell_message + "] : " + code + " - " + "1초에 5회 이상 주문하며 실패되었습니다.\n");
                 }
                 else
@@ -1806,7 +1812,7 @@ namespace WindowsFormsApp1
                     findRows[0]["상태"] = "매수완료";
 
                     //
-                    WriteLog("[매도주문/" + sell_message + "] : " + code + " - 에러코드(" + error + ")로 인하여 주문이 실패되었습니다.\n");
+                    WriteLog_System_Order("[매도주문/" + sell_message + "] : " + code + " - 에러코드(" + error + ")로 인하여 주문이 실패되었습니다.\n");
                     telegram_message("[매도주문/" + sell_message + "] : " + code + " - 에러코드(" + error + ")로 인하여 주문이 실패되었습니다.\n");
                 }
             }
@@ -1885,25 +1891,25 @@ namespace WindowsFormsApp1
                 WriteLog("----------------------------------+\n\n");
                 */
 
-                WriteLog("----------------------------------+\n");
+                WriteLog_System_Order("----------------------------------+\n");
                 //매도수구분
                 string Gubun = axKHOpenAPI1.GetChejanData(907);
-                WriteLog("매도수구분 : " + Gubun + "\n");
+                WriteLog_System_Order("매도수구분 : " + Gubun + "\n");
 
                 //추가로드- 종목코드
                 string code = axKHOpenAPI1.GetChejanData(9001).Replace("A", "");
-                WriteLog("종목코드 : " + code + "\n");
+                WriteLog_System_Order("종목코드 : " + code + "\n");
 
                 // 누적체결수량/주문수량
                 string order_sum = axKHOpenAPI1.GetChejanData(900);
                 string partial_sum = axKHOpenAPI1.GetChejanData(911);
-                WriteLog("누적체결수량 : " + partial_sum + "/" + order_sum + "\n");
+                WriteLog_System_Order("누적체결수량 : " + partial_sum + "/" + order_sum + "\n");
 
                 //미체결수량
                 string left_Acc = axKHOpenAPI1.GetChejanData(902);
-                WriteLog("미체결수량 : " + left_Acc + "\n");
+                WriteLog_System_Order("미체결수량 : " + left_Acc + "\n");
 
-                WriteLog("----------------------------------+\n");
+                WriteLog_System_Order("----------------------------------+\n");
 
                 //데이터 업데이트
                 DataRow[] findRows = dtCondStock.Select($"종목코드 = {code}");
@@ -1933,13 +1939,12 @@ namespace WindowsFormsApp1
                     GetCashInfo(acc_text.Text.Trim(), "예수금상세현황추가");
 
                     //Message
-                    WriteLog("[매수주문/정상완료] : " + code_name + " - " + code + " 매수가 정상 완료되었습니다.\n");
+                    WriteLog_System_Order("[매수주문/정상완료] : " + code_name + " - " + code + " 매수가 정상 완료되었습니다.\n");
                     telegram_message("[매수주문/정상완료] : " + code_name + " - " + code + " 매수가 정상 완료되었습니다.\n");
                 }
                 //매도확인
                 else if(left_Acc.Equals("0"))
                 {
-                    WriteLog("Check\n");
 
                     //추가로드 - 종목이름
                     string code_name = axKHOpenAPI1.GetChejanData(302);
@@ -1963,7 +1968,7 @@ namespace WindowsFormsApp1
                     GetCashInfo(acc_text.Text.Trim(), "예수금상세현황추가");
 
                     //Message
-                    WriteLog("[매도주문/정상완료] : " + code_name + " - " + code + " 매도가 정상 완료되었습니다.\n");
+                    WriteLog_System_Order("[매도주문/정상완료] : " + code_name + " - " + code + " 매도가 정상 완료되었습니다.\n");
                     telegram_message("[매도주문/정상완료] : " + code_name + " - " + code + " 매도가 정상 완료되었습니다.\n");
 
                     //중복거래허용
