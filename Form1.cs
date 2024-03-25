@@ -1113,7 +1113,7 @@ namespace WindowsFormsApp1
 
             //검색된 조건식이 있을시
             string[] condition = buy_condition.Text.Split('^');
-            var condInfo = conditionInfo.Find(f => f.Index == Convert.ToInt32(condition[0]));
+            var condInfo = conditionInfo.Find(f => f.Index == Convert.ToInt32(condition[0]) && f.Name.Equals(condition[1]));
 
             //로드된 조건식 목록에 설정된 조건식이 존재하지 않는 경우 이탈
             if (condInfo == null)
