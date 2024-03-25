@@ -58,6 +58,16 @@ namespace WindowsFormsApp1
             max_hold_text.Leave += Max_hold_text_Leave;
             profit_won_text.Leave += Profit_won_text_Leave;
             loss_won_text.Leave += Loss_won_text_Leave;
+            term_for_buy_text.Leave += Term_for_buy_text_Leave;
+            term_for_sell_text.Leave += Term_for_sell_text_Leave;
+            type1_start.Leave += Type1_start_Leave;
+            type1_end.Leave += Type1_end_Leave;
+            type2_start.Leave += Type2_start_Leave;
+            type2_end.Leave += Type2_end_Leave;
+            type3_start.Leave += Type3_start_Leave;
+            type3_end.Leave += Type3_end_Leave;
+            type4_start.Leave += Type4_start_Leave;
+            type4_end.Leave += Type4_end_Leave;
 
             //시간확인
             market_start_time.Leave += Market_start_time_Leave;
@@ -79,106 +89,46 @@ namespace WindowsFormsApp1
             Fomula_list_buy.TextChanged += Fomula_list_buy_TextChanged;
 
             //미사용 항목 경고창(19개)
-            hold_deny.CheckedChanged += Hold_deny_CheckedChanged;
-            sell_condition.CheckedChanged += Sell_condition_CheckedChanged;
-            profit_ts.CheckedChanged += Profit_ts_CheckedChanged;
-            profit_after1.CheckedChanged += CheckBox6_CheckedChanged;
-            profit_after2.CheckedChanged += CheckBox8_CheckedChanged;
-            loss_after1.CheckedChanged += CheckBox7_CheckedChanged;
-            loss_after2.CheckedChanged += CheckBox9_CheckedChanged;
-            clear_sell_profit_after1.CheckedChanged += After_market_profit_CheckedChanged;
-            clear_sell_profit_after2.CheckedChanged += CheckBox4_CheckedChanged;
-            clear_sell_loss_after1.CheckedChanged += After_market_loss_CheckedChanged;
-            clear_sell_loss_after2.CheckedChanged += CheckBox5_CheckedChanged;
-            term_for_buy.CheckedChanged += Term_for_buy_CheckedChanged;
-            term_for_sell.CheckedChanged += Term_for_sell_CheckedChanged;
-            term_for_non_buy.CheckedChanged += Term_for_non_buy_CheckedChanged;
-            term_for_non_sell.CheckedChanged += Term_for_non_sell_CheckedChanged;
-            kospi_index.CheckedChanged += Kospi_index_CheckedChanged;
-            kosdak_index.CheckedChanged += Kosdak_index_CheckedChanged;
-            kospi_commodity.CheckedChanged += Kospi_commodity_CheckedChanged;
-            kosdak_commodity.CheckedChanged += Kosdak_commodity_CheckedChanged;
+            hold_deny.CheckedChanged += HandleCheckedChanged;
+            sell_condition.CheckedChanged += HandleCheckedChanged;
+            profit_ts.CheckedChanged += HandleCheckedChanged;
+            profit_after1.CheckedChanged += HandleCheckedChanged;
+            profit_after2.CheckedChanged += HandleCheckedChanged;
+            profit_index_connection1.CheckedChanged += HandleCheckedChanged;
+            profit_index_connection2.CheckedChanged += HandleCheckedChanged;
+            loss_after1.CheckedChanged += HandleCheckedChanged;
+            loss_after2.CheckedChanged += HandleCheckedChanged;
+            loss_index_connection1.CheckedChanged += HandleCheckedChanged;
+            loss_index_connection2.CheckedChanged += HandleCheckedChanged;
+            clear_sell_profit_after1.CheckedChanged += HandleCheckedChanged;
+            clear_sell_profit_after2.CheckedChanged += HandleCheckedChanged;
+            clear_sell_index_connection1.CheckedChanged += HandleCheckedChanged;
+            clear_sell_index_connection2.CheckedChanged += HandleCheckedChanged;
+            clear_sell_loss_after1.CheckedChanged += HandleCheckedChanged;
+            clear_sell_loss_after2.CheckedChanged += HandleCheckedChanged; ;
+            clear_sell_loss_index_connection1.CheckedChanged += HandleCheckedChanged;
+            clear_sell_loss_index_connection2.CheckedChanged += HandleCheckedChanged;
+            term_for_buy.CheckedChanged += HandleCheckedChanged;
+            term_for_sell.CheckedChanged += HandleCheckedChanged;
+            term_for_non_buy.CheckedChanged += HandleCheckedChanged;
+            term_for_non_sell.CheckedChanged += HandleCheckedChanged;
+            kospi_index.CheckedChanged += HandleCheckedChanged;
+            kosdak_index.CheckedChanged += HandleCheckedChanged;
+            kospi_commodity.CheckedChanged += HandleCheckedChanged;
+            kosdak_commodity.CheckedChanged += HandleCheckedChanged;
         }
 
         //----------------------------미사용 항목 경고창----------------------------------------
 
-        private void Hold_deny_CheckedChanged(object sender, EventArgs e)
+        private void HandleCheckedChanged(object sender, EventArgs e)
         {
-            hold_deny.Checked = false;
-            MessageBox.Show("준비중입니다.", "개발중", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
-
-        private void Sell_condition_CheckedChanged(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-        private void Profit_ts_CheckedChanged(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-        private void CheckBox6_CheckedChanged(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-        private void CheckBox8_CheckedChanged(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-        private void CheckBox7_CheckedChanged(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-        private void CheckBox9_CheckedChanged(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-        private void After_market_profit_CheckedChanged(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-        private void CheckBox4_CheckedChanged(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-        private void After_market_loss_CheckedChanged(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-        private void CheckBox5_CheckedChanged(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-        private void Term_for_buy_CheckedChanged(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-        private void Term_for_sell_CheckedChanged(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-        private void Term_for_non_buy_CheckedChanged(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-        private void Term_for_non_sell_CheckedChanged(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-        private void Kospi_index_CheckedChanged(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-        private void Kosdak_index_CheckedChanged(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-        private void Kospi_commodity_CheckedChanged(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-        private void Kosdak_commodity_CheckedChanged(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
+            CheckBox checkedCheckBox = (CheckBox)sender;
+            if (checkedCheckBox.Checked)
+            {
+                MessageBox.Show("준비중입니다.", "개발중", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                // 필요한 경우 여기에 특정 함수를 호출합니다.
+            }
+            checkedCheckBox.Checked = false;
         }
 
         //----------------------------KIS 및 텔레그램 확인----------------------------------------
@@ -218,84 +168,57 @@ namespace WindowsFormsApp1
 
         private void Buy_set1_Leave(object sender, EventArgs e)
         {
-            if (buy_set1.Text.Equals(""))
-            {
-                buy_set1.SelectedIndex = 1;
-                buy_set2.SelectedIndex = 6;
-                MessageBox.Show("선택된 값이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            if (buy_set1.Text.Equals("시장가"))
-            {
-                buy_set2.SelectedIndex = 6;
-                return;
-            }
-            if(buy_set1.Text.Equals("wlwjdrk") && buy_set2.SelectedIndex == 6)
-            {
-                buy_set2.SelectedIndex = 5;
-                MessageBox.Show("지정가는 시장가를 선택할 수 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            ValidateOrderType(sender, e, buy_set1, buy_set2);
         }
+
         private void Buy_set2_Leave(object sender, EventArgs e)
         {
-            if (buy_set1.Text.Equals(""))
-            {
-                buy_set1.SelectedIndex = 1;
-                buy_set2.SelectedIndex = 6;
-                MessageBox.Show("지정가 혹은 시장가를 선택하세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            if (buy_set2.Text.Equals("시장가") && !buy_set1.Text.Equals("시장가"))
-            {
-                buy_set1.SelectedIndex = 1;
-                MessageBox.Show("시장가를 선택하세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            if (!buy_set2.Text.Equals("시장가") && buy_set1.Text.Equals("시장가"))
-            {
-                buy_set1.SelectedIndex = 0;
-                MessageBox.Show("지정가를 선택하세요..", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            ValidateOrderType(sender, e, buy_set1, buy_set2);
         }
+
         private void Sell_set1_Leave(object sender, EventArgs e)
         {
-            if (sell_set1.Text.Equals(""))
+            ValidateOrderType(sender, e, sell_set1, sell_set2);
+        }
+
+        private void Sell_set2_Leave(object sender, EventArgs e)
+        {
+            ValidateOrderType(sender, e, sell_set1, sell_set2);
+        }
+
+        private void ValidateOrderType(object sender, EventArgs e, ComboBox orderType, ComboBox orderPrice)
+        {
+            if (orderType.Text.Equals(""))
             {
-                sell_set1.SelectedIndex = 1;
-                sell_set2.SelectedIndex = 6;
+                orderType.SelectedIndex = 1;
+                orderPrice.SelectedIndex = 6;
                 MessageBox.Show("선택된 값이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (sell_set1.Text.Equals("시장가"))
+
+            if (orderType.Text.Equals("시장가"))
             {
-                sell_set2.SelectedIndex = 6;
+                orderPrice.SelectedIndex = 6;
                 return;
             }
-            if (sell_set1.Text.Equals("wlwjdrk") && buy_set2.SelectedIndex == 6)
+
+            if (orderType.Text.Equals("지정가") && orderPrice.SelectedIndex == 6)
             {
-                sell_set2.SelectedIndex = 5;
+                orderPrice.SelectedIndex = 5;
                 MessageBox.Show("지정가는 시장가를 선택할 수 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-        }
-        private void Sell_set2_Leave(object sender, EventArgs e)
-        {
-            if (sell_set1.Text.Equals(""))
+
+            if (orderPrice.Text.Equals("시장가") && !orderType.Text.Equals("시장가"))
             {
-                sell_set1.SelectedIndex = 1;
-                sell_set2.SelectedIndex = 6;
-                MessageBox.Show("지정가 혹은 시장가를 선택하세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            if (sell_set2.Text.Equals("시장가") && !sell_set1.Text.Equals("시장가"))
-            {
-                sell_set1.SelectedIndex = 1;
+                orderType.SelectedIndex = 1;
                 MessageBox.Show("시장가를 선택하세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (!sell_set2.Text.Equals("시장가") && sell_set1.Text.Equals("시장가"))
+
+            if (!orderPrice.Text.Equals("시장가") && orderType.Text.Equals("시장가"))
             {
-                sell_set1.SelectedIndex = 0;
-                MessageBox.Show("지정가를 선택하세요..", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                orderType.SelectedIndex = 0;
+                MessageBox.Show("지정가를 선택하세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -303,171 +226,36 @@ namespace WindowsFormsApp1
 
         private void Profit_percent_text_Leave(object sender, EventArgs e)
         {
-            string input = profit_percent_text.Text;
-
-            if (string.IsNullOrWhiteSpace(input))
-            {
-                profit_percent_text.Text = "2.5";
-                MessageBox.Show("입력된 값이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            bool hasDecimalPoint = false;
-            int decimalPointCount = 0;
-
-            foreach (char c in input)
-            {
-                if (char.IsDigit(c))
-                {
-                    continue;
-                }
-                else if (c == '.' && !hasDecimalPoint)
-                {
-                    hasDecimalPoint = true;
-                    decimalPointCount++;
-                }
-                else
-                {
-                    profit_percent_text.Text = "2.5";
-                    MessageBox.Show("정수 혹은 점이 아닌 값이 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
-
-            if (decimalPointCount > 1)
-            {
-                profit_percent_text.Text = "2.5";
-                MessageBox.Show("점을 한번만 입력하세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            ValidateTextBoxInput(sender, e, profit_percent_text, "2.5");
         }
+
         private void Loss_percent_text_Leave(object sender, EventArgs e)
         {
-            string input = loss_percent_text.Text;
-
-            if (string.IsNullOrWhiteSpace(input))
-            {
-                loss_percent_text.Text = "2.5";
-                MessageBox.Show("입력된 값이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            bool hasDecimalPoint = false;
-            int decimalPointCount = 0;
-
-            foreach (char c in input)
-            {
-                if (char.IsDigit(c))
-                {
-                    continue;
-                }
-                else if (c == '.' && !hasDecimalPoint)
-                {
-                    hasDecimalPoint = true;
-                    decimalPointCount++;
-                }
-                else
-                {
-                    loss_percent_text.Text = "2.5";
-                    MessageBox.Show("정수 혹은 점이 아닌 값이 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
-
-            if (decimalPointCount > 1)
-            {
-                loss_percent_text.Text = "2.5";
-                MessageBox.Show("점을 한번만 입력하세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            ValidateTextBoxInput(sender, e, loss_percent_text, "2.5");
         }
+
         private void Profit_ts_text_Leave(object sender, EventArgs e)
         {
-            string input = profit_ts_text.Text;
-
-            if (string.IsNullOrWhiteSpace(input))
-            {
-                profit_ts_text.Text = "2.5";
-                MessageBox.Show("입력된 값이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            bool hasDecimalPoint = false;
-            int decimalPointCount = 0;
-
-            foreach (char c in input)
-            {
-                if (char.IsDigit(c))
-                {
-                    continue;
-                }
-                else if (c == '.' && !hasDecimalPoint)
-                {
-                    hasDecimalPoint = true;
-                    decimalPointCount++;
-                }
-                else
-                {
-                    profit_ts_text.Text = "2.5";
-                    MessageBox.Show("정수 혹은 점이 아닌 값이 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
-
-            if (decimalPointCount > 1)
-            {
-                profit_ts_text.Text = "2.5";
-                MessageBox.Show("점을 한번만 입력하세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            ValidateTextBoxInput(sender, e, profit_ts_text, "2.5");
         }
+
         private void Clear_sell_profit_text_Leave(object sender, EventArgs e)
         {
-            string input = clear_sell_profit_text.Text;
-
-            if (string.IsNullOrWhiteSpace(input))
-            {
-                clear_sell_profit_text.Text = "2.5";
-                MessageBox.Show("입력된 값이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            bool hasDecimalPoint = false;
-            int decimalPointCount = 0;
-
-            foreach (char c in input)
-            {
-                if (char.IsDigit(c))
-                {
-                    continue;
-                }
-                else if (c == '.' && !hasDecimalPoint)
-                {
-                    hasDecimalPoint = true;
-                    decimalPointCount++;
-                }
-                else
-                {
-                    clear_sell_profit_text.Text = "2.5";
-                    MessageBox.Show("정수 혹은 점이 아닌 값이 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
-
-            if (decimalPointCount > 1)
-            {
-                clear_sell_profit_text.Text = "2.5";
-                MessageBox.Show("점을 한번만 입력하세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            ValidateTextBoxInput(sender, e, clear_sell_profit_text, "2.5");
         }
+
         private void Clear_sell_loss_text_Leave(object sender, EventArgs e)
         {
-            string input = clear_sell_loss_text.Text;
+            ValidateTextBoxInput(sender, e, clear_sell_loss_text, "2.5");
+        }
+
+        private void ValidateTextBoxInput(object sender, EventArgs e, TextBox textBox, string defaultValue)
+        {
+            string input = textBox.Text;
 
             if (string.IsNullOrWhiteSpace(input))
             {
-                clear_sell_loss_text.Text = "2.5";
+                textBox.Text = defaultValue;
                 MessageBox.Show("입력된 값이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -488,7 +276,7 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    clear_sell_loss_text.Text = "2.5";
+                    textBox.Text = defaultValue;
                     MessageBox.Show("정수 혹은 점이 아닌 값이 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
@@ -496,7 +284,7 @@ namespace WindowsFormsApp1
 
             if (decimalPointCount > 1)
             {
-                clear_sell_loss_text.Text = "2.5";
+                textBox.Text = defaultValue;
                 MessageBox.Show("점을 한번만 입력하세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -506,207 +294,97 @@ namespace WindowsFormsApp1
 
         private void Setting_Positive_numver(object sender, EventArgs e)
         {
-            string input = setting_account_number.Text;
-
-            if (string.IsNullOrWhiteSpace(input))
-            {
-                setting_account_number.Text = "0000000000";
-                MessageBox.Show("입력된 값이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            foreach (char c in input)
-            {
-                if (!char.IsDigit(c))
-                {
-                    setting_account_number.Text = "0000000000";
-                    MessageBox.Show("정수가 아닌 값이 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
-
-            if (input.Length != 10)
-            {
-                setting_account_number.Text = "0000000000";
-                MessageBox.Show("계좌번호는 10자리 숫자입니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
+            ValidateNumericInput(sender, e, setting_account_number, "0000000000", 10);
         }
+
         private void Initial_balance_Leave(object sender, EventArgs e)
         {
-            string input = initial_balance.Text;
-
-            if (string.IsNullOrWhiteSpace(input))
-            {
-                initial_balance.Text = "1000000";
-                MessageBox.Show("입력된 값이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            foreach (char c in input)
-            {
-                if (!char.IsDigit(c))
-                {
-                    initial_balance.Text = "1000000";
-                    MessageBox.Show("정수가 아닌 값이 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
+            ValidateNumericInput(sender, e, initial_balance, "1000000");
         }
+
         private void Maxbuy_Leave(object sender, EventArgs e)
         {
-            string input = maxbuy.Text;
-
-            if (string.IsNullOrWhiteSpace(input))
-            {
-                maxbuy.Text = "100000";
-                MessageBox.Show("입력된 값이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            foreach (char c in input)
-            {
-                if (!char.IsDigit(c))
-                {
-                    maxbuy.Text = "100000";
-                    MessageBox.Show("정수가 아닌 값이 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
+            ValidateNumericInput(sender, e, maxbuy, "100000");
         }
+
         private void Maxbuy_acc_Leave(object sender, EventArgs e)
         {
-            string input = maxbuy_acc.Text;
-
-            if (string.IsNullOrWhiteSpace(input))
-            {
-                maxbuy_acc.Text = "1";
-                MessageBox.Show("입력된 값이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            foreach (char c in input)
-            {
-                if (!char.IsDigit(c))
-                {
-                    maxbuy_acc.Text = "1";
-                    MessageBox.Show("정수가 아닌 값이 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
+            ValidateNumericInput(sender, e, maxbuy_acc, "1");
         }
+
         private void Min_price_Leave(object sender, EventArgs e)
         {
-            string input = min_price.Text;
-
-            if (string.IsNullOrWhiteSpace(input))
-            {
-                min_price.Text = "1000";
-                MessageBox.Show("입력된 값이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            foreach (char c in input)
-            {
-                if (!char.IsDigit(c))
-                {
-                    min_price.Text = "1000";
-                    MessageBox.Show("정수가 아닌 값이 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
-
-            if (Convert.ToInt32(input) < Convert.ToInt32(min_price.Text))
-            {
-                min_price.Text = Convert.ToString(Convert.ToInt32(max_price.Text) - 100);
-                MessageBox.Show("최대 종목 매수가 보다 큽니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            ValidateNumericInput(sender, e, min_price, "1000", minValue: 1000, maxValue: Convert.ToInt32(max_price.Text) - 100);
         }
+
         private void Max_price_Leave(object sender, EventArgs e)
         {
-            string input = max_price.Text;
-
-            if (string.IsNullOrWhiteSpace(input))
-            {
-                max_price.Text = "10000";
-                MessageBox.Show("입력된 값이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            foreach (char c in input)
-            {
-                if (!char.IsDigit(c))
-                {
-                    max_price.Text = "10000";
-                    MessageBox.Show("정수가 아닌 값이 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
-
-            if(Convert.ToInt32(input) < Convert.ToInt32(min_price.Text))
-            {
-                max_price.Text = Convert.ToString(Convert.ToInt32(min_price.Text) + 100);
-                MessageBox.Show("최소 종목 매수가 보다 작습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            ValidateNumericInput(sender, e, max_price, "10000", minValue: Convert.ToInt32(min_price.Text) + 100, maxValue: 10000);
         }
+
         private void Max_hold_text_Leave(object sender, EventArgs e)
         {
-            string input = max_hold_text.Text;
-
-            if (string.IsNullOrWhiteSpace(input))
-            {
-                max_hold_text.Text = "0";
-                MessageBox.Show("입력된 값이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            foreach (char c in input)
-            {
-                if (!char.IsDigit(c))
-                {
-                    max_hold_text.Text = "0";
-                    MessageBox.Show("정수가 아닌 값이 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
-
-            if(Convert.ToInt32(input) > 100)
-            {
-                max_hold_text.Text = "100";
-                MessageBox.Show("실시간 시세가 100개 까지 지원하나 성능상 10개 이하를 권장합니다.", "주의", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            ValidateNumericInput(sender, e, max_hold_text, "0", maxValue: 100);
         }
+
         private void Profit_won_text_Leave(object sender, EventArgs e)
         {
-            string input = profit_won_text.Text;
-
-            if (string.IsNullOrWhiteSpace(input))
-            {
-                profit_won_text.Text = "0";
-                MessageBox.Show("입력된 값이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            foreach (char c in input)
-            {
-                if (!char.IsDigit(c))
-                {
-                    profit_won_text.Text = "0";
-                    MessageBox.Show("정수가 아닌 값이 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
+            ValidateNumericInput(sender, e, profit_won_text, "0");
         }
+
         private void Loss_won_text_Leave(object sender, EventArgs e)
         {
-            string input = loss_won_text.Text;
+            ValidateNumericInput(sender, e, loss_won_text, "0");
+        }
+
+        private void Term_for_buy_text_Leave(object sender, EventArgs e)
+        {
+            ValidateNumericInput(sender, e, term_for_buy_text, "30");
+        }
+        private void Term_for_sell_text_Leave(object sender, EventArgs e)
+        {
+            ValidateNumericInput(sender, e, term_for_sell_text, "30");
+        }
+        private void Type1_start_Leave(object sender, EventArgs e)
+        {
+            ValidateNumericInput(sender, e, type1_start, "100");
+        }
+        private void Type1_end_Leave(object sender, EventArgs e)
+        {
+            ValidateNumericInput(sender, e, type1_end, "1000");
+        }
+        private void Type2_start_Leave(object sender, EventArgs e)
+        {
+            ValidateNumericInput(sender, e, type2_start, "100");
+        }
+        private void Type2_end_Leave(object sender, EventArgs e)
+        {
+            ValidateNumericInput(sender, e, type2_end, "1000");
+        }
+        private void Type3_start_Leave(object sender, EventArgs e)
+        {
+            ValidateNumericInput(sender, e, type3_start, "100");
+        }
+        private void Type3_end_Leave(object sender, EventArgs e)
+        {
+            ValidateNumericInput(sender, e, type3_end, "1000");
+        }
+        private void Type4_start_Leave(object sender, EventArgs e)
+        {
+            ValidateNumericInput(sender, e, type4_start, "100");
+        }
+        private void Type4_end_Leave(object sender, EventArgs e)
+        {
+            ValidateNumericInput(sender, e, type4_end, "1000");
+        }
+
+        private void ValidateNumericInput(object sender, EventArgs e, TextBox textBox, string defaultValue, int? maxLength = null, int? minValue = null, int? maxValue = null)
+        {
+            string input = textBox.Text;
 
             if (string.IsNullOrWhiteSpace(input))
             {
-                loss_won_text.Text = "0";
+                textBox.Text = defaultValue;
                 MessageBox.Show("입력된 값이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -715,10 +393,33 @@ namespace WindowsFormsApp1
             {
                 if (!char.IsDigit(c))
                 {
+                    textBox.Text = defaultValue;
                     MessageBox.Show("정수가 아닌 값이 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    loss_won_text.Text = "0";
                     return;
                 }
+            }
+
+            if (maxLength.HasValue && input.Length != maxLength.Value)
+            {
+                textBox.Text = defaultValue;
+                MessageBox.Show($"입력값은 {maxLength.Value}자리 숫자여야 합니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int value = Convert.ToInt32(input);
+
+            if (minValue.HasValue && value < minValue.Value)
+            {
+                textBox.Text = defaultValue;
+                MessageBox.Show($"입력값은 {minValue.Value} 이상이어야 합니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (maxValue.HasValue && value > maxValue.Value)
+            {
+                textBox.Text = defaultValue;
+                MessageBox.Show($"입력값은 {maxValue.Value} 이하여야 합니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
         }
 
@@ -726,321 +427,81 @@ namespace WindowsFormsApp1
 
         private void Market_start_time_Leave(object sender, EventArgs e)
         {
-            string input_Text = market_start_time.Text.Trim();
-
-            // 텍스트를 DateTime 형식으로 변환 시도
-            DateTime inputTime;
-            //
-            if (DateTime.TryParse(input_Text, out inputTime))
-            {
-                // 입력된 값이 시간 범위 내에 있는지 확인
-                TimeSpan inputTimeSpan = inputTime.TimeOfDay;
-                TimeSpan minTime = new TimeSpan(5, 30, 0); // 09:00:00
-                TimeSpan maxTime = new TimeSpan(23, 59, 59); // 15:30:00
-                TimeSpan nextTime = TimeSpan.Parse(market_end_time.Text);
-
-                // 입력된 값이 범위를 벗어나면 MessageBox 표시
-                if (inputTimeSpan < minTime || inputTimeSpan > maxTime)
-                {
-                    market_start_time.Text = "05:30:00";
-                    MessageBox.Show("입력된 시간은 05:30:00 ~ 23:59:59 범위를 벗어납니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                // END 시간보다 클 경우
-                if (inputTimeSpan > nextTime)
-                {
-                    // 입력된 값이 범위를 벗어나면 MessageBox 표시
-                    market_start_time.Text = "05:30:00";
-                    MessageBox.Show("입력된 시간이 조건 종료 시간보다 앞에 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
-            else
-            {
-                // 입력된 값이 시간 형식이 아닌 경우 MessageBox 표시
-                market_start_time.Text = "05:30:00";
-                MessageBox.Show("올바른 시간 형식(HH:mm:ss)으로 입력해주세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            ValidateTimeInput(sender, e, market_start_time, "05:30:00", new TimeSpan(5, 30, 0), new TimeSpan(23, 59, 59), market_end_time);
         }
 
         private void Market_end_time_Leave(object sender, EventArgs e)
         {
-            string input_Text = market_end_time.Text.Trim();
-
-            // 텍스트를 DateTime 형식으로 변환 시도
-            DateTime inputTime;
-            //
-            if (DateTime.TryParse(input_Text, out inputTime))
-            {
-                // 입력된 값이 시간 범위 내에 있는지 확인
-                TimeSpan inputTimeSpan = inputTime.TimeOfDay;
-                TimeSpan minTime = new TimeSpan(5, 30, 0); // 09:00:00
-                TimeSpan maxTime = new TimeSpan(23, 59, 59); // 15:30:00
-                TimeSpan beforeTime = TimeSpan.Parse(market_start_time.Text);
-
-                // 입력된 값이 범위를 벗어나면 MessageBox 표시
-                if (inputTimeSpan < minTime || inputTimeSpan > maxTime)
-                {
-                    market_end_time.Text = "23:59:59";
-                    MessageBox.Show("입력된 시간은 05:30:00 ~ 23:59:59 범위를 벗어납니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                // END 시간보다 클 경우
-                if (inputTimeSpan < beforeTime)
-                {
-                    // 입력된 값이 범위를 벗어나면 MessageBox 표시
-                    market_end_time.Text = "23:59:59";
-                    MessageBox.Show("입력된 시간이 조건 시작 시간보다 뒤에 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
-            else
-            {
-                // 입력된 값이 시간 형식이 아닌 경우 MessageBox 표시
-                market_end_time.Text = "23:59:59";
-                MessageBox.Show("올바른 시간 형식(HH:mm:ss)으로 입력해주세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            ValidateTimeInput(sender, e, market_end_time, "23:59:59", new TimeSpan(5, 30, 0), new TimeSpan(23, 59, 59), market_start_time);
         }
 
-        //매수 조건식 형식 및 범위 확인
         private void Buy_condition_start_Leave(object sender, EventArgs e)
         {
-            string input_Text = buy_condition_start.Text.Trim();
-
-            // 텍스트를 DateTime 형식으로 변환 시도
-            DateTime inputTime;
-            //
-            if (DateTime.TryParse(input_Text, out inputTime))
-            {
-                // 입력된 값이 시간 범위 내에 있는지 확인
-                TimeSpan inputTimeSpan = inputTime.TimeOfDay;
-                TimeSpan minTime = new TimeSpan(9, 0, 0); // 09:00:00
-                TimeSpan maxTime = new TimeSpan(15, 30, 0); // 15:30:00
-                TimeSpan nextTime = TimeSpan.Parse(buy_condition_end.Text);
-
-                // 입력된 값이 범위를 벗어나면 MessageBox 표시
-                if (inputTimeSpan < minTime || inputTimeSpan > maxTime)
-                {
-                    buy_condition_start.Text = "09:00:00";
-                    MessageBox.Show("입력된 시간은 09:00:00 ~ 15:30:00 범위를 벗어납니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                // END 시간보다 클 경우
-                if (inputTimeSpan > nextTime)
-                {
-                    // 입력된 값이 범위를 벗어나면 MessageBox 표시
-                    buy_condition_start.Text = "09:00:00";
-                    MessageBox.Show("입력된 시간이 조건 종료 시간보다 앞에 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
-            else
-            {
-                // 입력된 값이 시간 형식이 아닌 경우 MessageBox 표시
-                buy_condition_start.Text = "09:00:00";
-                MessageBox.Show("올바른 시간 형식(HH:mm:ss)으로 입력해주세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            ValidateTimeInput(sender, e, buy_condition_start, "09:00:00", new TimeSpan(9, 0, 0), new TimeSpan(15, 30, 0), buy_condition_end);
         }
+
         private void Buy_condition_end_Leave(object sender, EventArgs e)
         {
-            string input_Text = buy_condition_end.Text.Trim();
-
-            // 텍스트를 DateTime 형식으로 변환 시도
-            DateTime inputTime;
-            //
-            if (DateTime.TryParse(input_Text, out inputTime))
-            {
-                // 입력된 값이 시간 범위 내에 있는지 확인
-                TimeSpan inputTimeSpan = inputTime.TimeOfDay;
-                TimeSpan minTime = new TimeSpan(9, 0, 0); // 09:00:00
-                TimeSpan maxTime = new TimeSpan(15, 30, 0); // 15:30:00
-                TimeSpan beforeTime = TimeSpan.Parse(buy_condition_start.Text);
-
-                // 입력된 값이 범위를 벗어나면 MessageBox 표시
-                if (inputTimeSpan < minTime || inputTimeSpan > maxTime)
-                {
-                    buy_condition_end.Text = "15:30:00";
-                    MessageBox.Show("입력된 시간은 09:00:00 ~ 15:30:00 범위를 벗어납니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                // END 시간보다 클 경우
-                if (inputTimeSpan < beforeTime)
-                {
-                    // 입력된 값이 범위를 벗어나면 MessageBox 표시
-                    buy_condition_end.Text = "15:30:00";
-                    MessageBox.Show("입력된 시간이 조건 시작 시간보다 뒤에 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
-            else
-            {
-                // 입력된 값이 시간 형식이 아닌 경우 MessageBox 표시
-                buy_condition_end.Text = "15:30:00";
-                MessageBox.Show("올바른 시간 형식(HH:mm:ss)으로 입력해주세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            ValidateTimeInput(sender, e, buy_condition_end, "15:30:00", new TimeSpan(9, 0, 0), new TimeSpan(15, 30, 0), buy_condition_start);
         }
 
         private void Sell_condition_start_Leave(object sender, EventArgs e)
         {
-            string input_Text = sell_condition_start.Text.Trim();
-
-            // 텍스트를 DateTime 형식으로 변환 시도
-            DateTime inputTime;
-            //
-            if (DateTime.TryParse(input_Text, out inputTime))
-            {
-                // 입력된 값이 시간 범위 내에 있는지 확인
-                TimeSpan inputTimeSpan = inputTime.TimeOfDay;
-                TimeSpan minTime = new TimeSpan(9, 0, 0); // 09:00:00
-                TimeSpan maxTime = new TimeSpan(15, 30, 0); // 15:30:00
-                TimeSpan nextTime = TimeSpan.Parse(sell_condition_end.Text);
-
-                // 입력된 값이 범위를 벗어나면 MessageBox 표시
-                if (inputTimeSpan < minTime || inputTimeSpan > maxTime)
-                {
-                    sell_condition_start.Text = "09:00:00";
-                    MessageBox.Show("입력된 시간은 09:00:00 ~ 15:30:00 범위를 벗어납니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                // END 시간보다 클 경우
-                if (inputTimeSpan > nextTime)
-                {
-                    // 입력된 값이 범위를 벗어나면 MessageBox 표시
-                    sell_condition_start.Text = "09:00:00";
-                    MessageBox.Show("입력된 시간이 조건 종료 시간보다 앞에 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
-            else
-            {
-                // 입력된 값이 시간 형식이 아닌 경우 MessageBox 표시
-                sell_condition_start.Text = "09:00:00";
-                MessageBox.Show("올바른 시간 형식(HH:mm:ss)으로 입력해주세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            ValidateTimeInput(sender, e, sell_condition_start, "09:00:00", new TimeSpan(9, 0, 0), new TimeSpan(15, 30, 0), sell_condition_end);
         }
 
         private void Sell_condition_end_Leave(object sender, EventArgs e)
         {
-            string input_Text = sell_condition_end.Text.Trim();
-
-            // 텍스트를 DateTime 형식으로 변환 시도
-            DateTime inputTime;
-            //
-            if (DateTime.TryParse(input_Text, out inputTime))
-            {
-                // 입력된 값이 시간 범위 내에 있는지 확인
-                TimeSpan inputTimeSpan = inputTime.TimeOfDay;
-                TimeSpan minTime = new TimeSpan(9, 0, 0); // 09:00:00
-                TimeSpan maxTime = new TimeSpan(15, 30, 0); // 15:30:00
-                TimeSpan beforeTime = TimeSpan.Parse(sell_condition_start.Text);
-
-                // 입력된 값이 범위를 벗어나면 MessageBox 표시
-                if (inputTimeSpan < minTime || inputTimeSpan > maxTime)
-                {
-                    sell_condition_end.Text = "15:30:00";
-                    MessageBox.Show("입력된 시간은 09:00:00 ~ 15:30:00 범위를 벗어납니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                // END 시간보다 클 경우
-                if (inputTimeSpan < beforeTime)
-                {
-                    // 입력된 값이 범위를 벗어나면 MessageBox 표시
-                    sell_condition_end.Text = "15:30:00";
-                    MessageBox.Show("입력된 시간이 조건 시작 시간보다 뒤에 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
-            else
-            {
-                // 입력된 값이 시간 형식이 아닌 경우 MessageBox 표시
-                sell_condition_end.Text = "15:30:00";
-                MessageBox.Show("올바른 시간 형식(HH:mm:ss)으로 입력해주세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            ValidateTimeInput(sender, e, sell_condition_end, "15:30:00", new TimeSpan(9, 0, 0), new TimeSpan(15, 30, 0), sell_condition_start);
         }
 
         private void Clear_sell_start_Leave(object sender, EventArgs e)
         {
-            string input_Text = clear_sell_start.Text.Trim();
-
-            // 텍스트를 DateTime 형식으로 변환 시도
-            DateTime inputTime;
-            //
-            if (DateTime.TryParse(input_Text, out inputTime))
-            {
-                // 입력된 값이 시간 범위 내에 있는지 확인
-                TimeSpan inputTimeSpan = inputTime.TimeOfDay;
-                TimeSpan minTime = new TimeSpan(9, 0, 0); // 09:00:00
-                TimeSpan maxTime = new TimeSpan(18, 00, 0); // 15:30:00
-                TimeSpan nextTime = TimeSpan.Parse(clear_sell_end.Text);
-
-                // 입력된 값이 범위를 벗어나면 MessageBox 표시
-                if (inputTimeSpan < minTime || inputTimeSpan > maxTime)
-                {
-                    clear_sell_start.Text = "09:00:00";
-                    MessageBox.Show("입력된 시간은 09:00:00 ~ 18:00:00 범위를 벗어납니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                // END 시간보다 클 경우
-                if (inputTimeSpan > nextTime)
-                {
-                    // 입력된 값이 범위를 벗어나면 MessageBox 표시
-                    clear_sell_start.Text = "09:00:00";
-                    MessageBox.Show("입력된 시간이 조건 종료 시간보다 앞에 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
-            else
-            {
-                // 입력된 값이 시간 형식이 아닌 경우 MessageBox 표시
-                clear_sell_start.Text = "09:00:00";
-                MessageBox.Show("올바른 시간 형식(HH:mm:ss)으로 입력해주세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            ValidateTimeInput(sender, e, clear_sell_start, "09:00:00", new TimeSpan(9, 0, 0), new TimeSpan(18, 0, 0), clear_sell_end);
         }
 
         private void Clear_sell_end_Leave(object sender, EventArgs e)
         {
-            string input_Text = clear_sell_end.Text.Trim();
+            ValidateTimeInput(sender, e, clear_sell_end, "18:00:00", new TimeSpan(9, 0, 0), new TimeSpan(18, 0, 0), clear_sell_start);
+        }
 
-            // 텍스트를 DateTime 형식으로 변환 시도
+        private void ValidateTimeInput(object sender, EventArgs e, TextBox textBox, string defaultValue, TimeSpan minTime, TimeSpan maxTime, TextBox comparisonTextBox = null)
+        {
+            string input = textBox.Text.Trim();
+
             DateTime inputTime;
-            //
-            if (DateTime.TryParse(input_Text, out inputTime))
+            if (!DateTime.TryParse(input, out inputTime))
             {
-                // 입력된 값이 시간 범위 내에 있는지 확인
-                TimeSpan inputTimeSpan = inputTime.TimeOfDay;
-                TimeSpan minTime = new TimeSpan(9, 0, 0); // 09:00:00
-                TimeSpan maxTime = new TimeSpan(18, 00, 0); // 15:30:00
-                TimeSpan beforeTime = TimeSpan.Parse(clear_sell_start.Text);
-
-                // 입력된 값이 범위를 벗어나면 MessageBox 표시
-                if (inputTimeSpan < minTime || inputTimeSpan > maxTime)
-                {
-                    clear_sell_end.Text = "18:00:00";
-                    MessageBox.Show("입력된 시간은 09:00:00 ~ 18:00:00 범위를 벗어납니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                // END 시간보다 클 경우
-                if (inputTimeSpan < beforeTime)
-                {
-                    // 입력된 값이 범위를 벗어나면 MessageBox 표시
-                    clear_sell_end.Text = "18:00:00";
-                    MessageBox.Show("입력된 시간이 조건 시작 시간보다 뒤에 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
-            else
-            {
-                // 입력된 값이 시간 형식이 아닌 경우 MessageBox 표시
-                clear_sell_end.Text = "18:00:00";
+                textBox.Text = defaultValue;
                 MessageBox.Show("올바른 시간 형식(HH:mm:ss)으로 입력해주세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            TimeSpan inputTimeSpan = inputTime.TimeOfDay;
+
+            if (inputTimeSpan < minTime || inputTimeSpan > maxTime)
+            {
+                textBox.Text = defaultValue;
+                MessageBox.Show($"입력된 시간은 {minTime.ToString(@"hh\:mm\:ss")} ~ {maxTime.ToString(@"hh\:mm\:ss")} 범위를 벗어납니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (comparisonTextBox != null)
+            {
+                TimeSpan comparisonTime = TimeSpan.Parse(comparisonTextBox.Text);
+
+                if (inputTimeSpan > comparisonTime)
+                {
+                    textBox.Text = defaultValue;
+                    MessageBox.Show($"입력된 시간이 {comparisonTextBox.Name.Replace("_", " ")} 보다 앞에 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else if (inputTimeSpan < comparisonTime)
+                {
+                    textBox.Text = defaultValue;
+                    MessageBox.Show($"입력된 시간이 {comparisonTextBox.Name.Replace("_", " ")} 보다 뒤에 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
             }
         }
 

@@ -1132,7 +1132,6 @@ namespace WindowsFormsApp1
             condInfo.LastRequestTime = DateTime.Now;
 
             WriteLog("실시간 조건식 매수 시작\n");
-            WriteLog(condition[1] + " " + condition[0] + "\n");
             telegram_message("실시간 조건식 매수 시작\n");
 
             //종목 검색 요청
