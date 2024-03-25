@@ -37,11 +37,11 @@ namespace WindowsFormsApp1
             //메인 시간 동작
             timer1.Start(); //시간 표시 - 1000ms
 
-            //기존 세팅 로드
-            utility.setting_load_auto();
-
             //테이블 초기 세팅
             initial_Table();
+
+            //기존 세팅 로드
+            utility.setting_load_auto();
 
             //-------------------로그인 이벤트 동작-------------------
             axKHOpenAPI1.OnEventConnect += onEventConnect; //로그인 상태 확인(ID,NAME,계좌번호,KEYBOARD,FIREWALL,조건식)
@@ -208,6 +208,43 @@ namespace WindowsFormsApp1
 
         //-----------------------------------------initial-------------------------------------
 
+        //초기 Table 값 입력
+        private void initial_Table()
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add("편입", typeof(string)); // '편입' '이탈'
+            dataTable.Columns.Add("상태", typeof(string)); // '대기' '매수중 '매수완료' '매도중' '매도완료'
+            dataTable.Columns.Add("종목코드", typeof(string));
+            dataTable.Columns.Add("종목명", typeof(string));
+            dataTable.Columns.Add("현재가", typeof(string)); // + - 부호를 통해 매수호가인지 매도 호가인지 현재가인지 파악한다.
+            dataTable.Columns.Add("등락율", typeof(string));
+            dataTable.Columns.Add("거래량", typeof(string));
+            dataTable.Columns.Add("편입가", typeof(string));
+            dataTable.Columns.Add("수익률", typeof(string));
+            dataTable.Columns.Add("보유수량", typeof(string)); //보유수량
+            dataTable.Columns.Add("조건식", typeof(string));
+            dataTable.Columns.Add("편입시각", typeof(string));
+            dataTable.Columns.Add("이탈시각", typeof(string));
+            dataTable.Columns.Add("매수시각", typeof(string));
+            dataTable.Columns.Add("매도시각", typeof(string));
+            dataTable.Columns.Add("상한가", typeof(string)); //상한가 => 시장가 계산용
+            dtCondStock = dataTable;
+            dataGridView1.DataSource = dtCondStock;
+
+            DataTable dataTable2 = new DataTable();
+            dataTable2.Columns.Add("종목코드", typeof(string)); //고정
+            dataTable2.Columns.Add("종목명", typeof(string)); //고정
+            dataTable2.Columns.Add("현재가", typeof(string)); //실시간 변경
+            dataTable2.Columns.Add("보유수량", typeof(string)); //고정
+            dataTable2.Columns.Add("평균단가", typeof(string)); //고정
+            dataTable2.Columns.Add("평가금액", typeof(string));
+            dataTable2.Columns.Add("수익률", typeof(string)); //실시간 변경
+            dataTable2.Columns.Add("손익금액", typeof(string));
+            dataTable2.Columns.Add("매도수량", typeof(string)); //고정
+            dtCondStock_hold = dataTable2;
+            dataGridView2.DataSource = dtCondStock_hold;
+        }
+
         //초기 설정 반영
         public async Task initial_allow()
         {
@@ -258,46 +295,21 @@ namespace WindowsFormsApp1
             string[] ms = { "200", "400", "500", "1000", "2000", "5000" };
             update_interval.Items.AddRange(ms);
 
+            //KIS_Allow
+            initial_KIS();
+
             //
             WriteLog("세팅 반영 완료\n");
             telegram_message("세팅 반영 완료\n");
         }
 
-        //초기 Table 값 입력
-        private void initial_Table()
+        //KIS
+        private void initial_KIS()
         {
-            DataTable dataTable = new DataTable();
-            dataTable.Columns.Add("편입", typeof(string)); // '편입' '이탈'
-            dataTable.Columns.Add("상태", typeof(string)); // '대기' '매수중 '매수완료' '매도중' '매도완료'
-            dataTable.Columns.Add("종목코드", typeof(string));
-            dataTable.Columns.Add("종목명", typeof(string));
-            dataTable.Columns.Add("현재가", typeof(string)); // + - 부호를 통해 매수호가인지 매도 호가인지 현재가인지 파악한다.
-            dataTable.Columns.Add("등락율", typeof(string));
-            dataTable.Columns.Add("거래량", typeof(string));
-            dataTable.Columns.Add("편입가", typeof(string));
-            dataTable.Columns.Add("수익률", typeof(string));
-            dataTable.Columns.Add("보유수량", typeof(string)); //보유수량
-            dataTable.Columns.Add("조건식", typeof(string));
-            dataTable.Columns.Add("편입시각", typeof(string));
-            dataTable.Columns.Add("이탈시각", typeof(string));
-            dataTable.Columns.Add("매수시각", typeof(string));
-            dataTable.Columns.Add("매도시각", typeof(string));
-            dataTable.Columns.Add("상한가", typeof(string)); //상한가 => 시장가 계산용
-            dtCondStock = dataTable;
-            dataGridView1.DataSource = dtCondStock;
-
-            DataTable dataTable2 = new DataTable();
-            dataTable2.Columns.Add("종목코드", typeof(string)); //고정
-            dataTable2.Columns.Add("종목명", typeof(string)); //고정
-            dataTable2.Columns.Add("현재가", typeof(string)); //실시간 변경
-            dataTable2.Columns.Add("보유수량", typeof(string)); //고정
-            dataTable2.Columns.Add("평균단가", typeof(string)); //고정
-            dataTable2.Columns.Add("평가금액", typeof(string));
-            dataTable2.Columns.Add("수익률", typeof(string)); //실시간 변경
-            dataTable2.Columns.Add("손익금액", typeof(string));
-            dataTable2.Columns.Add("매도수량", typeof(string)); //고정
-            dtCondStock_hold = dataTable2;
-            dataGridView2.DataSource = dtCondStock_hold;
+            KIS_RUN.Text = Convert.ToString(utility.KIS_Allow);
+            KIS_ACCOUNT.Text = "0"; //예수금 로딩
+            KIS_N.Text = utility.KIS_amount;
+            KIS_YN.Text = "N";
         }
 
         private void onEventConnect(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnEventConnectEvent e)
@@ -556,7 +568,6 @@ namespace WindowsFormsApp1
                 telegram_message("자동 실행 미설정\n");
             }
         }
-
 
         //계좌 보유 현황 확인
         private void Account_before(string code)
@@ -1400,6 +1411,7 @@ namespace WindowsFormsApp1
                             {
                                 sell_order(code, "Nan", "청산매도/시간");
                             }
+                            //
                             if (utility.clear_sell_mode)
                             {
                                 double percent_edit = double.Parse(row.Field<string>("수익률").Replace("%", ""));

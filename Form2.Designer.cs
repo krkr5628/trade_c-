@@ -120,7 +120,6 @@ namespace WindowsFormsApp1
             this.clear_sell_index_connection2 = new System.Windows.Forms.CheckBox();
             this.clear_sell_loss_index_connection1 = new System.Windows.Forms.CheckBox();
             this.clear_sell_loss_index_connection2 = new System.Windows.Forms.CheckBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.clear_sell = new System.Windows.Forms.RadioButton();
             this.clear_sell_mode = new System.Windows.Forms.RadioButton();
             this.clear_sell_profit = new System.Windows.Forms.CheckBox();
@@ -1263,7 +1262,6 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel10.Controls.Add(this.clear_sell_index_connection2, 1, 3);
             this.tableLayoutPanel10.Controls.Add(this.clear_sell_loss_index_connection1, 3, 3);
             this.tableLayoutPanel10.Controls.Add(this.clear_sell_loss_index_connection2, 4, 3);
-            this.tableLayoutPanel10.Controls.Add(this.textBox2, 2, 1);
             this.tableLayoutPanel10.Controls.Add(this.clear_sell, 0, 0);
             this.tableLayoutPanel10.Controls.Add(this.clear_sell_mode, 4, 0);
             this.tableLayoutPanel10.Controls.Add(this.clear_sell_profit, 0, 1);
@@ -1451,16 +1449,6 @@ namespace WindowsFormsApp1
             this.clear_sell_loss_index_connection2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.clear_sell_loss_index_connection2.UseVisualStyleBackColor = false;
             // 
-            // textBox2
-            // 
-            this.textBox2.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.textBox2.Location = new System.Drawing.Point(315, 39);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(21, 30);
-            this.textBox2.TabIndex = 31;
-            this.textBox2.Text = "~";
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // clear_sell
             // 
             this.clear_sell.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1581,6 +1569,7 @@ namespace WindowsFormsApp1
             this.term_for_buy.Size = new System.Drawing.Size(161, 31);
             this.term_for_buy.TabIndex = 21;
             this.term_for_buy.Text = "종목매수텀";
+            this.term_for_buy.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.term_for_buy.UseVisualStyleBackColor = false;
             // 
             // term_for_buy_text
@@ -1603,6 +1592,7 @@ namespace WindowsFormsApp1
             this.term_for_non_sell.Size = new System.Drawing.Size(161, 32);
             this.term_for_non_sell.TabIndex = 21;
             this.term_for_non_sell.Text = "미체결취소";
+            this.term_for_non_sell.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.term_for_non_sell.UseVisualStyleBackColor = false;
             // 
             // term_for_sell
@@ -1618,6 +1608,7 @@ namespace WindowsFormsApp1
             this.term_for_sell.Size = new System.Drawing.Size(161, 31);
             this.term_for_sell.TabIndex = 22;
             this.term_for_sell.Text = "종목매도텀";
+            this.term_for_sell.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.term_for_sell.UseVisualStyleBackColor = false;
             // 
             // term_for_non_buy
@@ -1633,6 +1624,7 @@ namespace WindowsFormsApp1
             this.term_for_non_buy.Size = new System.Drawing.Size(161, 32);
             this.term_for_non_buy.TabIndex = 23;
             this.term_for_non_buy.Text = "미체결취소";
+            this.term_for_non_buy.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.term_for_non_buy.UseVisualStyleBackColor = false;
             // 
             // term_for_sell_text
@@ -2655,7 +2647,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel19;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.RadioButton clear_sell;
         private System.Windows.Forms.RadioButton clear_sell_mode;
         private System.Windows.Forms.CheckBox clear_sell_profit;
