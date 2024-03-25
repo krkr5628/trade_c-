@@ -2543,7 +2543,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.TextBox clear_sell_end;
         private System.Windows.Forms.TextBox textBox29;
         private System.Windows.Forms.TextBox clear_sell_start;
-        private System.Windows.Forms.TextBox clear_sell_loss_text;
         private System.Windows.Forms.ComboBox Fomula_list_buy;
         private System.Windows.Forms.ComboBox Fomula_list_sell;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
@@ -2662,5 +2661,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.CheckBox clear_sell_profit;
         private System.Windows.Forms.CheckBox clear_sell_loss;
         private System.Windows.Forms.ComboBox type1_selection;
+        private System.Windows.Forms.TextBox clear_sell_loss_text;
     }
 }

@@ -1322,7 +1322,7 @@ namespace WindowsFormsApp1
             account_check_buy();
 
             //매도 완료 종목에 대한 청산 검증
-            if (utility.clear_sell)
+            if (utility.clear_sell || utility.clear_sell_mode)
             {
                 //청산 매도 시간 확인
                 TimeSpan t_code = TimeSpan.Parse(DateTime.Now.ToString("HH:mm:ss"));
@@ -1396,7 +1396,24 @@ namespace WindowsFormsApp1
                         if (!sell_runningCodes.ContainsKey(code))
                         {
                             sell_runningCodes[code] = true;
-                            sell_order(code, "Nan", "청산매도/시간");
+                            if (utility.clear_sell)
+                            {
+                                sell_order(code, "Nan", "청산매도/시간");
+                            }
+                            if (utility.clear_sell_mode)
+                            {
+                                double percent_edit = double.Parse(row.Field<string>("수익률").Replace("%", ""));
+                                double profit = double.Parse(utility.clear_sell_profit_text);
+                                double loss = double.Parse(utility.clear_sell_loss_text);
+                                if (utility.clear_sell_profit && percent_edit >= profit)
+                                {
+                                    sell_order(code, "Nan", "청산매도/수익");
+                                }
+                                if (utility.clear_sell_loss && percent_edit <= -loss)
+                                {
+                                    sell_order(code, "Nan", "청산매도/손실");
+                                }
+                            }                          
                             sell_runningCodes.Remove(code);
                         }
                     }
@@ -1675,7 +1692,7 @@ namespace WindowsFormsApp1
             //손절
             if (utility.loss_percent)
             {
-                double percent_edit = double.Parse(percent.TrimEnd('%')) / 100;
+                double percent_edit = double.Parse(percent.TrimEnd('%'));
                 double loss = double.Parse(utility.profit_percent_text);
                 if (percent_edit <= -loss)
                 {
@@ -1967,7 +1984,5 @@ namespace WindowsFormsApp1
                 //매도 미체결
             }
         }
-
-        //------------KIS 한국투자---------------------
     }
 }

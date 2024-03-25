@@ -26,6 +26,8 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
 
+            file_load();
+
             timer1.Start();
 
             //
@@ -68,9 +70,6 @@ namespace WindowsFormsApp1
         {
             //시간표시
             Time_label.Text = DateTime.Now.ToString("yy MM-dd (ddd) HH:mm:ss");
-
-            //
-            file_load();
 
             //
             if (Operation && load_complete && auto_run) Opeartion_Time();
