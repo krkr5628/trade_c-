@@ -1112,7 +1112,7 @@ namespace WindowsFormsApp1
             Real_time_search_btn.Enabled = false;
 
             //조건식이 로딩되었는지
-            if (string.IsNullOrEmpty(buy_condition.Text))
+            if (string.IsNullOrEmpty(utility.Fomula_list_buy_text))
             {
                 WriteLog_System_Order("선택된 조건식이 없습니다.\n");
                 telegram_message("선택된 조건식이 없습니다.\n");
@@ -1121,43 +1121,43 @@ namespace WindowsFormsApp1
                 return;
             }
 
-            //검색된 조건식이 있을시
-            string[] condition = buy_condition.Text.Split('^');
-            var condInfo = conditionInfo.Find(f => f.Index == Convert.ToInt32(condition[0]) && f.Name.Equals(condition[1]));
-
-            //로드된 조건식 목록에 설정된 조건식이 존재하지 않는 경우 이탈
-            if (condInfo == null)
+            foreach(string Fomula in utility.Fomula_list_buy_text.Split(','))
             {
-                WriteLog_System_Order("선택된 조건식이 조건색 리스트에 없습니다.\n");
-                telegram_message("선택된 조건식이 조건색 리스트에 없습니다.\n");
-                Real_time_stop_btn.Enabled = false;
-                Real_time_search_btn.Enabled = true;
-                return;
-            }
+                //검색된 조건식이 있을시
+                string[] condition = Fomula.Split('^');
+                var condInfo = conditionInfo.Find(f => f.Index == Convert.ToInt32(condition[0]) && f.Name.Equals(condition[1]));
 
-            //조건식에 대한 검색은 60초 마다 가능
-            if (condInfo.LastRequestTime != null && condInfo.LastRequestTime >= DateTime.Now.AddSeconds(-60))
-            {
-                int second = 60 - (DateTime.Now - condInfo.LastRequestTime.Value).Seconds;
-                WriteLog_System_Order($"{second}초 후에 조회 가능합니다.\n");
-                Real_time_stop_btn.Enabled = false;
-                Real_time_search_btn.Enabled = true;
-                return;
-            }
-            
-            //마지막 조건식 검색 시각 업데이트
-            condInfo.LastRequestTime = DateTime.Now;
+                //로드된 조건식 목록에 설정된 조건식이 존재하지 않는 경우 이탈
+                if (condInfo == null)
+                {
+                    WriteLog_System_Order("\'" + Fomula + "\'" + "이 조건색 리스트에 없습니다.\n");
+                    telegram_message("\'" + Fomula + "\'" + "이 조건색 리스트에 없습니다.\n");
+                    Real_time_stop_btn.Enabled = false;
+                    Real_time_search_btn.Enabled = true;
+                    return;
+                }
 
-            WriteLog_System_Order("실시간 조건식 매수 시작\n");
-            telegram_message("실시간 조건식 매수 시작\n");
+                //조건식에 대한 검색은 60초 마다 가능
+                if (condInfo.LastRequestTime != null && condInfo.LastRequestTime >= DateTime.Now.AddSeconds(-60))
+                {
+                    int second = 60 - (DateTime.Now - condInfo.LastRequestTime.Value).Seconds;
+                    WriteLog_System_Order($"{second}초 후에 조회 가능합니다.\n");
+                    Real_time_stop_btn.Enabled = false;
+                    Real_time_search_btn.Enabled = true;
+                    return;
+                }
 
-            //종목 검색 요청
-            //화면 번호, 조건식 이름, 조건식 번호, 조회 구분(0은 일반 검색, 1은 실시간 검색)
-            int result = axKHOpenAPI1.SendCondition(GetScreenNo(), condition[1], Convert.ToInt32(condition[0]), 1);
-            if (result != 1)
-            {
-                WriteLog_System_Order("실시간조건검색 : 실패(조건식 고유번호와 이름을 확인해주세요.\n");
-                telegram_message("실시간조건검색 : 실패(조건식 고유번호와 이름을 확인해주세요.\n");
+                //마지막 조건식 검색 시각 업데이트
+                condInfo.LastRequestTime = DateTime.Now;
+
+                //종목 검색 요청
+                //화면 번호, 조건식 이름, 조건식 번호, 조회 구분(0은 일반 검색, 1은 실시간 검색)
+                int result = axKHOpenAPI1.SendCondition(GetScreenNo(), condition[1], Convert.ToInt32(condition[0]), 1);
+                if (result != 1)
+                {
+                    WriteLog_System_Order("[실시간조건검색/실패] : \'" + Fomula + "\'의 고유번호와 이름을 확인하고 재설정하세요.\n");
+                    telegram_message("[실시간조건검색/실패] : \'" + Fomula + "\'의 고유번호와 이름을 확인하고 재설정하세요.\n");
+                }
             }
         }
 
@@ -1166,8 +1166,8 @@ namespace WindowsFormsApp1
         //조건식 초기 검색(일반, 실시간)
         private void onReceiveTrCondition(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrConditionEvent e)
         {
-            WriteLog_System_Order("실시간조건검색 : 시작\n");
-            telegram_message("실시간조건검색 : 시작\n");
+            WriteLog_System_Order("[실시간조건검색/시작] : " + e.strConditionName + "\n");
+            telegram_message("[실시간조건검색/시작] : " + e.strConditionName + "\n");
 
             string code = e.strCodeList.Trim();
             if (string.IsNullOrEmpty(code)) return;
