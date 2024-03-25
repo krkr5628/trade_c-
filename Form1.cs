@@ -475,7 +475,7 @@ namespace WindowsFormsApp1
             {
                 WriteLog("기존에 보유중인 종목이 없습니다.\n");
                 telegram_message("기존에 보유중인 종목이 없습니다.\n");
-                max_hoid.Text = "0/" + utility.maxbuy_acc;
+                maxbuy_acc.Text = "0/" + utility.maxbuy_acc;
                 if (utility.max_hold)
                 {
                     //최대 보유 종목 에 대한 계산
@@ -487,7 +487,6 @@ namespace WindowsFormsApp1
                 }
                 //실시간 조건 검색 시작
                 auto_allow();
-
                 return;
             }
 
@@ -520,6 +519,45 @@ namespace WindowsFormsApp1
             //실시간 조건 검색 시작
             auto_allow();
         }
+
+        //초기 매매 설정
+        private async Task auto_allow()
+        {
+            //자동 설정 여부
+            if (utility.auto_trade_allow)
+            {
+                //자동 매수 조건식 설정 여부
+                if (utility.buy_condition)
+                {
+                    real_time_search(null, EventArgs.Empty);
+                }
+                else
+                {
+                    WriteLog("자동 조건식 매수 미설정\n");
+                    telegram_message("자동 조건식 매수 미설정\n");
+                }
+
+                //자동 매도 조건식 설정 여부
+                if (utility.sell_condition)
+                {
+                    WriteLog("실시간 조건식 매도 시작\n");
+                    telegram_message("실시간 조건식 매도 시작\n");
+                    real_time_search(null, EventArgs.Empty);
+
+                }
+                else
+                {
+                    WriteLog("자동 조건식 매도 미설정\n");
+                    telegram_message("자동 조건식 매도 미설정\n");
+                }
+            }
+            else
+            {
+                WriteLog("자동 실행 미설정\n");
+                telegram_message("자동 실행 미설정\n");
+            }
+        }
+
 
         //계좌 보유 현황 확인
         private void Account_before(string code)
@@ -804,45 +842,6 @@ namespace WindowsFormsApp1
                     today_profit_percent.Text = string.Format("{0:#,##0.00}%", Convert.ToDecimal(Convert.ToDouble(sum_profit) / Convert.ToDouble(User_money.Text.Replace(",", "")) * 100));
                     today_profit_percent_tax.Text = string.Format("{0:#,##0.00}%", Convert.ToDecimal(Convert.ToDouble(sum_profit - sum_tax) / Convert.ToDouble(User_money.Text.Replace(",", "")) * 100));
                     break;
-            }
-        }
-
-        //---------------LOAD---------------------
-
-        //초기 매매 설정
-        private async Task auto_allow()
-        {
-            //자동 설정 여부
-            if (utility.auto_trade_allow)
-            {
-                //자동 매수 조건식 설정 여부
-                if (utility.buy_condition)
-                {
-                        real_time_search(null, EventArgs.Empty);
-                }
-                else
-                {
-                    WriteLog("자동 조건식 매수 미설정\n");
-                    telegram_message("자동 조건식 매수 미설정\n");
-                }
-                //자동 매도 조건식 설정 여부
-                if (utility.sell_condition)
-                {
-                    WriteLog("실시간 조건식 매도 시작\n");
-                    telegram_message("실시간 조건식 매도 시작\n");
-                    real_time_search(null, EventArgs.Empty);
-
-                }
-                else
-                {
-                    WriteLog("자동 조건식 매도 미설정\n");
-                    telegram_message("자동 조건식 매도 미설정\n");
-                }
-            }
-            else
-            {
-                WriteLog("자동 실행 미설정\n");
-                telegram_message("자동 실행 미설정\n");
             }
         }
 
@@ -1183,8 +1182,9 @@ namespace WindowsFormsApp1
                     DataRow[] findRows1 = dtCondStock.Select($"종목코드 = {e.sTrCode}");
 
                     //기존에 포함됬던 종목이라면 편입 시간만 업데이트 한다.
-                    if(findRows1.Length != 0)
+                    if(findRows1.Length != 0 && findRows1[0]["상태"].Equals("대기"))
                     {
+                        findRows1[0]["편입"] = "편입";
                         findRows1[0]["편입시각"] = DateTime.Now.ToString("HH:mm:ss");
                         dtCondStock.AcceptChanges();
 
@@ -1213,7 +1213,6 @@ namespace WindowsFormsApp1
                     //검출된 종목이 이미 이탈했다면(기본적으로 I D가 번갈아가면서 발생하므로 그럴릴 없음? 있는듯?)
                     DataRow[] findRows = dtCondStock.Select($"종목코드 = {e.sTrCode}");
                     if (findRows.Length == 0) return;
-                    if (findRows[0]["상태"].Equals("대기") || findRows[0]["상태"].Equals("매도완료")) return;
 
                     WriteLog("[기존종목/이탈] : " + e.sTrCode + "\n");
 
@@ -1223,8 +1222,10 @@ namespace WindowsFormsApp1
                     dataGridView1.DataSource = dtCondStock;
 
                     //시세 중단
-                    axKHOpenAPI1.SetRealRemove("ALL", e.sTrCode);
-
+                    if (findRows[0]["상태"].Equals("대기") || findRows[0]["상태"].Equals("매도완료"))
+                    {
+                        axKHOpenAPI1.SetRealRemove("ALL", e.sTrCode);
+                    }
                     break;
             }
         }
