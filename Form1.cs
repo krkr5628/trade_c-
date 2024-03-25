@@ -368,10 +368,7 @@ namespace WindowsFormsApp1
                 //당일 손익 받기
                 today_profit_tax_load();
 
-                //계좌 보유 현황 확인 => 초기 보유 종목 테이블 업데이트 => 실시간 조건 검색 시작
-                Account_before_initial(null, EventArgs.Empty);
-
-                //조건식 검색
+                //조건식 검색 => 계좌 보유 현황 확인 => 초기 보유 종목 테이블 업데이트 => 실시간 조건 검색 시작
                 WriteLog("조건식 검색ing\n");
                 if (axKHOpenAPI1.GetConditionLoad() == 1)
                 {
@@ -452,6 +449,9 @@ namespace WindowsFormsApp1
             }
             WriteLog("조건식 조회 성공\n");
             telegram_message("조건식 조회 성공\n");
+
+            //계좌 보유 현황 확인 => 초기 보유 종목 테이블 업데이트 => 실시간 조건 검색 시작
+            Account_before_initial(null, EventArgs.Empty);
         }
 
         //계좌 보유 현황 확인 => 초기 보유 종목 테이블 업데이트 => 실시간 조건 검색 시작
