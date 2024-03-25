@@ -53,7 +53,6 @@ namespace WindowsFormsApp1
             Trade_setting.Click += trade_setting; //설정창
             porfoilo_btn.Click += Porfoilo_btn_Click;//매매정보
             update_agree_btn.Click += Update_agree_btn_Click;//업데이트 및 동의사항
-            explain_btn.Click += Explain_btn_Click;//사용설명서
 
             update_interval.SelectedIndexChanged += acc_interval; //계좌 조회 인터벌 변경
             Stock_search_btn.Click += stock_search_btn; //종목조회
@@ -885,12 +884,6 @@ namespace WindowsFormsApp1
 
         //업데이트 및 동의사항 확인
         private void Update_agree_btn_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("준비중입니다.");
-        }
-
-        //사용설명 확인
-        private void Explain_btn_Click(object sender, EventArgs e)
         {
             MessageBox.Show("준비중입니다.");
         }
