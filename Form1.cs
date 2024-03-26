@@ -226,6 +226,7 @@ namespace WindowsFormsApp1
             dataTable.Columns.Add("현재가", typeof(string)); // + - 부호를 통해 매수호가인지 매도 호가인지 현재가인지 파악한다.
             dataTable.Columns.Add("등락율", typeof(string));
             dataTable.Columns.Add("거래량", typeof(string));
+            dataTable.Columns.Add("편입상태", typeof(string));
             dataTable.Columns.Add("편입가", typeof(string));
             dataTable.Columns.Add("수익률", typeof(string));
             dataTable.Columns.Add("보유수량", typeof(string)); //보유수량
@@ -684,8 +685,6 @@ namespace WindowsFormsApp1
                     dataTable2.Columns.Add("수익률", typeof(string));
                     dataTable2.Columns.Add("손익금액", typeof(string));
                     dataTable2.Columns.Add("매도수량", typeof(string));
-                    dtCondStock_hold = dataTable2;
-                    dataGridView2.DataSource = dtCondStock_hold;
 
                     int count2 = axKHOpenAPI1.GetRepeatCnt(e.sTrCode, e.sRQName);
 
@@ -693,12 +692,14 @@ namespace WindowsFormsApp1
                     {
                         string code = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "종목코드").Trim().Replace("A", "");
                         string average_price = string.Format("{0:#,##0}", Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "평균단가").Trim()));
+                        //매수완료 후 실제 편입가 업데이트
                         if (code.Equals(condition_nameORcode))
                         {
-                            DataRow[] findRows = dtCondStock.Select($"종목코드 = {code}");
+                            DataRow[] findRows = dtCondStock.Select($"종목코드 = {code}, 편입상태 = {"진입가"}");
+                            findRows[0]["편입상태"] = "실매입";
                             findRows[0]["편입가"] = average_price;
                         }
-
+                        //
                         dataTable2.Rows.Add(
                             code,
                             axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "종목명").Trim(),
@@ -814,6 +815,7 @@ namespace WindowsFormsApp1
                             string.Format("{0:#,##0}", current_price),
                             string.Format("{0:#,##0.00}%", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "등락율").Trim())),
                             string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "거래량").Trim())),
+                            "진입가",
                             string.Format("{0:#,##0}", current_price),
                             "00.00%",
                             "0/" + now_hold1,
@@ -873,6 +875,7 @@ namespace WindowsFormsApp1
                         string.Format("{0:#,##0}", current_price2),
                         string.Format("{0:#,##0.00}%", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "등락율").Trim())),
                         string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "거래량").Trim())),
+                        "진입가",
                         string.Format("{0:#,##0}", current_price2),
                         "00.00%",
                         "0/" + now_hold2,
@@ -1299,7 +1302,6 @@ namespace WindowsFormsApp1
             //종목 데이터
             //종목코드 리스트, 연속조회여부(기본값0만존재), 종목코드 갯수, 종목(0 주식, 3 선물옵션), 사용자 구분명, 화면번호
             int error = axKHOpenAPI1.CommKwRqData(code, 0, codeCount, 0, "조건일반검색/"+ e.strConditionName, GetScreenNo());
-            WriteLog_System_Order("[실시간조건검색/시작] : " + error + "\n");
         }
 
         //실시간 종목 편입 이탈
@@ -2234,21 +2236,21 @@ namespace WindowsFormsApp1
 
                 WriteLog_System_Order("----------------------------------+\n");
 
-                //데이터 업데이트
-                DataRow[] findRows = dtCondStock.Select($"종목코드 = {code}");
-                findRows[0]["보유수량"] = partial_sum + "/" + order_sum;
 
                 //매수확인
                 if (Gubun.Equals("2") && left_Acc.Equals("0"))
                 {
+                    //데이터 업데이트(Independent 모드에서 어떤 조건식으로 주문이 들어갔는지 알지 못하므로 먼저 처리가 끝난순으로 기입한다)
+                    DataRow[] findRows1 = dtCondStock.Select($"종목코드 = {code}, 상태 = '매수중'");
+                    findRows1[0]["보유수량"] = partial_sum + "/" + order_sum;
 
                     //추가로드 - 종목이름
                     string code_name = axKHOpenAPI1.GetChejanData(302).Trim();
 
                     //편입 차트 상태 '매수완료' 변경 / 매수 완료 시각 업데이트
-                    findRows[0]["상태"] = "매수완료";
+                    findRows1[0]["상태"] = "매수완료";
                     string buy_time = axKHOpenAPI1.GetChejanData(908).Trim();
-                    findRows[0]["매수시각"] = string.Format("{0:D2}:{1:D2}:{2:D2}", int.Parse(buy_time.Substring(0, 2)), int.Parse(buy_time.Substring(2, 2)), int.Parse(buy_time.Substring(4, 2))); ;
+                    findRows1[0]["매수시각"] = string.Format("{0:D2}:{1:D2}:{2:D2}", int.Parse(buy_time.Substring(0, 2)), int.Parse(buy_time.Substring(2, 2)), int.Parse(buy_time.Substring(4, 2))); ;
                     dtCondStock.AcceptChanges();
                     dataGridView1.DataSource = dtCondStock;
 
@@ -2268,12 +2270,15 @@ namespace WindowsFormsApp1
                 //매도확인
                 else if(left_Acc.Equals("0"))
                 {
+                    //데이터 업데이트(Independent 모드에서 어떤 조건식으로 주문이 들어갔는지 알지 못하므로 먼저 처리가 끝난순으로 기입한다)
+                    DataRow[] findRows2 = dtCondStock.Select($"종목코드 = {code}, 상태 = '매도중'");
+                    findRows2[0]["보유수량"] = partial_sum + "/" + order_sum;
 
                     //추가로드 - 종목이름
                     string code_name = axKHOpenAPI1.GetChejanData(302).Trim();
 
                     //데이터 업데이트
-                    findRows[0]["보유수량"] = left_Acc + "/" + 0;
+                    findRows2[0]["보유수량"] = left_Acc + "/" + 0;
 
                     //보유 수량 업데이트
                     string[] hold_status = max_hoid.Text.Split('/');
@@ -2298,9 +2303,9 @@ namespace WindowsFormsApp1
                     if (!utility.duplication_deny)
                     {
                         //편입 차트 상태 '대기' 변경
-                        findRows[0]["상태"] = "대기";
+                        findRows2[0]["상태"] = "대기";
                         string sell_time = axKHOpenAPI1.GetChejanData(908).Trim();
-                        findRows[0]["매도시각"] = string.Format("{0:D2}:{1:D2}:{2:D2}", int.Parse(sell_time.Substring(0, 2)), int.Parse(sell_time.Substring(2, 2)), int.Parse(sell_time.Substring(4, 2)));
+                        findRows2[0]["매도시각"] = string.Format("{0:D2}:{1:D2}:{2:D2}", int.Parse(sell_time.Substring(0, 2)), int.Parse(sell_time.Substring(2, 2)), int.Parse(sell_time.Substring(4, 2)));
                         dtCondStock.AcceptChanges();
                         dataGridView1.DataSource = dtCondStock;
                     }
@@ -2310,8 +2315,8 @@ namespace WindowsFormsApp1
                         //모든 화면에서 "code"종목 실시간 해지
                         axKHOpenAPI1.SetRealRemove("ALL", code);
                         string sell_time = axKHOpenAPI1.GetChejanData(908).Trim();
-                        findRows[0]["상태"] = "매도완료";
-                        findRows[0]["매도시각"] = string.Format("{0:D2}:{1:D2}:{2:D2}", int.Parse(sell_time.Substring(0, 2)), int.Parse(sell_time.Substring(2, 2)), int.Parse(sell_time.Substring(4, 2)));
+                        findRows2[0]["상태"] = "매도완료";
+                        findRows2[0]["매도시각"] = string.Format("{0:D2}:{1:D2}:{2:D2}", int.Parse(sell_time.Substring(0, 2)), int.Parse(sell_time.Substring(2, 2)), int.Parse(sell_time.Substring(4, 2)));
                         dtCondStock.AcceptChanges();
                         dataGridView1.DataSource = dtCondStock;
                     }
