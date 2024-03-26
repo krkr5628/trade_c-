@@ -34,14 +34,14 @@ namespace WindowsFormsApp1
 
             //-------------------초기 동작-------------------
 
-            //메인 시간 동작
-            timer1.Start(); //시간 표시 - 1000ms
-
             //테이블 초기 세팅
             initial_Table();
 
             //기존 세팅 로드
             utility.setting_load_auto();
+
+            //메인 시간 동작
+            timer1.Start(); //시간 표시 - 1000ms
 
             //-------------------로그인 이벤트 동작-------------------
             axKHOpenAPI1.OnEventConnect += onEventConnect; //로그인 상태 확인(ID,NAME,계좌번호,KEYBOARD,FIREWALL,조건식)
@@ -261,7 +261,14 @@ namespace WindowsFormsApp1
             //초기 세팅
             acc_text.Text = utility.setting_account_number;
             total_money.Text = string.Format("{0:#,##0}", Convert.ToDecimal(utility.initial_balance));
-            maxbuy_acc.Text = "0/" + utility.maxbuy_acc;
+            if (utility.buy_INDEPENDENT)
+            {
+                maxbuy_acc.Text = string.Concat(Enumerable.Repeat("0/", utility.Fomula_list_buy_text.Split(',').Length)) + utility.maxbuy_acc;
+            }
+            else
+            {
+                maxbuy_acc.Text = "0/" + utility.maxbuy_acc;
+            }
             operation_start.Text = utility.market_start_time;
             operation_stop.Text = utility.market_end_time;
             search_start.Text = utility.buy_condition_start;
@@ -332,6 +339,8 @@ namespace WindowsFormsApp1
                 //"ACCLIST" 또는 "ACCNO" : 구분자 ';', 보유계좌 목록                
                 string 계좌목록 = axKHOpenAPI1.GetLoginInfo("ACCLIST").Trim();
 
+                System.Threading.Thread.Sleep(200);
+
                 //계좌목록은 ';'문자로 분리된 문자열
                 //분리된 계좌를 ComboBox에 추가 
                 account = 계좌목록.Split(';');
@@ -340,9 +349,13 @@ namespace WindowsFormsApp1
                 string 사용자id = axKHOpenAPI1.GetLoginInfo("USER_ID");
                 User_id.Text = 사용자id;
 
+                System.Threading.Thread.Sleep(200);
+
                 //사용자 이름을 UserName 라벨에 추가
                 string 사용자이름 = axKHOpenAPI1.GetLoginInfo("USER_NAME");
                 User_name.Text = 사용자이름;
+
+                System.Threading.Thread.Sleep(200);
 
                 //접속서버 구분(1 : 모의투자, 나머지: 실거래서버)
                 string 접속서버구분 = axKHOpenAPI1.GetLoginInfo("GetServerGubun");
@@ -355,6 +368,8 @@ namespace WindowsFormsApp1
                     User_connection.Text = "실제\n";
                 }
 
+                System.Threading.Thread.Sleep(200);
+
                 //"KEY_BSECGB" : 키보드 보안 해지여부(0 : 정상, 1 : 해지)
                 string 키보드보안 = axKHOpenAPI1.GetLoginInfo("KEY_BSECGB");
                 if (키보드보안.Equals("1"))
@@ -365,6 +380,8 @@ namespace WindowsFormsApp1
                 {
                     Keyboard_wall.Text = "해지\n";
                 }
+
+                System.Threading.Thread.Sleep(200);
 
                 //"FIREW_SECGB" : 방화벽 설정여부(0 : 미설정, 1 : 설정, 2 : 해지)
                 string 방화벽 = axKHOpenAPI1.GetLoginInfo("FIREW_SECGB");
@@ -381,11 +398,17 @@ namespace WindowsFormsApp1
                     Fire_wall.Text = "해지\n";
                 }
 
+                System.Threading.Thread.Sleep(200);
+
                 //예수금 받아오기
                 GetCashInfo(acc_text.Text.Trim(), "예수금상세현황");
 
+                System.Threading.Thread.Sleep(200);
+
                 //당일 손익 받기
                 today_profit_tax_load("NAN");
+
+                System.Threading.Thread.Sleep(200);
 
                 //조건식 검색 => 계좌 보유 현황 확인 => 초기 보유 종목 테이블 업데이트 => 실시간 조건 검색 시작
                 if (axKHOpenAPI1.GetConditionLoad() == 1)
@@ -468,6 +491,8 @@ namespace WindowsFormsApp1
             WriteLog_System_Order("조건식 조회 성공\n");
             telegram_message("조건식 조회 성공\n");
 
+            System.Threading.Thread.Sleep(200);
+
             //계좌 보유 현황 확인 => 초기 보유 종목 테이블 업데이트 => 실시간 조건 검색 시작
             Account_before_initial(null, EventArgs.Empty);
         }
@@ -502,6 +527,9 @@ namespace WindowsFormsApp1
                 {
                     max_hoid.Text = "0/10";
                 }
+
+                System.Threading.Thread.Sleep(200);
+
                 //실시간 조건 검색 시작
                 auto_allow();
                 return;
@@ -532,6 +560,8 @@ namespace WindowsFormsApp1
             {
                 max_hoid.Text = dtCondStock_hold.Rows.Count + "/10";
             }
+
+            System.Threading.Thread.Sleep(200);
 
             //실시간 조건 검색 시작
             auto_allow();
@@ -928,6 +958,7 @@ namespace WindowsFormsApp1
                                 if (buyCheckResult == "매수중")
                                 {
                                     dtCondStock.Rows[i][statusColumnIndex] = "매수중";
+                                    dtCondStock.Rows[i]["보유수량"] = "0/" + buyCheckResult.Split('/')[1];
                                 }
                                 else
                                 {
@@ -1237,6 +1268,9 @@ namespace WindowsFormsApp1
 
                 //종목 검색 요청
                 //화면 번호, 조건식 이름, 조건식 번호, 조회 구분(0은 일반 검색, 1은 실시간 검색)
+
+                System.Threading.Thread.Sleep(200);
+
                 int result = axKHOpenAPI1.SendCondition(GetScreenNo(), condition[1], Convert.ToInt32(condition[0]), 1);
                 if (result != 1)
                 {
@@ -1262,7 +1296,8 @@ namespace WindowsFormsApp1
             //
             //종목 데이터
             //종목코드 리스트, 연속조회여부(기본값0만존재), 종목코드 갯수, 종목(0 주식, 3 선물옵션), 사용자 구분명, 화면번호
-            axKHOpenAPI1.CommKwRqData(code, 0, codeCount, 0, "조건일반검색/"+ e.strConditionName, GetScreenNo());
+            int error = axKHOpenAPI1.CommKwRqData(code, 0, codeCount, 0, "조건일반검색/"+ e.strConditionName, GetScreenNo());
+            WriteLog_System_Order("[실시간조건검색/시작] : " + error + "\n");
         }
 
         //실시간 종목 편입 이탈
