@@ -796,7 +796,7 @@ namespace WindowsFormsApp1
                         {
                             if (!buy_runningCodes.ContainsKey(code) && !utility.buy_AND)
                             {
-                                condition1 = buy_check(code, code_name, string.Format("{0:#,##0}", current_price), time1, high1, false);
+                                condition1 = buy_check(code, code_name, string.Format("{0:#,##0}", current_price), time1, high1, false, condition_nameORcode);
                             }
                         }
                         //
@@ -855,7 +855,7 @@ namespace WindowsFormsApp1
                     {
                         if (!buy_runningCodes.ContainsKey(code2) && !utility.buy_AND)
                         {
-                            condition2 = buy_check(code2, code_name2, string.Format("{0:#,##0}", current_price2), time2, high2, false);
+                            condition2 = buy_check(code2, code_name2, string.Format("{0:#,##0}", current_price2), time2, high2, false, condition_nameORcode);
                         }
                     }
                     //
@@ -920,6 +920,7 @@ namespace WindowsFormsApp1
             int codeColumnIndex = dtCondStock.Columns["종목코드"].Ordinal;
             int currentPriceColumnIndex = dtCondStock.Columns["현재가"].Ordinal;
             int highPriceColumnIndex = dtCondStock.Columns["상한가"].Ordinal;
+            int conditionColumnIndex = dtCondStock.Columns["조건식"].Ordinal;
 
             // 중복 행 제거를 위한 HashSet 생성
             HashSet<string> uniqueValues = new HashSet<string>();
@@ -951,10 +952,11 @@ namespace WindowsFormsApp1
                             string code_name = currentValue;
                             string current_price = string.Format("{0:#,##0}", dtCondStock.Rows[i][currentPriceColumnIndex]);
                             string high1 = dtCondStock.Rows[i][highPriceColumnIndex].ToString();
+                            string condition = dtCondStock.Rows[i][conditionColumnIndex].ToString();
 
                             if (!buy_runningCodes.ContainsKey(code))
                             {
-                                string buyCheckResult = buy_check(code, code_name, current_price, time1, high1, false);
+                                string buyCheckResult = buy_check(code, code_name, current_price, time1, high1, false, condition);
                                 if (buyCheckResult == "매수중")
                                 {
                                     dtCondStock.Rows[i][statusColumnIndex] = "매수중";
@@ -1345,7 +1347,7 @@ namespace WindowsFormsApp1
 
                             if (!buy_runningCodes.ContainsKey(code))
                             {
-                                string buyCheckResult = buy_check(code, code_name, current_price, time1, high1, false);
+                                string buyCheckResult = buy_check(code, code_name, current_price, time1, high1, false, e.strConditionName);
                                 if (buyCheckResult == "매수중")
                                 {
                                     findRows1[0]["상태"] = "매수중";
@@ -1371,7 +1373,7 @@ namespace WindowsFormsApp1
 
                                 if (!buy_runningCodes.ContainsKey(code))
                                 {
-                                    string buyCheckResult = buy_check(code, code_name, current_price, time1, high1, false);
+                                    string buyCheckResult = buy_check(code, code_name, current_price, time1, high1, false, e.strConditionName);
                                     if (buyCheckResult == "매수중")
                                     {
                                         findRows1[0]["상태"] = "매수중";
@@ -1614,7 +1616,7 @@ namespace WindowsFormsApp1
                         if (!buy_runningCodes.ContainsKey(code))
                         {
                             buy_runningCodes[code] = true;
-                            buy_check(code, row.Field<string>("종목명"), row.Field<string>("현재가").Replace(",",""), time, row.Field<string>("상한가"), true);
+                            buy_check(code, row.Field<string>("종목명"), row.Field<string>("현재가").Replace(",",""), time, row.Field<string>("상한가"), true, row.Field<string>("조건식"));
                             buy_runningCodes.Remove(code);
                         }
                     }
@@ -1671,7 +1673,7 @@ namespace WindowsFormsApp1
         //--------------실시간 매수 조건 확인 및 매수 주문---------------------
 
         //매수 가능한 상태인지 확인
-        private string buy_check(string code, string code_name, string price, string time, string high, bool check)
+        private string buy_check(string code, string code_name, string price, string time, string high, bool check, string condition_name)
         {
 
             //매수 시간 확인
@@ -1694,10 +1696,29 @@ namespace WindowsFormsApp1
             if (hold >= hold_max) return "대기";
 
             //매매 횟수 확인
-            string[] trade_status = maxbuy_acc.Text.Split('/');
-            int trade_status_already = Convert.ToInt32(trade_status[0]);
-            int trade_status_limit = Convert.ToInt32(trade_status[1]);
-            if (trade_status_already >= trade_status_limit) return "대기";
+            if (utility.buy_INDEPENDENT)
+            {
+                string[] trade_status = maxbuy_acc.Text.Split('/');
+                string[] condition_num = utility.Fomula_list_buy_text.Split(',');
+                for(int i = 0; i < condition_num.Length; i++)
+                {
+                    if (condition_num[i].Split('^')[1].Equals(condition_name))
+                    {
+                        if(Convert.ToInt32(trade_status[i]) >= Convert.ToInt32(trade_status[trade_status.Length - 1]))
+                        {
+                            return "대기";
+                        }
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                string[] trade_status = maxbuy_acc.Text.Split('/');
+                int trade_status_already = Convert.ToInt32(trade_status[0]);
+                int trade_status_limit = Convert.ToInt32(trade_status[1]);
+                if (trade_status_already >= trade_status_limit) return "대기";
+            }
 
             //이전 종목 매수와의 TERM
 
@@ -1726,6 +1747,8 @@ namespace WindowsFormsApp1
                 WriteLog_System_Order("[매수주문/시장가] : " + code + " - " + order_acc_market + "개 " + "주문이 접수되었습니다.\n");
                 telegram_message("[매수주문/시장가] : " + code + " - " + order_acc_market + "개 " + "주문이 접수되었습니다.\n");
 
+                System.Threading.Thread.Sleep(200);
+
                 int error = axKHOpenAPI1.SendOrder("시장가매수", GetScreenNo(), utility.setting_account_number, 1, code, order_acc_market, 0, "03", "");
 
                 if (error == 0)
@@ -1734,17 +1757,40 @@ namespace WindowsFormsApp1
                     WriteLog_System_Order("[매수주문/시장가] : " + code + " - " + order_acc_market + "개 " + "주문을 성공하였습니다.\n");
                     telegram_message("[매수주문/시장가] : " + code + " - " + order_acc_market + "개 " + "주문을 성공하였습니다.\n");
 
-                    //매매 수량 업데이트
-                    string[] trade_status_update = maxbuy_acc.Text.Split('/');
-                    int trade_status_already_update = Convert.ToInt32(trade_status_update[0]);
-                    int trade_status_limit_update = Convert.ToInt32(trade_status_update[1]);
-                    maxbuy_acc.Text = trade_status_already_update + 1 + "/" + trade_status_limit_update;
-
                     //보유 수량 업데이트
                     string[] hold_status_update = max_hoid.Text.Split('/');
                     int hold_update = Convert.ToInt32(hold_status_update[0]);
                     int hold_max_update = Convert.ToInt32(hold_status_update[1]);
                     max_hoid.Text = (hold_update + 1) + "/" + hold_max_update;
+
+                    //매매 횟수업데이트
+                    if (utility.buy_INDEPENDENT)
+                    {
+                        string[] trade_status = maxbuy_acc.Text.Split('/');
+                        string[] condition_num = utility.Fomula_list_buy_text.Split(',');
+                        for (int i = 0; i < condition_num.Length; i++)
+                        {
+                            if (condition_num[i].Split('^')[1].Equals(condition_name))
+                            {
+                                trade_status[i] = Convert.ToString(Convert.ToInt32(trade_status[i]) + 1);
+                                maxbuy_acc.Text = String.Join("/", trade_status);
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        string[] trade_status_update = maxbuy_acc.Text.Split('/');
+                        int trade_status_already_update = Convert.ToInt32(trade_status_update[0]);
+                        int trade_status_limit_update = Convert.ToInt32(trade_status_update[1]);
+                        maxbuy_acc.Text = trade_status_already_update + 1 + "/" + trade_status_limit_update;
+
+                        //매매 수량이 최대치에 도달했을 경우(실시간조건식검색중단/실시간 시세는 유지)
+                        if (trade_status_already_update + 1 == trade_status_limit_update)
+                        {
+                            real_time_stop(false);
+                        }
+                    }
 
                     return "매수중/" + order_acc_market;
 
@@ -1753,12 +1799,29 @@ namespace WindowsFormsApp1
                 {
                     WriteLog_System_Order("[매수주문/시장가] : " + code + " - " + "1초에 5회 이상 주문하며 실패되었습니다.\n");
                     telegram_message("[매수주문/시장가] : " + code + " - " + "1초에 5회 이상 주문하며 실패되었습니다.\n");
+
+                    if (check)
+                    {
+                        //편입 차트 상태 '매수중' 변경
+                        DataRow[] findRows = dtCondStock.Select($"종목코드 = {code}");
+                        findRows[0]["상태"] = "대기";
+                        dtCondStock.AcceptChanges();
+                        dataGridView1.DataSource = dtCondStock;
+                    }
+
                     return "대기/0";
                 }
                 else
                 {
                     WriteLog_System_Order("[매수주문/시장가] : " + code + " - 에러코드(" + error + ")로 인하여 주문이 실패되었습니다.\n");
                     telegram_message("[매수주문/시장가] : " + code + " - 에러코드(" + error + ")로 인하여 주문이 실패되었습니다.\n");
+
+                    //편입 차트 상태 '매수중' 변경
+                    DataRow[] findRows = dtCondStock.Select($"종목코드 = {code}");
+                    findRows[0]["상태"] = "대기";
+                    dtCondStock.AcceptChanges();
+                    dataGridView1.DataSource = dtCondStock;
+
                     return "대기/0";
                 }
             }
@@ -1782,23 +1845,40 @@ namespace WindowsFormsApp1
                     WriteLog_System_Order("[매수주문/지정가매수] : " + code + " - " + order_acc + "개를 " + price + "원에 주문을 성공하었습니다.\n");
                     telegram_message("[매수주문/지정가매수] : " + code + " - " + order_acc + "개를 " + price + "원에 주문을 성공하었습니다.\n");
 
-                    //매매 수량 업데이트
-                    string[] trade_status_update = maxbuy_acc.Text.Split('/');
-                    int trade_status_already_update = Convert.ToInt32(trade_status_update[0]);
-                    int trade_status_limit_update = Convert.ToInt32(trade_status_update[1]);
-                    maxbuy_acc.Text = trade_status_already_update + 1 + "/" + trade_status_limit_update;
-
-                    //매매 수량이 최대치에 도달했을 경우(실시간조건식검색중단/실시간 시세는 유지)
-                    if(trade_status_already_update + 1 == trade_status_limit_update)
-                    {
-                        real_time_stop(false);
-                    }
-
                     //보유 수량 업데이트
                     string[] hold_status_update = max_hoid.Text.Split('/');
                     int hold_update = Convert.ToInt32(hold_status_update[0]);
                     int hold_max_update = Convert.ToInt32(hold_status_update[1]);
                     max_hoid.Text = (hold_update + 1) + "/" + hold_max_update;
+
+                    //매매 횟수업데이트
+                    if (utility.buy_INDEPENDENT)
+                    {
+                        string[] trade_status = maxbuy_acc.Text.Split('/');
+                        string[] condition_num = utility.Fomula_list_buy_text.Split(',');
+                        for (int i = 0; i < condition_num.Length; i++)
+                        {
+                            if (condition_num[i].Split('^')[1].Equals(condition_name))
+                            {
+                                trade_status[i] = Convert.ToString(Convert.ToInt32(trade_status[i]) + 1);
+                                maxbuy_acc.Text = String.Join("/", trade_status);
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        string[] trade_status_update = maxbuy_acc.Text.Split('/');
+                        int trade_status_already_update = Convert.ToInt32(trade_status_update[0]);
+                        int trade_status_limit_update = Convert.ToInt32(trade_status_update[1]);
+                        maxbuy_acc.Text = trade_status_already_update + 1 + "/" + trade_status_limit_update;
+
+                        //매매 수량이 최대치에 도달했을 경우(실시간조건식검색중단/실시간 시세는 유지)
+                        if (trade_status_already_update + 1 == trade_status_limit_update)
+                        {
+                            real_time_stop(false);
+                        }
+                    }
 
                     return "매수중/" + order_acc;
 
@@ -1807,12 +1887,26 @@ namespace WindowsFormsApp1
                 {
                     WriteLog_System_Order("[매수주문/지정가매수] : " + code + " - " + "1초에 5회 이상 주문하며 실패되었습니다.\n");
                     telegram_message("[매수주문/지정가매수] : " + code + " - " + "1초에 5회 이상 주문하며 실패되었습니다.\n");
+
+                    //편입 차트 상태 '매수중' 변경
+                    DataRow[] findRows = dtCondStock.Select($"종목코드 = {code}");
+                    findRows[0]["상태"] = "대기";
+                    dtCondStock.AcceptChanges();
+                    dataGridView1.DataSource = dtCondStock;
+
                     return "대기";
                 }
                 else
                 {
                     WriteLog_System_Order("[매수주문/지정가매수] : " + code + " - 에러코드(" + error + ")로 인하여 주문이 실패되었습니다.\n");
                     telegram_message("[매수주문/지정가매수] : " + code + " - 에러코드(" + error + ")로 인하여 주문이 실패되었습니다.\n");
+
+                    //편입 차트 상태 '매수중' 변경
+                    DataRow[] findRows = dtCondStock.Select($"종목코드 = {code}");
+                    findRows[0]["상태"] = "대기";
+                    dtCondStock.AcceptChanges();
+                    dataGridView1.DataSource = dtCondStock;
+
                     return "대기";
                 }
             }
