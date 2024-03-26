@@ -647,7 +647,7 @@ namespace WindowsFormsApp1
         //체결내역업데이트(주문번호)
         private void Transaction_Detail(string order_number)
         {
-            axKHOpenAPI1.SetInputValue("주문일자", utility.setting_account_number);
+            axKHOpenAPI1.SetInputValue("주문일자", DateTime.Now.ToString("yyyyMMdd"));
             axKHOpenAPI1.SetInputValue("계좌번호", utility.setting_account_number);
             axKHOpenAPI1.SetInputValue("비밀번호입력매체구분", "00");
             axKHOpenAPI1.SetInputValue("조회구분 ", "1");
