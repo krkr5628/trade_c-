@@ -385,7 +385,7 @@ namespace WindowsFormsApp1
                 GetCashInfo(acc_text.Text.Trim(), "예수금상세현황");
 
                 //당일 손익 받기
-                today_profit_tax_load();
+                today_profit_tax_load("NAN");
 
                 //조건식 검색 => 계좌 보유 현황 확인 => 초기 보유 종목 테이블 업데이트 => 실시간 조건 검색 시작
                 if (axKHOpenAPI1.GetConditionLoad() == 1)
@@ -584,14 +584,15 @@ namespace WindowsFormsApp1
             axKHOpenAPI1.CommRqData("계좌평가현황요청/" + code, "OPW00004", 0, GetScreenNo());
         }
 
-        private void today_profit_tax_load()
+        private void today_profit_tax_load(string load_type)
         {
             //당일 손익 + 당일 손일률 + 당일 수수료
             axKHOpenAPI1.SetInputValue("계좌번호", utility.setting_account_number);
             axKHOpenAPI1.SetInputValue("기준일자", "");
             axKHOpenAPI1.SetInputValue("단주구분", "2");
             axKHOpenAPI1.SetInputValue("현금신용구분", "0");
-            int result = axKHOpenAPI1.CommRqData("당일매매일지요청", "OPT10170", 0, GetScreenNo());
+            if (load_type.Equals("NAN")) load_type = "";
+            int result = axKHOpenAPI1.CommRqData("당일매매일지요청/" + load_type, "OPT10170", 0, GetScreenNo());
         }
 
         //전체 종목 업데이트
@@ -849,14 +850,23 @@ namespace WindowsFormsApp1
                     break;
 
                 case "당일매매일지요청":
-                    int sum_profit = Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "총손익금액").Trim().Replace(",",""));
-                    int sum_tax = Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "총수수료_세금").Trim().Replace(",", ""));
+                    //실질매수 : 0.015% / 실질매도 : 0.015% + 0.18%
+                    //모의매수 : 0.35% / 실질매도 : 0.35% + 0.25%
+                    int sum_profit_tax = Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "총손익금액").Trim().Replace(",","")); //세후손익
+                    int sum_tax = Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "총수수료_세금").Trim().Replace(",", "")); //세금
 
-                    today_profit.Text = string.Format("{0:#,##0}", Convert.ToDecimal(sum_profit));
-                    today_tax.Text = string.Format("{0:#,##0}", Convert.ToDecimal(sum_tax));
-                    today_profit_tax.Text = string.Format("{0:#,##0}", Convert.ToDecimal(sum_profit - sum_tax));
-                    today_profit_percent.Text = string.Format("{0:#,##0.00}%", Convert.ToDecimal(Convert.ToDouble(sum_profit) / Convert.ToDouble(User_money.Text.Replace(",", "")) * 100));
-                    today_profit_percent_tax.Text = string.Format("{0:#,##0.00}%", Convert.ToDecimal(Convert.ToDouble(sum_profit - sum_tax) / Convert.ToDouble(User_money.Text.Replace(",", "")) * 100));
+                    today_profit.Text = string.Format("{0:#,##0}", Convert.ToDecimal(sum_profit_tax + sum_tax)); // 당일 손익
+                    today_tax.Text = string.Format("{0:#,##0}", Convert.ToDecimal(sum_tax)); // 당일 세금
+                    today_profit_tax.Text = string.Format("{0:#,##0}", Convert.ToDecimal(sum_profit_tax)); // 당일 세후 손익
+                    today_profit_percent.Text = string.Format("{0:#,##0.00}%", Convert.ToDecimal(Convert.ToDouble(sum_profit_tax + sum_tax) / Convert.ToDouble(User_money.Text.Replace(",", "")) * 100)); // 당일 손익률
+                    today_profit_percent_tax.Text = string.Format("{0:#,##0.00}%", Convert.ToDecimal(Convert.ToDouble(sum_profit_tax) / Convert.ToDouble(User_money.Text.Replace(",", "")) * 100)); // 당일 세후 손익률
+                    if (condition_nameORcode.Equals("매도"))
+                    {
+                        WriteLog_System_Order("누적세전손익 : " + today_profit.Text + " / 누적세후손익 : " + today_profit_tax.Text);
+                        WriteLog_System_Order("누적세전손익률 : " + today_profit_percent.Text + " / 누적세후손익률 : " + today_profit_percent_tax.Text);
+                        telegram_message("누적세전손익 : " + today_profit.Text + " / 누적세후손익 : " + today_profit_tax.Text);
+                        telegram_message("누적세전손익률 : " + today_profit_percent.Text + " / 누적세후손익률 : " + today_profit_percent_tax.Text);
+                    }
                     break;
             }
         }
@@ -1920,7 +1930,7 @@ namespace WindowsFormsApp1
                 {
 
                     //추가로드 - 종목이름
-                    string code_name = axKHOpenAPI1.GetChejanData(302);
+                    string code_name = axKHOpenAPI1.GetChejanData(302).Trim();
 
                     //편입 차트 상태 '매수완료' 변경 / 매수 완료 시각 업데이트
                     findRows[0]["상태"] = "매수완료";
@@ -1930,7 +1940,7 @@ namespace WindowsFormsApp1
                     dataGridView1.DataSource = dtCondStock;
 
                     //당일 손익 + 당일 손일률 + 당일 수수료 업데이트
-                    today_profit_tax_load();
+                    today_profit_tax_load("NAN");
 
                     //계좌보유현황업데이트
                     Account_before(code);
@@ -1947,7 +1957,7 @@ namespace WindowsFormsApp1
                 {
 
                     //추가로드 - 종목이름
-                    string code_name = axKHOpenAPI1.GetChejanData(302);
+                    string code_name = axKHOpenAPI1.GetChejanData(302).Trim();
 
                     //데이터 업데이트
                     findRows[0]["보유수량"] = left_Acc + "/" + 0;
@@ -1959,7 +1969,7 @@ namespace WindowsFormsApp1
                     max_hoid.Text = (hold - 1) + "/" + hold_max;
 
                     //당일 손익 + 당일 손일률 + 당일 수수료 업데이트
-                    today_profit_tax_load();
+                    today_profit_tax_load("매도");
 
                     //계좌보유현황업데이트
                     Account_before("");
