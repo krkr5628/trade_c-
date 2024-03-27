@@ -33,5 +33,5 @@
 코스닥지수/false/0/0
 코스피선물/false/0/0
 코스닥선물/false/0/0
-텔레그램ID/690962803
-텔레그램token/6796820171:AAEHNFBUGTvOvqCzvx2Xj2Rx2np0xDsiUwM
+텔레그램ID/634534524
+텔레그램token/63452478920171:AAEHNFBUGTvOvqCzvx2Xj2Rx2np0xDsiUwM
