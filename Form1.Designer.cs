@@ -156,7 +156,7 @@ namespace WindowsFormsApp1
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.log_window3 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -200,14 +200,16 @@ namespace WindowsFormsApp1
             // log_window
             // 
             this.log_window.AcceptsTab = true;
+            this.log_window.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.log_window.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.log_window.Dock = System.Windows.Forms.DockStyle.Fill;
             this.log_window.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.log_window.Location = new System.Drawing.Point(3, 26);
             this.log_window.Margin = new System.Windows.Forms.Padding(4);
             this.log_window.Name = "log_window";
             this.log_window.ReadOnly = true;
-            this.log_window.Size = new System.Drawing.Size(462, 253);
+            this.log_window.Size = new System.Drawing.Size(525, 293);
             this.log_window.TabIndex = 2;
             this.log_window.Text = "";
             // 
@@ -236,7 +238,7 @@ namespace WindowsFormsApp1
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -776,7 +778,7 @@ namespace WindowsFormsApp1
             this.Main_menu});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(2400, 33);
+            this.menu.Size = new System.Drawing.Size(2458, 33);
             this.menu.TabIndex = 7;
             this.menu.Text = "menuStrip1";
             // 
@@ -1307,7 +1309,7 @@ namespace WindowsFormsApp1
             this.groupBox1.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.groupBox1.Location = new System.Drawing.Point(1915, 321);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(468, 282);
+            this.groupBox1.Size = new System.Drawing.Size(531, 322);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "System";
@@ -1824,9 +1826,9 @@ namespace WindowsFormsApp1
             // 
             this.groupBox7.Controls.Add(this.log_window2);
             this.groupBox7.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox7.Location = new System.Drawing.Point(1915, 1005);
+            this.groupBox7.Location = new System.Drawing.Point(1915, 1058);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(473, 428);
+            this.groupBox7.Size = new System.Drawing.Size(528, 375);
             this.groupBox7.TabIndex = 20;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Stock";
@@ -1834,14 +1836,16 @@ namespace WindowsFormsApp1
             // log_window2
             // 
             this.log_window2.AcceptsTab = true;
+            this.log_window2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.log_window2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.log_window2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.log_window2.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.log_window2.Location = new System.Drawing.Point(3, 26);
             this.log_window2.Margin = new System.Windows.Forms.Padding(4);
             this.log_window2.Name = "log_window2";
             this.log_window2.ReadOnly = true;
-            this.log_window2.Size = new System.Drawing.Size(467, 399);
+            this.log_window2.Size = new System.Drawing.Size(522, 346);
             this.log_window2.TabIndex = 3;
             this.log_window2.Text = "";
             // 
@@ -1898,35 +1902,37 @@ namespace WindowsFormsApp1
             // 
             // groupBox9
             // 
-            this.groupBox9.Controls.Add(this.richTextBox1);
+            this.groupBox9.Controls.Add(this.log_window3);
             this.groupBox9.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox9.Location = new System.Drawing.Point(1918, 609);
+            this.groupBox9.Location = new System.Drawing.Point(1918, 648);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(468, 390);
+            this.groupBox9.Size = new System.Drawing.Size(525, 404);
             this.groupBox9.TabIndex = 15;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Order";
             // 
-            // richTextBox1
+            // log_window3
             // 
-            this.richTextBox1.AcceptsTab = true;
-            this.richTextBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.richTextBox1.Location = new System.Drawing.Point(3, 26);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(462, 361);
-            this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.Text = "";
+            this.log_window3.AcceptsTab = true;
+            this.log_window3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.log_window3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.log_window3.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.log_window3.Location = new System.Drawing.Point(3, 26);
+            this.log_window3.Margin = new System.Windows.Forms.Padding(4);
+            this.log_window3.Name = "log_window3";
+            this.log_window3.ReadOnly = true;
+            this.log_window3.Size = new System.Drawing.Size(519, 375);
+            this.log_window3.TabIndex = 2;
+            this.log_window3.Text = "";
             // 
             // Trade_Auto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(2400, 1445);
+            this.ClientSize = new System.Drawing.Size(2458, 1445);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox7);
@@ -2096,7 +2102,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.DataGridView dataGridView3;
         private System.Windows.Forms.GroupBox groupBox9;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox log_window3;
     }
 }
 

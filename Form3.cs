@@ -39,8 +39,8 @@ namespace WindowsFormsApp1
         private void Button1_Click(object sender, EventArgs e)
         {
             trade_auto = new Trade_Auto();
-            trade_auto.FormClosed += Trade_auto_FormClosed;
-            trade_auto.ShowDialog(); //form2 닫기 전까지 form1 제어 불가능
+            trade_auto.FormClosed -= Trade_auto_FormClosed;
+            trade_auto.Show(); //form2 닫기 전까지 form1 제어 불가능
         }
 
         private void Trade_auto_FormClosed(object sender, FormClosedEventArgs e)
@@ -110,7 +110,7 @@ namespace WindowsFormsApp1
             if (!isTradeAutoOpened && trade_auto == null && t_now >= t_start && t_now <= t_end)
             {
                 trade_auto = new Trade_Auto();
-                trade_auto.ShowDialog(); //form2 닫기 전까지 form1 제어 불가능
+                trade_auto.Show(); //form2 닫기 전까지 form1 제어 불가능
                 isTradeAutoOpened = true;
                 label7.Text = "실행";
             }
@@ -126,6 +126,10 @@ namespace WindowsFormsApp1
         {
             if (trade_auto != null)
             {
+                //Overflow방지 이벤트 제거
+                trade_auto.FormClosed -= Trade_auto_FormClosed;
+
+                //
                 trade_auto.Close(); //폼을 닫고 닫기 이벤트를 발생, 폼이 닫힌 후에도 폼 객체는 메모리에 남음
                 trade_auto.Dispose(); //폼이 사용한 모든 리소스(메모리, 핸들 등)를 해제
                 trade_auto = null; //폼 객체에 대한 참조를 제거하여 리소스 누수(memory leak)를 방지

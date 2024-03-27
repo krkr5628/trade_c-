@@ -432,7 +432,7 @@ namespace WindowsFormsApp1
 
         private void Market_end_time_Leave(object sender, EventArgs e)
         {
-            ValidateTimeInput(sender, e, market_end_time, "23:59:59", new TimeSpan(5, 30, 0), new TimeSpan(23, 59, 59), market_start_time);
+            ValidateTimeInput(sender, e, market_start_time, "23:59:59", new TimeSpan(5, 30, 0), new TimeSpan(23, 59, 59), market_end_time);
         }
 
         private void Buy_condition_start_Leave(object sender, EventArgs e)
@@ -442,7 +442,7 @@ namespace WindowsFormsApp1
 
         private void Buy_condition_end_Leave(object sender, EventArgs e)
         {
-            ValidateTimeInput(sender, e, buy_condition_end, "15:30:00", new TimeSpan(9, 0, 0), new TimeSpan(15, 30, 0), buy_condition_start);
+            ValidateTimeInput(sender, e, buy_condition_start, "15:30:00", new TimeSpan(9, 0, 0), new TimeSpan(15, 30, 0), buy_condition_end);
         }
 
         private void Sell_condition_start_Leave(object sender, EventArgs e)
@@ -452,7 +452,7 @@ namespace WindowsFormsApp1
 
         private void Sell_condition_end_Leave(object sender, EventArgs e)
         {
-            ValidateTimeInput(sender, e, sell_condition_end, "15:30:00", new TimeSpan(9, 0, 0), new TimeSpan(15, 30, 0), sell_condition_start);
+            ValidateTimeInput(sender, e, sell_condition_start, "15:30:00", new TimeSpan(9, 0, 0), new TimeSpan(15, 30, 0), sell_condition_end);
         }
 
         private void Clear_sell_start_Leave(object sender, EventArgs e)
@@ -462,7 +462,7 @@ namespace WindowsFormsApp1
 
         private void Clear_sell_end_Leave(object sender, EventArgs e)
         {
-            ValidateTimeInput(sender, e, clear_sell_end, "18:00:00", new TimeSpan(9, 0, 0), new TimeSpan(18, 0, 0), clear_sell_start);
+            ValidateTimeInput(sender, e, clear_sell_start, "18:00:00", new TimeSpan(9, 0, 0), new TimeSpan(18, 0, 0), clear_sell_end);
         }
 
         private void ValidateTimeInput(object sender, EventArgs e, TextBox textBox, string defaultValue, TimeSpan minTime, TimeSpan maxTime, TextBox comparisonTextBox = null)
@@ -486,22 +486,13 @@ namespace WindowsFormsApp1
                 return;
             }
 
-            if (comparisonTextBox != null)
-            {
-                TimeSpan comparisonTime = TimeSpan.Parse(comparisonTextBox.Text);
+            TimeSpan comparisonTime = TimeSpan.Parse(comparisonTextBox.Text);
 
-                if (inputTimeSpan > comparisonTime)
-                {
-                    textBox.Text = defaultValue;
-                    MessageBox.Show($"입력된 시간이 {comparisonTextBox.Name.Replace("_", " ")} 보다 앞에 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-                else if (inputTimeSpan < comparisonTime)
-                {
-                    textBox.Text = defaultValue;
-                    MessageBox.Show($"입력된 시간이 {comparisonTextBox.Name.Replace("_", " ")} 보다 뒤에 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
+            if (inputTimeSpan > comparisonTime)
+            {
+                textBox.Text = defaultValue;
+                MessageBox.Show($"입력된 시간이 잘못되었습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
         }
 
