@@ -150,7 +150,7 @@ namespace WindowsFormsApp1
             this.KIS_RUN = new System.Windows.Forms.Label();
             this.KIS_ACCOUNT = new System.Windows.Forms.Label();
             this.KIS_N = new System.Windows.Forms.Label();
-            this.KIS_YN = new System.Windows.Forms.Label();
+            this.KIS_Profit = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.log_window2 = new System.Windows.Forms.RichTextBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
@@ -1703,7 +1703,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel8.Controls.Add(this.KIS_RUN, 1, 0);
             this.tableLayoutPanel8.Controls.Add(this.KIS_ACCOUNT, 1, 1);
             this.tableLayoutPanel8.Controls.Add(this.KIS_N, 1, 2);
-            this.tableLayoutPanel8.Controls.Add(this.KIS_YN, 1, 3);
+            this.tableLayoutPanel8.Controls.Add(this.KIS_Profit, 1, 3);
             this.tableLayoutPanel8.Location = new System.Drawing.Point(6, 24);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 4;
@@ -1771,7 +1771,7 @@ namespace WindowsFormsApp1
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(72, 42);
             this.label23.TabIndex = 3;
-            this.label23.Text = "보유중";
+            this.label23.Text = "수익";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // KIS_RUN
@@ -1810,17 +1810,17 @@ namespace WindowsFormsApp1
             this.KIS_N.Size = new System.Drawing.Size(72, 42);
             this.KIS_N.TabIndex = 7;
             // 
-            // KIS_YN
+            // KIS_Profit
             // 
-            this.KIS_YN.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.KIS_Profit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.KIS_YN.AutoSize = true;
-            this.KIS_YN.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.KIS_YN.Location = new System.Drawing.Point(81, 126);
-            this.KIS_YN.Name = "KIS_YN";
-            this.KIS_YN.Size = new System.Drawing.Size(72, 42);
-            this.KIS_YN.TabIndex = 8;
+            this.KIS_Profit.AutoSize = true;
+            this.KIS_Profit.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.KIS_Profit.Location = new System.Drawing.Point(81, 126);
+            this.KIS_Profit.Name = "KIS_Profit";
+            this.KIS_Profit.Size = new System.Drawing.Size(72, 42);
+            this.KIS_Profit.TabIndex = 8;
             // 
             // groupBox7
             // 
@@ -2098,7 +2098,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label KIS_RUN;
         private System.Windows.Forms.Label KIS_ACCOUNT;
         private System.Windows.Forms.Label KIS_N;
-        private System.Windows.Forms.Label KIS_YN;
+        private System.Windows.Forms.Label KIS_Profit;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.DataGridView dataGridView3;
         private System.Windows.Forms.GroupBox groupBox9;
