@@ -25,7 +25,7 @@
 # 참고 자료
 - 사이트 : https://fors.tistory.com/355
 - 사이트 : https://joel-helloworld.tistory.com/68
-- 기타 : Claude Sonnet, Copilot
+- 기타 : Claude Sonnet, Copilot, GPT 3.5
 
 # 디자인
 - FORM1 : 자동실행 및 업데이트
@@ -39,7 +39,7 @@
 
 # 특징
 - 증권사 실시간 조건 검색을 활용하여 매수 매도를 할 수 있다.
-- 특정 시간에 프로그램이 시작 및 종료되어 서버 점검을 대비할 수 있다.
+- 특정 시간에 프로그램이 시작 및 종료되어 서버 점검을 대비할 수 있다. => 기능 분리 Kiwoom_KIS_Starter Repository 참고
 - Telegram을 통해 매매 현황을 보고받을 수 있다.
 - 개인 컴퓨터나 클라우드를 활용해 24시간 활용할 수 있다.
 - KIS(한국투자증권)과 연계하여 거래할 수 있다.(진행중)
