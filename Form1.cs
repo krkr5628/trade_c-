@@ -361,6 +361,13 @@ namespace WindowsFormsApp1
                 //분리된 계좌를 ComboBox에 추가 
                 account = 계좌목록.Split(';');
 
+                //계좌번호 존재 확인
+                if (!account.Contains(utility.setting_account_number))
+                {
+                    MessageBox.Show("계좌번호를 재설정해주세요.");
+                    acc_text.Text = account[0];
+                }
+
                 //사용자 id를 UserId 라벨에 추가
                 string 사용자id = axKHOpenAPI1.GetLoginInfo("USER_ID");
                 User_id.Text = 사용자id;
@@ -417,6 +424,7 @@ namespace WindowsFormsApp1
                 System.Threading.Thread.Sleep(200);
 
                 //여기서 부터 계좌번호 필요 => 계좌 없을 시 어떻게 할지 설정해야 함
+                //일단 존재하는 계좌로 변경해서 조회함
 
                 //예수금 받아오기
                 GetCashInfo(acc_text.Text.Trim(), "예수금상세현황");
@@ -433,7 +441,7 @@ namespace WindowsFormsApp1
 
                 System.Threading.Thread.Sleep(200);
 
-                //조건식 검색 => 계좌 보유 현황 확인 => 초기 보유 종목 테이블 업데이트 => 실시간 조건 검색 시작
+                //조건식 검색(계좌불필요) => 계좌 보유 현황 확인 => 초기 보유 종목 테이블 업데이트 => 실시간 조건 검색 시작
                 if (axKHOpenAPI1.GetConditionLoad() == 1)
                 {
                     WriteLog_System("조건식 검색 성공\n");
@@ -523,7 +531,7 @@ namespace WindowsFormsApp1
             //계좌 보유 종목 갱신
             if (utility.load_check && login_check == 0)
             {
-                axKHOpenAPI1.SetInputValue("계좌번호", utility.setting_account_number);
+                axKHOpenAPI1.SetInputValue("계좌번호", acc_text.Text);
                 axKHOpenAPI1.SetInputValue("상장폐지조회구분", "0");
                 axKHOpenAPI1.SetInputValue("비밀번호입력매체구분", "00");
                 axKHOpenAPI1.CommRqData("계좌평가현황요청/초기", "OPW00004", 0, GetScreenNo());
@@ -589,6 +597,13 @@ namespace WindowsFormsApp1
         //초기 매매 설정
         private async Task auto_allow()
         {
+            //계좌 없으면 이탈
+            if (!account.Contains(utility.setting_account_number))
+            {
+                MessageBox.Show("계좌번호를 재설정해주세요.");
+                return;
+            }
+
             //자동 설정 여부
             if (utility.auto_trade_allow)
             {
@@ -627,7 +642,7 @@ namespace WindowsFormsApp1
         //계좌 보유 현황 확인
         private void Account_before(string code)
         {
-            axKHOpenAPI1.SetInputValue("계좌번호", utility.setting_account_number);
+            axKHOpenAPI1.SetInputValue("계좌번호", acc_text.Text);
             axKHOpenAPI1.SetInputValue("상장폐지조회구분", "0");
             axKHOpenAPI1.SetInputValue("비밀번호입력매체구분", "00");
             axKHOpenAPI1.CommRqData("계좌평가현황요청/" + code, "OPW00004", 0, GetScreenNo());
@@ -636,7 +651,7 @@ namespace WindowsFormsApp1
         private void today_profit_tax_load(string load_type)
         {
             //당일 손익 + 당일 손일률 + 당일 수수료
-            axKHOpenAPI1.SetInputValue("계좌번호", utility.setting_account_number);
+            axKHOpenAPI1.SetInputValue("계좌번호", acc_text.Text);
             axKHOpenAPI1.SetInputValue("기준일자", "");
             axKHOpenAPI1.SetInputValue("단주구분", "2");
             axKHOpenAPI1.SetInputValue("현금신용구분", "0");
@@ -649,7 +664,7 @@ namespace WindowsFormsApp1
         private void Transaction_Detail(string order_number)
         {
             axKHOpenAPI1.SetInputValue("주문일자", DateTime.Now.ToString("yyyyMMdd"));
-            axKHOpenAPI1.SetInputValue("계좌번호", utility.setting_account_number);
+            axKHOpenAPI1.SetInputValue("계좌번호", acc_text.Text);
             axKHOpenAPI1.SetInputValue("비밀번호입력매체구분", "00");
             axKHOpenAPI1.SetInputValue("조회구분", "2");
             axKHOpenAPI1.SetInputValue("주식채권구분", "0");
