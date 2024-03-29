@@ -416,7 +416,7 @@ namespace WindowsFormsApp1
 
                 System.Threading.Thread.Sleep(200);
 
-                //여기서 부터 계좌번호 필요
+                //여기서 부터 계좌번호 필요 => 계좌 없을 시 어떻게 할지 설정해야 함
 
                 //예수금 받아오기
                 GetCashInfo(acc_text.Text.Trim(), "예수금상세현황");

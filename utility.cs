@@ -202,7 +202,7 @@ namespace WindowsFormsApp1
 
             //매수시간전검출매수금지
             String[] before_time_deny_tmp = reader.ReadLine().Split('/');
-            before_time_deny = Convert.ToBoolean(before_time_deny_tmp[1]);
+            before_time_deny = Convert.ToBoolean(before_time_deny_tmp[1]);           
 
             //보유종목매수금지
             String[] hold_deny_tmp = reader.ReadLine().Split('/');
@@ -409,12 +409,12 @@ namespace WindowsFormsApp1
             KIS_Allow = Convert.ToBoolean(KIS_Allow_tmp[1]);
 
             //한국투자증권appkey
-            String[] KIS_appkey_tmp = reader.ReadLine().Split('/');
-            KIS_appkey = KIS_appkey_tmp[1];
+            String KIS_appkey_tmp = reader.ReadLine();
+            KIS_appkey = KIS_appkey_tmp;
 
             //한국투자증권appsecret
-            String[] KIS_appsecret_tmp = reader.ReadLine().Split('/');
-            KIS_appsecret = KIS_appsecret_tmp[1];
+            String KIS_appsecret_tmp = reader.ReadLine();
+            KIS_appsecret = KIS_appsecret_tmp;
 
             //한국투자증권KIS_amount
             String[] KIS_amount_tmp = reader.ReadLine().Split('/');
