@@ -1802,7 +1802,7 @@ namespace WindowsFormsApp1
                                         .ToList();
 
             //검출 종목에 대한 확인
-            if (filteredRows.Count > 1)
+            if (filteredRows.Count > 0)
             {
                 foreach (DataRow row in filteredRows)
                 {
