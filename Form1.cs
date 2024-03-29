@@ -416,6 +416,8 @@ namespace WindowsFormsApp1
 
                 System.Threading.Thread.Sleep(200);
 
+                //여기서 부터 계좌번호 필요
+
                 //예수금 받아오기
                 GetCashInfo(acc_text.Text.Trim(), "예수금상세현황");
 
@@ -1212,7 +1214,7 @@ namespace WindowsFormsApp1
             Real_time_search_btn.Enabled = true;
 
             // 검색된 조건식이 없을시
-            if (string.IsNullOrEmpty(buy_condition.Text))
+            if (string.IsNullOrEmpty(utility.Fomula_list_buy_text))
             {
                 WriteLog_System("실시간조건식검색 : 중단실패(조건식없음)\n");
                 telegram_message("실시간조건식검색 : 중단실패(조건식없음)\n");
@@ -1222,18 +1224,25 @@ namespace WindowsFormsApp1
             }
 
             //검색된 조건식이 있을시
-            string[] condition = buy_condition.Text.Split('^');
-
-            //계좌 탐색 중단
-            timer3.Stop();
+            if (utility.buy_condition)
+            {
+                string[] condition = utility.Fomula_list_buy_text.Split('^');
+                for(int i = 0; i < condition.Length; i++)
+                {
+                    string[] tmp = condition[i].Split('^');
+                    axKHOpenAPI1.SendConditionStop(GetScreenNo(), tmp[1], Convert.ToInt32(tmp[0])); //조건검색 중지
+                }
+            }
 
             //실시간 중지
             WriteLog_System("실시간조건식검색 : 중단\n");
             telegram_message("실시간조건식검색 : 중단\n");
-            axKHOpenAPI1.SendConditionStop(GetScreenNo(), condition[1], Convert.ToInt32(condition[0])); //조건검색 중지
+
+            //완전 전체 중단
             if (real_price_all_stop)
             {
                 axKHOpenAPI1.SetRealRemove("ALL", "ALL"); //실시간 시세 중지
+                timer3.Stop();//계좌 탐색 중단
             }
         }
 
