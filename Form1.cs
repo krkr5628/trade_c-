@@ -2582,7 +2582,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        //------------주문 상태 확인 및 정정---------------------
+        //------------KIS 주문 설정---------------------
 
         //KIS
         private void initial_KIS()
