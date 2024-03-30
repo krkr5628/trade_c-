@@ -13,6 +13,7 @@ using System.Net.Http;
 using System.Web;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1
@@ -2587,138 +2588,70 @@ namespace WindowsFormsApp1
         //KIS
         private void initial_KIS()
         {
-            KIS_RUN.Text = Convert.ToString(utility.KIS_Allow);
-            KIS_ACCOUNT.Text = utility.KIS_Allow ? KIS_Account() : "0";
-            KIS_N.Text = utility.KIS_amount;
-            KIS_Profit.Text = "N";
+            KIS_RUN.Text = Convert.ToString(utility.KIS_Allow); //사용여부
+            KIS_ACCOUNT.Text = "0";//예수금
+            KIS_N.Text = utility.KIS_amount; //N등분
+            KIS_Profit.Text = "N"; //매매수익
         }
 
-        private string KIS_Account()
+        //접근토큰받기(너무 어려움)
+        public async Task KIS_WebSocket()
         {
-            string url = "https://openapi.koreainvestment.com:9443/uapi/domestic-stock/v1/trading/inquire-balance";
-            string tr_id = "CTRP6548R";
-            string data = @"{
-            ""CANO"": ""12345678"",
-            ""ACNT_PRDT_CD"": ""01"",
-            ""INQR_DVSN_1"": """",
-            ""BSPR_BF_DT_APLY_YN"": """"
-            }";
-            string response = HttpPostBodyConnection(url, data, tr_id);
-            MessageBox.Show(response);
-            //ParseAndDisplayResponse(response);
-            return "";
-        }
-        public string HttpPostBodyConnection(string UrlData, string ParamData, string TrId)
-        {
-            try
-            {
-                string totalUrl = UrlData.Trim();
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(totalUrl);
-                request.Method = "POST";
-                request.ContentType = "application/json; charset=utf-8";
-                request.Headers.Add("authorization", "Bearer {ACCESS_TOKEN}");
-                request.Headers.Add("appKey", utility.KIS_appkey);
-                request.Headers.Add("secretkey", utility.KIS_appsecret);
-                request.Headers.Add("tr_id", TrId);
-                request.Headers.Add("custtype", "P"); // 개인 고객
+            string domain = "https://openapivts.koreainvestment.com:29443";
+            string endpoint = "/oauth2/tokenP";
 
-                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
-                {
-                    streamWriter.Write(ParamData);
-                }
-
-                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-                using (var streamReader = new StreamReader(response.GetResponseStream()))
-                {
-                    return streamReader.ReadToEnd();
-                }
-            }
-            catch (WebException ex)
+            // Construct the request data
+            var requestData = new
             {
-                if (ex.Response != null)
+                grant_type = "client_credentials",
+                appkey = utility.KIS_appkey,
+                appsecret = utility.KIS_appsecret
+            };
+
+            // Serialize the request data to JSON
+            string jsonData = JsonConvert.SerializeObject(requestData);
+
+            // Make a POST request to the token endpoint
+            using (var client = new HttpClient())
+            {
+                // Set the base address
+                client.BaseAddress = new Uri(domain);
+
+                // Create the request content
+                var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+                // Send the POST request
+                HttpResponseMessage response = await client.PostAsync(endpoint, content);
+
+                // Check if the request was successful
+                if (response.IsSuccessStatusCode)
                 {
-                    using (var streamReader = new StreamReader(ex.Response.GetResponseStream()))
-                    {
-                        return streamReader.ReadToEnd();
-                    }
+                    // Read the response content
+                    string responseContent = await response.Content.ReadAsStringAsync();
+                    // Parse the JSON response
+                    var tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(responseContent);
+                    // Access the token and other fields
+                    string accessToken = tokenResponse.access_token;
+                    string tokenType = tokenResponse.token_type;
+                    int expiresIn = tokenResponse.expires_in;
+                    //문자열 보간 방식
+                    WriteLog_System($"Access Token: {accessToken}\n");
+                    WriteLog_System($"Token Type: {tokenType}\n");
+                    WriteLog_System($"Expires In (seconds): {expiresIn}\n");
+
                 }
                 else
                 {
-                    return "API 요청 실패: " + ex.Message;
+                    MessageBox.Show($"Failed to get token. Status code: {response.StatusCode}");
                 }
             }
-            catch (Exception ex)
-            {
-                return "예외 발생: " + ex.Message;
-            }
         }
-
-        public string ParseAndDisplayResponse(string jsonResponse)
+        // Define a class to represent the token response
+        class TokenResponse
         {
-            using (JsonDocument doc = JsonDocument.Parse(jsonResponse))
-            {
-                JsonElement root = doc.RootElement;
-                JsonElement output1 = root.GetProperty("output1");
-
-                /*종목별 내역 볼 수 있음
-                foreach (JsonElement item in output1.EnumerateArray())
-                {
-                    DisplayOutput1Item(item);
-                }
-                */
-
-                JsonElement output2 = root.GetProperty("output2");
-                return DisplayOutput2Item(output2);
-            }
-        }
-        /*
-        private void DisplayOutput1Item(JsonElement item)
-        {
-            string pchs_amt = item.GetProperty("pchs_amt").GetString();
-            string evlu_amt = item.GetProperty("evlu_amt").GetString();
-            string evlu_pfls_amt = item.GetProperty("evlu_pfls_amt").GetString();
-            string crdt_lnd_amt = item.GetProperty("crdt_lnd_amt").GetString();
-            string real_nass_amt = item.GetProperty("real_nass_amt").GetString();
-            string whol_weit_rt = item.GetProperty("whol_weit_rt").GetString();
-
-            Console.WriteLine($"매입금액: {pchs_amt}");
-            Console.WriteLine($"평가금액: {evlu_amt}");
-            Console.WriteLine($"평가손익금액: {evlu_pfls_amt}");
-            Console.WriteLine($"신용대출금액: {crdt_lnd_amt}");
-            Console.WriteLine($"실제순자산금액: {real_nass_amt}");
-            Console.WriteLine($"전체비중율: {whol_weit_rt}");
-        }
-        */
-
-        private string DisplayOutput2Item(JsonElement item)
-        {
-            string pchs_amt_smtl = item.GetProperty("pchs_amt_smtl").GetString();
-            string nass_tot_amt = item.GetProperty("nass_tot_amt").GetString();
-            string loan_amt_smtl = item.GetProperty("loan_amt_smtl").GetString();
-            string evlu_pfls_amt_smtl = item.GetProperty("evlu_pfls_amt_smtl").GetString();
-            string evlu_amt_smtl = item.GetProperty("evlu_amt_smtl").GetString();
-            string tot_asst_amt = item.GetProperty("tot_asst_amt").GetString();
-            string tot_lnda_tot_ulst_lnda = item.GetProperty("tot_lnda_tot_ulst_lnda").GetString();
-            string cma_auto_loan_amt = item.GetProperty("cma_auto_loan_amt").GetString();
-            string tot_mgln_amt = item.GetProperty("tot_mgln_amt").GetString();
-            string stln_evlu_amt = item.GetProperty("stln_evlu_amt").GetString();
-            string crdt_fncg_amt = item.GetProperty("crdt_fncg_amt").GetString();
-            string ocl_apl_loan_amt = item.GetProperty("ocl_apl_loan_amt").GetString();
-            string pldg_stup_amt = item.GetProperty("pldg_stup_amt").GetString();
-            string frcr_evlu_tota = item.GetProperty("frcr_evlu_tota").GetString();
-            string tot_dncl_amt = item.GetProperty("tot_dncl_amt").GetString();
-            string cma_evlu_amt = item.GetProperty("cma_evlu_amt").GetString();
-            string dncl_amt = item.GetProperty("dncl_amt").GetString();
-            string tot_sbst_amt = item.GetProperty("tot_sbst_amt").GetString();
-            string thdt_rcvb_amt = item.GetProperty("thdt_rcvb_amt").GetString();
-            string ovrs_stck_evlu_amt1 = item.GetProperty("ovrs_stck_evlu_amt1").GetString();
-            string ovrs_bond_evlu_amt = item.GetProperty("ovrs_bond_evlu_amt").GetString();
-            string mmf_cma_mgge_loan_amt = item.GetProperty("mmf_cma_mgge_loan_amt").GetString();
-            string sbsc_dncl_amt = item.GetProperty("sbsc_dncl_amt").GetString();
-            string pbst_sbsc_fnds_loan_use_amt = item.GetProperty("pbst_sbsc_fnds_loan_use_amt").GetString();
-            string etpr_crdt_grnt_loan_amt = item.GetProperty("etpr_crdt_grnt_loan_amt").GetString();
-            WriteLog_System(nass_tot_amt + " / " + evlu_amt_smtl + " / " + tot_asst_amt + " / " + tot_dncl_amt + " / " + dncl_amt);
-            return nass_tot_amt + " / " + evlu_amt_smtl + " / " + tot_asst_amt + " / " + tot_dncl_amt + " / " + dncl_amt;
+            public string access_token { get; set; }
+            public string token_type { get; set; }
+            public int expires_in { get; set; }
         }
     }
 }
