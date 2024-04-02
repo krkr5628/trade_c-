@@ -2593,8 +2593,7 @@ namespace WindowsFormsApp1
             KIS_ACCOUNT.Text = "0";//예수금
             KIS_N.Text = utility.KIS_amount; //N등분
             KIS_Profit.Text = "";
-            initial_KIS();
-
+            //KIS_Start();
         }
 
         public string appKey = utility.KIS_appkey;
@@ -2605,7 +2604,7 @@ namespace WindowsFormsApp1
         public string acntPrdtCd = "00"; //계좌번호 체계(8-2)의 뒤 2자리
 
         //초기실행
-        private async Task Initial_KIS()
+        private async Task KIS_Start()
         {
             //웹소켓발급(모의투자)
             await KIS_WebSocket();

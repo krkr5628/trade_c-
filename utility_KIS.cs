@@ -182,43 +182,48 @@ namespace WindowsFormsApp1
 
         public async Task KIS_Depositt()
         {
-            string domain = "https://openapi.koreainvestment.com:9443"; //실전투자
+            string domain = "https://openapi.koreainvestment.com:9443";
             string endpoint = "/uapi/domestic-stock/v1/trading/inquire-account-balance";
 
-            // Construct the request data
-            var requestData = new
+            // Construct the query parameters
+            var queryParams = new Dictionary<string, string>
             {
-                authorization = access_token,
-                appkey = appKey,
-                appsecret = secretkey,
-                tr_id = "CTRP6548R",
-                custtype = "P",
-                CANO = cano,
-                ACNT_PRDT_CD = acntPrdtCd,
-                INQR_DVSN_1 = "",
-                BSPR_BF_DT_APLY_YN = ""
+                { "CANO", cano },
+                { "ACNT_PRDT_CD", acntPrdtCd },
+                { "INQR_DVSN_1", "" },
+                { "BSPR_BF_DT_APLY_YN", "" }
             };
 
-            // Serialize the request data to JSON
-            string jsonData = JsonConvert.SerializeObject(requestData);
+            string queryString = string.Join("&", queryParams.Select(x => $"{x.Key}={Uri.EscapeDataString(x.Value)}"));
+            string uri = $"{domain}{endpoint}?{queryString}";
 
             // Make a POST request to the token endpoint
             using (var client = new HttpClient())
             {
-                // Set the base address
+
                 client.BaseAddress = new Uri(domain);
 
+                // Set authorization header and other headers
+                client.DefaultRequestHeaders.Add("authorization", access_token);
+                client.DefaultRequestHeaders.Add("appkey", appKey);
+                client.DefaultRequestHeaders.Add("appsecret", secretkey);
+                client.DefaultRequestHeaders.Add("tr_id", "CTRP6548R");
+                client.DefaultRequestHeaders.Add("custtype", "P");
+
                 // Create the request content
-                var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+                var content = new StringContent(string.Empty, Encoding.UTF8, "application/json");
 
                 // Send the POST request
                 HttpResponseMessage response = await client.PostAsync(endpoint, content);
+
+                MessageBox.Show(response.ToString());
 
                 // Check if the request was successful
                 if (response.IsSuccessStatusCode)
                 {
                     // Read the response content
                     string responseContent = await response.Content.ReadAsStringAsync();
+                    //WriteLog_System(responseContent);
                     // Parse the JSON response
                     var tokenResponse = JsonConvert.DeserializeObject<TokenResponse<Output2Data>>(responseContent);
                     // Access the token and other fields
