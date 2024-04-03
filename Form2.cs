@@ -722,8 +722,8 @@ namespace WindowsFormsApp1
                     tmp.Add("type4/" + (type4_selection.Text.Equals("") ? "9999" : type4_selection.Text) + "/" + type4_start.Text + "/" + type4_end.Text);
                     //
                     tmp.Add("KIS_Allow/" + Convert.ToString(KIS_Allow.Checked));
-                    tmp.Add("KIS_appkey/" + appkey.Text);
-                    tmp.Add("KIS_appsecret/" + appsecret.Text);
+                    tmp.Add(appkey.Text);
+                    tmp.Add(appsecret.Text);
                     tmp.Add("KIS_amount/" + kis_amount.Text);
                     //
                     tmp.Add("Telegram_Allow/" + Convert.ToString(Telegram_Allow.Checked));
@@ -1037,14 +1037,14 @@ namespace WindowsFormsApp1
             KIS_Allow.Checked = Convert.ToBoolean(KIS_Allow_tmp[1]);
 
             //한국투자증권appkey
-            String[] KIS_appkey_tmp = reader.ReadLine().Split('/');
-            appkey.Text = KIS_appkey_tmp[1];
+            String KIS_appkey_tmp = reader.ReadLine();
+            appkey.Text = KIS_appkey_tmp;
 
             //한국투자증권appsecret
-            String[] KIS_appsecret_tmp = reader.ReadLine().Split('/');
-            appsecret.Text = KIS_appsecret_tmp[1];
+            String KIS_appsecret_tmp = reader.ReadLine();
+            appsecret.Text = KIS_appsecret_tmp;
 
-            //한국투자증권appsecret
+            //한국투자증권N등분
             String[] KIS_amount_tmp = reader.ReadLine().Split('/');
             kis_amount.Text = KIS_amount_tmp[1];
 
