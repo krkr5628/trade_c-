@@ -294,7 +294,7 @@ namespace WindowsFormsApp1
 
         private void Setting_Positive_numver(object sender, EventArgs e)
         {
-            ValidateNumericInput(sender, e, setting_account_number, "0000000000", 10);
+            ValidateNumericInput(sender, e, setting_account_number, "0000000000");
         }
 
         private void Initial_balance_Leave(object sender, EventArgs e)
@@ -314,12 +314,12 @@ namespace WindowsFormsApp1
 
         private void Min_price_Leave(object sender, EventArgs e)
         {
-            ValidateNumericInput(sender, e, min_price, "1000", minValue: 1000, maxValue: Convert.ToInt32(max_price.Text) - 100);
+            ValidateNumericInput(sender, e, min_price, "1000", minValue: 0);
         }
 
         private void Max_price_Leave(object sender, EventArgs e)
         {
-            ValidateNumericInput(sender, e, max_price, "10000", minValue: Convert.ToInt32(min_price.Text) + 100, maxValue: 10000);
+            ValidateNumericInput(sender, e, max_price, "10000", minValue: Convert.ToInt32(min_price.Text) + 1);
         }
 
         private void Max_hold_text_Leave(object sender, EventArgs e)
@@ -406,16 +406,14 @@ namespace WindowsFormsApp1
                 return;
             }
 
-            int value = Convert.ToInt32(input);
-
-            if (minValue.HasValue && value < minValue.Value)
+            if (minValue.HasValue && Convert.ToInt32(input) < minValue.Value)
             {
                 textBox.Text = defaultValue;
                 MessageBox.Show($"입력값은 {minValue.Value} 이상이어야 합니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (maxValue.HasValue && value > maxValue.Value)
+            if (maxValue.HasValue && Convert.ToInt32(input) > maxValue.Value)
             {
                 textBox.Text = defaultValue;
                 MessageBox.Show($"입력값은 {maxValue.Value} 이하여야 합니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
