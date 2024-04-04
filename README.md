@@ -1,3 +1,8 @@
+# 현재 상황
+- 정규장 시간에 대하여 0R - AND - INDEPENDENT 모드로 종목을 거래할 수 있으며 Telegram을 통해 상황을 보고받을 수 있습니다.
+- AWS 클라우에서 Free Tier 통해 실제로 활용하고 있습니다.
+- 현재 시나리오 모드, KIS, 시간외거래 등을 기획중이며 퀀트 프로그램도 재시작할 생각입니다.
+
 # 자동 매매 서비스
 ❓ Problem1 : 증권사 자체 프로그램을 매일 켜야하거나 수수료가 비싸다.
 
@@ -32,10 +37,10 @@
 <img width="233" alt="image" src="https://github.com/krkr5628/trade_c-/assets/75410553/5de516e9-cdf4-46d1-8b39-cbd821ea8830">
 
 - FORM2 : 매매 확인
-<img width="1253" alt="image" src="https://github.com/krkr5628/trade_c-/assets/75410553/c50bb531-eb35-45ec-a376-28d40facef9a">
+<img width="1280" alt="image" src="https://github.com/krkr5628/trade_c-/assets/75410553/630e5754-db3c-4891-ba86-f650949e0df1">
 
 - FORM3 : 매매 설정
-<img width="796" alt="image" src="https://github.com/krkr5628/trade_c-/assets/75410553/93d82459-ebd8-448b-a7b7-d2b95e95adb1">
+<img width="794" alt="image" src="https://github.com/krkr5628/trade_c-/assets/75410553/551c132e-e6ca-4092-a5b0-0107541f9752">
 
 # 특징
 - 증권사 실시간 조건 검색을 활용하여 매수 매도를 할 수 있다.
@@ -129,7 +134,7 @@
 # TELEGRAM
 - 사용자의 ID 및 토큰을 확인하여 간단한 매매 현황 전송
   
-# KIS
+# KIS(개발중)
 - 한국투자증권의 OPEN_API를 통해 거래
 - 분할 숫자를 넣어서 예수금의 N비율만큼 거래
 
