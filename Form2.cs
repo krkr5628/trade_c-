@@ -719,14 +719,16 @@ namespace WindowsFormsApp1
                     tmp.Add("type3/" + (type3_selection.Text.Equals("") ? "9999" : type3_selection.Text) + "/" + type3_start.Text + "/" + type3_end.Text);
                     tmp.Add("type4/" + (type4_selection.Text.Equals("") ? "9999" : type4_selection.Text) + "/" + type4_start.Text + "/" + type4_end.Text);
                     //
-                    tmp.Add("KIS_Allow/" + Convert.ToString(KIS_Allow.Checked));
-                    tmp.Add(appkey.Text);
-                    tmp.Add(appsecret.Text);
-                    tmp.Add("KIS_amount/" + kis_amount.Text);
-                    //
                     tmp.Add("Telegram_Allow/" + Convert.ToString(Telegram_Allow.Checked));
                     tmp.Add("텔레그램ID/" + telegram_user_id.Text);
                     tmp.Add("텔레그램token/" + telegram_token.Text);
+                    //
+                    tmp.Add("KIS_Allow/" + Convert.ToString(KIS_Allow.Checked));
+                    tmp.Add("KIS_Independent/" + Convert.ToString(KIS_Independent.Checked));
+                    tmp.Add("KIS_Account/" + KIS_Account.Text);
+                    tmp.Add(appkey.Text);
+                    tmp.Add(appsecret.Text);
+                    tmp.Add("KIS_amount/" + kis_amount.Text);
 
                     //텍스트 합치기
                     string textToSave = string.Join("\r\n", tmp);
@@ -1030,9 +1032,30 @@ namespace WindowsFormsApp1
             type4_start.Text = Convert.ToString(type4_selection_tmp[2]);
             type4_end.Text = Convert.ToString(type4_selection_tmp[3]);
 
+            //텔레그램Telegram_Allow
+            String[] Telegram_Allow_tmp = reader.ReadLine().Split('/');
+            Telegram_Allow.Checked = Convert.ToBoolean(Telegram_Allow_tmp[1]);
+
+
+            //텔레그램ID
+            String[] telegram_user_id_tmp = reader.ReadLine().Split('/');
+            telegram_user_id.Text = telegram_user_id_tmp[1];
+
+            //텔레그램TOKEN
+            String[] telegram_token_tmp = reader.ReadLine().Split('/');
+            telegram_token.Text = telegram_token_tmp[1];
+
             //한국투자증권KIS_Allow
             String[] KIS_Allow_tmp = reader.ReadLine().Split('/');
             KIS_Allow.Checked = Convert.ToBoolean(KIS_Allow_tmp[1]);
+
+            //한국투자증권KIS_AllowKIS_Independent_tmp
+            String[] KIS_Independent_tmp = reader.ReadLine().Split('/');
+            KIS_Independent.Checked = Convert.ToBoolean(KIS_Independent_tmp[1]);
+
+            //한국투자증권Account
+            String[] KIS_Account_tmp = reader.ReadLine().Split('/');
+            KIS_Account.Text = KIS_Account_tmp[1];
 
             //한국투자증권appkey
             String KIS_appkey_tmp = reader.ReadLine();
@@ -1046,25 +1069,8 @@ namespace WindowsFormsApp1
             String[] KIS_amount_tmp = reader.ReadLine().Split('/');
             kis_amount.Text = KIS_amount_tmp[1];
 
-            //텔레그램Telegram_Allow
-            String[] Telegram_Allow_tmp = reader.ReadLine().Split('/');
-            Telegram_Allow.Checked = Convert.ToBoolean(Telegram_Allow_tmp[1]);
-
-            //텔레그램ID
-            String[] telegram_user_id_tmp = reader.ReadLine().Split('/');
-            telegram_user_id.Text = telegram_user_id_tmp[1];
-
-            //텔레그램TOKEN
-            String[] telegram_token_tmp = reader.ReadLine().Split('/');
-            telegram_token.Text = telegram_token_tmp[1];
-
             reader.Close();
         }
-
-        //-----------------------------------KIS 테스트----------------------------------------
-
-
-
 
         //-----------------------------------Tekegram 테스트----------------------------------------
 

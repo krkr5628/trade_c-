@@ -11,7 +11,7 @@ namespace WindowsFormsApp1
     class utility
     {
         //check 변수
-        public static string system_route = "C:\\Auto_Trade\\setting.txt";
+        public static string system_route = "C:\\Users\\krkr5\\OneDrive\\바탕 화면\\project\\password\\setting.txt";
         public static bool load_check = false;
 
         //global 변수
@@ -119,14 +119,16 @@ namespace WindowsFormsApp1
         public static string type4_start;
         public static string type4_end;
 
-        public static bool KIS_Allow;
-        public static string KIS_appkey;
-        public static string KIS_appsecret;
-        public static string KIS_amount;
-
         public static bool Telegram_Allow;
         public static string telegram_user_id;
         public static string telegram_token;
+
+        public static bool KIS_Allow;
+        public static bool KIS_Independent;
+        public static string KIS_Account;
+        public static string KIS_appkey;
+        public static string KIS_appsecret;
+        public static string KIS_amount;
 
         //utility 목록
         public static async Task setting_load_auto()
@@ -403,9 +405,29 @@ namespace WindowsFormsApp1
             type4_start = Convert.ToString(type4_selection_tmp[2]);
             type4_end = Convert.ToString(type4_selection_tmp[3]);
 
+            //텔레그램Telegram_Allow
+            String[] Telegram_Allow_tmp = reader.ReadLine().Split('/');
+            Telegram_Allow = Convert.ToBoolean(Telegram_Allow_tmp[1]);
+
+            //텔레그램ID
+            String[] telegram_user_id_tmp = reader.ReadLine().Split('/');
+            telegram_user_id = telegram_user_id_tmp[1];
+
+            //텔레그램TOKEN
+            String[] telegram_token_tmp = reader.ReadLine().Split('/');
+            telegram_token = telegram_token_tmp[1];
+
             //한국투자증권KIS_Allow
             String[] KIS_Allow_tmp = reader.ReadLine().Split('/');
             KIS_Allow = Convert.ToBoolean(KIS_Allow_tmp[1]);
+
+            //한국투자증권KIS_Independent
+            String[] KIS_Independent_tmp = reader.ReadLine().Split('/');
+            KIS_Independent = Convert.ToBoolean(KIS_Independent_tmp[1]);
+
+            //한국투자증권Account
+            String[] KIS_Account_tmp = reader.ReadLine().Split('/');
+            KIS_Account = KIS_Account_tmp[1];
 
             //한국투자증권appkey
             String KIS_appkey_tmp = reader.ReadLine();
@@ -418,18 +440,6 @@ namespace WindowsFormsApp1
             //한국투자증권KIS_amount
             String[] KIS_amount_tmp = reader.ReadLine().Split('/');
             KIS_amount = KIS_amount_tmp[1];
-
-            //텔레그램Telegram_Allow
-            String[] Telegram_Allow_tmp = reader.ReadLine().Split('/');
-            Telegram_Allow = Convert.ToBoolean(Telegram_Allow_tmp[1]);
-
-            //텔레그램ID
-            String[] telegram_user_id_tmp = reader.ReadLine().Split('/');
-            telegram_user_id = telegram_user_id_tmp[1];
-
-            //텔레그램TOKEN
-            String[] telegram_token_tmp = reader.ReadLine().Split('/');
-            telegram_token = telegram_token_tmp[1];
 
             reader.Close();
 

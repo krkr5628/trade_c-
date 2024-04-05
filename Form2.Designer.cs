@@ -178,12 +178,9 @@ namespace WindowsFormsApp1
             this.Telegram_Allow = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.textBox21 = new System.Windows.Forms.TextBox();
-            this.textBox45 = new System.Windows.Forms.TextBox();
             this.telegram_user_id = new System.Windows.Forms.TextBox();
-            this.telegram_token = new System.Windows.Forms.TextBox();
             this.telegram_test_button = new System.Windows.Forms.Button();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.KIS_Allow = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
             this.appkey_text = new System.Windows.Forms.Label();
@@ -196,6 +193,11 @@ namespace WindowsFormsApp1
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.Fomula_list_buy_Checked_box = new System.Windows.Forms.CheckedListBox();
+            this.KIS_Independent = new System.Windows.Forms.CheckBox();
+            this.telegram_token = new System.Windows.Forms.TextBox();
+            this.textBox45 = new System.Windows.Forms.TextBox();
+            this.KIS_Accunt_Text = new System.Windows.Forms.Label();
+            this.KIS_Account = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -674,7 +676,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.90253F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.43321F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.53069F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 260F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 262F));
             this.tableLayoutPanel5.Controls.Add(this.setting_allowed, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.setting_open, 3, 0);
             this.tableLayoutPanel5.Controls.Add(this.save_button, 2, 0);
@@ -694,7 +696,7 @@ namespace WindowsFormsApp1
             this.setting_allowed.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_allowed.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_allowed.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_allowed.Location = new System.Drawing.Point(1002, 3);
+            this.setting_allowed.Location = new System.Drawing.Point(1001, 3);
             this.setting_allowed.Name = "setting_allowed";
             this.setting_allowed.Size = new System.Drawing.Size(147, 44);
             this.setting_allowed.TabIndex = 8;
@@ -706,7 +708,7 @@ namespace WindowsFormsApp1
             this.setting_open.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_open.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_open.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_open.Location = new System.Drawing.Point(857, 3);
+            this.setting_open.Location = new System.Drawing.Point(856, 3);
             this.setting_open.Name = "setting_open";
             this.setting_open.Size = new System.Drawing.Size(139, 44);
             this.setting_open.TabIndex = 7;
@@ -718,7 +720,7 @@ namespace WindowsFormsApp1
             this.save_button.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.save_button.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.save_button.ForeColor = System.Drawing.Color.SpringGreen;
-            this.save_button.Location = new System.Drawing.Point(703, 3);
+            this.save_button.Location = new System.Drawing.Point(702, 3);
             this.save_button.Name = "save_button";
             this.save_button.Size = new System.Drawing.Size(148, 44);
             this.save_button.TabIndex = 6;
@@ -733,7 +735,7 @@ namespace WindowsFormsApp1
             this.setting_name.Location = new System.Drawing.Point(194, 3);
             this.setting_name.Name = "setting_name";
             this.setting_name.ReadOnly = true;
-            this.setting_name.Size = new System.Drawing.Size(503, 28);
+            this.setting_name.Size = new System.Drawing.Size(502, 28);
             this.setting_name.TabIndex = 1;
             // 
             // label5
@@ -1799,7 +1801,7 @@ namespace WindowsFormsApp1
             this.groupBox8.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.groupBox8.Location = new System.Drawing.Point(1129, 210);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(381, 309);
+            this.groupBox8.Size = new System.Drawing.Size(381, 286);
             this.groupBox8.TabIndex = 21;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "지수 선물 연동(불가)";
@@ -1828,7 +1830,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.39456F));
             this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.8231F));
             this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.83033F));
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 133F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 134F));
             this.tableLayoutPanel12.Controls.Add(this.type4_selection, 1, 3);
             this.tableLayoutPanel12.Controls.Add(this.type3_selection, 1, 2);
             this.tableLayoutPanel12.Controls.Add(this.type2_selection, 1, 1);
@@ -1867,7 +1869,7 @@ namespace WindowsFormsApp1
             this.type4_selection.FormattingEnabled = true;
             this.type4_selection.Location = new System.Drawing.Point(39, 123);
             this.type4_selection.Name = "type4_selection";
-            this.type4_selection.Size = new System.Drawing.Size(78, 28);
+            this.type4_selection.Size = new System.Drawing.Size(77, 28);
             this.type4_selection.TabIndex = 33;
             // 
             // type3_selection
@@ -1878,7 +1880,7 @@ namespace WindowsFormsApp1
             this.type3_selection.FormattingEnabled = true;
             this.type3_selection.Location = new System.Drawing.Point(39, 83);
             this.type3_selection.Name = "type3_selection";
-            this.type3_selection.Size = new System.Drawing.Size(78, 28);
+            this.type3_selection.Size = new System.Drawing.Size(77, 28);
             this.type3_selection.TabIndex = 32;
             // 
             // type2_selection
@@ -1889,7 +1891,7 @@ namespace WindowsFormsApp1
             this.type2_selection.FormattingEnabled = true;
             this.type2_selection.Location = new System.Drawing.Point(39, 43);
             this.type2_selection.Name = "type2_selection";
-            this.type2_selection.Size = new System.Drawing.Size(78, 28);
+            this.type2_selection.Size = new System.Drawing.Size(77, 28);
             this.type2_selection.TabIndex = 31;
             // 
             // label20
@@ -1922,28 +1924,28 @@ namespace WindowsFormsApp1
             // 
             // type1_end
             // 
-            this.type1_end.Location = new System.Drawing.Point(233, 3);
+            this.type1_end.Location = new System.Drawing.Point(230, 3);
             this.type1_end.Name = "type1_end";
             this.type1_end.Size = new System.Drawing.Size(87, 30);
             this.type1_end.TabIndex = 6;
             // 
             // type2_end
             // 
-            this.type2_end.Location = new System.Drawing.Point(233, 43);
+            this.type2_end.Location = new System.Drawing.Point(230, 43);
             this.type2_end.Name = "type2_end";
             this.type2_end.Size = new System.Drawing.Size(87, 30);
             this.type2_end.TabIndex = 10;
             // 
             // type3_end
             // 
-            this.type3_end.Location = new System.Drawing.Point(233, 83);
+            this.type3_end.Location = new System.Drawing.Point(230, 83);
             this.type3_end.Name = "type3_end";
             this.type3_end.Size = new System.Drawing.Size(87, 30);
             this.type3_end.TabIndex = 14;
             // 
             // type4_end
             // 
-            this.type4_end.Location = new System.Drawing.Point(233, 123);
+            this.type4_end.Location = new System.Drawing.Point(230, 123);
             this.type4_end.Name = "type4_end";
             this.type4_end.Size = new System.Drawing.Size(87, 30);
             this.type4_end.TabIndex = 18;
@@ -1955,9 +1957,9 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
             this.label12.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label12.Location = new System.Drawing.Point(208, 0);
+            this.label12.Location = new System.Drawing.Point(206, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(19, 40);
+            this.label12.Size = new System.Drawing.Size(18, 40);
             this.label12.TabIndex = 19;
             this.label12.Text = "~";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1969,9 +1971,9 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.AutoSize = true;
             this.label14.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label14.Location = new System.Drawing.Point(208, 40);
+            this.label14.Location = new System.Drawing.Point(206, 40);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(19, 40);
+            this.label14.Size = new System.Drawing.Size(18, 40);
             this.label14.TabIndex = 21;
             this.label14.Text = "~";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1983,9 +1985,9 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label16.AutoSize = true;
             this.label16.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label16.Location = new System.Drawing.Point(208, 80);
+            this.label16.Location = new System.Drawing.Point(206, 80);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(19, 40);
+            this.label16.Size = new System.Drawing.Size(18, 40);
             this.label16.TabIndex = 23;
             this.label16.Text = "~";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1997,39 +1999,39 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label18.AutoSize = true;
             this.label18.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label18.Location = new System.Drawing.Point(208, 120);
+            this.label18.Location = new System.Drawing.Point(206, 120);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(19, 40);
+            this.label18.Size = new System.Drawing.Size(18, 40);
             this.label18.TabIndex = 25;
             this.label18.Text = "~";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // type1_start
             // 
-            this.type1_start.Location = new System.Drawing.Point(123, 3);
+            this.type1_start.Location = new System.Drawing.Point(122, 3);
             this.type1_start.Name = "type1_start";
-            this.type1_start.Size = new System.Drawing.Size(79, 30);
+            this.type1_start.Size = new System.Drawing.Size(78, 30);
             this.type1_start.TabIndex = 4;
             // 
             // type2_start
             // 
-            this.type2_start.Location = new System.Drawing.Point(123, 43);
+            this.type2_start.Location = new System.Drawing.Point(122, 43);
             this.type2_start.Name = "type2_start";
-            this.type2_start.Size = new System.Drawing.Size(79, 30);
+            this.type2_start.Size = new System.Drawing.Size(78, 30);
             this.type2_start.TabIndex = 7;
             // 
             // type3_start
             // 
-            this.type3_start.Location = new System.Drawing.Point(123, 83);
+            this.type3_start.Location = new System.Drawing.Point(122, 83);
             this.type3_start.Name = "type3_start";
-            this.type3_start.Size = new System.Drawing.Size(79, 30);
+            this.type3_start.Size = new System.Drawing.Size(78, 30);
             this.type3_start.TabIndex = 12;
             // 
             // type4_start
             // 
-            this.type4_start.Location = new System.Drawing.Point(123, 123);
+            this.type4_start.Location = new System.Drawing.Point(122, 123);
             this.type4_start.Name = "type4_start";
-            this.type4_start.Size = new System.Drawing.Size(79, 30);
+            this.type4_start.Size = new System.Drawing.Size(78, 30);
             this.type4_start.TabIndex = 16;
             // 
             // label19
@@ -2068,7 +2070,7 @@ namespace WindowsFormsApp1
             this.type1_selection.FormattingEnabled = true;
             this.type1_selection.Location = new System.Drawing.Point(39, 3);
             this.type1_selection.Name = "type1_selection";
-            this.type1_selection.Size = new System.Drawing.Size(78, 28);
+            this.type1_selection.Size = new System.Drawing.Size(77, 28);
             this.type1_selection.TabIndex = 30;
             // 
             // tableLayoutPanel18
@@ -2169,9 +2171,9 @@ namespace WindowsFormsApp1
             this.groupBox9.Controls.Add(this.tableLayoutPanel13);
             this.groupBox9.Controls.Add(this.telegram_test_button);
             this.groupBox9.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox9.Location = new System.Drawing.Point(1126, 693);
+            this.groupBox9.Location = new System.Drawing.Point(1129, 502);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(381, 181);
+            this.groupBox9.Size = new System.Drawing.Size(381, 133);
             this.groupBox9.TabIndex = 22;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "TELEGRAM";
@@ -2190,21 +2192,20 @@ namespace WindowsFormsApp1
             // 
             // tableLayoutPanel13
             // 
-            this.tableLayoutPanel13.ColumnCount = 1;
+            this.tableLayoutPanel13.ColumnCount = 2;
             this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 280F));
+            this.tableLayoutPanel13.Controls.Add(this.telegram_user_id, 1, 0);
+            this.tableLayoutPanel13.Controls.Add(this.textBox45, 0, 1);
+            this.tableLayoutPanel13.Controls.Add(this.telegram_token, 1, 1);
             this.tableLayoutPanel13.Controls.Add(this.textBox21, 0, 0);
-            this.tableLayoutPanel13.Controls.Add(this.textBox45, 0, 2);
-            this.tableLayoutPanel13.Controls.Add(this.telegram_user_id, 0, 1);
-            this.tableLayoutPanel13.Controls.Add(this.telegram_token, 0, 3);
             this.tableLayoutPanel13.Location = new System.Drawing.Point(7, 50);
             this.tableLayoutPanel13.Name = "tableLayoutPanel13";
-            this.tableLayoutPanel13.RowCount = 4;
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel13.RowCount = 2;
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel13.Size = new System.Drawing.Size(367, 122);
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(367, 70);
             this.tableLayoutPanel13.TabIndex = 0;
             // 
             // textBox21
@@ -2213,39 +2214,20 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox21.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.textBox21.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.textBox21.Location = new System.Drawing.Point(3, 3);
             this.textBox21.Name = "textBox21";
-            this.textBox21.Size = new System.Drawing.Size(361, 30);
+            this.textBox21.Size = new System.Drawing.Size(81, 26);
             this.textBox21.TabIndex = 0;
             this.textBox21.Text = "USER_ID";
             this.textBox21.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBox45
-            // 
-            this.textBox45.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox45.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.textBox45.Location = new System.Drawing.Point(3, 63);
-            this.textBox45.Name = "textBox45";
-            this.textBox45.Size = new System.Drawing.Size(361, 30);
-            this.textBox45.TabIndex = 1;
-            this.textBox45.Text = "TOKEN";
-            this.textBox45.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // telegram_user_id
             // 
-            this.telegram_user_id.Location = new System.Drawing.Point(3, 33);
+            this.telegram_user_id.Location = new System.Drawing.Point(90, 3);
             this.telegram_user_id.Name = "telegram_user_id";
-            this.telegram_user_id.Size = new System.Drawing.Size(360, 30);
+            this.telegram_user_id.Size = new System.Drawing.Size(274, 30);
             this.telegram_user_id.TabIndex = 2;
-            // 
-            // telegram_token
-            // 
-            this.telegram_token.Location = new System.Drawing.Point(3, 93);
-            this.telegram_token.Name = "telegram_token";
-            this.telegram_token.Size = new System.Drawing.Size(360, 30);
-            this.telegram_token.TabIndex = 3;
             // 
             // telegram_test_button
             // 
@@ -2260,27 +2242,16 @@ namespace WindowsFormsApp1
             // 
             // groupBox10
             // 
-            this.groupBox10.Controls.Add(this.button1);
+            this.groupBox10.Controls.Add(this.KIS_Independent);
             this.groupBox10.Controls.Add(this.KIS_Allow);
             this.groupBox10.Controls.Add(this.tableLayoutPanel14);
             this.groupBox10.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox10.Location = new System.Drawing.Point(1126, 496);
+            this.groupBox10.Location = new System.Drawing.Point(1129, 645);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(381, 187);
+            this.groupBox10.Size = new System.Drawing.Size(381, 217);
             this.groupBox10.TabIndex = 23;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "KIS";
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.button1.ForeColor = System.Drawing.Color.MediumSpringGreen;
-            this.button1.Location = new System.Drawing.Point(237, 10);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(137, 37);
-            this.button1.TabIndex = 26;
-            this.button1.Text = "테스트";
-            this.button1.UseVisualStyleBackColor = false;
             // 
             // KIS_Allow
             // 
@@ -2299,19 +2270,23 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel14.ColumnCount = 2;
             this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 246F));
-            this.tableLayoutPanel14.Controls.Add(this.appkey_text, 0, 0);
-            this.tableLayoutPanel14.Controls.Add(this.kis_amount_text, 0, 2);
-            this.tableLayoutPanel14.Controls.Add(this.appkey, 1, 0);
-            this.tableLayoutPanel14.Controls.Add(this.label13, 0, 1);
-            this.tableLayoutPanel14.Controls.Add(this.appsecret, 1, 1);
-            this.tableLayoutPanel14.Controls.Add(this.kis_amount, 1, 2);
+            this.tableLayoutPanel14.Controls.Add(this.KIS_Account, 1, 0);
+            this.tableLayoutPanel14.Controls.Add(this.label13, 0, 2);
+            this.tableLayoutPanel14.Controls.Add(this.appkey_text, 0, 1);
+            this.tableLayoutPanel14.Controls.Add(this.kis_amount, 1, 3);
+            this.tableLayoutPanel14.Controls.Add(this.appsecret, 1, 2);
+            this.tableLayoutPanel14.Controls.Add(this.appkey, 1, 1);
+            this.tableLayoutPanel14.Controls.Add(this.kis_amount_text, 0, 3);
+            this.tableLayoutPanel14.Controls.Add(this.KIS_Accunt_Text, 0, 0);
             this.tableLayoutPanel14.Location = new System.Drawing.Point(9, 48);
             this.tableLayoutPanel14.Name = "tableLayoutPanel14";
-            this.tableLayoutPanel14.RowCount = 3;
+            this.tableLayoutPanel14.RowCount = 4;
             this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel14.Size = new System.Drawing.Size(367, 124);
+            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel14.Size = new System.Drawing.Size(367, 156);
             this.tableLayoutPanel14.TabIndex = 0;
             // 
             // appkey_text
@@ -2322,9 +2297,9 @@ namespace WindowsFormsApp1
             this.appkey_text.AutoSize = true;
             this.appkey_text.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.appkey_text.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.appkey_text.Location = new System.Drawing.Point(3, 0);
+            this.appkey_text.Location = new System.Drawing.Point(3, 39);
             this.appkey_text.Name = "appkey_text";
-            this.appkey_text.Size = new System.Drawing.Size(115, 41);
+            this.appkey_text.Size = new System.Drawing.Size(115, 39);
             this.appkey_text.TabIndex = 0;
             this.appkey_text.Text = "appkey";
             this.appkey_text.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2337,16 +2312,16 @@ namespace WindowsFormsApp1
             this.kis_amount_text.AutoSize = true;
             this.kis_amount_text.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.kis_amount_text.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.kis_amount_text.Location = new System.Drawing.Point(3, 82);
+            this.kis_amount_text.Location = new System.Drawing.Point(3, 117);
             this.kis_amount_text.Name = "kis_amount_text";
-            this.kis_amount_text.Size = new System.Drawing.Size(115, 42);
+            this.kis_amount_text.Size = new System.Drawing.Size(115, 39);
             this.kis_amount_text.TabIndex = 1;
             this.kis_amount_text.Text = "amount";
             this.kis_amount_text.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // appkey
             // 
-            this.appkey.Location = new System.Drawing.Point(124, 3);
+            this.appkey.Location = new System.Drawing.Point(124, 42);
             this.appkey.Name = "appkey";
             this.appkey.Size = new System.Drawing.Size(238, 30);
             this.appkey.TabIndex = 4;
@@ -2359,9 +2334,9 @@ namespace WindowsFormsApp1
             this.label13.AutoSize = true;
             this.label13.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.label13.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label13.Location = new System.Drawing.Point(3, 41);
+            this.label13.Location = new System.Drawing.Point(3, 78);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(115, 41);
+            this.label13.Size = new System.Drawing.Size(115, 39);
             this.label13.TabIndex = 5;
             this.label13.Text = "appsecret";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2371,7 +2346,7 @@ namespace WindowsFormsApp1
             this.appsecret.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.appsecret.Location = new System.Drawing.Point(124, 44);
+            this.appsecret.Location = new System.Drawing.Point(124, 81);
             this.appsecret.Name = "appsecret";
             this.appsecret.Size = new System.Drawing.Size(240, 30);
             this.appsecret.TabIndex = 6;
@@ -2381,7 +2356,7 @@ namespace WindowsFormsApp1
             this.kis_amount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kis_amount.Location = new System.Drawing.Point(124, 85);
+            this.kis_amount.Location = new System.Drawing.Point(124, 120);
             this.kis_amount.Name = "kis_amount";
             this.kis_amount.Size = new System.Drawing.Size(240, 30);
             this.kis_amount.TabIndex = 7;
@@ -2410,16 +2385,71 @@ namespace WindowsFormsApp1
             this.Fomula_list_buy_Checked_box.TabIndex = 25;
             this.Fomula_list_buy_Checked_box.Visible = false;
             // 
+            // KIS_Independent
+            // 
+            this.KIS_Independent.AutoSize = true;
+            this.KIS_Independent.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.KIS_Independent.Location = new System.Drawing.Point(207, 20);
+            this.KIS_Independent.Margin = new System.Windows.Forms.Padding(4);
+            this.KIS_Independent.Name = "KIS_Independent";
+            this.KIS_Independent.Size = new System.Drawing.Size(169, 21);
+            this.KIS_Independent.TabIndex = 2;
+            this.KIS_Independent.Text = "KIS_Independent";
+            this.KIS_Independent.UseVisualStyleBackColor = true;
+            // 
+            // telegram_token
+            // 
+            this.telegram_token.Location = new System.Drawing.Point(90, 38);
+            this.telegram_token.Name = "telegram_token";
+            this.telegram_token.Size = new System.Drawing.Size(274, 30);
+            this.telegram_token.TabIndex = 3;
+            // 
+            // textBox45
+            // 
+            this.textBox45.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox45.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.textBox45.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.textBox45.Location = new System.Drawing.Point(3, 38);
+            this.textBox45.Name = "textBox45";
+            this.textBox45.Size = new System.Drawing.Size(81, 26);
+            this.textBox45.TabIndex = 1;
+            this.textBox45.Text = "TOKEN";
+            this.textBox45.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // KIS_Accunt_Text
+            // 
+            this.KIS_Accunt_Text.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.KIS_Accunt_Text.AutoSize = true;
+            this.KIS_Accunt_Text.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.KIS_Accunt_Text.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.KIS_Accunt_Text.Location = new System.Drawing.Point(3, 0);
+            this.KIS_Accunt_Text.Name = "KIS_Accunt_Text";
+            this.KIS_Accunt_Text.Size = new System.Drawing.Size(115, 39);
+            this.KIS_Accunt_Text.TabIndex = 8;
+            this.KIS_Accunt_Text.Text = "Account";
+            this.KIS_Accunt_Text.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // KIS_Account
+            // 
+            this.KIS_Account.Location = new System.Drawing.Point(124, 3);
+            this.KIS_Account.Name = "KIS_Account";
+            this.KIS_Account.Size = new System.Drawing.Size(238, 30);
+            this.KIS_Account.TabIndex = 9;
+            // 
             // Setting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1531, 967);
+            this.ClientSize = new System.Drawing.Size(1020, 644);
             this.Controls.Add(this.Fomula_list_buy_Checked_box);
+            this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox11);
             this.Controls.Add(this.groupBox10);
-            this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
@@ -2578,8 +2608,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Button telegram_test_button;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
         private System.Windows.Forms.TextBox textBox21;
-        private System.Windows.Forms.TextBox textBox45;
-        private System.Windows.Forms.TextBox telegram_token;
         private System.Windows.Forms.GroupBox groupBox10;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.CheckBox term_for_non_sell;
@@ -2624,7 +2652,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.RadioButton buy_mode_or;
         private System.Windows.Forms.RadioButton buy_mode_and;
         private System.Windows.Forms.RadioButton buy_mode_independent;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox profit_ts_text;
         private System.Windows.Forms.TextBox telegram_user_id;
         private System.Windows.Forms.CheckBox profit_after1;
@@ -2653,5 +2680,10 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.CheckBox clear_sell_loss;
         private System.Windows.Forms.ComboBox type1_selection;
         private System.Windows.Forms.TextBox clear_sell_loss_text;
+        private System.Windows.Forms.CheckBox KIS_Independent;
+        private System.Windows.Forms.TextBox textBox45;
+        private System.Windows.Forms.TextBox telegram_token;
+        private System.Windows.Forms.Label KIS_Accunt_Text;
+        private System.Windows.Forms.TextBox KIS_Account;
     }
 }
