@@ -23,10 +23,13 @@ namespace WindowsFormsApp1
     {
         public string appKey = utility.KIS_appkey;
         public string secretkey = utility.KIS_appsecret;
+        //
+        public string cano = utility.KIS_Account.Split('-')[0];
+        public string acntPrdtCd = utility.KIS_Account.Split('-')[1];
+        //
         public string Approval_key = "";
         public string access_token = "";
-        public string cano = "00000000";//계좌번호 체계(8-2)의 앞 8자리
-        public string acntPrdtCd = "00"; //계좌번호 체계(8-2)의 뒤 2자리
+        public string account_value = "";
 
         //초기실행
         private async Task Initial_KIS()
@@ -40,11 +43,11 @@ namespace WindowsFormsApp1
             //투자계좌자산현황조회-예수금(모의투자미지원)
             await KIS_Depositt();
 
+            //국내주식실시간체결통보-등록(모의투자) => 주문번호, 체결수량, 주문수량
+            await KIS_Real_Order_Result();
+
             //국내주식매수매도주문(모의투자)
             //KIS_Order(string buy_sell, string code, string order_type, string order_amt, string order_price)
-
-            //국내주식실시간체결통보-등록(모의투자) => 주문번호, 체결수량, 주문수량
-            //KIS_Real_Order_Result()
 
             //주식일별주문체결조회(모의투자) => 주문번호 => 주문번호, 평균가
             //KIS_buy_Mean_Price(string order_number)
@@ -56,7 +59,7 @@ namespace WindowsFormsApp1
         //-------------------------접근토큰발급(모의투자)-----------------------------
 
         //접근토큰받기
-        public async Task KIS_WebSocket()
+        public async Task<string> KIS_WebSocket()
         {
             string domain = "https://openapivts.koreainvestment.com:29443";// 모의투자
             //string domain = "https://openapi.koreainvestment.com:9443" //실전투자
@@ -94,15 +97,13 @@ namespace WindowsFormsApp1
                     var tokenResponse = JsonConvert.DeserializeObject<TokenResponse_WebSocket>(responseContent);
                     // Access the token and other fields
                     string approval_key = tokenResponse.approval_key;
-                    //확인
-                    //문자열 보간 방식
-                    //WriteLog_System($"Access Token: {approval_key}\n");
-                    //접근토큰
+                    //
                     Approval_key = approval_key;
+                    return "WebSocket Success";
                 }
                 else
                 {
-                    MessageBox.Show($"Failed to get token. Status code: {response.StatusCode}");
+                    return $"Failed to get token. Status code: {response.StatusCode}";
                 }
             }
         }
@@ -115,7 +116,7 @@ namespace WindowsFormsApp1
 
         //-------------------------접근토큰발급(모의투자)-----------------------------
 
-        public async Task KIS_Access()
+        public async Task<String> KIS_Access()
         {
             string domain = "https://openapivts.koreainvestment.com:29443";// 모의투자
             //string domain = "https://openapi.koreainvestment.com:9443" //실전투자
@@ -153,19 +154,13 @@ namespace WindowsFormsApp1
                     var tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(responseContent);
                     // Access the token and other fields
                     string accessToken = tokenResponse.Access_token;
-                    string tokenType = tokenResponse.Token_type;
-                    int expiresIn = tokenResponse.Expires_in;
-                    //확인
-                    //문자열 보간 방식
-                    //WriteLog_System($"Access Token: {accessToken}\n");
-                    //WriteLog_System($"Token Type: {tokenType}\n");
-                    //WriteLog_System($"Expires In (seconds): {expiresIn}\n");
-                    //접근토큰
+                    //
                     access_token = accessToken;
+                    return "Access Key Success";
                 }
                 else
                 {
-                    MessageBox.Show($"Failed to get token. Status code: {response.StatusCode}");
+                    return $"Failed to get token. Status code: {response.StatusCode}";
                 }
             }
         }
@@ -174,13 +169,11 @@ namespace WindowsFormsApp1
         class TokenResponse
         {
             public string Access_token { get; set; }
-            public string Token_type { get; set; }
-            public int Expires_in { get; set; }
         }
 
         //-------------------------투자계좌자산현황조회예수금(모의투자미지원)-----------------------------
 
-        public async Task KIS_Depositt()
+        public async Task<string> KIS_Depositt()
         {
             string domain = "https://openapi.koreainvestment.com:9443";
             string endpoint = "/uapi/domestic-stock/v1/trading/inquire-account-balance";
@@ -227,19 +220,17 @@ namespace WindowsFormsApp1
                     // Parse the JSON response
                     var tokenResponse = JsonConvert.DeserializeObject<TokenResponse<Output2Data>>(responseContent);
                     // Access the token and other fields
-                    string Nass_tot_amt = tokenResponse.output2.nass_tot_amt;
-                    string Tot_asst_amt = tokenResponse.output2.tot_asst_amt;
-                    string Tot_dncl_amt = tokenResponse.output2.tot_dncl_amt;
-                    string Dncl_amt = tokenResponse.output2.dncl_amt;
-                    //문자열 보간 방식
-                    //WriteLog_System($"Nass_tot_amt: {Nass_tot_amt}\n"); //순자산총금액
-                    //WriteLog_System($"Tot_asst_amt: {Tot_asst_amt}\n"); //총자산금액
-                    //WriteLog_System($"Tot_dncl_amt: {Tot_dncl_amt}\n"); //총예수금액
-                    //WriteLog_System($"Dncl_amt: {Dncl_amt}\n"); //예수금액
+                    string Nass_tot_amt = tokenResponse.output2.nass_tot_amt; //순자산총금액
+                    string Tot_asst_amt = tokenResponse.output2.tot_asst_amt; //총자산금액
+                    string Tot_dncl_amt = tokenResponse.output2.tot_dncl_amt; //총예수금액
+                    string Dncl_amt = tokenResponse.output2.dncl_amt; //예수금액
+                    //
+                    account_value = Tot_dncl_amt;
+                    return "Account Value Success";
                 }
                 else
                 {
-                    MessageBox.Show($"Failed to get token. Status code: {response.StatusCode}");
+                    return $"Failed to get token. Status code: {response.StatusCode}";
                 }
             }
         }
