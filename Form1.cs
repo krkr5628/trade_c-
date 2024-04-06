@@ -54,7 +54,6 @@ namespace WindowsFormsApp1
             porfoilo_btn.Click += Porfoilo_btn_Click;//매매정보
             update_agree_btn.Click += Update_agree_btn_Click;//업데이트 및 동의사항
 
-            update_interval.SelectedIndexChanged += acc_interval; //계좌 조회 인터벌 변경
             Stock_search_btn.Click += stock_search_btn; //종목조회
 
             Real_time_search_btn.Click += real_time_search_btn; //실시간 조건식 등록
@@ -336,9 +335,11 @@ namespace WindowsFormsApp1
 
             //KIS
             KIS_RUN.Text = Convert.ToString(utility.KIS_Allow); //사용여부
-            KIS_ACCOUNT.Text = "0";//예수금
+            KIS_Independent.Text = Convert.ToString(utility.KIS_Independent);
+            KIS_Account_Number.Text = utility.KIS_Account;
             KIS_N.Text = utility.KIS_amount; //N등분
-            KIS_Profit.Text = "";
+            KIS_ACCOUNT.Text = "0";//예수금
+            KIS_Profit.Text = "0";
 
             //
             WriteLog_System("세팅 반영 완료\n");
@@ -1169,13 +1170,6 @@ namespace WindowsFormsApp1
         {
             MessageBox.Show("준비중입니다.");
         }
-
-        //계좌 보유 현황 갱신 주기 설정
-        private void acc_interval(object sender, EventArgs e)
-        {
-            timer2.Interval = Convert.ToInt32(update_interval.Text);
-        }
-
 
         //종목 조회 실행
         private void stock_search_btn(object sender, EventArgs e)
