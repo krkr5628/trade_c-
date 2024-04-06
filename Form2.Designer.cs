@@ -2347,7 +2347,7 @@ namespace WindowsFormsApp1
             // 
             this.tableLayoutPanel13.ColumnCount = 2;
             this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 196F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 187F));
             this.tableLayoutPanel13.Controls.Add(this.telegram_user_id, 1, 0);
             this.tableLayoutPanel13.Controls.Add(this.textBox45, 0, 1);
             this.tableLayoutPanel13.Controls.Add(this.telegram_token, 1, 1);
@@ -2364,10 +2364,11 @@ namespace WindowsFormsApp1
             // 
             // telegram_user_id
             // 
-            this.telegram_user_id.Location = new System.Drawing.Point(63, 2);
+            this.telegram_user_id.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.telegram_user_id.Location = new System.Drawing.Point(72, 2);
             this.telegram_user_id.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.telegram_user_id.Name = "telegram_user_id";
-            this.telegram_user_id.Size = new System.Drawing.Size(192, 23);
+            this.telegram_user_id.Size = new System.Drawing.Size(183, 20);
             this.telegram_user_id.TabIndex = 2;
             // 
             // textBox45
@@ -2380,17 +2381,18 @@ namespace WindowsFormsApp1
             this.textBox45.Location = new System.Drawing.Point(2, 25);
             this.textBox45.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox45.Name = "textBox45";
-            this.textBox45.Size = new System.Drawing.Size(57, 20);
+            this.textBox45.Size = new System.Drawing.Size(66, 20);
             this.textBox45.TabIndex = 1;
             this.textBox45.Text = "TOKEN";
             this.textBox45.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // telegram_token
             // 
-            this.telegram_token.Location = new System.Drawing.Point(63, 25);
+            this.telegram_token.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.telegram_token.Location = new System.Drawing.Point(72, 25);
             this.telegram_token.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.telegram_token.Name = "telegram_token";
-            this.telegram_token.Size = new System.Drawing.Size(192, 23);
+            this.telegram_token.Size = new System.Drawing.Size(183, 20);
             this.telegram_token.TabIndex = 3;
             // 
             // textBox21
@@ -2403,7 +2405,7 @@ namespace WindowsFormsApp1
             this.textBox21.Location = new System.Drawing.Point(2, 2);
             this.textBox21.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox21.Name = "textBox21";
-            this.textBox21.Size = new System.Drawing.Size(57, 20);
+            this.textBox21.Size = new System.Drawing.Size(66, 20);
             this.textBox21.TabIndex = 0;
             this.textBox21.Text = "USER_ID";
             this.textBox21.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -2461,7 +2463,7 @@ namespace WindowsFormsApp1
             // 
             this.tableLayoutPanel14.ColumnCount = 2;
             this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 172F));
+            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 189F));
             this.tableLayoutPanel14.Controls.Add(this.KIS_Account, 1, 0);
             this.tableLayoutPanel14.Controls.Add(this.label13, 0, 2);
             this.tableLayoutPanel14.Controls.Add(this.appkey_text, 0, 1);
@@ -2484,10 +2486,11 @@ namespace WindowsFormsApp1
             // 
             // KIS_Account
             // 
-            this.KIS_Account.Location = new System.Drawing.Point(87, 2);
+            this.KIS_Account.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.KIS_Account.Location = new System.Drawing.Point(70, 2);
             this.KIS_Account.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.KIS_Account.Name = "KIS_Account";
-            this.KIS_Account.Size = new System.Drawing.Size(168, 23);
+            this.KIS_Account.Size = new System.Drawing.Size(185, 20);
             this.KIS_Account.TabIndex = 9;
             // 
             // label13
@@ -2497,11 +2500,11 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label13.AutoSize = true;
             this.label13.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.label13.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label13.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label13.Location = new System.Drawing.Point(2, 52);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(81, 26);
+            this.label13.Size = new System.Drawing.Size(64, 26);
             this.label13.TabIndex = 5;
             this.label13.Text = "appsecret";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2513,11 +2516,11 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.appkey_text.AutoSize = true;
             this.appkey_text.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.appkey_text.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.appkey_text.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.appkey_text.Location = new System.Drawing.Point(2, 26);
             this.appkey_text.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.appkey_text.Name = "appkey_text";
-            this.appkey_text.Size = new System.Drawing.Size(81, 26);
+            this.appkey_text.Size = new System.Drawing.Size(64, 26);
             this.appkey_text.TabIndex = 0;
             this.appkey_text.Text = "appkey";
             this.appkey_text.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2527,10 +2530,11 @@ namespace WindowsFormsApp1
             this.kis_amount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kis_amount.Location = new System.Drawing.Point(87, 80);
+            this.kis_amount.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.kis_amount.Location = new System.Drawing.Point(70, 80);
             this.kis_amount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.kis_amount.Name = "kis_amount";
-            this.kis_amount.Size = new System.Drawing.Size(168, 23);
+            this.kis_amount.Size = new System.Drawing.Size(185, 20);
             this.kis_amount.TabIndex = 7;
             // 
             // appsecret
@@ -2538,18 +2542,20 @@ namespace WindowsFormsApp1
             this.appsecret.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.appsecret.Location = new System.Drawing.Point(87, 54);
+            this.appsecret.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.appsecret.Location = new System.Drawing.Point(70, 54);
             this.appsecret.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.appsecret.Name = "appsecret";
-            this.appsecret.Size = new System.Drawing.Size(168, 23);
+            this.appsecret.Size = new System.Drawing.Size(185, 20);
             this.appsecret.TabIndex = 6;
             // 
             // appkey
             // 
-            this.appkey.Location = new System.Drawing.Point(87, 28);
+            this.appkey.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.appkey.Location = new System.Drawing.Point(70, 28);
             this.appkey.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.appkey.Name = "appkey";
-            this.appkey.Size = new System.Drawing.Size(168, 23);
+            this.appkey.Size = new System.Drawing.Size(185, 20);
             this.appkey.TabIndex = 4;
             // 
             // kis_amount_text
@@ -2559,11 +2565,11 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kis_amount_text.AutoSize = true;
             this.kis_amount_text.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.kis_amount_text.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.kis_amount_text.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.kis_amount_text.Location = new System.Drawing.Point(2, 78);
             this.kis_amount_text.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.kis_amount_text.Name = "kis_amount_text";
-            this.kis_amount_text.Size = new System.Drawing.Size(81, 26);
+            this.kis_amount_text.Size = new System.Drawing.Size(64, 26);
             this.kis_amount_text.TabIndex = 1;
             this.kis_amount_text.Text = "amount";
             this.kis_amount_text.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2575,11 +2581,11 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.KIS_Accunt_Text.AutoSize = true;
             this.KIS_Accunt_Text.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.KIS_Accunt_Text.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.KIS_Accunt_Text.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.KIS_Accunt_Text.Location = new System.Drawing.Point(2, 0);
             this.KIS_Accunt_Text.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.KIS_Accunt_Text.Name = "KIS_Accunt_Text";
-            this.KIS_Accunt_Text.Size = new System.Drawing.Size(81, 26);
+            this.KIS_Accunt_Text.Size = new System.Drawing.Size(64, 26);
             this.KIS_Accunt_Text.TabIndex = 8;
             this.KIS_Accunt_Text.Text = "Account";
             this.KIS_Accunt_Text.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
