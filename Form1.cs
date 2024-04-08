@@ -667,7 +667,6 @@ namespace WindowsFormsApp1
             axKHOpenAPI1.SetInputValue("현금신용구분", "0");
             if (load_type.Equals("NAN")) load_type = "";
             int result = axKHOpenAPI1.CommRqData("당일매매일지요청/" + load_type, "OPT10170", 0, GetScreenNo());
-            WriteLog_System("[당일매매일지요청/에러확인] : " + result + "\n");
         }
 
         //체결내역업데이트(주문번호)
@@ -682,7 +681,6 @@ namespace WindowsFormsApp1
             axKHOpenAPI1.SetInputValue("종목코드", "");//종목코드
             axKHOpenAPI1.SetInputValue("시작주문번호", "");//시작주문번호
             int result = axKHOpenAPI1.CommRqData("계좌별주문체결내역상세요청/" + order_number, "OPW00007", 0, GetScreenNo());
-            WriteLog_System("[계좌별주문체결내역상세요청/에러확인] : " + result + "\n");
         }
 
         //전체 종목 업데이트
@@ -875,7 +873,7 @@ namespace WindowsFormsApp1
                     DataRow[] findRows1 = dtCondStock_Transaction.Select($"주문번호 = {condition_nameORcode}");
                     if (findRows1.Length != 0)
                     {
-                        average_price4 = findRows1[0]["편입가"].ToString();
+                        average_price4 = findRows1[0]["체결단가"].ToString();
                     }
                     //
                     WriteLog_Stock("[HTS_수동/편입] : " + code4 + "-" + code_name4 + "\n");
