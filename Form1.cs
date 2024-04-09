@@ -1029,7 +1029,7 @@ namespace WindowsFormsApp1
                     {
                         string transaction_number = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "주문번호").Trim();
                         string average_price = string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "체결단가").Trim().TrimStart('0') == "" ? "0" : axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "체결단가").Trim().TrimStart('0')));
-                        string gubun = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "매매구분").Trim();
+                        string gubun = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "주문구분").Trim();
                         //매수완료 후 실제 편입가 업데이트
                         if (transaction_number.Equals(condition_nameORcode))
                         {
@@ -1038,7 +1038,7 @@ namespace WindowsFormsApp1
                             if (findRows2.Any())
                             {
                                 DataRow row = findRows2.First();
-                                if (gubun.Equals("매수"))
+                                if (gubun.Equals("현금매수"))
                                 {
                                     row["편입상태"] = "실매입";
                                     row["편입가"] = average_price;
@@ -1057,8 +1057,8 @@ namespace WindowsFormsApp1
                             axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "종목명").Trim(),
                             axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "주문시간").Trim(),
                             transaction_number,
+                            axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "매매구분").Trim(),
                             gubun,
-                            axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "주문구분").Trim(),
                             axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "주문수량").Trim().TrimStart('0'),
                             axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "체결수량").Trim().TrimStart('0'),
                             average_price
