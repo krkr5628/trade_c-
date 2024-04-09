@@ -890,7 +890,7 @@ namespace WindowsFormsApp1
                         average_price4,
                         "-",
                         "0.00%",
-                        0 + "/" + 0,
+                        name_split[2] + "/" + name_split[2],
                         "HTS보유",
                         time4,
                         "-",
@@ -2467,7 +2467,6 @@ namespace WindowsFormsApp1
                         //계좌보유현황업데이트
                         Account_before(code);
 
-                        //"[매수주문/시장가/주문성공] : " + code_name + "(" + code + ") " + order_acc_market + "개\n")
                         //Message
                         WriteLog_Order($"[매수주문/정상완료] : {code_name}({code}) {partial_sum}개 {row.Field<string>("편입가")}원\n");
                         telegram_message($"[매수주문/정상완료] : {code_name}({code}) {partial_sum}개 {row.Field<string>("편입가")}원\n");
@@ -2482,7 +2481,7 @@ namespace WindowsFormsApp1
                         System.Threading.Thread.Sleep(200);
 
                         axKHOpenAPI1.SetInputValue("종목코드", code);
-                        axKHOpenAPI1.CommRqData("조건실시간검색_수동/" + order_number, "OPT10001", 0, GetScreenNo());
+                        axKHOpenAPI1.CommRqData("조건실시간검색_수동/" + order_number+ "/" + order_sum, "OPT10001", 0, GetScreenNo());
 
                         System.Threading.Thread.Sleep(200);
 
@@ -2500,17 +2499,6 @@ namespace WindowsFormsApp1
                         Account_before(code);
 
                         System.Threading.Thread.Sleep(200);
-
-                        //
-                        var findRows_manual = dtCondStock.AsEnumerable().Where(row => row.Field<string>("주문번호") == order_number);
-
-                        if (findRows_manual.Any())
-                        {
-                            DataRow row = findRows_manual.First();
-                            row["보유수량"] = $"{partial_sum}/{order_sum}";
-                        }
-                        dtCondStock.AcceptChanges();
-                        dataGridView1.DataSource = dtCondStock;
 
                         //Message
                         WriteLog_Order($"[HTS매수주문/정상완료] : {code_name}({code}) {partial_sum}게\n");
