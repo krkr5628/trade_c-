@@ -927,8 +927,8 @@ namespace WindowsFormsApp1
                     all_profit_percent.Text = string.Format("{0:#,##0.00}%", Convert.ToDecimal(Convert.ToDouble(all_profit.Text.Replace(",", "")) / Convert.ToDouble(total_money.Text.Replace(",", "")) * 100)); //수익률수익률
 
                     //
-                    WriteLog_System("[예수금] : " + User_money.Text + "\n");
-                    telegram_message("[예수금] : " + User_money.Text + "\n");
+                    WriteLog_System("[예수금] : " + Current_User_money.Text + "\n");
+                    telegram_message("[예수금] : " + Current_User_money.Text + "\n");
                     break;
 
                 //계좌 보유 현황 조회

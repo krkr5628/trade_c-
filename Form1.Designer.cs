@@ -209,7 +209,7 @@ namespace WindowsFormsApp1
             this.log_window.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.log_window.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.log_window.Location = new System.Drawing.Point(3, 26);
-            this.log_window.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.log_window.Margin = new System.Windows.Forms.Padding(4);
             this.log_window.Name = "log_window";
             this.log_window.ReadOnly = true;
             this.log_window.Size = new System.Drawing.Size(641, 266);
@@ -248,7 +248,7 @@ namespace WindowsFormsApp1
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.Location = new System.Drawing.Point(6, 72);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
@@ -299,7 +299,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel1.Controls.Add(this.today_profit_tax, 9, 1);
             this.tableLayoutPanel1.Controls.Add(this.today_profit_percent_tax, 8, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(17, 198);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -698,7 +698,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel2.Controls.Add(this.Stock_code, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.Stock_search_btn, 1, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(7, 96);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -745,7 +745,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Stock_code.Location = new System.Drawing.Point(4, 4);
-            this.Stock_code.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Stock_code.Margin = new System.Windows.Forms.Padding(4);
             this.Stock_code.Name = "Stock_code";
             this.Stock_code.Size = new System.Drawing.Size(143, 30);
             this.Stock_code.TabIndex = 13;
@@ -781,7 +781,6 @@ namespace WindowsFormsApp1
             this.Main_menu});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Padding = new System.Windows.Forms.Padding(6, 2, 0, 2);
             this.menu.Size = new System.Drawing.Size(2237, 33);
             this.menu.TabIndex = 7;
             this.menu.Text = "menuStrip1";
@@ -1667,7 +1666,7 @@ namespace WindowsFormsApp1
             // 
             this.axKHOpenAPI1.Enabled = true;
             this.axKHOpenAPI1.Location = new System.Drawing.Point(670, 50);
-            this.axKHOpenAPI1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.axKHOpenAPI1.Margin = new System.Windows.Forms.Padding(4);
             this.axKHOpenAPI1.Name = "axKHOpenAPI1";
             this.axKHOpenAPI1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axKHOpenAPI1.OcxState")));
             this.axKHOpenAPI1.Size = new System.Drawing.Size(204, 93);
@@ -1921,7 +1920,7 @@ namespace WindowsFormsApp1
             this.log_window2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.log_window2.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.log_window2.Location = new System.Drawing.Point(3, 26);
-            this.log_window2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.log_window2.Margin = new System.Windows.Forms.Padding(4);
             this.log_window2.Name = "log_window2";
             this.log_window2.ReadOnly = true;
             this.log_window2.Size = new System.Drawing.Size(645, 271);
@@ -1999,7 +1998,7 @@ namespace WindowsFormsApp1
             this.log_window3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.log_window3.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.log_window3.Location = new System.Drawing.Point(3, 26);
-            this.log_window3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.log_window3.Margin = new System.Windows.Forms.Padding(4);
             this.log_window3.Name = "log_window3";
             this.log_window3.ReadOnly = true;
             this.log_window3.Size = new System.Drawing.Size(647, 265);
@@ -2029,7 +2028,7 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.time);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menu;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Trade_Auto";
             this.Text = "Trade_Auto";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
