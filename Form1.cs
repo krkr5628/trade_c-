@@ -1900,8 +1900,8 @@ namespace WindowsFormsApp1
                 //User_money.Text;
                 int order_acc_market = buy_order_cal(Convert.ToInt32(high.Replace(",", "")));
 
-                WriteLog_Order("[매수주문/시장가/주문접수] : " + code_name  + "(" + code + ") " + order_acc_market + "개\n");
-                telegram_message("[매수주문/시장가/주문접수] : " + code_name + "(" + code + ") " + order_acc_market + "개\n");
+                WriteLog_Order($"[매수주문/시장가/주문접수/{condition_name}] : {code_name}({code}) {order_acc_market} 개\n");
+                telegram_message($"[매수주문/시장가/주문접수/{condition_name}] : {code_name}({code}) {order_acc_market} 개\n");
 
                 System.Threading.Thread.Sleep(200);
 
@@ -1910,8 +1910,8 @@ namespace WindowsFormsApp1
                 if (error == 0)
                 {
                     //
-                    WriteLog_Order("[매수주문/시장가/주문성공] : " + code_name + "(" + code + ") " + order_acc_market + "개\n");
-                    telegram_message("[매수주문/시장가/주문성공] : " + code_name + "(" + code + ") " + order_acc_market + "개\n");
+                    WriteLog_Order($"[매수주문/시장가/주문성공/{condition_name}] : {code_name}({code}) {order_acc_market} 개\n");
+                    telegram_message($"[매수주문/시장가/주문성공/{condition_name}] : {code_name}({code}) {order_acc_market} 개\n");
 
                     //보유 수량 업데이트
                     string[] hold_status_update = max_hoid.Text.Split('/');
@@ -1953,8 +1953,8 @@ namespace WindowsFormsApp1
                 }
                 else if (error == -308)
                 {
-                    WriteLog_Order("[매수주문/시장가/주문실패] : " + code_name + "(" + code + ") " + "초당 5회 이상 주문 블가)\n");
-                    telegram_message("[매수주문/시장가/주문실패] : " + code_name + "(" + code + ") " + "초당 5회 이상 주문 불가\n");
+                    WriteLog_Order($"[매수주문/시장가/주문실패/{condition_name}] : {code_name}({code}) 초당 5회 이상 주문 블가)\n");
+                    telegram_message($"[매수주문/시장가/주문실패/{condition_name}] : {code_name}({code}) 초당 5회 이상 주문 블가)\n");
 
                     if (check)
                     {
@@ -1969,8 +1969,8 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    WriteLog_Order("[매수주문/시장가/주문실패] : " + code_name + "(" + code + ") " + "에러코드(" + error + "\n");
-                    telegram_message("[매수주문/시장가/주문실패] : " + code_name + "(" + code + ") " + "에러코드(" + error + "\n");
+                    WriteLog_Order($"[매수주문/시장가/주문실패/{condition_name}] : {code_name}({code}) 에러코드(" + error + "\n");
+                    telegram_message($"[매수주문/시장가/주문실패/{condition_name}] : {code_name}({code}) 에러코드(" + error + "\n");
 
                     //편입 차트 상태 '매수중' 변경
                     DataRow[] findRows = dtCondStock.Select($"종목코드 = {code}");
@@ -1990,16 +1990,16 @@ namespace WindowsFormsApp1
                 //지정가에 대하여 주문 가능 개수 계산
                 int order_acc = buy_order_cal(edited_price_hoga);
 
-                WriteLog_Order("[매수주문/지정가매수/접수] : " + code_name + "(" + code + ") " + order_acc + "개 " + price + "원\n");
-                telegram_message("[매수주문/지정가매수/접수] : " + code_name + "(" + code + ") " + order_acc + "개 " + price + "원\n");
+                WriteLog_Order($"[매수주문/지정가/주문접수/{condition_name}] : {code_name}({code}) {order_acc}개 {price}원\n");
+                telegram_message($"[매수주문/지정가/주문접수/{condition_name}] : {code_name}({code}) {order_acc}개 {price}원\n");
 
                 int error = axKHOpenAPI1.SendOrder("지정가매수", GetScreenNo(), utility.setting_account_number, 1, code, order_acc, edited_price_hoga, "00", "");
 
                 if (error == 0)
                 {
                     //
-                    WriteLog_Order("[매수주문/지정가매수/접수성공] : " + code_name + "(" + code + ") " + order_acc + "개 " + price + "원\n");
-                    telegram_message("[매수주문/지정가매수/접수성공] : " + code_name + "(" + code + ") " + order_acc + "개 " + price + "원\n");
+                    WriteLog_Order($"[매수주문/지정가/접수성공/{condition_name}] : {code_name}({code}) {order_acc}개 {price}원\n");
+                    telegram_message($"[매수주문/지정가/접수성공/{condition_name}] : {code_name}({code}) {order_acc}개 {price}원\n");
 
                     //보유 수량 업데이트
                     string[] hold_status_update = max_hoid.Text.Split('/');
@@ -2041,8 +2041,8 @@ namespace WindowsFormsApp1
                 }
                 else if (error == -308)
                 {
-                    WriteLog_Order("[매수주문/지정가매수/주문실패] : " + code_name + "(" + code + ") " + "초당 5회 이상 주문 불가)\n");
-                    telegram_message("[매수주문/지정가매수/주문실패] : " + code_name + "(" + code + ") " + "초당 5회 이상 주문 불가)\n");
+                    WriteLog_Order($"[매수주문/지정가/주문실패/{condition_name}] : {code_name}({code}) 초당 5회 이상 주문 불가)\n");
+                    telegram_message($"[매수주문/지정가/주문실패/{condition_name}] : {code_name}({code}) 초당 5회 이상 주문 불가)\n");
 
                     //편입 차트 상태 '매수중' 변경
                     DataRow[] findRows = dtCondStock.Select($"종목코드 = {code}");
@@ -2054,8 +2054,8 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    WriteLog_Order("[매수주문/지정가매수/주문실패] : " + code_name + "(" + code + ") " + "에러코드(" + error + "\n");
-                    telegram_message("[매수주문/지정가매수/주문실패] : " + code_name + "(" + code + ") " + "에러코드(" + error + "\n");
+                    WriteLog_Order($"[매수주문/지정가/주문실패/{condition_name}] : {code_name}({code}) 에러코드(" + error + "\n");
+                    telegram_message($"[매수주문/지정가/주문실패/{condition_name}] : {code_name}({code}) 에러코드(" + error + "\n");
 
                     //편입 차트 상태 '매수중' 변경
                     DataRow[] findRows = dtCondStock.Select($"종목코드 = {code}");
