@@ -26,6 +26,7 @@ namespace WindowsFormsApp1
         static public string[] account;
         public int login_check = 1;
         private bool isRunned = false;
+        private bool user_money_before = true;
 
         //-----------------------------------------------Main------------------------------------------------
         public Trade_Auto()
@@ -433,22 +434,12 @@ namespace WindowsFormsApp1
                 //여기서 부터 계좌번호 필요 => 계좌 없을 시 어떻게 할지 설정해야 함
                 //일단 존재하는 계좌로 변경해서 조회함
 
-                //예수금 받아오기
-                GetCashInfo(acc_text.Text.Trim(), "예수금상세현황");
-
-                System.Threading.Thread.Sleep(200);
-
-                //당일 손익 받기
-                today_profit_tax_load("NAN");
-
-                System.Threading.Thread.Sleep(200);
-
                 //매매내역 업데이트
                 Transaction_Detail("");
 
                 System.Threading.Thread.Sleep(200);
 
-                //조건식 검색(계좌불필요) => 계좌 보유 현황 확인 => 초기 보유 종목 테이블 업데이트 => 실시간 조건 검색 시작
+                //조건식 검색(계좌불필요) => 계좌 보유 현황 확인 => 당일 손익 받기 => 초기 보유 종목 테이블 업데이트 => 실시간 조건 검색 시작
                 if (axKHOpenAPI1.GetConditionLoad() == 1)
                 {
                     WriteLog_System("조건식 검색 성공\n");
@@ -477,23 +468,6 @@ namespace WindowsFormsApp1
                         break;
                 }
             }
-        }
-
-        //예수금 조회
-        private void GetCashInfo(string acctNo, string CashType)
-        {
-            //SetInputValue : 계좌번호, 비밀번호입력매체구분, 조회구분
-            //비밀번호입력매체구 : 기본(00), 일반조회(2). 추정조회(3)
-            //CommRqData(Request Name, TR CODE, 0, 화면 번호)
-            axKHOpenAPI1.SetInputValue("계좌번호", acctNo);
-            axKHOpenAPI1.SetInputValue("비밀번호입력매체구분", "00");
-            axKHOpenAPI1.SetInputValue("조회구분", "2");
-
-            //CommRqData(sRQName, sTRCode, nPreNext, sScreenNo)
-            //CommRqData(임의 사용자 구분명, TR목록, 연속조회여부, 화면번호)
-            //CommRqData를 하는 경우 KHOpenAPI Control의 OnReceiveTrData 이벤트가 호출
-            int result = axKHOpenAPI1.CommRqData(CashType, "OPW00001", 0, GetScreenNo());
-            GetErrorMessage(result);
         }
 
         //조건식 조회(조건식이 있어야 initial 작동 / initial을 통해 계좌를 받아와야 GetCashInfo)
@@ -532,7 +506,7 @@ namespace WindowsFormsApp1
             Account_before_initial(null, EventArgs.Empty);
         }
 
-        //계좌 보유 현황 확인 => 초기 보유 종목 테이블 업데이트 => 실시간 조건 검색 시작
+        //계좌 보유 현황 확인 => 매매내역 업데이트 => 초기 보유 종목 테이블 업데이트 => 실시간 조건 검색 시작
         private void Account_before_initial(object sender, EventArgs e)
         {
             //계좌 보유 종목 갱신
@@ -902,35 +876,6 @@ namespace WindowsFormsApp1
                     dataGridView1.DataSource = dtCondStock;
                     break;
 
-                //예수금 초기 조회
-                case "예수금상세현황":
-
-                    //
-                    User_money.Text = string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "예수금").Trim()));
-                    Current_User_money.Text = string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "주문가능금액").Trim()));
-
-                    //업데이트
-                    all_profit.Text = string.Format("{0:#,##0}", Convert.ToDecimal(Convert.ToInt32(Current_User_money.Text.Replace(",", "")) - Convert.ToInt32(total_money.Text.Replace(",", "")))); //수익
-                    all_profit_percent.Text = string.Format("{0:#,##0.00}%", Convert.ToDecimal(Convert.ToDouble(all_profit.Text.Replace(",", "")) / Convert.ToDouble(total_money.Text.Replace(",", "")) * 100)); //수익률
-
-                    WriteLog_System("[예수금] : " + User_money.Text + "\n");
-                    telegram_message("[예수금] : " + User_money.Text + "\n");
-                    break;
-
-                //예수금 추가 조회
-                case "예수금상세현황추가":
-                    //
-                    Current_User_money.Text = string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "주문가능금액").Trim()));
-
-                    //업데이트
-                    all_profit.Text = string.Format("{0:#,##0}", Convert.ToDecimal(Convert.ToInt32(Current_User_money.Text.Replace(",", "")) - Convert.ToInt32(total_money.Text.Replace(",", "")))); //수익
-                    all_profit_percent.Text = string.Format("{0:#,##0.00}%", Convert.ToDecimal(Convert.ToDouble(all_profit.Text.Replace(",", "")) / Convert.ToDouble(total_money.Text.Replace(",", "")) * 100)); //수익률수익률
-
-                    //
-                    WriteLog_System("[예수금] : " + Current_User_money.Text + "\n");
-                    telegram_message("[예수금] : " + Current_User_money.Text + "\n");
-                    break;
-
                 //계좌 보유 현황 조회
                 case "계좌평가현황요청":
                     DataTable dataTable2 = new DataTable();
@@ -944,8 +889,21 @@ namespace WindowsFormsApp1
                     dataTable2.Columns.Add("손익금액", typeof(string));
                     dataTable2.Columns.Add("매도수량", typeof(string));
 
-                    int count2 = axKHOpenAPI1.GetRepeatCnt(e.sTrCode, e.sRQName);
+                    //예수금 업데이트
+                    string tmp = string.Format("{0:#,##0}", Convert.ToDecimal(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "D+2추정예수금").Trim()));
 
+                    if(user_money_before) User_money.Text = tmp; user_money_before = false;
+                    Current_User_money.Text = tmp;
+
+                    all_profit.Text = string.Format("{0:#,##0}", Convert.ToDecimal(Convert.ToInt32(Current_User_money.Text.Replace(",", "")) - Convert.ToInt32(total_money.Text.Replace(",", "")))); //수익
+                    all_profit_percent.Text = string.Format("{0:#,##0.00}%", Convert.ToDecimal(Convert.ToDouble(all_profit.Text.Replace(",", "")) / Convert.ToDouble(total_money.Text.Replace(",", "")) * 100)); //수익률
+
+                    WriteLog_System("[D+2예수금] : " + tmp + "\n");
+                    telegram_message("[D+2예수금] : " + tmp + "\n");
+
+                    //
+                    int count2 = axKHOpenAPI1.GetRepeatCnt(e.sTrCode, e.sRQName);
+                    
                     for (int i = 0; i < count2; i++)
                     {
                         string code = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "종목코드").Trim().Replace("A", "");
@@ -967,6 +925,10 @@ namespace WindowsFormsApp1
                     if (condition_nameORcode.Equals("초기"))
                     {
                         System.Threading.Thread.Sleep(200);
+                        //당일 손익 받기
+                        today_profit_tax_load("NAN");
+                        System.Threading.Thread.Sleep(200);
+                        //기존 보유 종목 차트 업데이트
                         Hold_Update();
                     }
                     break;
@@ -2459,13 +2421,13 @@ namespace WindowsFormsApp1
 
                         System.Threading.Thread.Sleep(200);
 
-                        //당일 손익 + 당일 손일률 + 당일 수수료 업데이트
-                        today_profit_tax_load("NAN");
+                        //계좌보유현황업데이트
+                        Account_before(code);
 
                         System.Threading.Thread.Sleep(200);
 
-                        //계좌보유현황업데이트
-                        Account_before(code);
+                        //당일 손익 + 당일 손일률 + 당일 수수료 업데이트
+                        today_profit_tax_load("NAN");
 
                         //Message
                         WriteLog_Order($"[매수주문/정상완료] : {code_name}({code}) {partial_sum}개 {row.Field<string>("편입가")}원\n");
@@ -2490,13 +2452,13 @@ namespace WindowsFormsApp1
 
                         System.Threading.Thread.Sleep(200);
 
-                        //당일 손익 + 당일 손일률 + 당일 수수료 업데이트
-                        today_profit_tax_load("NAN");
+                        //계좌보유현황업데이트
+                        Account_before(code);
 
                         System.Threading.Thread.Sleep(200);
 
-                        //계좌보유현황업데이트
-                        Account_before(code);
+                        //당일 손익 + 당일 손일률 + 당일 수수료 업데이트
+                        today_profit_tax_load("NAN");
 
                         System.Threading.Thread.Sleep(200);
 
@@ -2526,7 +2488,6 @@ namespace WindowsFormsApp1
 
                         System.Threading.Thread.Sleep(200);
 
-
                         //
                         row["보유수량"] = $"{left_Acc}/0";
 
@@ -2554,7 +2515,6 @@ namespace WindowsFormsApp1
 
                         System.Threading.Thread.Sleep(200);
 
-
                         //보유 수량 업데이트
                         string[] hold_status = max_hoid.Text.Split('/');
                         int hold = Convert.ToInt32(hold_status[0]);
@@ -2563,25 +2523,17 @@ namespace WindowsFormsApp1
 
                         System.Threading.Thread.Sleep(200);
 
-
-                        //당일 손익 + 당일 손일률 + 당일 수수료 업데이트
-                        today_profit_tax_load("매도");
-
-                        System.Threading.Thread.Sleep(200);
-
                         //계좌보유현황업데이트
                         Account_before("");
 
                         System.Threading.Thread.Sleep(200);
 
+                        //당일 손익 + 당일 손일률 + 당일 수수료 업데이트
+                        today_profit_tax_load("매도");
+
                         //Message
                         WriteLog_Order($"[매도주문/정상완료] : {code_name}({code}) {partial_sum}개 {row.Field<string>("매도가")}원\n");
                         telegram_message($"[매도주문/정상완료] : {code_name}({code}) {partial_sum}개 {row.Field<string>("매도가")}원\n");
-
-                        System.Threading.Thread.Sleep(200);
-
-                        //예수금 업데이트
-                        GetCashInfo(acc_text.Text.Trim(), "예수금상세현황추가");
                     }
                 }
             }

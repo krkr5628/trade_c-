@@ -15,7 +15,7 @@ namespace WindowsFormsApp1
         public static string system_route = "C:\\Users\\krkr5\\OneDrive\\바탕 화면\\project\\password\\setting.txt";
         public static bool load_check = false;
 
-        //global 변수
+        //global 변수ㅊㄴ
         public static bool auto_trade_allow; //자동실행 여부
         public static string market_start_time; //자동 운영 시간
         public static string market_end_time; //계좌 번호
