@@ -811,7 +811,7 @@ namespace WindowsFormsApp1
             //
             if (!buy_condition_tmp[5].Equals("9999"))
             {
-                string[] Selectedtext_temp = buy_condition_tmp[4].Split(',');
+                string[] Selectedtext_temp = buy_condition_tmp[5].Split(',');
                 string SelectedIndexTextJoin_temp = "";
                 for (int i = 0; i < Selectedtext_temp.Length; i++)
                 {

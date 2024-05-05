@@ -285,7 +285,6 @@ namespace WindowsFormsApp1
             String[] loss_after2_tmp = reader.ReadLine().Split('/');
             loss_after2 = Convert.ToBoolean(loss_after2_tmp[1]);
 
-
             //전체청산
             String[] clear_sell_tmp = reader.ReadLine().Split('/');
             clear_sell = Convert.ToBoolean(clear_sell_tmp[1]);
