@@ -94,26 +94,16 @@ namespace WindowsFormsApp1
             profit_ts.CheckedChanged += HandleCheckedChanged;
             profit_after1.CheckedChanged += HandleCheckedChanged;
             profit_after2.CheckedChanged += HandleCheckedChanged;
-            profit_index_connection1.CheckedChanged += HandleCheckedChanged;
-            profit_index_connection2.CheckedChanged += HandleCheckedChanged;
             loss_after1.CheckedChanged += HandleCheckedChanged;
             loss_after2.CheckedChanged += HandleCheckedChanged;
-            loss_index_connection1.CheckedChanged += HandleCheckedChanged;
-            loss_index_connection2.CheckedChanged += HandleCheckedChanged;
             clear_sell_profit_after1.CheckedChanged += HandleCheckedChanged;
             clear_sell_profit_after2.CheckedChanged += HandleCheckedChanged;
-            clear_sell_index_connection1.CheckedChanged += HandleCheckedChanged;
-            clear_sell_index_connection2.CheckedChanged += HandleCheckedChanged;
             clear_sell_loss_after1.CheckedChanged += HandleCheckedChanged;
             clear_sell_loss_after2.CheckedChanged += HandleCheckedChanged; ;
-            clear_sell_loss_index_connection1.CheckedChanged += HandleCheckedChanged;
-            clear_sell_loss_index_connection2.CheckedChanged += HandleCheckedChanged;
             term_for_buy.CheckedChanged += HandleCheckedChanged;
             term_for_sell.CheckedChanged += HandleCheckedChanged;
             term_for_non_buy.CheckedChanged += HandleCheckedChanged;
             term_for_non_sell.CheckedChanged += HandleCheckedChanged;
-            kospi_index.CheckedChanged += HandleCheckedChanged;
-            kosdak_index.CheckedChanged += HandleCheckedChanged;
             kospi_commodity.CheckedChanged += HandleCheckedChanged;
             kosdak_commodity.CheckedChanged += HandleCheckedChanged;
         }
@@ -593,10 +583,6 @@ namespace WindowsFormsApp1
             buy_set2.Items.AddRange(hoo);
             sell_set1.Items.AddRange(mode);
             sell_set2.Items.AddRange(hoo);
-            type1_selection.Items.AddRange(mode_index);
-            type2_selection.Items.AddRange(mode_index);
-            type3_selection.Items.AddRange(mode_index);
-            type4_selection.Items.AddRange(mode_index);
         }
 
         //-----------------------------------열기 및 반영----------------------------------------
@@ -672,34 +658,26 @@ namespace WindowsFormsApp1
                     tmp.Add("매수시간전검출매수금지/" + Convert.ToString(before_time_deny.Checked));
                     tmp.Add("보유종목매수금지/" + Convert.ToString(hold_deny.Checked));
                     //
-                    tmp.Add("매수조건/" + Convert.ToString(buy_condition.Checked) + "/" + buy_condition_start.Text + "/" + buy_condition_end.Text + "/" + (Fomula_list_buy.Text.Equals("") ? "9999" : Fomula_list_buy.Text) + "/" + Convert.ToString(buy_mode_or.Checked) + "/" + Convert.ToString(buy_mode_and.Checked) + "/" + Convert.ToString(buy_mode_independent.Checked));
-                    tmp.Add("매도조건/" + Convert.ToString(sell_condition.Checked) + "/" + sell_condition_start.Text + "/" + sell_condition_end.Text + "/" + Convert.ToString(Fomula_list_sell.SelectedIndex) + "/" + Fomula_list_sell.Text);
+                    tmp.Add("매수조건/" + Convert.ToString(buy_condition.Checked) + "/" + buy_condition_start.Text + "/" + buy_condition_end.Text + "/" + Convert.ToString(buy_condition_index.Checked) + ";" + (Fomula_list_buy.Text.Equals("") ? "9999" : Fomula_list_buy.Text) + "/" + Convert.ToString(buy_mode_or.Checked) + "/" + Convert.ToString(buy_mode_and.Checked) + "/" + Convert.ToString(buy_mode_independent.Checked));
+                    tmp.Add("매도조건/" + Convert.ToString(sell_condition.Checked) + "/" + sell_condition_start.Text + "/" + sell_condition_end.Text + "/" + Convert.ToString(sell_condition_index.Checked) + ";" + Convert.ToString(Fomula_list_sell.SelectedIndex) + "/" + Fomula_list_sell.Text);
                     tmp.Add("익절/" + Convert.ToString(profit_percent.Checked) + "/" + profit_percent_text.Text);
                     tmp.Add("익절원/" + Convert.ToString(profit_won.Checked) + "/" + profit_won_text.Text);
                     tmp.Add("익절TS/" + Convert.ToString(profit_ts.Checked) + "/" + profit_ts_text.Text);
                     tmp.Add("익절동시호가/" + Convert.ToString(profit_after1.Checked));//익정동시호가
                     tmp.Add("익절시간외단일가/" + Convert.ToString(profit_after2.Checked));//익절시간외단일가
-                    tmp.Add("익절연동type1/" + Convert.ToString(profit_index_connection1.Checked));//익정동시호가
-                    tmp.Add("익절연동type2/" + Convert.ToString(profit_index_connection2.Checked));//익절시간외단일가
                     tmp.Add("손절/" + Convert.ToString(loss_percent.Checked) + "/" + loss_percent_text.Text);
                     tmp.Add("손절원/" + Convert.ToString(loss_won.Checked) + "/" + loss_won_text.Text);
                     tmp.Add("손절동시호가/" + Convert.ToString(loss_after1.Checked));//익정동시호가
                     tmp.Add("손절시간외단일가/" + Convert.ToString(loss_after2.Checked));//익절시간외단일가
-                    tmp.Add("손절연동type3/" + Convert.ToString(loss_index_connection1.Checked));//익정동시호가
-                    tmp.Add("손절연동type4/" + Convert.ToString(loss_index_connection2.Checked));//익절시간외단일가
                     //
                     tmp.Add("전체청산/" + Convert.ToString(clear_sell.Checked) + "/" + clear_sell_start.Text + "/" + clear_sell_end.Text);
                     tmp.Add("개별청산/" + Convert.ToString(clear_sell_mode.Checked));//익절시간외단일가
                     tmp.Add("청산익절/" + Convert.ToString(clear_sell_profit.Checked) + "/" + clear_sell_profit_text.Text);
                     tmp.Add("청산익절동시호가/" + Convert.ToString(clear_sell_profit_after1.Checked));
                     tmp.Add("청산익절시간외단일가/" + Convert.ToString(clear_sell_profit_after2.Checked));
-                    tmp.Add("청산일반익절연동type1/" + Convert.ToString(clear_sell_index_connection1.Checked));
-                    tmp.Add("청산일반익절연동type2/" + Convert.ToString(clear_sell_index_connection2.Checked));
                     tmp.Add("청산손절/" + Convert.ToString(clear_sell_loss.Checked) + "/" + clear_sell_loss_text.Text);
                     tmp.Add("청산손절동시호가/" + Convert.ToString(clear_sell_loss_after1.Checked));
                     tmp.Add("청산손절시간외단일가/" + Convert.ToString(clear_sell_loss_after2.Checked));
-                    tmp.Add("청산손절연동type1/" + Convert.ToString(clear_sell_loss_index_connection1.Checked));
-                    tmp.Add("청산손절연동type2/" + Convert.ToString(clear_sell_loss_index_connection2.Checked));
                     //
                     tmp.Add("종목매수텀/" + Convert.ToString(term_for_buy.Checked) + "/" + term_for_buy_text.Text);
                     tmp.Add("종목매도텀/" + Convert.ToString(term_for_sell.Checked) + "/" + term_for_sell_text.Text);
@@ -709,15 +687,23 @@ namespace WindowsFormsApp1
                     tmp.Add("매수설정/" + Convert.ToString(buy_set1.SelectedIndex) + "/" + Convert.ToString(buy_set2.SelectedIndex));
                     tmp.Add("매도설정/" + Convert.ToString(sell_set1.SelectedIndex) + "/" + Convert.ToString(sell_set2.SelectedIndex));
                     //
-                    tmp.Add("코스피지수/" + Convert.ToString(kospi_index.Checked));
-                    tmp.Add("코스닥지수/" + Convert.ToString(kosdak_index.Checked));
                     tmp.Add("코스피선물/" + Convert.ToString(kospi_commodity.Checked));
                     tmp.Add("코스닥선물/" + Convert.ToString(kosdak_commodity.Checked));
+                    tmp.Add("DOW/" + Convert.ToString(dow_index.Checked));
+                    tmp.Add("SP/" + Convert.ToString(sp_index.Checked));
+                    tmp.Add("NASDAQ/" + Convert.ToString(nasdaq_index.Checked));
                     //
-                    tmp.Add("type1/" + (type1_selection.Text.Equals("") ? "9999" : type1_selection.Text) + "/" + type1_start.Text + "/" + type1_end.Text);
-                    tmp.Add("type2/" + (type2_selection.Text.Equals("") ? "9999" : type2_selection.Text) + "/" + type2_start.Text + "/" + type2_end.Text);
-                    tmp.Add("type3/" + (type3_selection.Text.Equals("") ? "9999" : type3_selection.Text) + "/" + type3_start.Text + "/" + type3_end.Text);
-                    tmp.Add("type4/" + (type4_selection.Text.Equals("") ? "9999" : type4_selection.Text) + "/" + type4_start.Text + "/" + type4_end.Text);
+                    tmp.Add("type1/" + Convert.ToString(type1_selection.Checked) + "/" + type1_start.Text + "/" + type1_end.Text);
+                    tmp.Add("type2/" + Convert.ToString(type2_selection.Checked) + "/" + type2_start.Text + "/" + type2_end.Text);
+                    tmp.Add("type3/" + Convert.ToString(type3_selection.Checked) + "/" + type3_start.Text + "/" + type3_end.Text);
+                    tmp.Add("type4/" + Convert.ToString(type4_selection.Checked) + "/" + type4_start.Text + "/" + type4_end.Text);
+                    tmp.Add("type5/" + Convert.ToString(type5_selection.Checked) + "/" + type4_start.Text + "/" + type4_end.Text);
+                    //
+                    tmp.Add("type1_ALL/" + Convert.ToString(type1_selection_all.Checked) + "/" + type1_all_start.Text + "/" + type1_all_end.Text);
+                    tmp.Add("type2_ALL/" + Convert.ToString(type2_selection_all.Checked) + "/" + type2_all_start.Text + "/" + type2_all_end.Text);
+                    tmp.Add("type3_ALL/" + Convert.ToString(type3_selection_all.Checked) + "/" + type3_all_start.Text + "/" + type3_all_end.Text);
+                    tmp.Add("type4_ALL/" + Convert.ToString(type4_selection_all.Checked) + "/" + type4_all_start.Text + "/" + type4_all_end.Text);
+                    tmp.Add("type5_ALL/" + Convert.ToString(type5_selection_all.Checked) + "/" + type4_all_start.Text + "/" + type4_all_end.Text);
                     //
                     tmp.Add("Telegram_Allow/" + Convert.ToString(Telegram_Allow.Checked));
                     tmp.Add("텔레그램ID/" + telegram_user_id.Text);
@@ -821,8 +807,9 @@ namespace WindowsFormsApp1
             buy_condition.Checked = Convert.ToBoolean(buy_condition_tmp[1]);
             buy_condition_start.Text = buy_condition_tmp[2];
             buy_condition_end.Text = buy_condition_tmp[3];
+            buy_condition_index.Checked = Convert.ToBoolean(buy_condition_tmp[4]);
             //
-            if (!buy_condition_tmp[4].Equals("9999"))
+            if (!buy_condition_tmp[5].Equals("9999"))
             {
                 string[] Selectedtext_temp = buy_condition_tmp[4].Split(',');
                 string SelectedIndexTextJoin_temp = "";
@@ -842,17 +829,18 @@ namespace WindowsFormsApp1
                 Fomula_list_buy.Text = SelectedIndexTextJoin_temp;
             }
             //
-            buy_mode_or.Checked = Convert.ToBoolean(buy_condition_tmp[5]);
-            buy_mode_and.Checked = Convert.ToBoolean(buy_condition_tmp[6]);
-            buy_mode_independent.Checked = Convert.ToBoolean(buy_condition_tmp[7]);
+            buy_mode_or.Checked = Convert.ToBoolean(buy_condition_tmp[6]);
+            buy_mode_and.Checked = Convert.ToBoolean(buy_condition_tmp[7]);
+            buy_mode_independent.Checked = Convert.ToBoolean(buy_condition_tmp[8]);
 
             //매도조건
             String[] sell_condition_tmp = reader.ReadLine().Split('/');
             sell_condition.Checked = Convert.ToBoolean(sell_condition_tmp[1]);
             sell_condition_start.Text = sell_condition_tmp[2];
             sell_condition_end.Text = sell_condition_tmp[3];
-            Fomula_list_sell.SelectedIndex = Convert.ToInt32(sell_condition_tmp[4]);
-            Fomula_list_sell.Text = sell_condition_tmp[5];
+            sell_condition_index.Checked = Convert.ToBoolean(sell_condition_tmp[4]);
+            Fomula_list_sell.SelectedIndex = Convert.ToInt32(sell_condition_tmp[5]);
+            Fomula_list_sell.Text = sell_condition_tmp[6];
 
             //익절
             String[] profit_percent_tmp = reader.ReadLine().Split('/');
@@ -877,14 +865,6 @@ namespace WindowsFormsApp1
             String[] profit_after2_tmp = reader.ReadLine().Split('/');
             profit_after2.Checked = Convert.ToBoolean(profit_after2_tmp[1]);
 
-            //익절인덱스연동1 
-            String[] profit_index_connection1_tmp = reader.ReadLine().Split('/');
-            profit_index_connection1.Checked = Convert.ToBoolean(profit_index_connection1_tmp[1]);
-
-            //익절인덱스연동2
-            String[] profit_index_connection2_tmp = reader.ReadLine().Split('/');
-            profit_index_connection2.Checked = Convert.ToBoolean(profit_index_connection2_tmp[1]);
-
             //손절
             String[] loss_percent_tmp = reader.ReadLine().Split('/');
             loss_percent.Checked = Convert.ToBoolean(loss_percent_tmp[1]);
@@ -902,14 +882,6 @@ namespace WindowsFormsApp1
             //손절시간외단일가
             String[] loss_after2_tmp = reader.ReadLine().Split('/');
             loss_after2.Checked = Convert.ToBoolean(loss_after2_tmp[1]);
-
-            //손절인덱스연동1
-            String[] loss_index_connection1_tmp = reader.ReadLine().Split('/');
-            loss_index_connection1.Checked = Convert.ToBoolean(loss_index_connection1_tmp[1]);
-
-            //손절인덱스연동2
-            String[] loss_index_connection2_tmp = reader.ReadLine().Split('/');
-            loss_index_connection2.Checked = Convert.ToBoolean(loss_index_connection2_tmp[1]);
 
             //전체청산
             String[] clear_sell_tmp = reader.ReadLine().Split('/');
@@ -934,15 +906,6 @@ namespace WindowsFormsApp1
             String[] clear_sell_profit_after2_tmp = reader.ReadLine().Split('/');
             clear_sell_profit_after2.Checked = Convert.ToBoolean(clear_sell_profit_after2_tmp[1]);
 
-            //청산일반익절인덱스연동1
-            String[] clear_sell_index_connection1_tmp = reader.ReadLine().Split('/');
-            clear_sell_index_connection1.Checked = Convert.ToBoolean(clear_sell_index_connection1_tmp[1]);
-
-            //청산일반익절인덱스연동2
-            String[] clear_sell_index_connection2_tmp = reader.ReadLine().Split('/');
-            clear_sell_index_connection2.Checked = Convert.ToBoolean(clear_sell_index_connection2_tmp[1]);
-
-
             //청산손절
             String[] clear_sell_loss_tmp = reader.ReadLine().Split('/');
             clear_sell_loss.Checked = Convert.ToBoolean(clear_sell_loss_tmp[1]);
@@ -955,14 +918,6 @@ namespace WindowsFormsApp1
             //청산익절시간외단일가
             String[] clear_sell_loss_after2_tmp = reader.ReadLine().Split('/');
             clear_sell_loss_after2.Checked = Convert.ToBoolean(clear_sell_loss_after2_tmp[1]);
-
-            //청산손절인덱스연동1
-            String[] clear_sell_loss_index_connection1_tmp = reader.ReadLine().Split('/');
-            clear_sell_loss_index_connection1.Checked = Convert.ToBoolean(clear_sell_loss_index_connection1_tmp[1]);
-
-            //청산손절인덱스연동2
-            String[] clear_sell_loss_index_connection2_tmp = reader.ReadLine().Split('/');
-            clear_sell_loss_index_connection2.Checked = Convert.ToBoolean(clear_sell_loss_index_connection2_tmp[1]);
 
             //종목매수텀(대기)
             String[] term_for_buy_tmp = reader.ReadLine().Split('/');
@@ -992,50 +947,89 @@ namespace WindowsFormsApp1
             sell_set1.SelectedIndex = Convert.ToInt32(sell_set_tmp[1]);
             sell_set2.SelectedIndex = Convert.ToInt32(sell_set_tmp[2]);
 
-            //코스피지수(대기)
-            String[] kospi_index_tmp = reader.ReadLine().Split('/');
-            kospi_index.Checked = Convert.ToBoolean(kospi_index_tmp[1]);
-
-            //코스닥지수(대기)
-            String[] kosdak_index_tmp = reader.ReadLine().Split('/');
-            kosdak_index.Checked = Convert.ToBoolean(kosdak_index_tmp[1]);
-
-            //코스피선물(대기)
+            //코스피선물
             String[] kospi_commodity_tmp = reader.ReadLine().Split('/');
             kospi_commodity.Checked = Convert.ToBoolean(kospi_commodity_tmp[1]);
 
-            //코스닥선물(대기)
+            //코스닥선물
             String[] kosdak_commodity_tmp = reader.ReadLine().Split('/');
             kosdak_commodity.Checked = Convert.ToBoolean(kosdak_commodity_tmp[1]);
 
+            //DOW30
+            String[] dow_index_tmp = reader.ReadLine().Split('/');
+            dow_index.Checked = Convert.ToBoolean(dow_index_tmp[1]);
+
+            //SP500
+            String[] sp_index_tmp = reader.ReadLine().Split('/');
+            sp_index.Checked = Convert.ToBoolean(sp_index_tmp[1]);
+
+            //NASDAQ100
+            String[] nasdaq_index_tmp = reader.ReadLine().Split('/');
+            nasdaq_index.Checked = Convert.ToBoolean(nasdaq_index_tmp[1]);
+
             //#1
             String[] type1_selection_tmp = reader.ReadLine().Split('/');
-            type1_selection.Text = Convert.ToString(type1_selection_tmp[1]);
+            type1_selection.Checked = Convert.ToBoolean(type1_selection_tmp[1]);
             type1_start.Text = Convert.ToString(type1_selection_tmp[2]);
             type1_end.Text = Convert.ToString(type1_selection_tmp[3]);
 
             //#2
             String[] type2_selection_tmp = reader.ReadLine().Split('/');
-            type2_selection.Text = Convert.ToString(type2_selection_tmp[1]);
+            type2_selection.Checked = Convert.ToBoolean(type2_selection_tmp[1]);
             type2_start.Text = Convert.ToString(type2_selection_tmp[2]);
             type2_end.Text = Convert.ToString(type2_selection_tmp[3]);
 
             //#3
             String[] type3_selection_tmp = reader.ReadLine().Split('/');
-            type3_selection.Text = Convert.ToString(type3_selection_tmp[1]);
+            type3_selection.Checked = Convert.ToBoolean(type3_selection_tmp[1]);
             type3_start.Text = Convert.ToString(type3_selection_tmp[2]);
             type3_end.Text = Convert.ToString(type3_selection_tmp[3]);
 
             //#4
             String[] type4_selection_tmp = reader.ReadLine().Split('/');
-            type4_selection.Text = Convert.ToString(type4_selection_tmp[1]);
+            type4_selection.Checked = Convert.ToBoolean(type4_selection_tmp[1]);
             type4_start.Text = Convert.ToString(type4_selection_tmp[2]);
             type4_end.Text = Convert.ToString(type4_selection_tmp[3]);
+
+            //#5
+            String[] type5_selection_tmp = reader.ReadLine().Split('/');
+            type5_selection.Checked = Convert.ToBoolean(type5_selection_tmp[1]);
+            type5_start.Text = Convert.ToString(type5_selection_tmp[2]);
+            type5_end.Text = Convert.ToString(type5_selection_tmp[3]);
+
+            //#1
+            String[] type1_selection_all_tmp = reader.ReadLine().Split('/');
+            type1_selection_all.Checked = Convert.ToBoolean(type1_selection_all_tmp[1]);
+            type1_all_start.Text = Convert.ToString(type1_selection_all_tmp[2]);
+            type1_all_end.Text = Convert.ToString(type1_selection_all_tmp[3]);
+
+            //#2
+            String[] type2_selection_all_tmp = reader.ReadLine().Split('/');
+            type2_selection_all.Checked = Convert.ToBoolean(type2_selection_all_tmp[1]);
+            type2_all_start.Text = Convert.ToString(type2_selection_all_tmp[2]);
+            type2_all_end.Text = Convert.ToString(type2_selection_all_tmp[3]);
+
+            //#3
+            String[] type3_selection_all_tmp = reader.ReadLine().Split('/');
+            type3_selection_all.Checked = Convert.ToBoolean(type3_selection_all_tmp[1]);
+            type3_all_start.Text = Convert.ToString(type3_selection_all_tmp[2]);
+            type3_all_end.Text = Convert.ToString(type3_selection_all_tmp[3]);
+
+            //#4
+            String[] type4_selection_all_tmp = reader.ReadLine().Split('/');
+            type4_selection_all.Checked = Convert.ToBoolean(type4_selection_all_tmp[1]);
+            type4_all_start.Text = Convert.ToString(type4_selection_all_tmp[2]);
+            type4_all_end.Text = Convert.ToString(type4_selection_all_tmp[3]);
+
+            //#5
+            String[] type5_selection_all_tmp = reader.ReadLine().Split('/');
+            type5_selection_all.Checked = Convert.ToBoolean(type5_selection_all_tmp[1]);
+            type5_all_start.Text = Convert.ToString(type5_selection_all_tmp[2]);
+            type5_all_end.Text = Convert.ToString(type5_selection_all_tmp[3]);
 
             //텔레그램Telegram_Allow
             String[] Telegram_Allow_tmp = reader.ReadLine().Split('/');
             Telegram_Allow.Checked = Convert.ToBoolean(Telegram_Allow_tmp[1]);
-
 
             //텔레그램ID
             String[] telegram_user_id_tmp = reader.ReadLine().Split('/');
