@@ -51,7 +51,6 @@ namespace WindowsFormsApp1
         public static bool sell_condition; //매도조건
         public static string sell_condition_start;
         public static string sell_condition_end;
-        public static bool sell_condition_index;
         public static int Fomula_list_sell;
         public static string Fomula_list_sell_text;
 
@@ -83,6 +82,7 @@ namespace WindowsFormsApp1
         public static string clear_sell_loss_text;//청산손절
         public static bool clear_sell_loss_after1;//동시호가손절
         public static bool clear_sell_loss_after2;//청산익절시간외단일가
+        public static bool clear_index;
 
         public static bool term_for_buy;
         public static string term_for_buy_text;//종목매수텀
@@ -95,6 +95,8 @@ namespace WindowsFormsApp1
         public static int buy_set2;
         public static int sell_set1; //매도설정
         public static int sell_set2;
+        public static int sell_set1_after; //매도설정
+        public static int sell_set2_after;
 
         public static bool kospi_commodity;
         public static bool kosdak_commodity;
@@ -240,9 +242,8 @@ namespace WindowsFormsApp1
             sell_condition = Convert.ToBoolean(sell_condition_tmp[1]);
             sell_condition_start = sell_condition_tmp[2];
             sell_condition_end = sell_condition_tmp[3];
-            sell_condition_index = Convert.ToBoolean(sell_condition_tmp[4]);
-            Fomula_list_sell = Convert.ToInt32(sell_condition_tmp[5]);
-            Fomula_list_sell_text = sell_condition_tmp[6];
+            Fomula_list_sell = Convert.ToInt32(sell_condition_tmp[4]);
+            Fomula_list_sell_text = sell_condition_tmp[5];
 
             //익절
             String[] profit_percent_tmp = reader.ReadLine().Split('/');
@@ -321,6 +322,10 @@ namespace WindowsFormsApp1
             String[] clear_sell_loss_after2_tmp = reader.ReadLine().Split('/');
             clear_sell_loss_after2 = Convert.ToBoolean(clear_sell_loss_after2_tmp[1]);
 
+            //청산인덱스
+            String[] clear_index_tmp = reader.ReadLine().Split('/');
+            clear_index = Convert.ToBoolean(clear_index_tmp[1]);
+
             //종목매수텀(대기)
             String[] term_for_buy_tmp = reader.ReadLine().Split('/');
             term_for_buy = Convert.ToBoolean(term_for_buy_tmp[1]);
@@ -348,6 +353,11 @@ namespace WindowsFormsApp1
             String[] sell_set_tmp = reader.ReadLine().Split('/');
             sell_set1 = Convert.ToInt32(sell_set_tmp[1]);
             sell_set2 = Convert.ToInt32(sell_set_tmp[2]);
+
+            //매도설정
+            String[] sell_set_after_tmp = reader.ReadLine().Split('/');
+            sell_set1_after = Convert.ToInt32(sell_set_after_tmp[1]);
+            sell_set2_after = Convert.ToInt32(sell_set_after_tmp[2]);
 
             //코스피선물
             String[] kospi_commodity_tmp = reader.ReadLine().Split('/');
