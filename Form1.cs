@@ -15,6 +15,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Windows.Forms;
+using System.Timers;
 
 namespace WindowsFormsApp1
 {
@@ -687,6 +688,8 @@ namespace WindowsFormsApp1
             //다우존스
             if (utility.dow_index)
             {
+                double tmp5 = 0;
+
                 dow_index.Text = tmp5.ToString();
 
                 if (utility.buy_condition_index)
@@ -719,6 +722,8 @@ namespace WindowsFormsApp1
             //S&P500
             if (utility.sp_index)
             {
+                double tmp5 = 0;
+
                 sp_index.Text = tmp5.ToString();
 
                 if (utility.buy_condition_index)
@@ -751,6 +756,8 @@ namespace WindowsFormsApp1
             //NASDAQ100
             if (utility.nasdaq_index)
             {
+                double tmp5 = 0;
+
                 nasdaq_index.Text = tmp5.ToString();
 
                 if (utility.buy_condition_index)
@@ -790,22 +797,11 @@ namespace WindowsFormsApp1
 
         private void Initial_kor_index()
         {
-            //월물확인
-            sCode1 = cpFuture.GetData(0, (short)0);
-            string sName1 = cpFuture.GetData(1, (short)0);
-            WriteLog_System($"코스피최근월물 : {sCode1}/{sName1}\n");
-
-            sCode2 = cpFuture.GetData(0, (short)2);
-            string sName2 = cpFuture.GetData(1, (short)2);
-            WriteLog_System($"코스피다음월물 : {sCode2}/{sName2}\n");
-
-            sKCode1 = cpKFuture.GetData(0, (short)0);
-            string sKName1 = cpKFuture.GetData(1, (short)0);
-            WriteLog_System($"코스닥최근월물 : {sKCode1}/{sKName1}\n");
-
-            sKCode2 = cpKFuture.GetData(0, (short)2);
-            string sKName2 = cpKFuture.GetData(1, (short)2);
-            WriteLog_System($"코스닥다음월물 : {sKCode2}/{sKName2}\n");
+            //지수선물 종목코드 리스트를 ';'로 구분해서 전달
+            string[] tmp = axKHOpenAPI1.GetFutureList().Split(';');
+            foreach(string c in tmp){
+                WriteLog_Order(c + "\n");
+            }
 
             Index_timer();
         }
@@ -862,133 +858,93 @@ namespace WindowsFormsApp1
             //KOSPI 200 FUTURES
             if (utility.kospi_commodity)
             {
-                FutOptChart.SetInputValue(0, sCode1); //종목코드
-                FutOptChart.SetInputValue(1, '2'); //요청구분 1 기간데이터 2 개수 데이터
-                                                   //FutOptChart.SetInputValue(2,); //요청종료일 시간 요청인 경우 입력
-                FutOptChart.SetInputValue(3, Convert.ToInt32(index_time)); //요청시작일
-                FutOptChart.SetInputValue(4, 1); //요청개수
-                FutOptChart.SetInputValue(5, items); //필드배열
-                FutOptChart.SetInputValue(6, 'D'); //차트구분
-                FutOptChart.SetInputValue(7, (short)1); //주기?
-                FutOptChart.SetInputValue(8, '0'); //갭보정여부
-                FutOptChart.SetInputValue(9, '0'); //수정주가
-                                                   //
-                int reuslt_kospi = FutOptChart.BlockRequest();
-                //
-                if (reuslt_kospi == 0)
+                float tmp4 = 0;//전일종가
+                float tmp5 = 0;//현재가
+                float tmp6 = 0;//금일저가
+                float tmp7 = 0;//금일고가
+
+                //저가,종가,고가
+                kospi_index_series[0] = Math.Round((tmp6 - tmp4) / tmp4 * 100, 2); //저가
+                kospi_index_series[1] = Math.Round((tmp5 - tmp4) / tmp4 * 100, 2); //종가
+                kospi_index_series[2] = Math.Round((tmp7 - tmp4) / tmp4 * 100, 2); //고가
+
+                this.Invoke((MethodInvoker)delegate
                 {
-                    //string tmp = FutOptChart.GetHeaderValue(0);//종목코드
-                    //int tmp1 = FutOptChart.GetHeaderValue(1);//필드개수
-                    //string[] tmp2 = FutOptChart.GetHeaderValue(2);//필드명
-                    //int tmp3 = FutOptChart.GetHeaderValue(3);//수신개수
-                    float tmp4 = FutOptChart.GetHeaderValue(6);//전일종가
-                    float tmp5 = FutOptChart.GetHeaderValue(7);//현재가
-                    float tmp6 = FutOptChart.GetHeaderValue(14);//금일저가
-                    float tmp7 = FutOptChart.GetHeaderValue(13);//금일고가
+                    kospi_index.Text = kospi_index_series[0] + "/" + kospi_index_series[2];
+                    //WriteLog_System($"{tmp}/{tmp1}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}/{tmp7.ToString()}\n");
 
-                    //저가,종가,고가
-                    kospi_index_series[0] = Math.Round((tmp6 - tmp4) / tmp4 * 100, 2); //저가
-                    kospi_index_series[1] = Math.Round((tmp5 - tmp4) / tmp4 * 100, 2); //종가
-                    kospi_index_series[2] = Math.Round((tmp7 - tmp4) / tmp4 * 100, 2); //고가
-
-                    this.Invoke((MethodInvoker)delegate
+                    if (utility.buy_condition_index)
                     {
-                        kospi_index.Text = kospi_index_series[0] + "/" + kospi_index_series[2];
-                        //WriteLog_System($"{tmp}/{tmp1}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}/{tmp7.ToString()}\n");
-
-                        if (utility.buy_condition_index)
+                        if (utility.type1_selection)
                         {
-                            if (utility.type1_selection)
+                            double start = Convert.ToDouble(utility.type1_start);
+                            double end = Convert.ToDouble(utility.type1_end);
+                            if (kospi_index_series[0] < start || end < kospi_index_series[2])
                             {
-                                double start = Convert.ToDouble(utility.type1_start);
-                                double end = Convert.ToDouble(utility.type1_end);
-                                if (kospi_index_series[0] < start || end < kospi_index_series[2])
-                                {
-                                    index_buy = true;
-                                }
+                                index_buy = true;
                             }
                         }
+                    }
 
-                        if (utility.clear_index)
+                    if (utility.clear_index)
+                    {
+                        if (utility.type1_selection_all)
                         {
-                            if (utility.type1_selection_all)
+                            double start = Convert.ToDouble(utility.type1_start_all);
+                            double end = Convert.ToDouble(utility.type1_end_all);
+                            if (kospi_index_series[0] < start || end < kospi_index_series[2])
                             {
-                                double start = Convert.ToDouble(utility.type1_start_all);
-                                double end = Convert.ToDouble(utility.type1_end_all);
-                                if (kospi_index_series[0] < start || end < kospi_index_series[2])
-                                {
-                                    index_clear = true;
-                                }
+                                index_clear = true;
                             }
                         }
-                    });
-                }
+                    }
+                });
             }
 
             //KOSDAK 150 FUTURES
             if (utility.kosdak_commodity)
             {
-                FutOptChart.SetInputValue(0, sKCode1); //종목코드
-                FutOptChart.SetInputValue(1, '2'); //요청구분 1 기간데이터 2 개수 데이터
-                                                   //FutOptChart.SetInputValue(2,); //요청종료일 시간 요청인 경우 입력
-                FutOptChart.SetInputValue(3, Convert.ToInt32(index_time)); //요청시작일
-                FutOptChart.SetInputValue(4, 1); //요청개수
-                FutOptChart.SetInputValue(5, items); //필드배열
-                FutOptChart.SetInputValue(6, 'D'); //차트구분
-                FutOptChart.SetInputValue(7, (short)1); //주기?
-                FutOptChart.SetInputValue(8, '0'); //갭보정여부
-                FutOptChart.SetInputValue(9, '0'); //수정주가
-                                                   //
-                int reuslt_kosdask = FutOptChart.BlockRequest();
-                //
-                if (reuslt_kosdask == 0)
+                float tmp4 = 0;//전일종가
+                float tmp5 = 0;//현재가
+                float tmp6 = 0;//금일저가
+                float tmp7 = 0;//금일고가
+
+                //저가,종가,고가
+                kosdaq_index_series[0] = Math.Round((tmp6 - tmp4) / tmp4 * 100, 2); //저가
+                kosdaq_index_series[1] = Math.Round((tmp5 - tmp4) / tmp4 * 100, 2); //종가
+                kosdaq_index_series[2] = Math.Round((tmp7 - tmp4) / tmp4 * 100, 2); //고가
+
+                this.Invoke((MethodInvoker)delegate
                 {
-                    //string tmp = FutOptChart.GetHeaderValue(0);//종목코드
-                    //int tmp1 = FutOptChart.GetHeaderValue(1);//필드개수
-                    //string[] tmp2 = FutOptChart.GetHeaderValue(2);//필드명
-                    //int tmp3 = FutOptChart.GetHeaderValue(3);//수신개수
-                    float tmp4 = FutOptChart.GetHeaderValue(6);//전일종가
-                    float tmp5 = FutOptChart.GetHeaderValue(7);//현재가
-                    float tmp6 = FutOptChart.GetHeaderValue(14);//금일저가
-                    float tmp7 = FutOptChart.GetHeaderValue(13);//금일고가
+                    kosdaq_index.Text = kosdaq_index_series[0] + "/" + kosdaq_index_series[2];
+                    //WriteLog_System($"{tmp}/{tmp1}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}/{tmp7.ToString()}\n");
 
-                    //저가,종가,고가
-                    kosdaq_index_series[0] = Math.Round((tmp6 - tmp4) / tmp4 * 100, 2); //저가
-                    kosdaq_index_series[1] = Math.Round((tmp5 - tmp4) / tmp4 * 100, 2); //종가
-                    kosdaq_index_series[2] = Math.Round((tmp7 - tmp4) / tmp4 * 100, 2); //고가
-
-                    this.Invoke((MethodInvoker)delegate
+                    if (utility.buy_condition_index)
                     {
-                        kosdaq_index.Text = kosdaq_index_series[0] + "/" + kosdaq_index_series[2];
-                        //WriteLog_System($"{tmp}/{tmp1}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}/{tmp7.ToString()}\n");
-
-                        if (utility.buy_condition_index)
+                        if (utility.type2_selection)
                         {
-                            if (utility.type2_selection)
+                            double start = Convert.ToDouble(utility.type2_start);
+                            double end = Convert.ToDouble(utility.type2_end);
+                            if (kosdaq_index_series[0] < start || end < kosdaq_index_series[2])
                             {
-                                double start = Convert.ToDouble(utility.type2_start);
-                                double end = Convert.ToDouble(utility.type2_end);
-                                if (kosdaq_index_series[0] < start || end < kosdaq_index_series[2])
-                                {
-                                    index_buy = true;
-                                }
+                                index_buy = true;
                             }
                         }
+                    }
 
-                        if (utility.clear_index)
+                    if (utility.clear_index)
+                    {
+                        if (utility.type2_selection_all)
                         {
-                            if (utility.type2_selection_all)
+                            double start = Convert.ToDouble(utility.type2_start_all);
+                            double end = Convert.ToDouble(utility.type2_end_all);
+                            if (kosdaq_index_series[0] < start || end < kosdaq_index_series[2])
                             {
-                                double start = Convert.ToDouble(utility.type2_start_all);
-                                double end = Convert.ToDouble(utility.type2_end_all);
-                                if (kosdaq_index_series[0] < start || end < kosdaq_index_series[2])
-                                {
-                                    index_clear = true;
-                                }
+                                index_clear = true;
                             }
                         }
-                    });
-                }
+                    }
+                });
             }
         }
 

@@ -476,7 +476,6 @@ namespace WindowsFormsApp1
             KIS_amount = KIS_amount_tmp[1];
 
             reader.Close();
-
         }
     }
 }

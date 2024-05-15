@@ -83,6 +83,10 @@ namespace WindowsFormsApp1
             this.label11 = new System.Windows.Forms.Label();
             this.sell_set1 = new System.Windows.Forms.ComboBox();
             this.sell_set2 = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.sell_set1_after = new System.Windows.Forms.ComboBox();
+            this.sell_set2_after = new System.Windows.Forms.ComboBox();
+            this.label22 = new System.Windows.Forms.Label();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.sell_condition_end = new System.Windows.Forms.TextBox();
             this.sell_condition_start = new System.Windows.Forms.TextBox();
@@ -104,8 +108,8 @@ namespace WindowsFormsApp1
             this.profit_ts = new System.Windows.Forms.CheckBox();
             this.profit_won_text = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+            this.clear_index = new System.Windows.Forms.CheckBox();
             this.clear_sell_profit_text = new System.Windows.Forms.TextBox();
-            this.clear_sell_end = new System.Windows.Forms.TextBox();
             this.textBox29 = new System.Windows.Forms.TextBox();
             this.clear_sell_start = new System.Windows.Forms.TextBox();
             this.clear_sell_loss_text = new System.Windows.Forms.TextBox();
@@ -117,6 +121,7 @@ namespace WindowsFormsApp1
             this.clear_sell_mode = new System.Windows.Forms.RadioButton();
             this.clear_sell_profit = new System.Windows.Forms.CheckBox();
             this.clear_sell_loss = new System.Windows.Forms.CheckBox();
+            this.clear_sell_end = new System.Windows.Forms.TextBox();
             this.Fomula_list_buy = new System.Windows.Forms.ComboBox();
             this.Fomula_list_sell = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
@@ -135,6 +140,7 @@ namespace WindowsFormsApp1
             this.buy_mode_or = new System.Windows.Forms.RadioButton();
             this.buy_mode_and = new System.Windows.Forms.RadioButton();
             this.buy_mode_independent = new System.Windows.Forms.RadioButton();
+            this.Fomula_list_buy_Checked_box = new System.Windows.Forms.CheckedListBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
@@ -161,7 +167,6 @@ namespace WindowsFormsApp1
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox11 = new System.Windows.Forms.GroupBox();
-            this.Fomula_list_buy_Checked_box = new System.Windows.Forms.CheckedListBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel17 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel22 = new System.Windows.Forms.TableLayoutPanel();
@@ -223,11 +228,6 @@ namespace WindowsFormsApp1
             this.label26 = new System.Windows.Forms.Label();
             this.type5_end = new System.Windows.Forms.TextBox();
             this.type1_selection = new System.Windows.Forms.CheckBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.sell_set1_after = new System.Windows.Forms.ComboBox();
-            this.sell_set2_after = new System.Windows.Forms.ComboBox();
-            this.clear_index = new System.Windows.Forms.CheckBox();
-            this.label22 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -741,7 +741,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.90253F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.43321F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.53069F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 202F));
             this.tableLayoutPanel5.Controls.Add(this.setting_allowed, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.setting_open, 3, 0);
             this.tableLayoutPanel5.Controls.Add(this.save_button, 2, 0);
@@ -762,7 +762,7 @@ namespace WindowsFormsApp1
             this.setting_allowed.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_allowed.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_allowed.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_allowed.Location = new System.Drawing.Point(683, 2);
+            this.setting_allowed.Location = new System.Drawing.Point(681, 2);
             this.setting_allowed.Margin = new System.Windows.Forms.Padding(2);
             this.setting_allowed.Name = "setting_allowed";
             this.setting_allowed.Size = new System.Drawing.Size(103, 29);
@@ -775,10 +775,10 @@ namespace WindowsFormsApp1
             this.setting_open.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_open.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_open.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_open.Location = new System.Drawing.Point(584, 2);
+            this.setting_open.Location = new System.Drawing.Point(583, 2);
             this.setting_open.Margin = new System.Windows.Forms.Padding(2);
             this.setting_open.Name = "setting_open";
-            this.setting_open.Size = new System.Drawing.Size(95, 29);
+            this.setting_open.Size = new System.Drawing.Size(94, 29);
             this.setting_open.TabIndex = 7;
             this.setting_open.Text = "전량열기";
             this.setting_open.UseVisualStyleBackColor = false;
@@ -788,7 +788,7 @@ namespace WindowsFormsApp1
             this.save_button.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.save_button.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.save_button.ForeColor = System.Drawing.Color.SpringGreen;
-            this.save_button.Location = new System.Drawing.Point(479, 2);
+            this.save_button.Location = new System.Drawing.Point(478, 2);
             this.save_button.Margin = new System.Windows.Forms.Padding(2);
             this.save_button.Name = "save_button";
             this.save_button.Size = new System.Drawing.Size(101, 29);
@@ -805,7 +805,7 @@ namespace WindowsFormsApp1
             this.setting_name.Margin = new System.Windows.Forms.Padding(2);
             this.setting_name.Name = "setting_name";
             this.setting_name.ReadOnly = true;
-            this.setting_name.Size = new System.Drawing.Size(343, 21);
+            this.setting_name.Size = new System.Drawing.Size(342, 21);
             this.setting_name.TabIndex = 1;
             // 
             // label5
@@ -937,7 +937,7 @@ namespace WindowsFormsApp1
             // buy_set1
             // 
             this.buy_set1.FormattingEnabled = true;
-            this.buy_set1.Location = new System.Drawing.Point(80, 2);
+            this.buy_set1.Location = new System.Drawing.Point(79, 2);
             this.buy_set1.Margin = new System.Windows.Forms.Padding(2);
             this.buy_set1.Name = "buy_set1";
             this.buy_set1.Size = new System.Drawing.Size(73, 21);
@@ -946,7 +946,7 @@ namespace WindowsFormsApp1
             // buy_set2
             // 
             this.buy_set2.FormattingEnabled = true;
-            this.buy_set2.Location = new System.Drawing.Point(158, 2);
+            this.buy_set2.Location = new System.Drawing.Point(156, 2);
             this.buy_set2.Margin = new System.Windows.Forms.Padding(2);
             this.buy_set2.Name = "buy_set2";
             this.buy_set2.Size = new System.Drawing.Size(73, 21);
@@ -964,7 +964,7 @@ namespace WindowsFormsApp1
             this.label10.Location = new System.Drawing.Point(2, 0);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(74, 26);
+            this.label10.Size = new System.Drawing.Size(73, 26);
             this.label10.TabIndex = 25;
             this.label10.Text = "매수설정";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -978,10 +978,10 @@ namespace WindowsFormsApp1
             this.label11.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.label11.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label11.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.label11.Location = new System.Drawing.Point(236, 0);
+            this.label11.Location = new System.Drawing.Point(233, 0);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(74, 26);
+            this.label11.Size = new System.Drawing.Size(73, 26);
             this.label11.TabIndex = 26;
             this.label11.Text = "매도설정";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -989,7 +989,7 @@ namespace WindowsFormsApp1
             // sell_set1
             // 
             this.sell_set1.FormattingEnabled = true;
-            this.sell_set1.Location = new System.Drawing.Point(314, 2);
+            this.sell_set1.Location = new System.Drawing.Point(310, 2);
             this.sell_set1.Margin = new System.Windows.Forms.Padding(2);
             this.sell_set1.Name = "sell_set1";
             this.sell_set1.Size = new System.Drawing.Size(73, 21);
@@ -998,11 +998,60 @@ namespace WindowsFormsApp1
             // sell_set2
             // 
             this.sell_set2.FormattingEnabled = true;
-            this.sell_set2.Location = new System.Drawing.Point(392, 2);
+            this.sell_set2.Location = new System.Drawing.Point(387, 2);
             this.sell_set2.Margin = new System.Windows.Forms.Padding(2);
             this.sell_set2.Name = "sell_set2";
             this.sell_set2.Size = new System.Drawing.Size(74, 21);
             this.sell_set2.TabIndex = 24;
+            // 
+            // label15
+            // 
+            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label15.AutoSize = true;
+            this.label15.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label15.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label15.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.label15.Location = new System.Drawing.Point(233, 26);
+            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(73, 27);
+            this.label15.TabIndex = 27;
+            this.label15.Text = "매도설정";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // sell_set1_after
+            // 
+            this.sell_set1_after.FormattingEnabled = true;
+            this.sell_set1_after.Location = new System.Drawing.Point(310, 28);
+            this.sell_set1_after.Margin = new System.Windows.Forms.Padding(2);
+            this.sell_set1_after.Name = "sell_set1_after";
+            this.sell_set1_after.Size = new System.Drawing.Size(73, 21);
+            this.sell_set1_after.TabIndex = 28;
+            // 
+            // sell_set2_after
+            // 
+            this.sell_set2_after.FormattingEnabled = true;
+            this.sell_set2_after.Location = new System.Drawing.Point(387, 28);
+            this.sell_set2_after.Margin = new System.Windows.Forms.Padding(2);
+            this.sell_set2_after.Name = "sell_set2_after";
+            this.sell_set2_after.Size = new System.Drawing.Size(74, 21);
+            this.sell_set2_after.TabIndex = 29;
+            // 
+            // label22
+            // 
+            this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label22.AutoSize = true;
+            this.label22.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label22.Location = new System.Drawing.Point(157, 26);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(71, 27);
+            this.label22.TabIndex = 30;
+            this.label22.Text = "지수 =>";
+            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel8
             // 
@@ -1331,6 +1380,21 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel10.Size = new System.Drawing.Size(468, 93);
             this.tableLayoutPanel10.TabIndex = 10;
             // 
+            // clear_index
+            // 
+            this.clear_index.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.clear_index.AutoSize = true;
+            this.clear_index.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.clear_index.Location = new System.Drawing.Point(3, 72);
+            this.clear_index.Name = "clear_index";
+            this.clear_index.Size = new System.Drawing.Size(105, 18);
+            this.clear_index.TabIndex = 39;
+            this.clear_index.Text = "지수연동";
+            this.clear_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.clear_index.UseVisualStyleBackColor = false;
+            // 
             // clear_sell_profit_text
             // 
             this.clear_sell_profit_text.Location = new System.Drawing.Point(113, 25);
@@ -1338,14 +1402,6 @@ namespace WindowsFormsApp1
             this.clear_sell_profit_text.Name = "clear_sell_profit_text";
             this.clear_sell_profit_text.Size = new System.Drawing.Size(103, 23);
             this.clear_sell_profit_text.TabIndex = 17;
-            // 
-            // clear_sell_end
-            // 
-            this.clear_sell_end.Location = new System.Drawing.Point(238, 2);
-            this.clear_sell_end.Margin = new System.Windows.Forms.Padding(2);
-            this.clear_sell_end.Name = "clear_sell_end";
-            this.clear_sell_end.Size = new System.Drawing.Size(107, 23);
-            this.clear_sell_end.TabIndex = 16;
             // 
             // textBox29
             // 
@@ -1513,6 +1569,14 @@ namespace WindowsFormsApp1
             this.clear_sell_loss.Text = "청산손절(%)";
             this.clear_sell_loss.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.clear_sell_loss.UseVisualStyleBackColor = false;
+            // 
+            // clear_sell_end
+            // 
+            this.clear_sell_end.Location = new System.Drawing.Point(238, 2);
+            this.clear_sell_end.Margin = new System.Windows.Forms.Padding(2);
+            this.clear_sell_end.Name = "clear_sell_end";
+            this.clear_sell_end.Size = new System.Drawing.Size(107, 23);
+            this.clear_sell_end.TabIndex = 16;
             // 
             // Fomula_list_buy
             // 
@@ -1781,6 +1845,16 @@ namespace WindowsFormsApp1
             this.buy_mode_independent.Text = "Independent";
             this.buy_mode_independent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.buy_mode_independent.UseVisualStyleBackColor = false;
+            // 
+            // Fomula_list_buy_Checked_box
+            // 
+            this.Fomula_list_buy_Checked_box.FormattingEnabled = true;
+            this.Fomula_list_buy_Checked_box.Location = new System.Drawing.Point(6, 73);
+            this.Fomula_list_buy_Checked_box.Margin = new System.Windows.Forms.Padding(2);
+            this.Fomula_list_buy_Checked_box.Name = "Fomula_list_buy_Checked_box";
+            this.Fomula_list_buy_Checked_box.Size = new System.Drawing.Size(372, 22);
+            this.Fomula_list_buy_Checked_box.TabIndex = 25;
+            this.Fomula_list_buy_Checked_box.Visible = false;
             // 
             // groupBox5
             // 
@@ -2110,16 +2184,6 @@ namespace WindowsFormsApp1
             this.groupBox11.TabIndex = 24;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "매매설정(TS 불가)";
-            // 
-            // Fomula_list_buy_Checked_box
-            // 
-            this.Fomula_list_buy_Checked_box.FormattingEnabled = true;
-            this.Fomula_list_buy_Checked_box.Location = new System.Drawing.Point(6, 73);
-            this.Fomula_list_buy_Checked_box.Margin = new System.Windows.Forms.Padding(2);
-            this.Fomula_list_buy_Checked_box.Name = "Fomula_list_buy_Checked_box";
-            this.Fomula_list_buy_Checked_box.Size = new System.Drawing.Size(372, 22);
-            this.Fomula_list_buy_Checked_box.TabIndex = 25;
-            this.Fomula_list_buy_Checked_box.Visible = false;
             // 
             // groupBox8
             // 
@@ -2979,70 +3043,6 @@ namespace WindowsFormsApp1
             this.type1_selection.TabIndex = 39;
             this.type1_selection.Text = "checkBox1";
             this.type1_selection.UseVisualStyleBackColor = true;
-            // 
-            // label15
-            // 
-            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label15.AutoSize = true;
-            this.label15.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label15.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label15.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.label15.Location = new System.Drawing.Point(236, 26);
-            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(74, 27);
-            this.label15.TabIndex = 27;
-            this.label15.Text = "매도설정";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // sell_set1_after
-            // 
-            this.sell_set1_after.FormattingEnabled = true;
-            this.sell_set1_after.Location = new System.Drawing.Point(314, 28);
-            this.sell_set1_after.Margin = new System.Windows.Forms.Padding(2);
-            this.sell_set1_after.Name = "sell_set1_after";
-            this.sell_set1_after.Size = new System.Drawing.Size(73, 21);
-            this.sell_set1_after.TabIndex = 28;
-            // 
-            // sell_set2_after
-            // 
-            this.sell_set2_after.FormattingEnabled = true;
-            this.sell_set2_after.Location = new System.Drawing.Point(392, 28);
-            this.sell_set2_after.Margin = new System.Windows.Forms.Padding(2);
-            this.sell_set2_after.Name = "sell_set2_after";
-            this.sell_set2_after.Size = new System.Drawing.Size(74, 21);
-            this.sell_set2_after.TabIndex = 29;
-            // 
-            // clear_index
-            // 
-            this.clear_index.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.clear_index.AutoSize = true;
-            this.clear_index.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.clear_index.Location = new System.Drawing.Point(3, 72);
-            this.clear_index.Name = "clear_index";
-            this.clear_index.Size = new System.Drawing.Size(105, 18);
-            this.clear_index.TabIndex = 39;
-            this.clear_index.Text = "지수연동";
-            this.clear_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.clear_index.UseVisualStyleBackColor = false;
-            // 
-            // label22
-            // 
-            this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label22.AutoSize = true;
-            this.label22.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label22.Location = new System.Drawing.Point(159, 26);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(72, 27);
-            this.label22.TabIndex = 30;
-            this.label22.Text = "지수 =>";
-            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Setting
             // 
