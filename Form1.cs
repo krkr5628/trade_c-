@@ -790,18 +790,28 @@ namespace WindowsFormsApp1
 
         private string index_time = DateTime.Now.ToString("yyyyMMdd");
         private int[] items = { 0, 1, 4, 5 }; //날짜,시간,저가,종가
-        private string sCode1 = "";
-        private string sKCode1 = "";
+        private List<string> sCode1 = new List<string>();
+        private List<string> sKCode1 = new List<string>();
 
         private void Initial_kor_index()
         {
             //지수선물 종목코드 리스트를 ';'로 구분해서 전달
             string[] tmp = axKHOpenAPI1.GetFutureList().Split(';');
+
             foreach(string c in tmp){
-                WriteLog_Order(c + "\n");
+                if (c.StartsWith("101V"))
+                {
+                    sCode1.Add(c);
+                    WriteLog_System("코스피선물 " + c + "\n");
+                    continue;
+                }
+                if (c.StartsWith("106V"))
+                {
+                    sKCode1.Add(c);
+                    WriteLog_System("코스닥선물 " + c + "\n");
+                    continue;
+                }
             }
-
-
             //101V
             //106V
             Index_timer();
@@ -846,7 +856,7 @@ namespace WindowsFormsApp1
 
         private void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
-           //KOR_INDEX();
+           KOR_INDEX();
         }
 
         private double[] kospi_index_series = new double[3];
@@ -859,14 +869,14 @@ namespace WindowsFormsApp1
             //KOSPI 200 FUTURES
             if (utility.kospi_commodity)
             {
-                axKHOpenAPI1.SetInputValue("종목코드", sCode1);
+                axKHOpenAPI1.SetInputValue("종목코드", sCode1.First());
                 axKHOpenAPI1.CommRqData("KOSPI200_INDEX", "opt50001", 0, GetScreenNo());
             }
 
             //KOSDAK 150 FUTURES
             if (utility.kosdak_commodity)
             {
-                axKHOpenAPI1.SetInputValue("종목코드", sKCode1);
+                axKHOpenAPI1.SetInputValue("종목코드", sKCode1.First());
                 axKHOpenAPI1.CommRqData("KOSDAK150_INDEX", "opt50001", 0, GetScreenNo());
             }
         }
@@ -897,13 +907,21 @@ namespace WindowsFormsApp1
                     double tmp5 = Convert.ToDouble(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "현재가").Trim());//현재가
                     double tmp6 = Convert.ToDouble(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "저가").Trim());//금일저가
                     double tmp7 = Convert.ToDouble(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "고가").Trim());//금일고가
+                    double tmp8 = 0;
 
-                    WriteLog_Order($"전일대비기호 : {tmp3}");
+                    if(tmp3 == "2")
+                    {
+                        tmp8 = tmp5 - tmp4;
+                    }
+                    else
+                    {
+                        tmp8 = tmp5 + tmp4;
+                    }
 
                     //저가,종가,고가
-                    kospi_index_series[0] = Math.Round((tmp6 - tmp4) / tmp4 * 100, 2); //저가
-                    kospi_index_series[1] = Math.Round((tmp5 - tmp4) / tmp4 * 100, 2); //종가
-                    kospi_index_series[2] = Math.Round((tmp7 - tmp4) / tmp4 * 100, 2); //고가
+                    kospi_index_series[0] = Math.Round((tmp6 - tmp8) / tmp8 * 100, 2); //저가
+                    kospi_index_series[1] = Math.Round((tmp5 - tmp8) / tmp8 * 100, 2); //종가
+                    kospi_index_series[2] = Math.Round((tmp7 - tmp8) / tmp8 * 100, 2); //고가
 
                     this.Invoke((MethodInvoker)delegate
                     {
@@ -940,18 +958,29 @@ namespace WindowsFormsApp1
                     break;
 
                 //KOSDAK150 인덱스 처리
-                case "KODAK150_INDEX":
+                case "KOSDAK150_INDEX":
 
-                    string tmp34_KOSDAK = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "대비기호").Trim();//대비기호
-                    double tmp4_KOSDAK = Convert.ToDouble(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "현재가").Trim());//전일종가
+                    string tmp3_KOSDAK = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "대비기호").Trim();//대비기호
+                    double tmp4_KOSDAK = Convert.ToDouble(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "전일대비").Trim());//전일종가
                     double tmp5_KOSDAK = Convert.ToDouble(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "현재가").Trim());//현재가
                     double tmp6_KOSDAK = Convert.ToDouble(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "저가").Trim());//금일저가
                     double tmp7_KOSDAK = Convert.ToDouble(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, 0, "고가").Trim());//금일고가
+                    double tmp8_KOSDAK = 0;
 
                     //저가,종가,고가
-                    kosdaq_index_series[0] = Math.Round((tmp6_KOSDAK - tmp4_KOSDAK) / tmp4_KOSDAK * 100, 2); //저가
-                    kosdaq_index_series[1] = Math.Round((tmp5_KOSDAK - tmp4_KOSDAK) / tmp4_KOSDAK * 100, 2); //종가
-                    kosdaq_index_series[2] = Math.Round((tmp7_KOSDAK - tmp4_KOSDAK) / tmp4_KOSDAK * 100, 2); //고가
+                    if (tmp3_KOSDAK == "2")
+                    {
+                        tmp8_KOSDAK = tmp5_KOSDAK - tmp4_KOSDAK;
+                    }
+                    else
+                    {
+                        tmp8_KOSDAK = tmp5_KOSDAK + tmp4_KOSDAK;
+                    }
+
+                    //저가,종가,고가
+                    kosdaq_index_series[0] = Math.Round((tmp6_KOSDAK - tmp8_KOSDAK) / tmp8_KOSDAK * 100, 2); //저가
+                    kosdaq_index_series[1] = Math.Round((tmp5_KOSDAK - tmp8_KOSDAK) / tmp8_KOSDAK * 100, 2); //종가
+                    kosdaq_index_series[2] = Math.Round((tmp7_KOSDAK - tmp8_KOSDAK) / tmp8_KOSDAK * 100, 2); //고가
 
                     this.Invoke((MethodInvoker)delegate
                     {
