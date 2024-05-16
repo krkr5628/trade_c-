@@ -2841,7 +2841,7 @@ namespace WindowsFormsApp1
                 WriteLog(axKHOpenAPI1.GetChejanData(908) + "\n");//908(주문 및 체결시간)
                 WriteLog("----------------------------------+\n\n");
                 */
-
+                
                 //매도수구분
                 string Gubun = axKHOpenAPI1.GetChejanData(907);
                 //추가로드- 종목코드
