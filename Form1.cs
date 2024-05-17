@@ -2650,7 +2650,7 @@ namespace WindowsFormsApp1
                 {
                     market_time = 2;
                 }
-                else
+                else if(t_now.CompareTo(t_time3) >= 0)
                 {
                     WriteLog_Order($"[{sell_message}/주문접수] : {code_name}({code}) {order_acc}개 {percent} 시간외단일가 종료\n");
                     return;
