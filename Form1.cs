@@ -1510,13 +1510,52 @@ namespace WindowsFormsApp1
         //매매내역 확인
         private void Porfoilo_btn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("준비중입니다.");
+            if (!utility.load_check)
+            {
+                MessageBox.Show("초기 세팅 반영중");
+                return;
+            }
+            if (arrCondition.Length == 0)
+            {
+                MessageBox.Show("조건식 로딩중");
+                return;
+            }
+            Transaction newform2 = new Transaction();
+            newform2.ShowDialog(); //form2 닫기 전까지 form1 UI 제어 불가능
+        }
+
+        //전체로그 확인
+        private void Log_btn_Click(object sender, EventArgs e)
+        {
+            if (!utility.load_check)
+            {
+                MessageBox.Show("초기 세팅 반영중");
+                return;
+            }
+            if (arrCondition.Length == 0)
+            {
+                MessageBox.Show("조건식 로딩중");
+                return;
+            }
+            Log newform2 = new Log();
+            newform2.ShowDialog(); //form2 닫기 전까지 form1 UI 제어 불가능
         }
 
         //업데이트 및 동의사항 확인
         private void Update_agree_btn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("준비중입니다.");
+            if (!utility.load_check)
+            {
+                MessageBox.Show("초기 세팅 반영중");
+                return;
+            }
+            if (arrCondition.Length == 0)
+            {
+                MessageBox.Show("조건식 로딩중");
+                return;
+            }
+            Update newform2 = new Update();
+            newform2.ShowDialog(); //form2 닫기 전까지 form1 UI 제어 불가능
         }
 
         //종목 조회 실행
