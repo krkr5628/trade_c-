@@ -11,8 +11,8 @@ namespace WindowsFormsApp1
     class utility
     {
         //check 변수
-        //public static string system_route = "C:\\Auto_Trade\\setting.txt";
-        public static string system_route = "C:\\Users\\krkr5\\OneDrive\\바탕 화면\\project\\password\\setting.txt";
+        //public static string system_route = "C:\\Users\\krkr5\\OneDrive\\바탕 화면\\project\\password\\setting.txt";
+        public static string system_route = "C:\\Auto_Trade\\setting.txt";
         public static bool load_check = false;
 
         //global 변수ㅊㄴ

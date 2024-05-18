@@ -621,7 +621,7 @@ namespace WindowsFormsApp1
         }
 
         //초기 매매 설정
-        private async Task auto_allow()
+        public async Task auto_allow()
         {
             //계좌 없으면 이탈
             if (!account.Contains(utility.setting_account_number))
@@ -1503,7 +1503,7 @@ namespace WindowsFormsApp1
                 MessageBox.Show("조건식 로딩중");
                 return;
             }
-            Setting newform2 = new Setting();
+            Setting newform2 = new Setting(this);
             newform2.ShowDialog(); //form2 닫기 전까지 form1 제어 불가능
         }
 
@@ -1568,7 +1568,7 @@ namespace WindowsFormsApp1
             real_time_stop(true);
         }
 
-        private void real_time_stop(bool real_price_all_stop)
+        public void real_time_stop(bool real_price_all_stop)
         {
             //실시간 중단이 선언되면 '실시간시작'이 가능해진다.
             Real_time_stop_btn.Enabled = false;
