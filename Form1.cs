@@ -45,6 +45,9 @@ namespace WindowsFormsApp1
             //메인 시간 동작
             timer1.Start(); //시간 표시 - 1000ms
 
+            //----------종료_동작---------
+            this.FormClosed += new FormClosedEventHandler(Form_FormClosed);
+
             //-------------------로그인 이벤트 동작-------------------
             axKHOpenAPI1.OnEventConnect += onEventConnect; //로그인 상태 확인(ID,NAME,계좌번호,KEYBOARD,FIREWALL,조건식)
             axKHOpenAPI1.OnReceiveConditionVer += onReceiveConditionVer; //조건식 조회
@@ -196,6 +199,34 @@ namespace WindowsFormsApp1
         {
             string time = DateTime.Now.ToString("HH:mm:ss");
             log_window2.AppendText($@"{"[" + time + "] " + message}");
+        }
+
+        //매매로그 맟 전체로그 저장
+        private List<string> log_trade = new List<string>();
+        private List<string> log_full = new List<string>();
+
+        //FORM CLOSED 후 LOG 저장
+        //Process.Kill()에서 비정상 작동할 가능성 높음
+        private void Form_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+            string formattedDate = DateTime.Now.ToString("yyyyMMdd");
+
+            // 저장할 파일 경로
+            string filePath = $@"C:\Auto_Trade\Log\{formattedDate}_full.txt";
+
+            // StreamWriter를 사용하여 파일 저장
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(filePath, true))
+                {
+                    writer.Write(String.Join("", log_full));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("파일 저장 중 오류 발생: " + ex.Message);
+            }
         }
 
         //telegram_chat
