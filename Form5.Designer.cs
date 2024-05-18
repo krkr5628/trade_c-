@@ -1,7 +1,7 @@
 ﻿
 namespace WindowsFormsApp1
 {
-    partial class Form5
+    partial class Update
     {
         /// <summary>
         /// Required designer variable.
@@ -144,15 +144,15 @@ namespace WindowsFormsApp1
             this.richTextBox2.TabIndex = 1;
             this.richTextBox2.Text = "";
             // 
-            // Form5
+            // Update
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "Form5";
-            this.Text = "Form5";
+            this.Name = "Update";
+            this.Text = "Update";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();

@@ -33,18 +33,36 @@ namespace WindowsFormsApp1
             //즉시반영
             setting_allowed.Click += setting_allow;
 
+            //조건식 동작
+            Fomula_list_buy.DropDown += Fomula_list_buy_DropDown;
+            Fomula_list_buy_Checked_box.MouseLeave += Fomula_list_buy_Checked_box_MouseLeave;
+            Fomula_list_buy_Checked_box.ItemCheck += Fomula_list_buy_Checked_box_ItemCheck;
+
             //TELEGRAM TEST
             telegram_test_button.Click += telegram_test;
+
+            //미사용 항목 경고창(19개)
+            hold_deny.CheckedChanged += HandleCheckedChanged;
+            //
+            profit_ts.CheckedChanged += HandleCheckedChanged;
+            term_for_buy.CheckedChanged += HandleCheckedChanged;
+            term_for_sell.CheckedChanged += HandleCheckedChanged;
+            term_for_non_buy.CheckedChanged += HandleCheckedChanged;
+            term_for_non_sell.CheckedChanged += HandleCheckedChanged;
+
+            //--------------------------------------------
 
             //KIS 및 텔레그램 확인
             KIS_Allow.CheckedChanged += KIS_Allow_CheckedChanged;
             Telegram_Allow.CheckedChanged += Telegram_Allow_CheckedChanged;
 
             //매매방식 확인
-            buy_set1.Leave += Buy_set1_Leave;
-            buy_set2.Leave += Buy_set2_Leave;
-            sell_set1.Leave += Sell_set1_Leave;
-            sell_set2.Leave += Sell_set2_Leave;
+            buy_set1.Leave += Buy_set_Leave;
+            buy_set2.Leave += Buy_set_Leave;
+            sell_set1.Leave += Sell_set_Leave;
+            sell_set2.Leave += Sell_set_Leave;
+            sell_set1_after.Leave += Sell_set_after_Leave;
+            sell_set2_after.Leave += Sell_set_after_Leave;
 
             //소수점이 포함된 양의 숫자이거나 양의 정수인지 확인
             profit_percent_text.Leave += Profit_percent_text_Leave;
@@ -65,6 +83,8 @@ namespace WindowsFormsApp1
             loss_won_text.Leave += Loss_won_text_Leave;
             term_for_buy_text.Leave += Term_for_buy_text_Leave;
             term_for_sell_text.Leave += Term_for_sell_text_Leave;
+
+            //소수점이거나 정수인지 확인
             type1_start.Leave += Type1_start_Leave;
             type1_end.Leave += Type1_end_Leave;
             type2_start.Leave += Type2_start_Leave;
@@ -73,6 +93,19 @@ namespace WindowsFormsApp1
             type3_end.Leave += Type3_end_Leave;
             type4_start.Leave += Type4_start_Leave;
             type4_end.Leave += Type4_end_Leave;
+            type5_start.Leave += Type5_start_Leave;
+            type5_end.Leave += Type5_end_Leave;
+
+            type1_all_start.Leave += Type1_all_start_Leave;
+            type1_all_end.Leave += Type1_all_end_Leave;
+            type2_all_start.Leave += Type2_all_start_Leave;
+            type2_all_end.Leave += Type2_all_end_Leave;
+            type3_all_start.Leave += Type3_all_start_Leave;
+            type3_all_end.Leave += Type3_all_end_Leave;
+            type4_all_start.Leave += Type4_all_start_Leave;
+            type4_all_end.Leave += Type4_all_end_Leave;
+            type5_all_start.Leave += Type5_all_start_Leave;
+            type5_all_end.Leave += Type5_all_end_Leave;
 
             //시간확인
             market_start_time.Leave += Market_start_time_Leave;
@@ -84,23 +117,9 @@ namespace WindowsFormsApp1
             clear_sell_start.Leave += Clear_sell_start_Leave;
             clear_sell_end.Leave += Clear_sell_end_Leave;
 
-            //조건식 동작
-            Fomula_list_buy.DropDown += Fomula_list_buy_DropDown;
-            Fomula_list_buy_Checked_box.MouseLeave += Fomula_list_buy_Checked_box_MouseLeave;
-            Fomula_list_buy_Checked_box.ItemCheck += Fomula_list_buy_Checked_box_ItemCheck;
-
             //매수 조건식 확인
             buy_mode_and.Click += Buy_mode_and_Click;
             Fomula_list_buy.TextChanged += Fomula_list_buy_TextChanged;
-
-            //미사용 항목 경고창(19개)
-            hold_deny.CheckedChanged += HandleCheckedChanged;
-            //
-            profit_ts.CheckedChanged += HandleCheckedChanged;
-            term_for_buy.CheckedChanged += HandleCheckedChanged;
-            term_for_sell.CheckedChanged += HandleCheckedChanged;
-            term_for_non_buy.CheckedChanged += HandleCheckedChanged;
-            term_for_non_sell.CheckedChanged += HandleCheckedChanged;
         }
 
         //----------------------------미사용 항목 경고창----------------------------------------
@@ -151,25 +170,36 @@ namespace WindowsFormsApp1
 
         //----------------------------매매방식 확인----------------------------------------
 
-        private void Buy_set1_Leave(object sender, EventArgs e)
+        private void Buy_set_Leave(object sender, EventArgs e)
         {
             ValidateOrderType(sender, e, buy_set1, buy_set2);
         }
 
-        private void Buy_set2_Leave(object sender, EventArgs e)
-        {
-            ValidateOrderType(sender, e, buy_set1, buy_set2);
-        }
-
-        private void Sell_set1_Leave(object sender, EventArgs e)
+        private void Sell_set_Leave(object sender, EventArgs e)
         {
             ValidateOrderType(sender, e, sell_set1, sell_set2);
         }
 
-        private void Sell_set2_Leave(object sender, EventArgs e)
+        private void Sell_set_after_Leave(object sender, EventArgs e)
         {
-            ValidateOrderType(sender, e, sell_set1, sell_set2);
+            ValidateOrderType(sender, e, sell_set1_after, sell_set2_after);
+
+            if (sell_set1_after.Text.Equals(""))
+            {
+                sell_set1_after.SelectedIndex = 1;
+                sell_set2_after.SelectedIndex = 5;
+                MessageBox.Show("선택된 매매방식이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!sell_set1_after.Text.Equals("") || sell_set2_after.Text.Equals(""))
+            {
+                sell_set2_after.SelectedIndex = 5;
+                MessageBox.Show("선택된 호가가 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
         }
+
 
         private void ValidateOrderType(object sender, EventArgs e, ComboBox orderType, ComboBox orderPrice)
         {
@@ -330,38 +360,6 @@ namespace WindowsFormsApp1
         {
             ValidateNumericInput(sender, e, term_for_sell_text, "30");
         }
-        private void Type1_start_Leave(object sender, EventArgs e)
-        {
-            ValidateNumericInput(sender, e, type1_start, "100");
-        }
-        private void Type1_end_Leave(object sender, EventArgs e)
-        {
-            ValidateNumericInput(sender, e, type1_end, "1000");
-        }
-        private void Type2_start_Leave(object sender, EventArgs e)
-        {
-            ValidateNumericInput(sender, e, type2_start, "100");
-        }
-        private void Type2_end_Leave(object sender, EventArgs e)
-        {
-            ValidateNumericInput(sender, e, type2_end, "1000");
-        }
-        private void Type3_start_Leave(object sender, EventArgs e)
-        {
-            ValidateNumericInput(sender, e, type3_start, "100");
-        }
-        private void Type3_end_Leave(object sender, EventArgs e)
-        {
-            ValidateNumericInput(sender, e, type3_end, "1000");
-        }
-        private void Type4_start_Leave(object sender, EventArgs e)
-        {
-            ValidateNumericInput(sender, e, type4_start, "100");
-        }
-        private void Type4_end_Leave(object sender, EventArgs e)
-        {
-            ValidateNumericInput(sender, e, type4_end, "1000");
-        }
 
         private void ValidateNumericInput(object sender, EventArgs e, TextBox textBox, string defaultValue, int? maxLength = null, int? minValue = null, int? maxValue = null)
         {
@@ -402,6 +400,208 @@ namespace WindowsFormsApp1
             {
                 textBox.Text = defaultValue;
                 MessageBox.Show($"입력값은 {maxValue.Value} 이하여야 합니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+        }
+
+        //-----------------------------------양 혹은 음 소수점 확인-------------------------------------
+
+        private void Type1_start_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput(sender, e, type1_start, type1_end, "-5");
+        }
+        private void Type1_end_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput2(sender, e, type1_start, type1_end, "5");
+        }
+        private void Type2_start_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput(sender, e, type2_start, type2_end, "-5");
+        }
+        private void Type2_end_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput2(sender, e, type2_start, type2_end, "5");
+        }
+        private void Type3_start_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput(sender, e, type3_start, type3_end, "-5");
+        }
+        private void Type3_end_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput2(sender, e, type3_start, type3_end, "5");
+        }
+        private void Type4_start_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput(sender, e, type4_start, type4_end, "-5");
+        }
+        private void Type4_end_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput2(sender, e, type4_start, type4_end, "5");
+        }
+        private void Type5_start_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput(sender, e, type5_start, type5_end, "-5");
+        }
+        private void Type5_end_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput2(sender, e, type5_start, type5_end, "5");
+        }
+        private void Type1_all_start_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput(sender, e, type1_all_start, type1_all_end, "-5");
+        }
+        private void Type1_all_end_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput2(sender, e, type1_all_start, type1_all_end, "5");
+        }
+        private void Type2_all_start_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput(sender, e, type2_all_start, type2_all_end, "-5");
+        }
+        private void Type2_all_end_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput2(sender, e, type2_all_start, type2_all_end, "5");
+        }
+        private void Type3_all_start_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput(sender, e, type3_all_start, type3_all_end, "-5");
+        }
+        private void Type3_all_end_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput2(sender, e, type3_all_start, type3_all_end, "5");
+        }
+        private void Type4_all_start_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput(sender, e, type4_all_start, type4_all_end, "-5");
+        }
+        private void Type4_all_end_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput2(sender, e, type4_all_start, type4_all_end, "5");
+        }
+        private void Type5_all_start_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput(sender, e, type5_all_start, type5_all_end, "-5");
+        }
+        private void Type5_all_end_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput2(sender, e, type5_all_start, type5_all_end, "5");
+        }
+
+        private void ValidatedecimalInput(object sender, EventArgs e, TextBox textBox, TextBox textBox2, string defaultValue)
+        {
+            string input = textBox.Text;
+
+            //입력된 값이 없을시
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                textBox.Text = defaultValue;
+                MessageBox.Show("입력된 값이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            //숫자 혹은 소수점인지 확인
+            int decimalPointCount = 0;
+            int decimalMinusCount = 0;
+
+            foreach (char c in input)
+            {
+                if (char.IsDigit(c))
+                {
+                    continue;
+                }
+                else if (c == '.')
+                {
+                    decimalPointCount++;
+                }
+                else if (c == '-')
+                {
+                    decimalMinusCount++;
+                }
+                else
+                {
+                    textBox.Text = defaultValue;
+                    MessageBox.Show("정수 혹은 점이 아닌 값이 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            //소수점 형식 이탈 확인
+            if (decimalPointCount > 1)
+            {
+                textBox.Text = defaultValue;
+                MessageBox.Show("점을 한번만 입력하세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            //소수점 형식 이탈 확인
+            if (decimalMinusCount > 1)
+            {
+                textBox.Text = defaultValue;
+                MessageBox.Show("-을 한번만 입력하세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+        }
+
+        private void ValidatedecimalInput2(object sender, EventArgs e, TextBox textBox, TextBox textBox2, string defaultValue)
+        {
+            string input = textBox2.Text;
+
+            //입력된 값이 없을시
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                textBox2.Text = defaultValue;
+                MessageBox.Show("입력된 값이 없습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            //숫자 혹은 소수점인지 확인
+            int decimalPointCount = 0;
+            int decimalMinusCount = 0;
+
+            foreach (char c in input)
+            {
+                if (char.IsDigit(c))
+                {
+                    continue;
+                }
+                else if (c == '.')
+                {
+                    decimalPointCount++;
+                }
+                else if (c == '-')
+                {
+                    decimalMinusCount++;
+                }
+                else
+                {
+                    textBox2.Text = defaultValue;
+                    MessageBox.Show("정수 혹은 점이 아닌 값이 있습니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            //소수점 형식 이탈 확인
+            if (decimalPointCount > 1)
+            {
+                textBox2.Text = defaultValue;
+                MessageBox.Show("점을 한번만 입력하세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            //크기비교
+            if (Convert.ToDouble(textBox.Text) >= Convert.ToDouble(textBox2.Text))
+            {
+                textBox2.Text = Convert.ToString(Convert.ToDouble(textBox.Text) + 1);
+                MessageBox.Show("왼쪽 값은 오른쪽 값보다 작아야 합니다.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            //소수점 형식 이탈 확인
+            if (decimalMinusCount > 1)
+            {
+                textBox.Text = defaultValue;
+                MessageBox.Show("-을 한번만 입력하세요.", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
         }

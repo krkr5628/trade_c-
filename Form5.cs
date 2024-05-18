@@ -11,9 +11,9 @@ using System.IO;
 
 namespace WindowsFormsApp1
 {
-    public partial class Form5 : Form
+    public partial class Update : Form
     {
-        public Form5()
+        public Update()
         {
             InitializeComponent();
             //
