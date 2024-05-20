@@ -44,6 +44,7 @@ namespace WindowsFormsApp1
             // 
             // richTextBox1
             // 
+            this.richTextBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.richTextBox1.Location = new System.Drawing.Point(204, 13);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;

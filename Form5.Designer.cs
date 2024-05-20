@@ -30,17 +30,17 @@ namespace WindowsFormsApp1
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -57,19 +57,30 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel1.Size = new System.Drawing.Size(775, 361);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // tableLayoutPanel2
+            // groupBox2
             // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.button1, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label1, 1, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(301, 389);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(200, 49);
-            this.tableLayoutPanel2.TabIndex = 1;
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.richTextBox2);
+            this.groupBox2.Font = new System.Drawing.Font("굴림", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.groupBox2.Location = new System.Drawing.Point(390, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(382, 355);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Update";
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.richTextBox2.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.richTextBox2.Location = new System.Drawing.Point(7, 31);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.ReadOnly = true;
+            this.richTextBox2.Size = new System.Drawing.Size(369, 318);
+            this.richTextBox2.TabIndex = 1;
+            this.richTextBox2.Text = "";
             // 
             // groupBox1
             // 
@@ -85,19 +96,30 @@ namespace WindowsFormsApp1
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Agreement";
             // 
-            // groupBox2
+            // richTextBox1
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.richTextBox2);
-            this.groupBox2.Font = new System.Drawing.Font("굴림", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox2.Location = new System.Drawing.Point(390, 3);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(382, 355);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Update";
+            this.richTextBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.richTextBox1.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.richTextBox1.Location = new System.Drawing.Point(6, 31);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(369, 318);
+            this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.Text = "";
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.button1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label1, 1, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(301, 389);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(200, 49);
+            this.tableLayoutPanel2.TabIndex = 1;
             // 
             // button1
             // 
@@ -124,26 +146,6 @@ namespace WindowsFormsApp1
             this.label1.TabIndex = 1;
             this.label1.Text = "label1";
             // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.richTextBox1.Location = new System.Drawing.Point(6, 31);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(369, 318);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
-            // 
-            // richTextBox2
-            // 
-            this.richTextBox2.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.richTextBox2.Location = new System.Drawing.Point(7, 31);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.ReadOnly = true;
-            this.richTextBox2.Size = new System.Drawing.Size(369, 318);
-            this.richTextBox2.TabIndex = 1;
-            this.richTextBox2.Text = "";
-            // 
             // Update
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -154,10 +156,10 @@ namespace WindowsFormsApp1
             this.Name = "Update";
             this.Text = "Update";
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
