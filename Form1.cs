@@ -1599,79 +1599,7 @@ namespace WindowsFormsApp1
         {
             initial_Table();
             auto_allow();
-        }
-
-        //조건식 실시간 중단 버튼
-        private void real_time_stop_btn(object sender, EventArgs e)
-        {
-            real_time_stop(true);
-        }
-
-        public void real_time_stop(bool real_price_all_stop)
-        {
-            //실시간 중단이 선언되면 '실시간시작'이 가능해진다.
-            Real_time_stop_btn.Enabled = false;
-            Real_time_search_btn.Enabled = true;
-
-            //매수 조건식 중단
-            if (utility.buy_condition)
-            {
-                // 검색된 조건식이 없을시
-                if (string.IsNullOrEmpty(utility.Fomula_list_buy_text))
-                {
-                    WriteLog_System("[실시간매수조건/중단실패] : 조건식없음\n");
-                    telegram_message("[실시간매수조건/중단실패] : 조건식없음\n");
-                    Real_time_stop_btn.Enabled = true;
-                    Real_time_search_btn.Enabled = false;
-                }
-                else
-                {
-                    //검색된 매수 조건식이 있을시
-                    string[] condition = utility.Fomula_list_buy_text.Split(',');
-                    for (int i = 0; i < condition.Length; i++)
-                    {
-                        string[] tmp = condition[i].Split('^');
-                        axKHOpenAPI1.SendConditionStop(GetScreenNo(), tmp[1], Convert.ToInt32(tmp[0])); //조건검색 중지
-                    }
-                    WriteLog_System("[실시간매수조건/중단]\n");
-                    telegram_message("[실시간매수조건/중단]\n");
-                }
-            }
-
-            //매수 조건식 중단
-            if (utility.sell_condition)
-            {
-                // 검색된 조건식이 없을시
-                if (string.IsNullOrEmpty(utility.Fomula_list_buy_text))
-                {
-                    WriteLog_System("[실시간매도조건/중단실패] : 조건식없음\n");
-                    telegram_message("[실시간매도조건/중단실패] : 조건식없음\n");
-                    Real_time_stop_btn.Enabled = true;
-                    Real_time_search_btn.Enabled = false;
-                }
-                else
-                {
-                    //검색된 매수 조건식이 있을시
-                    string[] condition = utility.Fomula_list_sell_text.Split(',');
-                    for (int i = 0; i < condition.Length; i++)
-                    {
-                        string[] tmp = condition[i].Split('^');
-                        axKHOpenAPI1.SendConditionStop(GetScreenNo(), tmp[1], Convert.ToInt32(tmp[0])); //조건검색 중지
-                    }
-                    WriteLog_System("[실시간매도조건/중단]\n");
-                    telegram_message("[실시간매도조건/중단]\n");
-                }
-            }
-
-            //완전 전체 중단
-            if (real_price_all_stop)
-            {
-                axKHOpenAPI1.SetRealRemove("ALL", "ALL"); //실시간 시세 중지
-                timer3.Stop();//계좌 탐색 중단
-                WriteLog_System("[실시간시세/중단]\n");
-                telegram_message("[실시간시세/중단]\n");
-            }
-        }
+        } 
 
         //전체 청산 버튼
         private void All_clear_btn_Click(object sender, EventArgs e)
@@ -3134,6 +3062,86 @@ namespace WindowsFormsApp1
 
                 //매도 미체결
             }
-        }       
+        }
+
+        //------------조건식 실시간 중단 버튼-------------------
+        private void real_time_stop_btn(object sender, EventArgs e)
+        {
+            real_time_stop(true);
+        }
+
+        public void real_time_stop(bool real_price_all_stop)
+        {
+            //실시간 중단이 선언되면 '실시간시작'이 가능해진다.
+            Real_time_stop_btn.Enabled = false;
+            Real_time_search_btn.Enabled = true;
+
+            //매수 조건식 중단
+            if (utility.buy_condition)
+            {
+                // 검색된 조건식이 없을시
+                if (string.IsNullOrEmpty(utility.Fomula_list_buy_text))
+                {
+                    WriteLog_System("[실시간매수조건/중단실패] : 조건식없음\n");
+                    telegram_message("[실시간매수조건/중단실패] : 조건식없음\n");
+                    Real_time_stop_btn.Enabled = true;
+                    Real_time_search_btn.Enabled = false;
+                }
+                else
+                {
+                    //검색된 매수 조건식이 있을시
+                    string[] condition = utility.Fomula_list_buy_text.Split(',');
+                    for (int i = 0; i < condition.Length; i++)
+                    {
+                        string[] tmp = condition[i].Split('^');
+                        axKHOpenAPI1.SendConditionStop(GetScreenNo(), tmp[1], Convert.ToInt32(tmp[0])); //조건검색 중지
+                    }
+                    WriteLog_System("[실시간매수조건/중단]\n");
+                    telegram_message("[실시간매수조건/중단]\n");
+                }
+            }
+
+            //매수 조건식 중단
+            if (utility.sell_condition)
+            {
+                // 검색된 조건식이 없을시
+                if (string.IsNullOrEmpty(utility.Fomula_list_buy_text))
+                {
+                    WriteLog_System("[실시간매도조건/중단실패] : 조건식없음\n");
+                    telegram_message("[실시간매도조건/중단실패] : 조건식없음\n");
+                    Real_time_stop_btn.Enabled = true;
+                    Real_time_search_btn.Enabled = false;
+                }
+                else
+                {
+                    //검색된 매수 조건식이 있을시
+                    string[] condition = utility.Fomula_list_sell_text.Split(',');
+                    for (int i = 0; i < condition.Length; i++)
+                    {
+                        string[] tmp = condition[i].Split('^');
+                        axKHOpenAPI1.SendConditionStop(GetScreenNo(), tmp[1], Convert.ToInt32(tmp[0])); //조건검색 중지
+                    }
+                    WriteLog_System("[실시간매도조건/중단]\n");
+                    telegram_message("[실시간매도조건/중단]\n");
+                }
+            }
+
+            //완전 전체 중단
+            if (real_price_all_stop)
+            {
+                axKHOpenAPI1.SetRealRemove("ALL", "ALL"); //실시간 시세 중지
+                timer3.Stop();//계좌 탐색 중단
+                //
+                if (minuteTimer != null)
+                {
+                    minuteTimer.Stop();
+                    minuteTimer.Dispose();
+                    minuteTimer = null;
+                }
+                //
+                WriteLog_System("[실시간시세/중단]\n");
+                telegram_message("[실시간시세/중단]\n");
+            }
+        }
     }
 }
