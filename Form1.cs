@@ -838,8 +838,7 @@ namespace WindowsFormsApp1
                             telegram_message($"[CLEAR] OVER NASDAQ INDEX RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
                             telegram_message("Trade Stop\n");
                         }
-                    }
-                    }
+                    }              
                 }
             }
         }
@@ -992,6 +991,13 @@ namespace WindowsFormsApp1
                                 double end = Convert.ToDouble(utility.type1_end);
                                 if (kospi_index_series[0] < start || end < kospi_index_series[2])
                                 {
+                                    if (!index_buy)
+                                    {
+                                        WriteLog_System($"[Buy] OVER KOSPI200 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        WriteLog_System("Trade Stop\n");
+                                        telegram_message($"[Buy] OVER KOSPI200 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        telegram_message("Trade Stop\n");
+                                    }
                                     index_buy = true;
                                 }
                             }
@@ -1005,6 +1011,13 @@ namespace WindowsFormsApp1
                                 double end = Convert.ToDouble(utility.type1_end_all);
                                 if (kospi_index_series[0] < start || end < kospi_index_series[2])
                                 {
+                                    if (!index_clear)
+                                    {
+                                        WriteLog_System($"[CLEAR] OVER KOSPI200 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        WriteLog_System("Trade Stop\n");
+                                        telegram_message($"[CLEAR] OVER KOSPI200 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        telegram_message("Trade Stop\n");
+                                    }
                                     index_clear = true;
                                 }
                             }
@@ -1051,6 +1064,13 @@ namespace WindowsFormsApp1
                                 double end = Convert.ToDouble(utility.type2_end);
                                 if (kosdaq_index_series[0] < start || end < kosdaq_index_series[2])
                                 {
+                                    if (!index_buy)
+                                    {
+                                        WriteLog_System($"[Buy] OVER KOSDAK150 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        WriteLog_System("Trade Stop\n");
+                                        telegram_message($"[Buy] OVER KOSDAK150  Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        telegram_message("Trade Stop\n");
+                                    }
                                     index_buy = true;
                                 }
                             }
@@ -1064,6 +1084,13 @@ namespace WindowsFormsApp1
                                 double end = Convert.ToDouble(utility.type2_end_all);
                                 if (kosdaq_index_series[0] < start || end < kosdaq_index_series[2])
                                 {
+                                    if (!index_clear)
+                                    {
+                                        WriteLog_System($"[Clear] OVER KOSDAK150 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        WriteLog_System("Trade Stop\n");
+                                        telegram_message($"[Clear] OVER KOSDAK150  Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        telegram_message("Trade Stop\n");
+                                    }
                                     index_clear = true;
                                 }
                             }
