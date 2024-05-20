@@ -2221,11 +2221,6 @@ namespace WindowsFormsApp1
         //매수 가능한 상태인지 확인
         private string buy_check(string code, string code_name, string price, string time, string high, bool check, string condition_name)
         {
-            //지수 확인
-            if(index_buy)
-            {
-                return "대기";
-            }
 
             //매수 시간 확인
             TimeSpan t_code = TimeSpan.Parse(time);
@@ -2271,7 +2266,16 @@ namespace WindowsFormsApp1
                 if (trade_status_already >= trade_status_limit) return "대기";
             }
 
-            //이전 종목 매수와의 TERM
+            //지수 확인
+            if (index_buy)
+            {
+                WriteLog_Order($"[01] {code_name}({code}) Index 이탈\n");
+                return "대기";
+            }
+
+            //매수지연(기본값 200 => 프로그램 여러 호출단에서 기본 간격 200ms가 존재하므로 기본 지연 + 입력값
+            int term = 200;
+            if (utility.term_for_buy) term = Convert.ToInt32(utility.term_for_buy_text);
 
             //기존에 포함된 종목이면 따로 변경해줘야 함
             if (check)
