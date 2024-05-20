@@ -186,6 +186,7 @@ namespace WindowsFormsApp1
         {
             string time = DateTime.Now.ToString("HH:mm:ss");
             log_window.AppendText($@"{"[" + time + "] " + message}");
+            log_full.Add($"[{time}][System] : {message}");
         }
 
         //로그창(Order)
@@ -193,6 +194,7 @@ namespace WindowsFormsApp1
         {
             string time = DateTime.Now.ToString("HH:mm:ss");
             log_window3.AppendText($@"{"[" + time + "] " + message}");
+            log_full.Add($"[{time}][Order] : {message}");
         }
 
         //로그창(Stock)
@@ -200,10 +202,10 @@ namespace WindowsFormsApp1
         {
             string time = DateTime.Now.ToString("HH:mm:ss");
             log_window2.AppendText($@"{"[" + time + "] " + message}");
+            log_full.Add($"[{time}][Stock] : {message}");
         }
 
         //매매로그 맟 전체로그 저장
-        private List<string> log_trade = new List<string>();
         private List<string> log_full = new List<string>();
 
         //FORM CLOSED 후 LOG 저장
