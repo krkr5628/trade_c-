@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Windows.Forms;
 using System.Timers;
+using Newtonsoft.Json.Linq;
 
 namespace WindowsFormsApp1
 {
@@ -714,12 +715,21 @@ namespace WindowsFormsApp1
         private bool index_buy = false;
         private bool index_clear = false;
        
-        private void US_INDEX()
+        private async Task US_INDEX()
         {
+            string dowUrl = "https://query1.finance.yahoo.com/v8/finance/chart/^DJI"; //.DJI
+            string sp500Url = "https://query1.finance.yahoo.com/v8/finance/chart/^GSPC"; //SPX
+            string nasdaqUrl = "https://query1.finance.yahoo.com/v8/finance/chart/^IXIC"; //COMP
+
             //다우존스
             if (utility.dow_index)
             {
-                double tmp5 = 0;
+                double tmp5 = await GetStockIndex(dowUrl, "DOW");
+
+                if (tmp5 == 0)
+                {
+                    dow_index.Text = "미수신";
+                }
 
                 dow_index.Text = tmp5.ToString();
 
@@ -761,7 +771,12 @@ namespace WindowsFormsApp1
             //S&P500
             if (utility.sp_index)
             {
-                double tmp5 = 0;
+                double tmp5 = await GetStockIndex(sp500Url, "S&P");
+
+                if (tmp5 == 0)
+                {
+                    dow_index.Text = "미수신";
+                }
 
                 sp_index.Text = tmp5.ToString();
 
@@ -803,7 +818,12 @@ namespace WindowsFormsApp1
             //NASDAQ100
             if (utility.nasdaq_index)
             {
-                double tmp5 = 0;
+                double tmp5 = await GetStockIndex(nasdaqUrl, "NASDAQ");
+
+                if (tmp5 == 0)
+                {
+                    dow_index.Text = "미수신";
+                }
 
                 nasdaq_index.Text = tmp5.ToString();
 
@@ -840,6 +860,37 @@ namespace WindowsFormsApp1
                         }
                     }              
                 }
+            }
+        }
+
+        private async Task<double> GetStockIndex(string url, string symbol)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    HttpResponseMessage response = await client.GetAsync(url);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseData = await response.Content.ReadAsStringAsync();
+                        JObject jsonData = JObject.Parse(responseData);
+
+                        // Navigate the JSON structure to get the closing price
+                        double closePrice = Convert.ToDouble(jsonData["chart"]["result"][0]["meta"]["regularMarketPrice"]);
+                        double chartPreviousClose = Convert.ToDouble(jsonData["chart"]["result"][0]["meta"]["chartPreviousClose"]);
+
+                        return Math.Round((closePrice - chartPreviousClose) / chartPreviousClose * 100, 2);
+                    }
+                    else
+                    {
+                        WriteLog_System($"Error fetching data for {symbol}: {response.StatusCode}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    WriteLog_System($"Error fetching data for {symbol}: {ex.Message}");
+                }
+                return 0;
             }
         }
 
@@ -1066,9 +1117,9 @@ namespace WindowsFormsApp1
                                 {
                                     if (!index_buy)
                                     {
-                                        WriteLog_System($"[Buy] OVER KOSDAK150 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        WriteLog_System($"[Buy] OVER KOSDAK150 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5_KOSDAK})\n");
                                         WriteLog_System("Trade Stop\n");
-                                        telegram_message($"[Buy] OVER KOSDAK150  Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        telegram_message($"[Buy] OVER KOSDAK150  Commodity RANGE : START({start}) - END({end}) - NOW({tmp5_KOSDAK})\n");
                                         telegram_message("Trade Stop\n");
                                     }
                                     index_buy = true;
@@ -1086,9 +1137,9 @@ namespace WindowsFormsApp1
                                 {
                                     if (!index_clear)
                                     {
-                                        WriteLog_System($"[Clear] OVER KOSDAK150 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        WriteLog_System($"[Clear] OVER KOSDAK150 Commodity RANGE : START({start}) - END({end}) - NOW({tmp5_KOSDAK})\n");
                                         WriteLog_System("Trade Stop\n");
-                                        telegram_message($"[Clear] OVER KOSDAK150  Commodity RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+                                        telegram_message($"[Clear] OVER KOSDAK150  Commodity RANGE : START({start}) - END({end}) - NOW({tmp5_KOSDAK})\n");
                                         telegram_message("Trade Stop\n");
                                     }
                                     index_clear = true;
