@@ -216,7 +216,7 @@ namespace WindowsFormsApp1
             string formattedDate = DateTime.Now.ToString("yyyyMMdd");
 
             // 저장할 파일 경로
-            string filePath = $@"C:\Auto_Trade\Log\{formattedDate}_full.txt";
+            string filePath = $@"C:\Auto_Trade\Auto_Trade_Kiwoom\Log\{formattedDate}_full.txt";
 
             // StreamWriter를 사용하여 파일 저장
             try
