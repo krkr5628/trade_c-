@@ -58,6 +58,7 @@ namespace WindowsFormsApp1
             Main_menu.Click += main_menu; //메인메뉴
             Trade_setting.Click += trade_setting; //설정창
             porfoilo_btn.Click += Porfoilo_btn_Click;//매매정보
+            Log_btn.Click += Log_btn_Click;//매매정보
             update_agree_btn.Click += Update_agree_btn_Click;//업데이트 및 동의사항
 
             Stock_search_btn.Click += stock_search_btn; //종목조회

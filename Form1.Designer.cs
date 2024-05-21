@@ -89,7 +89,7 @@ namespace WindowsFormsApp1
             this.porfoilo_btn = new System.Windows.Forms.Button();
             this.Trade_setting = new System.Windows.Forms.Button();
             this.update_agree_btn = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.Log_btn = new System.Windows.Forms.Button();
             this.User_connection = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.Keyboard_wall = new System.Windows.Forms.Label();
@@ -874,7 +874,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel3.Controls.Add(this.porfoilo_btn, 2, 0);
             this.tableLayoutPanel3.Controls.Add(this.Trade_setting, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.update_agree_btn, 4, 0);
-            this.tableLayoutPanel3.Controls.Add(this.button1, 3, 0);
+            this.tableLayoutPanel3.Controls.Add(this.Log_btn, 3, 0);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(12, 33);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -931,21 +931,21 @@ namespace WindowsFormsApp1
             this.update_agree_btn.Text = "업데이트동의사항";
             this.update_agree_btn.UseVisualStyleBackColor = false;
             // 
-            // button1
+            // Log_btn
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.Log_btn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackColor = System.Drawing.Color.SteelBlue;
-            this.button1.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button1.ForeColor = System.Drawing.Color.Transparent;
-            this.button1.Location = new System.Drawing.Point(222, 0);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(74, 41);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "전체로그";
-            this.button1.UseVisualStyleBackColor = false;
+            this.Log_btn.BackColor = System.Drawing.Color.SteelBlue;
+            this.Log_btn.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Log_btn.ForeColor = System.Drawing.Color.Transparent;
+            this.Log_btn.Location = new System.Drawing.Point(222, 0);
+            this.Log_btn.Margin = new System.Windows.Forms.Padding(0);
+            this.Log_btn.Name = "Log_btn";
+            this.Log_btn.Size = new System.Drawing.Size(74, 41);
+            this.Log_btn.TabIndex = 6;
+            this.Log_btn.Text = "전체로그";
+            this.Log_btn.UseVisualStyleBackColor = false;
             // 
             // User_connection
             // 
@@ -2445,7 +2445,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.Label kospi_index;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button Log_btn;
     }
 }
 
