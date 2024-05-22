@@ -217,7 +217,7 @@ namespace WindowsFormsApp1
             string formattedDate = DateTime.Now.ToString("yyyyMMdd");
 
             // 저장할 파일 경로
-            string filePath = $@"C:\Auto_Trade\Auto_Trade_Kiwoom\Log\{formattedDate}_full.txt";
+            string filePath = $@"C:\Auto_Trade_Kiwoom\Log\{formattedDate}_full.txt";
 
             // StreamWriter를 사용하여 파일 저장
             try
@@ -1162,11 +1162,12 @@ namespace WindowsFormsApp1
                     int count = axKHOpenAPI1.GetRepeatCnt(e.sTrCode, e.sRQName);
                     string time1 = DateTime.Now.ToString("HH:mm:ss");
 
+
                     for (int i = 0; i < count; i++)
                     {
-                        int current_price = Math.Abs(Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "현재가").Trim()));
                         string code = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "종목코드").Trim();
                         string code_name = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "종목명").Trim();
+                        int current_price = Math.Abs(Convert.ToInt32(axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "현재가").Trim()));
 
                         //최소 및 최대 매수가 확인
                         if (current_price < Convert.ToInt32(utility.min_price) || current_price > Convert.ToInt32(utility.max_price))
@@ -1175,20 +1176,53 @@ namespace WindowsFormsApp1
                             continue;
                         }
 
-                        //
-                        WriteLog_Stock("[신규종목/초기/" + condition_nameORcode + "] : " + code + "-" + code_name + "\n");
+                        DataRow[] findRows_check = dtCondStock.Select($"종목코드 = '{code}'");
+
+                        if (findRows_check.Any() && utility.buy_OR)
+                        {
+                            WriteLog_Stock("[신규종목/초기/" + condition_nameORcode + "] : " + code + "-" + code_name + "OR 모드 중복" + "\n");
+                            continue;
+                        }
+
+                        bool buy_and_check = false;
+
+                        if (findRows_check.Any() && utility.buy_AND)
+                        {
+                            WriteLog_Stock("[신규종목/초기/" + condition_nameORcode + "] : " + code + "-" + code_name + "AND 모드 중복" + "\n");
+                            buy_and_check = true;
+                        }
+
+                        if (!buy_and_check)
+                        {
+                            WriteLog_Stock("[신규종목/초기/" + condition_nameORcode + "] : " + code + "-" + code_name + "\n");
+                        }
 
                         //
                         string high1 = axKHOpenAPI1.GetCommData(e.sTrCode, e.sRQName, i, "상한가").Trim();
                         string now_hold1 = "0";
                         string condition1 = utility.buy_AND ? "호출" : "대기";
-                        lock (buy_lock)
+                        if (!buy_and_check)
                         {
-                            if (!buy_runningCodes.ContainsKey(code) && !utility.buy_AND)
+                            lock (buy_lock)
                             {
-                                condition1 = buy_check(code, code_name, string.Format("{0:#,##0}", current_price), time1, high1, false, condition_nameORcode);
+                                if (!buy_runningCodes.ContainsKey(code) && !utility.buy_AND)
+                                {
+                                    condition1 = buy_check(code, code_name, string.Format("{0:#,##0}", current_price), time1, high1, false, condition_nameORcode);
+                                }
                             }
                         }
+                        else
+                        {
+                            lock (buy_lock)
+                            {
+                                if (!buy_runningCodes.ContainsKey(code) && !utility.buy_AND)
+                                {
+                                    condition1 = buy_check(code, code_name, string.Format("{0:#,##0}", current_price), time1, high1, true, condition_nameORcode);
+                                    return;
+                                }
+                            }
+                        }
+
                         //
                         if (condition1.StartsWith("매수중"))
                         {
