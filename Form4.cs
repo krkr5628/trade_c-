@@ -47,7 +47,7 @@ namespace WindowsFormsApp1
         private void read(object sender, EventArgs e)
         {
             // 파일이 있는 폴더 경로
-            string folderPath = @"C:\Auto_Trade_Kiwoom\Log";
+            string folderPath = @"C:\Auto_Trade_Kiwoom\Log\";
 
             try
             {
