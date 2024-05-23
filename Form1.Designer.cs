@@ -2278,7 +2278,7 @@ namespace WindowsFormsApp1
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menu;
             this.Name = "Trade_Auto";
-            this.Text = "Trade_Auto";
+            this.Text = "Trade_Auto_Kiwoom";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
