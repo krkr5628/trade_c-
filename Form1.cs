@@ -2070,8 +2070,6 @@ namespace WindowsFormsApp1
                         {
                             WriteLog_Stock($"[기존종목/INDEPENDENT편입/{e.strConditionName}] : {findRows1[0]["종목명"]}({e.sTrCode})\n");
 
-                            dtCondStock.AcceptChanges();
-
                             //정렬
                             var sorted_Rows = from row in dtCondStock.AsEnumerable()
                                               orderby row.Field<string>("편입시각") ascending
@@ -2084,11 +2082,6 @@ namespace WindowsFormsApp1
 
                         if (issingle)
                         {
-                            if (dtCondStock.Rows.Count >= 30)
-                            {
-                                WriteLog_Stock($"[신규편입불가/{e.strConditionName}/{e.sTrCode}] : 최대 감시 종목(30개) 초과 \n");
-                                return;
-                            }
 
                             if (dtCondStock.Rows.Count >= 50)
                             {
@@ -2102,6 +2095,8 @@ namespace WindowsFormsApp1
 
                             //실시간 항목 등록(대비기호, 현재가. 등락율, 거래량)
                             axKHOpenAPI1.SetRealReg(GetScreenNo(), e.sTrCode, "10;12;13", "1");
+
+                            return;
                         }
 
                     }
