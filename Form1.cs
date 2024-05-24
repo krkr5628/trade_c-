@@ -1528,7 +1528,7 @@ namespace WindowsFormsApp1
                             if (findRows2.Any())
                             {
                                 DataRow row = findRows2.First();
-                                if (gubun.Equals("현금매수"))
+                                if (gubun.StartsWith("현금매수")) //현금매수 K
                                 {
                                     row["편입상태"] = "실매입";
                                     row["편입가"] = average_price;
