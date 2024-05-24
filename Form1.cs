@@ -954,6 +954,9 @@ namespace WindowsFormsApp1
             };
             minuteTimer.AutoReset = false;
             minuteTimer.Start();
+
+            // 특정 함수 호출
+            KOR_INDEX();
         }
 
         private void StartMinuteTimer()
