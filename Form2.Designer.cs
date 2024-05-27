@@ -221,13 +221,13 @@ namespace WindowsFormsApp1
             this.label21 = new System.Windows.Forms.Label();
             this.type1_end = new System.Windows.Forms.TextBox();
             this.type1_start = new System.Windows.Forms.TextBox();
-            this.type3_start = new System.Windows.Forms.TextBox();
-            this.type2_start = new System.Windows.Forms.TextBox();
             this.type4_start = new System.Windows.Forms.TextBox();
             this.type5_start = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
             this.type5_end = new System.Windows.Forms.TextBox();
             this.type1_selection = new System.Windows.Forms.CheckBox();
+            this.type3_start = new System.Windows.Forms.TextBox();
+            this.type2_start = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -741,7 +741,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.90253F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.43321F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.53069F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 220F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 222F));
             this.tableLayoutPanel5.Controls.Add(this.setting_allowed, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.setting_open, 3, 0);
             this.tableLayoutPanel5.Controls.Add(this.save_button, 2, 0);
@@ -762,7 +762,7 @@ namespace WindowsFormsApp1
             this.setting_allowed.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_allowed.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_allowed.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_allowed.Location = new System.Drawing.Point(663, 2);
+            this.setting_allowed.Location = new System.Drawing.Point(661, 2);
             this.setting_allowed.Margin = new System.Windows.Forms.Padding(2);
             this.setting_allowed.Name = "setting_allowed";
             this.setting_allowed.Size = new System.Drawing.Size(103, 29);
@@ -775,7 +775,7 @@ namespace WindowsFormsApp1
             this.setting_open.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_open.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_open.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_open.Location = new System.Drawing.Point(567, 2);
+            this.setting_open.Location = new System.Drawing.Point(565, 2);
             this.setting_open.Margin = new System.Windows.Forms.Padding(2);
             this.setting_open.Name = "setting_open";
             this.setting_open.Size = new System.Drawing.Size(92, 29);
@@ -788,10 +788,10 @@ namespace WindowsFormsApp1
             this.save_button.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.save_button.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.save_button.ForeColor = System.Drawing.Color.SpringGreen;
-            this.save_button.Location = new System.Drawing.Point(465, 2);
+            this.save_button.Location = new System.Drawing.Point(464, 2);
             this.save_button.Margin = new System.Windows.Forms.Padding(2);
             this.save_button.Name = "save_button";
-            this.save_button.Size = new System.Drawing.Size(98, 29);
+            this.save_button.Size = new System.Drawing.Size(97, 29);
             this.save_button.TabIndex = 6;
             this.save_button.Text = "전량저장";
             this.save_button.UseVisualStyleBackColor = false;
@@ -805,7 +805,7 @@ namespace WindowsFormsApp1
             this.setting_name.Margin = new System.Windows.Forms.Padding(2);
             this.setting_name.Name = "setting_name";
             this.setting_name.ReadOnly = true;
-            this.setting_name.Size = new System.Drawing.Size(333, 21);
+            this.setting_name.Size = new System.Drawing.Size(332, 21);
             this.setting_name.TabIndex = 1;
             // 
             // label5
@@ -2964,28 +2964,6 @@ namespace WindowsFormsApp1
             this.type1_start.Size = new System.Drawing.Size(58, 20);
             this.type1_start.TabIndex = 4;
             // 
-            // type3_start
-            // 
-            this.type3_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type3_start.Location = new System.Drawing.Point(102, 40);
-            this.type3_start.Margin = new System.Windows.Forms.Padding(2);
-            this.type3_start.Name = "type3_start";
-            this.type3_start.Size = new System.Drawing.Size(58, 20);
-            this.type3_start.TabIndex = 12;
-            // 
-            // type2_start
-            // 
-            this.type2_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.type2_start.Location = new System.Drawing.Point(102, 21);
-            this.type2_start.Margin = new System.Windows.Forms.Padding(2);
-            this.type2_start.Name = "type2_start";
-            this.type2_start.Size = new System.Drawing.Size(58, 20);
-            this.type2_start.TabIndex = 7;
-            // 
             // type4_start
             // 
             this.type4_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -3043,6 +3021,28 @@ namespace WindowsFormsApp1
             this.type1_selection.TabIndex = 39;
             this.type1_selection.Text = "checkBox1";
             this.type1_selection.UseVisualStyleBackColor = true;
+            // 
+            // type3_start
+            // 
+            this.type3_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type3_start.Location = new System.Drawing.Point(102, 40);
+            this.type3_start.Margin = new System.Windows.Forms.Padding(2);
+            this.type3_start.Name = "type3_start";
+            this.type3_start.Size = new System.Drawing.Size(58, 20);
+            this.type3_start.TabIndex = 12;
+            // 
+            // type2_start
+            // 
+            this.type2_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type2_start.Location = new System.Drawing.Point(102, 21);
+            this.type2_start.Margin = new System.Windows.Forms.Padding(2);
+            this.type2_start.Name = "type2_start";
+            this.type2_start.Size = new System.Drawing.Size(58, 20);
+            this.type2_start.TabIndex = 7;
             // 
             // Setting
             // 

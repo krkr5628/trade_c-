@@ -484,6 +484,8 @@ namespace WindowsFormsApp1
                 //지수
                 Index_load();
 
+                System.Threading.Thread.Sleep(200);
+
                 //매매내역 업데이트
                 Transaction_Detail("");
 
@@ -710,6 +712,9 @@ namespace WindowsFormsApp1
         private void Index_load()
         {
             US_INDEX();
+
+            System.Threading.Thread.Sleep(200);
+
             if (utility.kospi_commodity || utility.kosdak_commodity)
             {
                 Initial_kor_index();
@@ -732,7 +737,10 @@ namespace WindowsFormsApp1
 
                 if (tmp5 == 0)
                 {
-                    dow_index.Text = "미수신";
+                    WriteLog_System($"[수신오류] DOW30 : 3초뒤 재시도\n");
+                    System.Threading.Thread.Sleep(3000); ;
+                    US_INDEX();
+                    return;
                 }
 
                 dow_index.Text = tmp5.ToString();
@@ -746,9 +754,13 @@ namespace WindowsFormsApp1
                         if (tmp5 < start || end < tmp5)
                         {
                             index_buy = true;
-                            WriteLog_System($"[BUY] OVER DOW30 INDEX RANGE : START({start}) <=  NOW({tmp5} <= END({end})\n");
+
+                            WriteLog_System($"[BUY/이탈] DOW30 INDEX RANGE\n");
+                            WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
                             WriteLog_System("Trade Stop\n");
-                            telegram_message($"[BUY] OVER DOW30 INDEX RANGE : START({start}) <=  NOW({tmp5} <= END({end})\n");
+
+                            telegram_message($"[BUY/이탈] DOW30 INDEX RANGE\n");
+                            telegram_message($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
                             telegram_message("Trade Stop\n");
                         }
                     }
@@ -763,9 +775,13 @@ namespace WindowsFormsApp1
                         if (tmp5 < start || end < tmp5)
                         {
                             index_clear = true;
-                            WriteLog_System($"[CLEAR] OVER DOW30 INDEX RANGE : START({start}) <=  NOW({tmp5} <= END({end})\n");
+
+                            WriteLog_System($"[CLEAR/이탈] DOW30 INDEX RANGE\n");
+                            WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
                             WriteLog_System("Trade Stop\n");
-                            telegram_message($"[CLEAR] OVER DOW30 INDEX RANGE : START({start}) <=  NOW({tmp5} <= END({end})\n");
+
+                            telegram_message($"[CLEAR/이탈] DOW30 INDEX RANGE\n");
+                            telegram_message($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
                             telegram_message("Trade Stop\n");
                         }
                     }
@@ -779,7 +795,10 @@ namespace WindowsFormsApp1
 
                 if (tmp5 == 0)
                 {
-                    dow_index.Text = "미수신";
+                    WriteLog_System($"[수신오류] S&P500 : 3초뒤 재시도\n");
+                    System.Threading.Thread.Sleep(3000); ;
+                    US_INDEX();
+                    return;
                 }
 
                 sp_index.Text = tmp5.ToString();
@@ -793,9 +812,13 @@ namespace WindowsFormsApp1
                         if (tmp5 < start || end < tmp5)
                         {
                             index_buy = true;
-                            WriteLog_System($"[BUY] OVER S&P500 INDEX RANGE : START({start}) <=  NOW({tmp5} <= END({end})\n");
+
+                            WriteLog_System($"[BUY/이탈] S&P500 INDEX RANGE\n");
+                            WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
                             WriteLog_System("Trade Stop\n");
-                            telegram_message($"[BUY] OVER S&P500 INDEX RANGE : START({start}) - END({end}) - NOW({tmp5})\n");
+
+                            telegram_message($"[BUY/이탈] S&P500INDEX RANGE\n");
+                            telegram_message($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
                             telegram_message("Trade Stop\n");
                         }
                     }
@@ -810,9 +833,13 @@ namespace WindowsFormsApp1
                         if (tmp5 < start || end < tmp5)
                         {
                             index_clear = true;
-                            WriteLog_System($"[CLEAR] OVER S&P500 INDEX RANGE : START({start}) <=  NOW({tmp5} <= END({end})\n");
+
+                            WriteLog_System($"[CLEAR/이탈] S&P500 INDEX RANGE\n");
+                            WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
                             WriteLog_System("Trade Stop\n");
-                            telegram_message($"[CLEAR] OVER S&P500 INDEX RANGE : START({start}) <=  NOW({tmp5} <= END({end})\n");
+
+                            telegram_message($"[CLEAR/이탈] S&P500 INDEX RANGE\n");
+                            telegram_message($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
                             telegram_message("Trade Stop\n");
                         }
                     }
@@ -826,7 +853,10 @@ namespace WindowsFormsApp1
 
                 if (tmp5 == 0)
                 {
-                    dow_index.Text = "미수신";
+                    WriteLog_System($"[수신오류] NASDAQ100 : : 3초뒤 재시도\n");
+                    System.Threading.Thread.Sleep(3000); ;
+                    US_INDEX();
+                    return;
                 }
 
                 nasdaq_index.Text = tmp5.ToString();
@@ -840,9 +870,13 @@ namespace WindowsFormsApp1
                         if (tmp5 < start || end < tmp5)
                         {
                             index_buy = true;
-                            WriteLog_System($"[BUY] OVER NASDAQ INDEX RANGE : START({start}) <=  NOW({tmp5} <= END({end})\n");
+
+                            WriteLog_System($"[BUY/이탈] NASDAQ INDEX RANGE\n");
+                            WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
                             WriteLog_System("Trade Stop\n");
-                            telegram_message($"[BUY] OVER NASDAQ INDEX RANGE : START({start}) <=  NOW({tmp5} <= END({end})\n");
+
+                            telegram_message($"[BUY/이탈] NASDAQ INDEX RANGE\n");
+                            telegram_message($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
                             telegram_message("Trade Stop\n");
                         }
                     }
@@ -857,9 +891,13 @@ namespace WindowsFormsApp1
                         if (tmp5 < start || end < tmp5)
                         {
                             index_clear = true;
-                            WriteLog_System($"[CLEAR] OVER NASDAQ INDEX RANGE : START({start}) <=  NOW({tmp5} <= END({end})\n");
+
+                            WriteLog_System($"[CLEAR/이탈] NASDAQ INDEX RANGE\n");
+                            WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
                             WriteLog_System("Trade Stop\n");
-                            telegram_message($"[CLEAR] OVER NASDAQ INDEX RANGE : SSTART({start}) <=  NOW({tmp5} <= END({end})\n");
+
+                            telegram_message($"[CLEAR/이탈] NASDAQ INDEX RANGE\n");
+                            telegram_message($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
                             telegram_message("Trade Stop\n");
                         }
                     }              
@@ -924,6 +962,9 @@ namespace WindowsFormsApp1
             }
             //101V
             //106V
+
+            System.Threading.Thread.Sleep(200);
+
             Index_timer();
         }
 
@@ -986,6 +1027,8 @@ namespace WindowsFormsApp1
                 axKHOpenAPI1.CommRqData("KOSPI200_INDEX", "opt50001", 0, GetScreenNo());
             }
 
+            System.Threading.Thread.Sleep(200);
+
             //KOSDAK 150 FUTURES
             if (utility.kosdak_commodity)
             {
@@ -1031,14 +1074,22 @@ namespace WindowsFormsApp1
                         tmp8 = tmp5 + tmp4;
                     }
 
+                    //8시 45분전에 수신시 혹은 최초 수신시 0값이 나오는 경우가 있음
+                    if (tmp5 == 0 || tmp6 == 0 || tmp7 == 0 || tmp8 == 0)
+                    {
+                        WriteLog_System($"[수신오류] KOSPI200 : 전일종가({tmp8}), 종가({tmp5}), 저가({tmp6}), 고가({tmp7})");
+                        return;
+                    }
+
                     //저가,종가,고가
                     kospi_index_series[0] = Math.Round((tmp6 - tmp8) / tmp8 * 100, 2); //저가
                     kospi_index_series[1] = Math.Round((tmp5 - tmp8) / tmp8 * 100, 2); //종가
                     kospi_index_series[2] = Math.Round((tmp7 - tmp8) / tmp8 * 100, 2); //고가
 
-                    this.Invoke((MethodInvoker)delegate
-                    {
-                        kospi_index.Text = kospi_index_series[0] + "/" + kospi_index_series[2];
+                    //KOSPI_INDEX_SERIES 입력전 실행되는 경우가 발생
+                    //this.Invoke((MethodInvoker)delegate
+
+                    kospi_index.Text = kospi_index_series[0] + "/" + kospi_index_series[2];
                         //WriteLog_System($"{tmp}/{tmp1}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}/{tmp7.ToString()}\n");
 
                         if (utility.buy_condition_index)
@@ -1051,9 +1102,13 @@ namespace WindowsFormsApp1
                                 {
                                     if (!index_buy)
                                     {
-                                        WriteLog_System($"[Buy] OVER KOSPI200 Commodity RANGE : SET_LOW({start}) <= LOW({kospi_index_series[0]}) && HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
+                                        WriteLog_System($"[Buy/이탈] KOSPI200 RANGE\n");
+                                        WriteLog_System($"SET_LOW({start}) <= LOW({kospi_index_series[0]})\n");
+                                        WriteLog_System($"HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
                                         WriteLog_System("Trade Stop\n");
-                                        telegram_message($"[Buy] OVER KOSPI200 Commodity RANGE : SET_LOW({start}) <= LOW({kospi_index_series[0]}) && HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
+                                        telegram_message($"[Buy/이탈] KOSPI200 RANGE\n");
+                                        telegram_message($"SET_LOW({start}) <= LOW({kospi_index_series[0]})\n");
+                                        telegram_message($"HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
                                         telegram_message("Trade Stop\n");
                                     }
                                     index_buy = true;
@@ -1071,16 +1126,19 @@ namespace WindowsFormsApp1
                                 {
                                     if (!index_clear)
                                     {
-                                        WriteLog_System($"[CLEAR] OVER KOSPI200 Commodity RANGE : SET_LOW({start}) <= LOW({kospi_index_series[0]}) && HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
+                                        WriteLog_System($"[CLEAR/이탈] KOSPI200 RANGE\n");
+                                        WriteLog_System($"SET_LOW({start}) <= LOW({kospi_index_series[0]})\n");
+                                        WriteLog_System($"HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
                                         WriteLog_System("Trade Stop\n");
-                                        telegram_message($"[CLEAR] OVER KOSPI200 Commodity RANGE : SET_LOW({start}) <= LOW({kospi_index_series[0]}) && HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
+                                        telegram_message($"[CLEAR/이탈] KOSPI200 RANGE\n");
+                                        telegram_message($"SET_LOW({start}) <= LOW({kospi_index_series[0]})\n");
+                                        telegram_message($"HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
                                         telegram_message("Trade Stop\n");
                                     }
                                     index_clear = true;
                                 }
                             }
                         }
-                    });
 
                     break;
 
@@ -1106,56 +1164,73 @@ namespace WindowsFormsApp1
                         tmp8_KOSDAK = tmp5_KOSDAK + tmp4_KOSDAK;
                     }
 
+                    //8시 45분전에 수신시 혹은 최초 수신시 0값이 나오는 경우가 있음
+                    if (tmp5_KOSDAK == 0 || tmp6_KOSDAK == 0 || tmp7_KOSDAK == 0 || tmp8_KOSDAK == 0)
+                    {
+                        WriteLog_System($"[수신오류] KOSDAK150 : 전일종가({tmp8_KOSDAK}), 종가({tmp5_KOSDAK}), 저가({tmp6_KOSDAK}), 고가({tmp7_KOSDAK})");
+                        return;
+                    }
+
                     //저가,종가,고가
                     kosdaq_index_series[0] = Math.Round((tmp6_KOSDAK - tmp8_KOSDAK) / tmp8_KOSDAK * 100, 2); //저가
                     kosdaq_index_series[1] = Math.Round((tmp5_KOSDAK - tmp8_KOSDAK) / tmp8_KOSDAK * 100, 2); //종가
                     kosdaq_index_series[2] = Math.Round((tmp7_KOSDAK - tmp8_KOSDAK) / tmp8_KOSDAK * 100, 2); //고가
 
-                    this.Invoke((MethodInvoker)delegate
+                    //KOSDAKINDEX_SERIES 입력전 실행되는 경우가 발생
+                    //this.Invoke((MethodInvoker)delegate
+
+                    kosdaq_index.Text = kosdaq_index_series[0] + "/" + kosdaq_index_series[2];
+                    //WriteLog_System($"{tmp}/{tmp1}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}/{tmp7.ToString()}\n");
+
+                    if (utility.buy_condition_index)
                     {
-                        kosdaq_index.Text = kosdaq_index_series[0] + "/" + kosdaq_index_series[2];
-                        //WriteLog_System($"{tmp}/{tmp1}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}/{tmp7.ToString()}\n");
-
-                        if (utility.buy_condition_index)
+                        if (utility.type2_selection)
                         {
-                            if (utility.type2_selection)
+                            double start = Convert.ToDouble(utility.type2_start);
+                            double end = Convert.ToDouble(utility.type2_end);
+                            if (kosdaq_index_series[0] < start || end < kosdaq_index_series[2])
                             {
-                                double start = Convert.ToDouble(utility.type2_start);
-                                double end = Convert.ToDouble(utility.type2_end);
-                                if (kosdaq_index_series[0] < start || end < kosdaq_index_series[2])
+                                if (!index_buy)
                                 {
-                                    if (!index_buy)
-                                    {
-                                        WriteLog_System($"[Buy] OVER KOSDAK150 Commodity RANGE : SET_LOW({start}) <= LOW({kospi_index_series[0]}) && HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
-                                        WriteLog_System("Trade Stop\n");
-                                        telegram_message($"[Buy] OVER KOSDAK150  Commodity RANGE : SET_LOW({start}) <= LOW({kospi_index_series[0]}) && HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
-                                        telegram_message("Trade Stop\n");
-                                    }
-                                    index_buy = true;
+                                    WriteLog_System($"[Buy/이탈] KOSDAK150 RANGE\n");
+                                    WriteLog_System($"SET_LOW({start}) <= LOW({kosdaq_index_series[0]})\n");
+                                    WriteLog_System($"HIGH({kosdaq_index_series[2]}) <= SET_HIGH({end})\n");
+                                    WriteLog_System("Trade Stop\n");
+
+                                    telegram_message($"[Buy/이탈] KOSDAK150 RANGE\n");
+                                    telegram_message($"SET_LOW({start}) <= LOW({kosdaq_index_series[0]})\n");
+                                    telegram_message($"HIGH({kosdaq_index_series[2]}) <= SET_HIGH({end})\n");
+                                    telegram_message("Trade Stop\n");
                                 }
+                                index_buy = true;
                             }
                         }
+                    }
 
-                        if (utility.clear_index)
+                    if (utility.clear_index)
+                    {
+                        if (utility.type2_selection_all)
                         {
-                            if (utility.type2_selection_all)
+                            double start = Convert.ToDouble(utility.type2_start_all);
+                            double end = Convert.ToDouble(utility.type2_end_all);
+                            if (kosdaq_index_series[0] < start || end < kosdaq_index_series[2])
                             {
-                                double start = Convert.ToDouble(utility.type2_start_all);
-                                double end = Convert.ToDouble(utility.type2_end_all);
-                                if (kosdaq_index_series[0] < start || end < kosdaq_index_series[2])
+                                if (!index_clear)
                                 {
-                                    if (!index_clear)
-                                    {
-                                        WriteLog_System($"[Clear] OVER KOSDAK150 Commodity RANGE : SET_LOW({start}) <= LOW({kospi_index_series[0]}) && HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
-                                        WriteLog_System("Trade Stop\n");
-                                        telegram_message($"[Clear] OVER KOSDAK150  Commodity RANGE : SET_LOW({start}) <= LOW({kospi_index_series[0]}) && HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
-                                        telegram_message("Trade Stop\n");
-                                    }
-                                    index_clear = true;
+                                    WriteLog_System($"[Clear/이탈] KOSDAK150 RANGE\n");
+                                    WriteLog_System($"SET_LOW({start}) <= LOW({kosdaq_index_series[0]})\n");
+                                    WriteLog_System($"HIGH({kosdaq_index_series[2]}) <= SET_HIGH({end})\n");
+                                    WriteLog_System("Trade Stop\n");
+
+                                    telegram_message($"[Clear/이탈] KOSDAK150 RANGE\n");
+                                    telegram_message($"SET_LOW({start}) <= LOW({kosdaq_index_series[0]})\n");
+                                    telegram_message($"HIGH({kosdaq_index_series[2]}) <= SET_HIGH({end})\n");
+                                    telegram_message("Trade Stop\n");
                                 }
+                                index_clear = true;
                             }
                         }
-                    });
+                    }
 
                     break;
 
@@ -2381,9 +2456,6 @@ namespace WindowsFormsApp1
         //timer3(200ms) : 09시 30분 이후 매수 시작인 것에 대하여 이전에 진입한 종목 중 편입 상태인 종목에 대한 매수
         private void Transfer_Timer(object sender, EventArgs e)
         {
-            //편입 상태 이면서 대기 종목인 녀석에 대한 검증
-            account_check_buy();
-
             //매도 완료 종목에 대한 청산 검증
             if (utility.clear_sell || utility.clear_sell_mode)
             {
@@ -2402,6 +2474,13 @@ namespace WindowsFormsApp1
             {
                 account_check_sell();
             }
+
+            //편입 상태 이면서 대기 종목인 녀석에 대한 검증
+            if (index_buy)
+            {
+                account_check_buy();
+            }
+
         }
 
         private void account_check_buy()
@@ -2555,7 +2634,6 @@ namespace WindowsFormsApp1
             //지수 확인
             if (index_buy)
             {
-                WriteLog_Order($"[01] {code_name}({code}) Index 이탈\n");
                 return "대기";
             }
 
