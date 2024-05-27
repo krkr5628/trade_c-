@@ -739,7 +739,7 @@ namespace WindowsFormsApp1
                 {
                     WriteLog_System($"[수신오류] DOW30 : 5초 뒤 재시도\n");
                     telegram_message($"[수신오류] DOW30 : 5초 뒤 재시도\n");
-                    System.Threading.Thread.Sleep(5000); ;
+                    System.Threading.Thread.Sleep(5000);
                     US_INDEX();
                     return;
                 }
@@ -798,7 +798,7 @@ namespace WindowsFormsApp1
                 {
                     WriteLog_System($"[수신오류] S&P500 : 5초 뒤 재시도\n");
                     telegram_message($"[수신오류] S&P500 : 5초 뒤 재시도\n");
-                    System.Threading.Thread.Sleep(5000); ;
+                    System.Threading.Thread.Sleep(5000);
                     US_INDEX();
                     return;
                 }
@@ -857,7 +857,7 @@ namespace WindowsFormsApp1
                 {
                     WriteLog_System($"[수신오류] NASDAQ100 : : 5초 뒤 재시도\n");
                     telegram_message($"[수신오류] NASDAQ100 : : 5초 뒤 재시도\n");
-                    System.Threading.Thread.Sleep(5000); ;
+                    System.Threading.Thread.Sleep(5000);
                     US_INDEX();
                     return;
                 }
