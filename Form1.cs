@@ -737,8 +737,9 @@ namespace WindowsFormsApp1
 
                 if (tmp5 == 0)
                 {
-                    WriteLog_System($"[수신오류] DOW30 : 3초뒤 재시도\n");
-                    System.Threading.Thread.Sleep(3000); ;
+                    WriteLog_System($"[수신오류] DOW30 : 5초 뒤 재시도\n");
+                    telegram_message($"[수신오류] DOW30 : 5초 뒤 재시도\n");
+                    System.Threading.Thread.Sleep(5000); ;
                     US_INDEX();
                     return;
                 }
@@ -755,11 +756,11 @@ namespace WindowsFormsApp1
                         {
                             index_buy = true;
 
-                            WriteLog_System($"[BUY/이탈] DOW30 INDEX RANGE\n");
+                            WriteLog_System($"[BUY/이탈] DOW30 RANGE\n");
                             WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
                             WriteLog_System("Trade Stop\n");
 
-                            telegram_message($"[BUY/이탈] DOW30 INDEX RANGE\n");
+                            telegram_message($"[BUY/이탈] DOW30 RANGE\n");
                             telegram_message($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
                             telegram_message("Trade Stop\n");
                         }
@@ -795,7 +796,8 @@ namespace WindowsFormsApp1
 
                 if (tmp5 == 0)
                 {
-                    WriteLog_System($"[수신오류] S&P500 : 3초뒤 재시도\n");
+                    WriteLog_System($"[수신오류] S&P500 : 5초 뒤 재시도\n");
+                    telegram_message($"[수신오류] S&P500 : 5초 뒤 재시도\n");
                     System.Threading.Thread.Sleep(3000); ;
                     US_INDEX();
                     return;
@@ -813,11 +815,11 @@ namespace WindowsFormsApp1
                         {
                             index_buy = true;
 
-                            WriteLog_System($"[BUY/이탈] S&P500 INDEX RANGE\n");
+                            WriteLog_System($"[BUY/이탈] S&P500 RANGE\n");
                             WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
                             WriteLog_System("Trade Stop\n");
 
-                            telegram_message($"[BUY/이탈] S&P500INDEX RANGE\n");
+                            telegram_message($"[BUY/이탈] S&P500 RANGE\n");
                             telegram_message($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
                             telegram_message("Trade Stop\n");
                         }
@@ -834,11 +836,11 @@ namespace WindowsFormsApp1
                         {
                             index_clear = true;
 
-                            WriteLog_System($"[CLEAR/이탈] S&P500 INDEX RANGE\n");
+                            WriteLog_System($"[CLEAR/이탈] S&P500 RANGE\n");
                             WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
                             WriteLog_System("Trade Stop\n");
 
-                            telegram_message($"[CLEAR/이탈] S&P500 INDEX RANGE\n");
+                            telegram_message($"[CLEAR/이탈] S&P500 RANGE\n");
                             telegram_message($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
                             telegram_message("Trade Stop\n");
                         }
@@ -853,7 +855,8 @@ namespace WindowsFormsApp1
 
                 if (tmp5 == 0)
                 {
-                    WriteLog_System($"[수신오류] NASDAQ100 : : 3초뒤 재시도\n");
+                    WriteLog_System($"[수신오류] NASDAQ100 : : 5초 뒤 재시도\n");
+                    telegram_message($"[수신오류] NASDAQ100 : : 5초 뒤 재시도\n");
                     System.Threading.Thread.Sleep(3000); ;
                     US_INDEX();
                     return;
@@ -871,11 +874,11 @@ namespace WindowsFormsApp1
                         {
                             index_buy = true;
 
-                            WriteLog_System($"[BUY/이탈] NASDAQ INDEX RANGE\n");
+                            WriteLog_System($"[BUY/이탈] NASDAQ RANGE\n");
                             WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
                             WriteLog_System("Trade Stop\n");
 
-                            telegram_message($"[BUY/이탈] NASDAQ INDEX RANGE\n");
+                            telegram_message($"[BUY/이탈] NASDAQ RANGE\n");
                             telegram_message($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
                             telegram_message("Trade Stop\n");
                         }
@@ -1078,6 +1081,7 @@ namespace WindowsFormsApp1
                     if (tmp5 == 0 || tmp6 == 0 || tmp7 == 0 || tmp8 == 0)
                     {
                         WriteLog_System($"[수신오류] KOSPI200 : 전일종가({tmp8}), 종가({tmp5}), 저가({tmp6}), 고가({tmp7})");
+                        telegram_message($"[수신오류] KOSPI200 : 30초 뒤 재시도");
                         return;
                     }
 
@@ -1168,6 +1172,7 @@ namespace WindowsFormsApp1
                     if (tmp5_KOSDAK == 0 || tmp6_KOSDAK == 0 || tmp7_KOSDAK == 0 || tmp8_KOSDAK == 0)
                     {
                         WriteLog_System($"[수신오류] KOSDAK150 : 전일종가({tmp8_KOSDAK}), 종가({tmp5_KOSDAK}), 저가({tmp6_KOSDAK}), 고가({tmp7_KOSDAK})");
+                        telegram_message($"[수신오류] KOSDAK150 : 30초 뒤 재시도");
                         return;
                     }
 
