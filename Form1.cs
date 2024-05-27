@@ -1080,8 +1080,8 @@ namespace WindowsFormsApp1
                     //8시 45분전에 수신시 혹은 최초 수신시 0값이 나오는 경우가 있음
                     if (tmp5 == 0 || tmp6 == 0 || tmp7 == 0 || tmp8 == 0)
                     {
-                        WriteLog_System($"[수신오류] KOSPI200 : 전일종가({tmp8}), 종가({tmp5}), 저가({tmp6}), 고가({tmp7})");
-                        telegram_message($"[수신오류] KOSPI200 : 30초 뒤 재시도");
+                        WriteLog_System($"[수신오류] KOSPI200 : 전일종가({tmp8}), 종가({tmp5}), 저가({tmp6}), 고가({tmp7})\n");
+                        telegram_message($"[수신오류] KOSPI200 : 30초 뒤 재시도\n");
                         return;
                     }
 
@@ -1094,55 +1094,53 @@ namespace WindowsFormsApp1
                     //this.Invoke((MethodInvoker)delegate
 
                     kospi_index.Text = kospi_index_series[0] + "/" + kospi_index_series[2];
-                        //WriteLog_System($"{tmp}/{tmp1}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}/{tmp7.ToString()}\n");
+                    //WriteLog_System($"{tmp}/{tmp1}/{tmp3}/{tmp4.ToString()}/{tmp5.ToString()}/{tmp6.ToString()}/{tmp7.ToString()}\n");
 
-                        if (utility.buy_condition_index)
+                    if (utility.buy_condition_index)
+                    {
+                        if (utility.type1_selection && !index_buy)
                         {
-                            if (utility.type1_selection)
+                            double start = Convert.ToDouble(utility.type1_start);
+                            double end = Convert.ToDouble(utility.type1_end);
+                            if (kospi_index_series[0] < start || end < kospi_index_series[2])
                             {
-                                double start = Convert.ToDouble(utility.type1_start);
-                                double end = Convert.ToDouble(utility.type1_end);
-                                if (kospi_index_series[0] < start || end < kospi_index_series[2])
-                                {
-                                    if (!index_buy)
-                                    {
-                                        WriteLog_System($"[Buy/이탈] KOSPI200 RANGE\n");
-                                        WriteLog_System($"SET_LOW({start}) <= LOW({kospi_index_series[0]})\n");
-                                        WriteLog_System($"HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
-                                        WriteLog_System("Trade Stop\n");
-                                        telegram_message($"[Buy/이탈] KOSPI200 RANGE\n");
-                                        telegram_message($"SET_LOW({start}) <= LOW({kospi_index_series[0]})\n");
-                                        telegram_message($"HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
-                                        telegram_message("Trade Stop\n");
-                                    }
-                                    index_buy = true;
-                                }
+                                WriteLog_System($"[Buy/이탈] KOSPI200 RANGE\n");
+                                WriteLog_System($"SET_LOW({start}) <= LOW({kospi_index_series[0]})\n");
+                                WriteLog_System($"HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
+                                WriteLog_System("Trade Stop\n");
+
+                                telegram_message($"[Buy/이탈] KOSPI200 RANGE\n");
+                                telegram_message($"SET_LOW({start}) <= LOW({kospi_index_series[0]})\n");
+                                telegram_message($"HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
+                                telegram_message("Trade Stop\n");
+
+                                index_buy = true;
                             }
                         }
+                    }
 
-                        if (utility.clear_index)
+                    if (utility.clear_index)
+                    {
+                        if (utility.type1_selection_all && !index_clear)
                         {
-                            if (utility.type1_selection_all)
+                            double start = Convert.ToDouble(utility.type1_start_all);
+                            double end = Convert.ToDouble(utility.type1_end_all);
+                            if (kospi_index_series[0] < start || end < kospi_index_series[2])
                             {
-                                double start = Convert.ToDouble(utility.type1_start_all);
-                                double end = Convert.ToDouble(utility.type1_end_all);
-                                if (kospi_index_series[0] < start || end < kospi_index_series[2])
-                                {
-                                    if (!index_clear)
-                                    {
-                                        WriteLog_System($"[CLEAR/이탈] KOSPI200 RANGE\n");
-                                        WriteLog_System($"SET_LOW({start}) <= LOW({kospi_index_series[0]})\n");
-                                        WriteLog_System($"HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
-                                        WriteLog_System("Trade Stop\n");
-                                        telegram_message($"[CLEAR/이탈] KOSPI200 RANGE\n");
-                                        telegram_message($"SET_LOW({start}) <= LOW({kospi_index_series[0]})\n");
-                                        telegram_message($"HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
-                                        telegram_message("Trade Stop\n");
-                                    }
-                                    index_clear = true;
-                                }
+                                WriteLog_System($"[CLEAR/이탈] KOSPI200 RANGE\n");
+                                WriteLog_System($"SET_LOW({start}) <= LOW({kospi_index_series[0]})\n");
+                                WriteLog_System($"HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
+                                WriteLog_System("Trade Stop\n");
+
+                                telegram_message($"[CLEAR/이탈] KOSPI200 RANGE\n");
+                                telegram_message($"SET_LOW({start}) <= LOW({kospi_index_series[0]})\n");
+                                telegram_message($"HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
+                                telegram_message("Trade Stop\n");
+
+                                index_clear = true;
                             }
                         }
+                    }
 
                     break;
 
@@ -1171,8 +1169,8 @@ namespace WindowsFormsApp1
                     //8시 45분전에 수신시 혹은 최초 수신시 0값이 나오는 경우가 있음
                     if (tmp5_KOSDAK == 0 || tmp6_KOSDAK == 0 || tmp7_KOSDAK == 0 || tmp8_KOSDAK == 0)
                     {
-                        WriteLog_System($"[수신오류] KOSDAK150 : 전일종가({tmp8_KOSDAK}), 종가({tmp5_KOSDAK}), 저가({tmp6_KOSDAK}), 고가({tmp7_KOSDAK})");
-                        telegram_message($"[수신오류] KOSDAK150 : 30초 뒤 재시도");
+                        WriteLog_System($"[수신오류] KOSDAK150 : 전일종가({tmp8_KOSDAK}), 종가({tmp5_KOSDAK}), 저가({tmp6_KOSDAK}), 고가({tmp7_KOSDAK})\n");
+                        telegram_message($"[수신오류] KOSDAK150 : 30초 뒤 재시도\n");
                         return;
                     }
 
@@ -1189,24 +1187,22 @@ namespace WindowsFormsApp1
 
                     if (utility.buy_condition_index)
                     {
-                        if (utility.type2_selection)
+                        if (utility.type2_selection && !index_buy)
                         {
                             double start = Convert.ToDouble(utility.type2_start);
                             double end = Convert.ToDouble(utility.type2_end);
                             if (kosdaq_index_series[0] < start || end < kosdaq_index_series[2])
                             {
-                                if (!index_buy)
-                                {
-                                    WriteLog_System($"[Buy/이탈] KOSDAK150 RANGE\n");
-                                    WriteLog_System($"SET_LOW({start}) <= LOW({kosdaq_index_series[0]})\n");
-                                    WriteLog_System($"HIGH({kosdaq_index_series[2]}) <= SET_HIGH({end})\n");
-                                    WriteLog_System("Trade Stop\n");
+                                WriteLog_System($"[Buy/이탈] KOSDAK150 RANGE\n");
+                                WriteLog_System($"SET_LOW({start}) <= LOW({kosdaq_index_series[0]})\n");
+                                WriteLog_System($"HIGH({kosdaq_index_series[2]}) <= SET_HIGH({end})\n");
+                                WriteLog_System("Trade Stop\n");
 
-                                    telegram_message($"[Buy/이탈] KOSDAK150 RANGE\n");
-                                    telegram_message($"SET_LOW({start}) <= LOW({kosdaq_index_series[0]})\n");
-                                    telegram_message($"HIGH({kosdaq_index_series[2]}) <= SET_HIGH({end})\n");
-                                    telegram_message("Trade Stop\n");
-                                }
+                                telegram_message($"[Buy/이탈] KOSDAK150 RANGE\n");
+                                telegram_message($"SET_LOW({start}) <= LOW({kosdaq_index_series[0]})\n");
+                                telegram_message($"HIGH({kosdaq_index_series[2]}) <= SET_HIGH({end})\n");
+                                telegram_message("Trade Stop\n");
+
                                 index_buy = true;
                             }
                         }
@@ -1214,24 +1210,22 @@ namespace WindowsFormsApp1
 
                     if (utility.clear_index)
                     {
-                        if (utility.type2_selection_all)
+                        if (utility.type2_selection_all && !index_clear)
                         {
                             double start = Convert.ToDouble(utility.type2_start_all);
                             double end = Convert.ToDouble(utility.type2_end_all);
                             if (kosdaq_index_series[0] < start || end < kosdaq_index_series[2])
                             {
-                                if (!index_clear)
-                                {
-                                    WriteLog_System($"[Clear/이탈] KOSDAK150 RANGE\n");
-                                    WriteLog_System($"SET_LOW({start}) <= LOW({kosdaq_index_series[0]})\n");
-                                    WriteLog_System($"HIGH({kosdaq_index_series[2]}) <= SET_HIGH({end})\n");
-                                    WriteLog_System("Trade Stop\n");
+                                WriteLog_System($"[Clear/이탈] KOSDAK150 RANGE\n");
+                                WriteLog_System($"SET_LOW({start}) <= LOW({kosdaq_index_series[0]})\n");
+                                WriteLog_System($"HIGH({kosdaq_index_series[2]}) <= SET_HIGH({end})\n");
+                                WriteLog_System("Trade Stop\n");
 
-                                    telegram_message($"[Clear/이탈] KOSDAK150 RANGE\n");
-                                    telegram_message($"SET_LOW({start}) <= LOW({kosdaq_index_series[0]})\n");
-                                    telegram_message($"HIGH({kosdaq_index_series[2]}) <= SET_HIGH({end})\n");
-                                    telegram_message("Trade Stop\n");
-                                }
+                                telegram_message($"[Clear/이탈] KOSDAK150 RANGE\n");
+                                telegram_message($"SET_LOW({start}) <= LOW({kosdaq_index_series[0]})\n");
+                                telegram_message($"HIGH({kosdaq_index_series[2]}) <= SET_HIGH({end})\n");
+                                telegram_message("Trade Stop\n");
+
                                 index_clear = true;
                             }
                         }
