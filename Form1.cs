@@ -2481,7 +2481,7 @@ namespace WindowsFormsApp1
             }
 
             //편입 상태 이면서 대기 종목인 녀석에 대한 검증
-            if (index_buy)
+            if (!index_buy)
             {
                 account_check_buy();
             }
