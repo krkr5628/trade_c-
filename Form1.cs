@@ -798,7 +798,7 @@ namespace WindowsFormsApp1
                 {
                     WriteLog_System($"[수신오류] S&P500 : 5초 뒤 재시도\n");
                     telegram_message($"[수신오류] S&P500 : 5초 뒤 재시도\n");
-                    System.Threading.Thread.Sleep(3000); ;
+                    System.Threading.Thread.Sleep(5000); ;
                     US_INDEX();
                     return;
                 }
@@ -857,7 +857,7 @@ namespace WindowsFormsApp1
                 {
                     WriteLog_System($"[수신오류] NASDAQ100 : : 5초 뒤 재시도\n");
                     telegram_message($"[수신오류] NASDAQ100 : : 5초 뒤 재시도\n");
-                    System.Threading.Thread.Sleep(3000); ;
+                    System.Threading.Thread.Sleep(5000); ;
                     US_INDEX();
                     return;
                 }
@@ -1005,7 +1005,7 @@ namespace WindowsFormsApp1
 
         private void StartMinuteTimer()
         {
-            minuteTimer = new System.Timers.Timer(60000); // 1분 = 60,000 밀리초
+            minuteTimer = new System.Timers.Timer(30000); // 1분 = 60,000 밀리초
             minuteTimer.Elapsed += OnTimedEvent;
             minuteTimer.AutoReset = true;
             minuteTimer.Enabled = true;
