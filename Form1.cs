@@ -1004,7 +1004,7 @@ namespace WindowsFormsApp1
 
         private void StartMinuteTimer()
         {
-            minuteTimer = new System.Timers.Timer(30000); // 1분 = 60,000 밀리초
+            minuteTimer = new System.Timers.Timer(60000); // 1분 = 60,000 밀리초
             minuteTimer.Elapsed += OnTimedEvent;
             minuteTimer.AutoReset = true;
             minuteTimer.Enabled = true;
@@ -1080,7 +1080,7 @@ namespace WindowsFormsApp1
                     if (tmp5 == 0 || tmp6 == 0 || tmp7 == 0 || tmp8 == 0)
                     {
                         WriteLog_System($"[수신오류] KOSPI200 : 전일종가({tmp8}), 종가({tmp5}), 저가({tmp6}), 고가({tmp7})\n");
-                        telegram_message($"[수신오류] KOSPI200 : 30초 뒤 재시도\n");
+                        telegram_message($"[수신오류] KOSPI200 : 60초 뒤 재시도\n");
                         return;
                     }
 
@@ -1169,7 +1169,7 @@ namespace WindowsFormsApp1
                     if (tmp5_KOSDAK == 0 || tmp6_KOSDAK == 0 || tmp7_KOSDAK == 0 || tmp8_KOSDAK == 0)
                     {
                         WriteLog_System($"[수신오류] KOSDAK150 : 전일종가({tmp8_KOSDAK}), 종가({tmp5_KOSDAK}), 저가({tmp6_KOSDAK}), 고가({tmp7_KOSDAK})\n");
-                        telegram_message($"[수신오류] KOSDAK150 : 30초 뒤 재시도\n");
+                        telegram_message($"[수신오류] KOSDAK150 : 60초 뒤 재시도\n");
                         return;
                     }
 
