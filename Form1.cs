@@ -140,7 +140,6 @@ namespace WindowsFormsApp1
                 });
 
                 timer3.Start(); //편입 종목 감시 - 200ms
-
             }
             else if (isRunned && t_now > t_end)
             {
@@ -2455,6 +2454,18 @@ namespace WindowsFormsApp1
         //timer3(200ms) : 09시 30분 이후 매수 시작인 것에 대하여 이전에 진입한 종목 중 편입 상태인 종목에 대한 매수
         private void Transfer_Timer(object sender, EventArgs e)
         {
+            // 지수연동청산
+            if (index_clear)
+            {
+                account_check_sell();
+            }
+
+            //편입 상태 이면서 대기 종목인 녀석에 대한 검증
+            if (!index_buy)
+            {
+                account_check_buy();
+            }
+
             //매도 완료 종목에 대한 청산 검증
             if (utility.clear_sell || utility.clear_sell_mode)
             {
@@ -2466,18 +2477,6 @@ namespace WindowsFormsApp1
                 if (t_code.CompareTo(t_start) < 0 || t_code.CompareTo(t_end) > 0) return;
 
                 account_check_sell();
-            }
-
-            //지수연동청산
-            if (index_clear)
-            {
-                account_check_sell();
-            }
-
-            //편입 상태 이면서 대기 종목인 녀석에 대한 검증
-            if (!index_buy)
-            {
-                account_check_buy();
             }
 
         }
@@ -2512,6 +2511,7 @@ namespace WindowsFormsApp1
                     lock (buy_lock)
                     {
                         string code = row.Field<string>("종목코드");
+
                         if (!buy_runningCodes.ContainsKey(code))
                         {
                             buy_runningCodes[code] = true;
