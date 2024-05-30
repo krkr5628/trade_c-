@@ -788,7 +788,7 @@ namespace WindowsFormsApp1
             }
 
             //
-            await Task.Delay(2000);
+            await Task.Delay(4245);
 
             //S&P500
             if (utility.sp_index)
@@ -851,7 +851,7 @@ namespace WindowsFormsApp1
             }
 
             //
-            await Task.Delay(3000);
+            await Task.Delay(3245);
 
             //NASDAQ100
             if (utility.nasdaq_index)
@@ -913,7 +913,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        private int delayMilliseconds = 60000; //1분
+        private int delayMilliseconds = 60102; //1분
         private int Max_Retry = 4;
         private string[] userAgents = new string[]
         {
@@ -1069,7 +1069,7 @@ namespace WindowsFormsApp1
 
         private void KOR_INDEX()
         {
-            //KOSPI 200 OPTIONS
+            //외국인 선물 누적
 
             //KOSPI 200 FUTURES
             if (utility.kospi_commodity)
@@ -3330,10 +3330,7 @@ namespace WindowsFormsApp1
                 //미체결수량
                 string left_Acc = axKHOpenAPI1.GetChejanData(902);
 
-                WriteLog_Order("------------\n");
-                WriteLog_Order($"[체결정보] 매도수구분 : {Gubun}  // 종목 : {code_name}({code})\n");
-                WriteLog_Order($"[체결정보] 누적체결수량 : {partial_sum}/{order_sum} // 미체결수량 : {left_Acc}\n");
-                WriteLog_Order("------------\n");
+                WriteLog_Order($"[체결] 구분 : {Gubun} / 종목 : {code_name}({code}) / 누적체결수량 : {partial_sum}/{order_sum} / 미체결수량 : {left_Acc}\n");
 
                 //매수확인
                 if (Gubun.Equals("2") && left_Acc.Equals("0"))

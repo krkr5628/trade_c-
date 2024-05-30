@@ -1769,7 +1769,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel15.Controls.Add(this.Fomula_list_buy, 0, 0);
             this.tableLayoutPanel15.Controls.Add(this.tableLayoutPanel16, 0, 1);
-            this.tableLayoutPanel15.Location = new System.Drawing.Point(4, 51);
+            this.tableLayoutPanel15.Location = new System.Drawing.Point(3, 50);
             this.tableLayoutPanel15.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel15.Name = "tableLayoutPanel15";
             this.tableLayoutPanel15.RowCount = 2;
@@ -1852,7 +1852,7 @@ namespace WindowsFormsApp1
             this.Fomula_list_buy_Checked_box.Location = new System.Drawing.Point(6, 73);
             this.Fomula_list_buy_Checked_box.Margin = new System.Windows.Forms.Padding(2);
             this.Fomula_list_buy_Checked_box.Name = "Fomula_list_buy_Checked_box";
-            this.Fomula_list_buy_Checked_box.Size = new System.Drawing.Size(372, 22);
+            this.Fomula_list_buy_Checked_box.Size = new System.Drawing.Size(372, 76);
             this.Fomula_list_buy_Checked_box.TabIndex = 25;
             this.Fomula_list_buy_Checked_box.Visible = false;
             // 
