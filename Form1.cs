@@ -184,7 +184,7 @@ namespace WindowsFormsApp1
         //로그창(System)
         private void WriteLog_System(string message)
         {
-            string time = DateTime.Now.ToString("HH:mm:ss");
+            string time = DateTime.Now.ToString("HH:mm:ss:fff");
             log_window.AppendText($@"{"[" + time + "] " + message}");
             log_full.Add($"[{time}][System] : {message}");
         }
@@ -192,7 +192,7 @@ namespace WindowsFormsApp1
         //로그창(Order)
         private void WriteLog_Order(string message)
         {
-            string time = DateTime.Now.ToString("HH:mm:ss");
+            string time = DateTime.Now.ToString("HH:mm:ss:fff");
             log_window3.AppendText($@"{"[" + time + "] " + message}");
             log_full.Add($"[{time}][Order] : {message}");
         }
@@ -200,7 +200,7 @@ namespace WindowsFormsApp1
         //로그창(Stock)
         private void WriteLog_Stock(string message)
         {
-            string time = DateTime.Now.ToString("HH:mm:ss");
+            string time = DateTime.Now.ToString("HH:mm:ss:fff");
             log_window2.AppendText($@"{"[" + time + "] " + message}");
             log_full.Add($"[{time}][Stock] : {message}");
         }
