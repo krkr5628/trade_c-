@@ -85,6 +85,8 @@ namespace WindowsFormsApp1
             term_for_sell_text.Leave += Term_for_sell_text_Leave;
 
             //소수점이거나 정수인지 확인
+            type0_start.Leave += Type0_start_Leave;
+            type0_end.Leave += Type0_end_Leave;
             type1_start.Leave += Type1_start_Leave;
             type1_end.Leave += Type1_end_Leave;
             type2_start.Leave += Type2_start_Leave;
@@ -96,6 +98,8 @@ namespace WindowsFormsApp1
             type5_start.Leave += Type5_start_Leave;
             type5_end.Leave += Type5_end_Leave;
 
+            type0_all_start.Leave += Type0_all_start_Leave;
+            type0_all_end.Leave += Type0_all_end_Leave;
             type1_all_start.Leave += Type1_all_start_Leave;
             type1_all_end.Leave += Type1_all_end_Leave;
             type2_all_start.Leave += Type2_all_start_Leave;
@@ -406,6 +410,14 @@ namespace WindowsFormsApp1
 
         //-----------------------------------양 혹은 음 소수점 확인-------------------------------------
 
+        private void Type0_start_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput(sender, e, type0_start, type0_end, "-5000");
+        }
+        private void Type0_end_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput2(sender, e, type0_start, type0_end, "5000");
+        }
         private void Type1_start_Leave(object sender, EventArgs e)
         {
             ValidatedecimalInput(sender, e, type1_start, type1_end, "-5");
@@ -445,6 +457,14 @@ namespace WindowsFormsApp1
         private void Type5_end_Leave(object sender, EventArgs e)
         {
             ValidatedecimalInput2(sender, e, type5_start, type5_end, "5");
+        }
+        private void Type0_all_start_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput(sender, e, type0_all_start, type0_all_end, "-5000");
+        }
+        private void Type0_all_end_Leave(object sender, EventArgs e)
+        {
+            ValidatedecimalInput2(sender, e, type0_all_start, type0_all_end, "5000");
         }
         private void Type1_all_start_Leave(object sender, EventArgs e)
         {
@@ -893,18 +913,21 @@ namespace WindowsFormsApp1
                     tmp.Add("매도설정/" + Convert.ToString(sell_set1.SelectedIndex) + "/" + Convert.ToString(sell_set2.SelectedIndex));
                     tmp.Add("매도설정_시간외/" + Convert.ToString(sell_set1_after.SelectedIndex) + "/" + Convert.ToString(sell_set2_after.SelectedIndex));
                     //
+                    tmp.Add("외국인선물/" + Convert.ToString(Foreign.Checked));
                     tmp.Add("코스피선물/" + Convert.ToString(kospi_commodity.Checked));
                     tmp.Add("코스닥선물/" + Convert.ToString(kosdak_commodity.Checked));
                     tmp.Add("DOW/" + Convert.ToString(dow_index.Checked));
                     tmp.Add("SP/" + Convert.ToString(sp_index.Checked));
                     tmp.Add("NASDAQ/" + Convert.ToString(nasdaq_index.Checked));
                     //
+                    tmp.Add("type0/" + Convert.ToString(type0_selection.Checked) + "/" + type0_start.Text + "/" + type0_end.Text);
                     tmp.Add("type1/" + Convert.ToString(type1_selection.Checked) + "/" + type1_start.Text + "/" + type1_end.Text);
                     tmp.Add("type2/" + Convert.ToString(type2_selection.Checked) + "/" + type2_start.Text + "/" + type2_end.Text);
                     tmp.Add("type3/" + Convert.ToString(type3_selection.Checked) + "/" + type3_start.Text + "/" + type3_end.Text);
                     tmp.Add("type4/" + Convert.ToString(type4_selection.Checked) + "/" + type4_start.Text + "/" + type4_end.Text);
                     tmp.Add("type5/" + Convert.ToString(type5_selection.Checked) + "/" + type5_start.Text + "/" + type5_end.Text);
                     //
+                    tmp.Add("type0_ALL/" + Convert.ToString(type0_selection_all.Checked) + "/" + type0_all_start.Text + "/" + type0_all_end.Text);
                     tmp.Add("type1_ALL/" + Convert.ToString(type1_selection_all.Checked) + "/" + type1_all_start.Text + "/" + type1_all_end.Text);
                     tmp.Add("type2_ALL/" + Convert.ToString(type2_selection_all.Checked) + "/" + type2_all_start.Text + "/" + type2_all_end.Text);
                     tmp.Add("type3_ALL/" + Convert.ToString(type3_selection_all.Checked) + "/" + type3_all_start.Text + "/" + type3_all_end.Text);
@@ -1161,6 +1184,10 @@ namespace WindowsFormsApp1
                 sell_set1_after.SelectedIndex = Convert.ToInt32(sell_set_after_tmp[1]);
                 sell_set2_after.SelectedIndex = Convert.ToInt32(sell_set_after_tmp[2]);
 
+                //외국인 누적 선물
+                String[] Foreign_tmp = reader.ReadLine().Split('/');
+                Foreign.Checked = Convert.ToBoolean(Foreign_tmp[1]);
+
                 //코스피선물
                 String[] kospi_commodity_tmp = reader.ReadLine().Split('/');
                 kospi_commodity.Checked = Convert.ToBoolean(kospi_commodity_tmp[1]);
@@ -1180,6 +1207,12 @@ namespace WindowsFormsApp1
                 //NASDAQ100
                 String[] nasdaq_index_tmp = reader.ReadLine().Split('/');
                 nasdaq_index.Checked = Convert.ToBoolean(nasdaq_index_tmp[1]);
+
+                //#0
+                String[] type0_selection_tmp = reader.ReadLine().Split('/');
+                type0_selection.Checked = Convert.ToBoolean(type0_selection_tmp[1]);
+                type0_start.Text = Convert.ToString(type0_selection_tmp[2]);
+                type0_end.Text = Convert.ToString(type0_selection_tmp[3]);
 
                 //#1
                 String[] type1_selection_tmp = reader.ReadLine().Split('/');
@@ -1210,6 +1243,12 @@ namespace WindowsFormsApp1
                 type5_selection.Checked = Convert.ToBoolean(type5_selection_tmp[1]);
                 type5_start.Text = Convert.ToString(type5_selection_tmp[2]);
                 type5_end.Text = Convert.ToString(type5_selection_tmp[3]);
+
+                //#0
+                String[] type0_selection_all_tmp = reader.ReadLine().Split('/');
+                type0_selection_all.Checked = Convert.ToBoolean(type0_selection_all_tmp[1]);
+                type0_all_start.Text = Convert.ToString(type0_selection_all_tmp[2]);
+                type0_all_end.Text = Convert.ToString(type0_selection_all_tmp[3]);
 
                 //#1
                 String[] type1_selection_all_tmp = reader.ReadLine().Split('/');

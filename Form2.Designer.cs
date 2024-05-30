@@ -228,6 +228,17 @@ namespace WindowsFormsApp1
             this.type1_selection = new System.Windows.Forms.CheckBox();
             this.type3_start = new System.Windows.Forms.TextBox();
             this.type2_start = new System.Windows.Forms.TextBox();
+            this.Foreign = new System.Windows.Forms.CheckBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.type0_selection_all = new System.Windows.Forms.CheckBox();
+            this.type0_all_start = new System.Windows.Forms.TextBox();
+            this.type0_all_end = new System.Windows.Forms.TextBox();
+            this.type0_selection = new System.Windows.Forms.CheckBox();
+            this.type0_start = new System.Windows.Forms.TextBox();
+            this.type0_end = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -741,7 +752,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.90253F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.43321F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.53069F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 226F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 228F));
             this.tableLayoutPanel5.Controls.Add(this.setting_allowed, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.setting_open, 3, 0);
             this.tableLayoutPanel5.Controls.Add(this.save_button, 2, 0);
@@ -762,7 +773,7 @@ namespace WindowsFormsApp1
             this.setting_allowed.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_allowed.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_allowed.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_allowed.Location = new System.Drawing.Point(657, 2);
+            this.setting_allowed.Location = new System.Drawing.Point(656, 2);
             this.setting_allowed.Margin = new System.Windows.Forms.Padding(2);
             this.setting_allowed.Name = "setting_allowed";
             this.setting_allowed.Size = new System.Drawing.Size(103, 29);
@@ -775,7 +786,7 @@ namespace WindowsFormsApp1
             this.setting_open.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.setting_open.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.setting_open.ForeColor = System.Drawing.Color.SpringGreen;
-            this.setting_open.Location = new System.Drawing.Point(562, 2);
+            this.setting_open.Location = new System.Drawing.Point(561, 2);
             this.setting_open.Margin = new System.Windows.Forms.Padding(2);
             this.setting_open.Name = "setting_open";
             this.setting_open.Size = new System.Drawing.Size(91, 29);
@@ -788,7 +799,7 @@ namespace WindowsFormsApp1
             this.save_button.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.save_button.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.save_button.ForeColor = System.Drawing.Color.SpringGreen;
-            this.save_button.Location = new System.Drawing.Point(461, 2);
+            this.save_button.Location = new System.Drawing.Point(460, 2);
             this.save_button.Margin = new System.Windows.Forms.Padding(2);
             this.save_button.Name = "save_button";
             this.save_button.Size = new System.Drawing.Size(97, 29);
@@ -805,7 +816,7 @@ namespace WindowsFormsApp1
             this.setting_name.Margin = new System.Windows.Forms.Padding(2);
             this.setting_name.Name = "setting_name";
             this.setting_name.ReadOnly = true;
-            this.setting_name.Size = new System.Drawing.Size(330, 21);
+            this.setting_name.Size = new System.Drawing.Size(329, 21);
             this.setting_name.TabIndex = 1;
             // 
             // label5
@@ -1901,7 +1912,7 @@ namespace WindowsFormsApp1
             this.groupBox9.Controls.Add(this.tableLayoutPanel13);
             this.groupBox9.Controls.Add(this.telegram_test_button);
             this.groupBox9.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox9.Location = new System.Drawing.Point(790, 342);
+            this.groupBox9.Location = new System.Drawing.Point(790, 383);
             this.groupBox9.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Padding = new System.Windows.Forms.Padding(2);
@@ -2006,7 +2017,7 @@ namespace WindowsFormsApp1
             this.groupBox10.Controls.Add(this.KIS_Allow);
             this.groupBox10.Controls.Add(this.tableLayoutPanel14);
             this.groupBox10.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox10.Location = new System.Drawing.Point(790, 435);
+            this.groupBox10.Location = new System.Drawing.Point(790, 476);
             this.groupBox10.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Padding = new System.Windows.Forms.Padding(2);
@@ -2193,7 +2204,7 @@ namespace WindowsFormsApp1
             this.groupBox8.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox8.Size = new System.Drawing.Size(267, 275);
+            this.groupBox8.Size = new System.Drawing.Size(267, 317);
             this.groupBox8.TabIndex = 26;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "지수 선물 연동(불가)";
@@ -2210,11 +2221,11 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel17.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel17.Name = "tableLayoutPanel17";
             this.tableLayoutPanel17.RowCount = 4;
-            this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.38461F));
-            this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.78322F));
-            this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 67.83217F));
-            this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 104F));
-            this.tableLayoutPanel17.Size = new System.Drawing.Size(259, 254);
+            this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.375F));
+            this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.25F));
+            this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 69.375F));
+            this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 125F));
+            this.tableLayoutPanel17.Size = new System.Drawing.Size(259, 297);
             this.tableLayoutPanel17.TabIndex = 0;
             // 
             // tableLayoutPanel22
@@ -2225,41 +2236,47 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.09804F));
             this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.019608F));
             this.tableLayoutPanel22.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.27451F));
-            this.tableLayoutPanel22.Controls.Add(this.type5_selection_all, 1, 4);
-            this.tableLayoutPanel22.Controls.Add(this.type4_selection_all, 1, 3);
-            this.tableLayoutPanel22.Controls.Add(this.type3_selection_all, 1, 2);
-            this.tableLayoutPanel22.Controls.Add(this.type2_selection_all, 1, 1);
-            this.tableLayoutPanel22.Controls.Add(this.label27, 0, 4);
-            this.tableLayoutPanel22.Controls.Add(this.label28, 0, 1);
-            this.tableLayoutPanel22.Controls.Add(this.label29, 0, 0);
-            this.tableLayoutPanel22.Controls.Add(this.type2_all_end, 4, 1);
-            this.tableLayoutPanel22.Controls.Add(this.type3_all_end, 4, 2);
-            this.tableLayoutPanel22.Controls.Add(this.type4_all_end, 4, 3);
-            this.tableLayoutPanel22.Controls.Add(this.label30, 3, 0);
-            this.tableLayoutPanel22.Controls.Add(this.label31, 3, 1);
-            this.tableLayoutPanel22.Controls.Add(this.label32, 3, 2);
-            this.tableLayoutPanel22.Controls.Add(this.label33, 3, 3);
-            this.tableLayoutPanel22.Controls.Add(this.label34, 0, 2);
-            this.tableLayoutPanel22.Controls.Add(this.label35, 0, 3);
-            this.tableLayoutPanel22.Controls.Add(this.type1_all_end, 4, 0);
-            this.tableLayoutPanel22.Controls.Add(this.type2_all_start, 2, 1);
-            this.tableLayoutPanel22.Controls.Add(this.type3_all_start, 2, 2);
-            this.tableLayoutPanel22.Controls.Add(this.type4_all_start, 2, 3);
-            this.tableLayoutPanel22.Controls.Add(this.type5_all_start, 2, 4);
-            this.tableLayoutPanel22.Controls.Add(this.label36, 3, 4);
-            this.tableLayoutPanel22.Controls.Add(this.type5_all_end, 4, 4);
-            this.tableLayoutPanel22.Controls.Add(this.type1_all_start, 2, 0);
-            this.tableLayoutPanel22.Controls.Add(this.type1_selection_all, 1, 0);
-            this.tableLayoutPanel22.Location = new System.Drawing.Point(2, 151);
+            this.tableLayoutPanel22.Controls.Add(this.type0_all_end, 4, 0);
+            this.tableLayoutPanel22.Controls.Add(this.type0_all_start, 2, 0);
+            this.tableLayoutPanel22.Controls.Add(this.type0_selection_all, 1, 0);
+            this.tableLayoutPanel22.Controls.Add(this.label27, 0, 5);
+            this.tableLayoutPanel22.Controls.Add(this.label35, 0, 4);
+            this.tableLayoutPanel22.Controls.Add(this.label34, 0, 3);
+            this.tableLayoutPanel22.Controls.Add(this.label28, 0, 2);
+            this.tableLayoutPanel22.Controls.Add(this.label29, 0, 1);
+            this.tableLayoutPanel22.Controls.Add(this.type5_selection_all, 1, 5);
+            this.tableLayoutPanel22.Controls.Add(this.type4_selection_all, 1, 4);
+            this.tableLayoutPanel22.Controls.Add(this.type3_selection_all, 1, 3);
+            this.tableLayoutPanel22.Controls.Add(this.type2_selection_all, 1, 2);
+            this.tableLayoutPanel22.Controls.Add(this.type1_selection_all, 1, 1);
+            this.tableLayoutPanel22.Controls.Add(this.type5_all_start, 2, 5);
+            this.tableLayoutPanel22.Controls.Add(this.type4_all_start, 2, 4);
+            this.tableLayoutPanel22.Controls.Add(this.type3_all_start, 2, 3);
+            this.tableLayoutPanel22.Controls.Add(this.type2_all_start, 2, 2);
+            this.tableLayoutPanel22.Controls.Add(this.type1_all_start, 2, 1);
+            this.tableLayoutPanel22.Controls.Add(this.label36, 3, 5);
+            this.tableLayoutPanel22.Controls.Add(this.label33, 3, 4);
+            this.tableLayoutPanel22.Controls.Add(this.label32, 3, 3);
+            this.tableLayoutPanel22.Controls.Add(this.label31, 3, 2);
+            this.tableLayoutPanel22.Controls.Add(this.label30, 3, 1);
+            this.tableLayoutPanel22.Controls.Add(this.type5_all_end, 4, 5);
+            this.tableLayoutPanel22.Controls.Add(this.type4_all_end, 4, 4);
+            this.tableLayoutPanel22.Controls.Add(this.type3_all_end, 4, 3);
+            this.tableLayoutPanel22.Controls.Add(this.type2_all_end, 4, 2);
+            this.tableLayoutPanel22.Controls.Add(this.type1_all_end, 4, 1);
+            this.tableLayoutPanel22.Controls.Add(this.label38, 3, 0);
+            this.tableLayoutPanel22.Controls.Add(this.label24, 0, 0);
+            this.tableLayoutPanel22.Location = new System.Drawing.Point(2, 172);
             this.tableLayoutPanel22.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel22.Name = "tableLayoutPanel22";
-            this.tableLayoutPanel22.RowCount = 5;
-            this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26.38889F));
-            this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 23.61111F));
-            this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel22.Size = new System.Drawing.Size(255, 101);
+            this.tableLayoutPanel22.RowCount = 6;
+            this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel22.Size = new System.Drawing.Size(255, 121);
             this.tableLayoutPanel22.TabIndex = 39;
             // 
             // type5_selection_all
@@ -2268,7 +2285,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.type5_selection_all.AutoSize = true;
-            this.type5_selection_all.Location = new System.Drawing.Point(32, 83);
+            this.type5_selection_all.Location = new System.Drawing.Point(32, 103);
             this.type5_selection_all.Name = "type5_selection_all";
             this.type5_selection_all.Size = new System.Drawing.Size(65, 15);
             this.type5_selection_all.TabIndex = 43;
@@ -2281,7 +2298,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.type4_selection_all.AutoSize = true;
-            this.type4_selection_all.Location = new System.Drawing.Point(32, 63);
+            this.type4_selection_all.Location = new System.Drawing.Point(32, 83);
             this.type4_selection_all.Name = "type4_selection_all";
             this.type4_selection_all.Size = new System.Drawing.Size(65, 14);
             this.type4_selection_all.TabIndex = 42;
@@ -2294,9 +2311,9 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.type3_selection_all.AutoSize = true;
-            this.type3_selection_all.Location = new System.Drawing.Point(32, 44);
+            this.type3_selection_all.Location = new System.Drawing.Point(32, 63);
             this.type3_selection_all.Name = "type3_selection_all";
-            this.type3_selection_all.Size = new System.Drawing.Size(65, 13);
+            this.type3_selection_all.Size = new System.Drawing.Size(65, 14);
             this.type3_selection_all.TabIndex = 41;
             this.type3_selection_all.Text = "checkBox1";
             this.type3_selection_all.UseVisualStyleBackColor = true;
@@ -2307,9 +2324,9 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.type2_selection_all.AutoSize = true;
-            this.type2_selection_all.Location = new System.Drawing.Point(32, 23);
+            this.type2_selection_all.Location = new System.Drawing.Point(32, 43);
             this.type2_selection_all.Name = "type2_selection_all";
-            this.type2_selection_all.Size = new System.Drawing.Size(65, 15);
+            this.type2_selection_all.Size = new System.Drawing.Size(65, 14);
             this.type2_selection_all.TabIndex = 40;
             this.type2_selection_all.Text = "checkBox1";
             this.type2_selection_all.UseVisualStyleBackColor = true;
@@ -2321,7 +2338,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label27.AutoSize = true;
             this.label27.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label27.Location = new System.Drawing.Point(2, 80);
+            this.label27.Location = new System.Drawing.Point(2, 100);
             this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(25, 21);
@@ -2336,10 +2353,10 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label28.AutoSize = true;
             this.label28.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label28.Location = new System.Drawing.Point(2, 20);
+            this.label28.Location = new System.Drawing.Point(2, 40);
             this.label28.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(25, 21);
+            this.label28.Size = new System.Drawing.Size(25, 20);
             this.label28.TabIndex = 28;
             this.label28.Text = "#2";
             this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2351,7 +2368,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label29.AutoSize = true;
             this.label29.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label29.Location = new System.Drawing.Point(2, 0);
+            this.label29.Location = new System.Drawing.Point(2, 20);
             this.label29.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(25, 20);
@@ -2361,7 +2378,7 @@ namespace WindowsFormsApp1
             // 
             // type2_all_end
             // 
-            this.type2_all_end.Location = new System.Drawing.Point(188, 22);
+            this.type2_all_end.Location = new System.Drawing.Point(188, 42);
             this.type2_all_end.Margin = new System.Windows.Forms.Padding(2);
             this.type2_all_end.Name = "type2_all_end";
             this.type2_all_end.Size = new System.Drawing.Size(64, 20);
@@ -2369,7 +2386,7 @@ namespace WindowsFormsApp1
             // 
             // type3_all_end
             // 
-            this.type3_all_end.Location = new System.Drawing.Point(188, 43);
+            this.type3_all_end.Location = new System.Drawing.Point(188, 62);
             this.type3_all_end.Margin = new System.Windows.Forms.Padding(2);
             this.type3_all_end.Name = "type3_all_end";
             this.type3_all_end.Size = new System.Drawing.Size(64, 20);
@@ -2377,7 +2394,7 @@ namespace WindowsFormsApp1
             // 
             // type4_all_end
             // 
-            this.type4_all_end.Location = new System.Drawing.Point(188, 62);
+            this.type4_all_end.Location = new System.Drawing.Point(188, 82);
             this.type4_all_end.Margin = new System.Windows.Forms.Padding(2);
             this.type4_all_end.Name = "type4_all_end";
             this.type4_all_end.Size = new System.Drawing.Size(64, 20);
@@ -2390,7 +2407,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label30.AutoSize = true;
             this.label30.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label30.Location = new System.Drawing.Point(166, 0);
+            this.label30.Location = new System.Drawing.Point(166, 20);
             this.label30.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(18, 20);
@@ -2405,10 +2422,10 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label31.AutoSize = true;
             this.label31.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label31.Location = new System.Drawing.Point(166, 20);
+            this.label31.Location = new System.Drawing.Point(166, 40);
             this.label31.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(18, 21);
+            this.label31.Size = new System.Drawing.Size(18, 20);
             this.label31.TabIndex = 21;
             this.label31.Text = "~";
             this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2420,10 +2437,10 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label32.AutoSize = true;
             this.label32.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label32.Location = new System.Drawing.Point(166, 41);
+            this.label32.Location = new System.Drawing.Point(166, 60);
             this.label32.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(18, 19);
+            this.label32.Size = new System.Drawing.Size(18, 20);
             this.label32.TabIndex = 23;
             this.label32.Text = "~";
             this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2435,7 +2452,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label33.AutoSize = true;
             this.label33.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label33.Location = new System.Drawing.Point(166, 60);
+            this.label33.Location = new System.Drawing.Point(166, 80);
             this.label33.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(18, 20);
@@ -2450,10 +2467,10 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label34.AutoSize = true;
             this.label34.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label34.Location = new System.Drawing.Point(2, 41);
+            this.label34.Location = new System.Drawing.Point(2, 60);
             this.label34.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(25, 19);
+            this.label34.Size = new System.Drawing.Size(25, 20);
             this.label34.TabIndex = 27;
             this.label34.Text = "#3";
             this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2465,7 +2482,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label35.AutoSize = true;
             this.label35.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label35.Location = new System.Drawing.Point(2, 60);
+            this.label35.Location = new System.Drawing.Point(2, 80);
             this.label35.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(25, 20);
@@ -2475,7 +2492,7 @@ namespace WindowsFormsApp1
             // 
             // type1_all_end
             // 
-            this.type1_all_end.Location = new System.Drawing.Point(188, 2);
+            this.type1_all_end.Location = new System.Drawing.Point(188, 22);
             this.type1_all_end.Margin = new System.Windows.Forms.Padding(2);
             this.type1_all_end.Name = "type1_all_end";
             this.type1_all_end.Size = new System.Drawing.Size(64, 20);
@@ -2486,7 +2503,7 @@ namespace WindowsFormsApp1
             this.type2_all_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.type2_all_start.Location = new System.Drawing.Point(102, 22);
+            this.type2_all_start.Location = new System.Drawing.Point(102, 42);
             this.type2_all_start.Margin = new System.Windows.Forms.Padding(2);
             this.type2_all_start.Name = "type2_all_start";
             this.type2_all_start.Size = new System.Drawing.Size(60, 20);
@@ -2497,7 +2514,7 @@ namespace WindowsFormsApp1
             this.type3_all_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.type3_all_start.Location = new System.Drawing.Point(102, 43);
+            this.type3_all_start.Location = new System.Drawing.Point(102, 62);
             this.type3_all_start.Margin = new System.Windows.Forms.Padding(2);
             this.type3_all_start.Name = "type3_all_start";
             this.type3_all_start.Size = new System.Drawing.Size(60, 20);
@@ -2508,7 +2525,7 @@ namespace WindowsFormsApp1
             this.type4_all_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.type4_all_start.Location = new System.Drawing.Point(102, 62);
+            this.type4_all_start.Location = new System.Drawing.Point(102, 82);
             this.type4_all_start.Margin = new System.Windows.Forms.Padding(2);
             this.type4_all_start.Name = "type4_all_start";
             this.type4_all_start.Size = new System.Drawing.Size(60, 20);
@@ -2519,7 +2536,7 @@ namespace WindowsFormsApp1
             this.type5_all_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.type5_all_start.Location = new System.Drawing.Point(102, 82);
+            this.type5_all_start.Location = new System.Drawing.Point(102, 102);
             this.type5_all_start.Margin = new System.Windows.Forms.Padding(2);
             this.type5_all_start.Name = "type5_all_start";
             this.type5_all_start.Size = new System.Drawing.Size(60, 20);
@@ -2532,7 +2549,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label36.AutoSize = true;
             this.label36.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label36.Location = new System.Drawing.Point(166, 80);
+            this.label36.Location = new System.Drawing.Point(166, 100);
             this.label36.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(18, 21);
@@ -2542,7 +2559,7 @@ namespace WindowsFormsApp1
             // 
             // type5_all_end
             // 
-            this.type5_all_end.Location = new System.Drawing.Point(188, 82);
+            this.type5_all_end.Location = new System.Drawing.Point(188, 102);
             this.type5_all_end.Margin = new System.Windows.Forms.Padding(2);
             this.type5_all_end.Name = "type5_all_end";
             this.type5_all_end.Size = new System.Drawing.Size(64, 20);
@@ -2553,7 +2570,7 @@ namespace WindowsFormsApp1
             this.type1_all_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.type1_all_start.Location = new System.Drawing.Point(102, 2);
+            this.type1_all_start.Location = new System.Drawing.Point(102, 22);
             this.type1_all_start.Margin = new System.Windows.Forms.Padding(2);
             this.type1_all_start.Name = "type1_all_start";
             this.type1_all_start.Size = new System.Drawing.Size(60, 20);
@@ -2565,7 +2582,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.type1_selection_all.AutoSize = true;
-            this.type1_selection_all.Location = new System.Drawing.Point(32, 3);
+            this.type1_selection_all.Location = new System.Drawing.Point(32, 23);
             this.type1_selection_all.Name = "type1_selection_all";
             this.type1_selection_all.Size = new System.Drawing.Size(65, 14);
             this.type1_selection_all.TabIndex = 39;
@@ -2581,7 +2598,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel18.Controls.Add(this.sp_index, 0, 0);
             this.tableLayoutPanel18.Controls.Add(this.nasdaq_index, 1, 0);
             this.tableLayoutPanel18.Controls.Add(this.dow_index, 0, 0);
-            this.tableLayoutPanel18.Location = new System.Drawing.Point(2, 25);
+            this.tableLayoutPanel18.Location = new System.Drawing.Point(2, 26);
             this.tableLayoutPanel18.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel18.Name = "tableLayoutPanel18";
             this.tableLayoutPanel18.RowCount = 1;
@@ -2642,16 +2659,18 @@ namespace WindowsFormsApp1
             // 
             // tableLayoutPanel19
             // 
-            this.tableLayoutPanel19.ColumnCount = 2;
-            this.tableLayoutPanel19.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel19.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel19.Controls.Add(this.kospi_commodity, 0, 0);
-            this.tableLayoutPanel19.Controls.Add(this.kosdak_commodity, 1, 0);
+            this.tableLayoutPanel19.ColumnCount = 3;
+            this.tableLayoutPanel19.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel19.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel19.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel19.Controls.Add(this.Foreign, 0, 0);
+            this.tableLayoutPanel19.Controls.Add(this.kosdak_commodity, 2, 0);
+            this.tableLayoutPanel19.Controls.Add(this.kospi_commodity, 1, 0);
             this.tableLayoutPanel19.Location = new System.Drawing.Point(2, 2);
             this.tableLayoutPanel19.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel19.Name = "tableLayoutPanel19";
             this.tableLayoutPanel19.RowCount = 1;
-            this.tableLayoutPanel19.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel19.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel19.Size = new System.Drawing.Size(255, 19);
             this.tableLayoutPanel19.TabIndex = 2;
             // 
@@ -2663,10 +2682,10 @@ namespace WindowsFormsApp1
             this.kospi_commodity.AutoSize = true;
             this.kospi_commodity.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.kospi_commodity.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.kospi_commodity.Location = new System.Drawing.Point(2, 2);
+            this.kospi_commodity.Location = new System.Drawing.Point(86, 2);
             this.kospi_commodity.Margin = new System.Windows.Forms.Padding(2);
             this.kospi_commodity.Name = "kospi_commodity";
-            this.kospi_commodity.Size = new System.Drawing.Size(123, 15);
+            this.kospi_commodity.Size = new System.Drawing.Size(80, 15);
             this.kospi_commodity.TabIndex = 2;
             this.kospi_commodity.Text = "코스피선물";
             this.kospi_commodity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2680,10 +2699,10 @@ namespace WindowsFormsApp1
             this.kosdak_commodity.AutoSize = true;
             this.kosdak_commodity.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.kosdak_commodity.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.kosdak_commodity.Location = new System.Drawing.Point(129, 2);
+            this.kosdak_commodity.Location = new System.Drawing.Point(170, 2);
             this.kosdak_commodity.Margin = new System.Windows.Forms.Padding(2);
             this.kosdak_commodity.Name = "kosdak_commodity";
-            this.kosdak_commodity.Size = new System.Drawing.Size(124, 15);
+            this.kosdak_commodity.Size = new System.Drawing.Size(83, 15);
             this.kosdak_commodity.TabIndex = 3;
             this.kosdak_commodity.Text = "코스닥선물";
             this.kosdak_commodity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2697,41 +2716,48 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.70588F));
             this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.411765F));
             this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.27451F));
-            this.tableLayoutPanel12.Controls.Add(this.type5_selection, 1, 4);
-            this.tableLayoutPanel12.Controls.Add(this.type4_selection, 1, 3);
-            this.tableLayoutPanel12.Controls.Add(this.type3_selection, 1, 2);
-            this.tableLayoutPanel12.Controls.Add(this.type2_selection, 1, 1);
-            this.tableLayoutPanel12.Controls.Add(this.label25, 0, 4);
-            this.tableLayoutPanel12.Controls.Add(this.label20, 0, 1);
-            this.tableLayoutPanel12.Controls.Add(this.label17, 0, 0);
-            this.tableLayoutPanel12.Controls.Add(this.type2_end, 4, 1);
-            this.tableLayoutPanel12.Controls.Add(this.type3_end, 4, 2);
-            this.tableLayoutPanel12.Controls.Add(this.type4_end, 4, 3);
-            this.tableLayoutPanel12.Controls.Add(this.label12, 3, 0);
+            this.tableLayoutPanel12.Controls.Add(this.type0_end, 4, 0);
+            this.tableLayoutPanel12.Controls.Add(this.type0_start, 2, 0);
+            this.tableLayoutPanel12.Controls.Add(this.type0_selection, 1, 0);
             this.tableLayoutPanel12.Controls.Add(this.label14, 3, 1);
             this.tableLayoutPanel12.Controls.Add(this.label16, 3, 2);
             this.tableLayoutPanel12.Controls.Add(this.label18, 3, 3);
-            this.tableLayoutPanel12.Controls.Add(this.label19, 0, 2);
-            this.tableLayoutPanel12.Controls.Add(this.label21, 0, 3);
-            this.tableLayoutPanel12.Controls.Add(this.type1_end, 4, 0);
-            this.tableLayoutPanel12.Controls.Add(this.type1_start, 2, 0);
-            this.tableLayoutPanel12.Controls.Add(this.type4_start, 2, 3);
-            this.tableLayoutPanel12.Controls.Add(this.type5_start, 2, 4);
+            this.tableLayoutPanel12.Controls.Add(this.label25, 0, 5);
+            this.tableLayoutPanel12.Controls.Add(this.label21, 0, 4);
+            this.tableLayoutPanel12.Controls.Add(this.label19, 0, 3);
+            this.tableLayoutPanel12.Controls.Add(this.label17, 0, 1);
+            this.tableLayoutPanel12.Controls.Add(this.label20, 0, 2);
+            this.tableLayoutPanel12.Controls.Add(this.type5_selection, 1, 5);
+            this.tableLayoutPanel12.Controls.Add(this.type4_selection, 1, 4);
+            this.tableLayoutPanel12.Controls.Add(this.type3_selection, 1, 3);
+            this.tableLayoutPanel12.Controls.Add(this.type2_selection, 1, 2);
+            this.tableLayoutPanel12.Controls.Add(this.type1_selection, 1, 1);
+            this.tableLayoutPanel12.Controls.Add(this.type5_start, 2, 5);
+            this.tableLayoutPanel12.Controls.Add(this.type4_start, 2, 4);
+            this.tableLayoutPanel12.Controls.Add(this.type3_start, 2, 3);
+            this.tableLayoutPanel12.Controls.Add(this.type2_start, 2, 2);
+            this.tableLayoutPanel12.Controls.Add(this.type1_start, 2, 1);
             this.tableLayoutPanel12.Controls.Add(this.label26, 3, 4);
-            this.tableLayoutPanel12.Controls.Add(this.type5_end, 4, 4);
-            this.tableLayoutPanel12.Controls.Add(this.type1_selection, 1, 0);
-            this.tableLayoutPanel12.Controls.Add(this.type3_start, 2, 2);
-            this.tableLayoutPanel12.Controls.Add(this.type2_start, 2, 1);
-            this.tableLayoutPanel12.Location = new System.Drawing.Point(2, 50);
+            this.tableLayoutPanel12.Controls.Add(this.label12, 3, 5);
+            this.tableLayoutPanel12.Controls.Add(this.type5_end, 4, 5);
+            this.tableLayoutPanel12.Controls.Add(this.type4_end, 4, 4);
+            this.tableLayoutPanel12.Controls.Add(this.type3_end, 4, 3);
+            this.tableLayoutPanel12.Controls.Add(this.type2_end, 4, 2);
+            this.tableLayoutPanel12.Controls.Add(this.type1_end, 4, 1);
+            this.tableLayoutPanel12.Controls.Add(this.label23, 0, 0);
+            this.tableLayoutPanel12.Controls.Add(this.label37, 3, 0);
+            this.tableLayoutPanel12.Location = new System.Drawing.Point(2, 53);
             this.tableLayoutPanel12.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel12.Name = "tableLayoutPanel12";
-            this.tableLayoutPanel12.RowCount = 5;
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel12.RowCount = 6;
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel12.Size = new System.Drawing.Size(255, 97);
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(255, 114);
             this.tableLayoutPanel12.TabIndex = 0;
             // 
             // type5_selection
@@ -2740,9 +2766,9 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.type5_selection.AutoSize = true;
-            this.type5_selection.Location = new System.Drawing.Point(32, 79);
+            this.type5_selection.Location = new System.Drawing.Point(32, 98);
             this.type5_selection.Name = "type5_selection";
-            this.type5_selection.Size = new System.Drawing.Size(65, 15);
+            this.type5_selection.Size = new System.Drawing.Size(65, 13);
             this.type5_selection.TabIndex = 43;
             this.type5_selection.Text = "checkBox1";
             this.type5_selection.UseVisualStyleBackColor = true;
@@ -2753,7 +2779,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.type4_selection.AutoSize = true;
-            this.type4_selection.Location = new System.Drawing.Point(32, 60);
+            this.type4_selection.Location = new System.Drawing.Point(32, 79);
             this.type4_selection.Name = "type4_selection";
             this.type4_selection.Size = new System.Drawing.Size(65, 13);
             this.type4_selection.TabIndex = 42;
@@ -2766,7 +2792,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.type3_selection.AutoSize = true;
-            this.type3_selection.Location = new System.Drawing.Point(32, 41);
+            this.type3_selection.Location = new System.Drawing.Point(32, 60);
             this.type3_selection.Name = "type3_selection";
             this.type3_selection.Size = new System.Drawing.Size(65, 13);
             this.type3_selection.TabIndex = 41;
@@ -2779,7 +2805,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.type2_selection.AutoSize = true;
-            this.type2_selection.Location = new System.Drawing.Point(32, 22);
+            this.type2_selection.Location = new System.Drawing.Point(32, 41);
             this.type2_selection.Name = "type2_selection";
             this.type2_selection.Size = new System.Drawing.Size(65, 13);
             this.type2_selection.TabIndex = 40;
@@ -2793,10 +2819,10 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label25.AutoSize = true;
             this.label25.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label25.Location = new System.Drawing.Point(2, 76);
+            this.label25.Location = new System.Drawing.Point(2, 95);
             this.label25.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(25, 21);
+            this.label25.Size = new System.Drawing.Size(25, 19);
             this.label25.TabIndex = 34;
             this.label25.Text = "#5";
             this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2808,7 +2834,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label20.AutoSize = true;
             this.label20.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label20.Location = new System.Drawing.Point(2, 19);
+            this.label20.Location = new System.Drawing.Point(2, 38);
             this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(25, 19);
@@ -2823,7 +2849,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label17.AutoSize = true;
             this.label17.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label17.Location = new System.Drawing.Point(2, 0);
+            this.label17.Location = new System.Drawing.Point(2, 19);
             this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(25, 19);
@@ -2833,7 +2859,7 @@ namespace WindowsFormsApp1
             // 
             // type2_end
             // 
-            this.type2_end.Location = new System.Drawing.Point(188, 21);
+            this.type2_end.Location = new System.Drawing.Point(188, 40);
             this.type2_end.Margin = new System.Windows.Forms.Padding(2);
             this.type2_end.Name = "type2_end";
             this.type2_end.Size = new System.Drawing.Size(63, 20);
@@ -2841,7 +2867,7 @@ namespace WindowsFormsApp1
             // 
             // type3_end
             // 
-            this.type3_end.Location = new System.Drawing.Point(188, 40);
+            this.type3_end.Location = new System.Drawing.Point(188, 59);
             this.type3_end.Margin = new System.Windows.Forms.Padding(2);
             this.type3_end.Name = "type3_end";
             this.type3_end.Size = new System.Drawing.Size(63, 20);
@@ -2849,7 +2875,7 @@ namespace WindowsFormsApp1
             // 
             // type4_end
             // 
-            this.type4_end.Location = new System.Drawing.Point(188, 59);
+            this.type4_end.Location = new System.Drawing.Point(188, 78);
             this.type4_end.Margin = new System.Windows.Forms.Padding(2);
             this.type4_end.Name = "type4_end";
             this.type4_end.Size = new System.Drawing.Size(63, 20);
@@ -2862,7 +2888,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
             this.label12.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label12.Location = new System.Drawing.Point(164, 0);
+            this.label12.Location = new System.Drawing.Point(164, 95);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(20, 19);
@@ -2922,7 +2948,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label19.AutoSize = true;
             this.label19.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label19.Location = new System.Drawing.Point(2, 38);
+            this.label19.Location = new System.Drawing.Point(2, 57);
             this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(25, 19);
@@ -2937,7 +2963,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label21.AutoSize = true;
             this.label21.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label21.Location = new System.Drawing.Point(2, 57);
+            this.label21.Location = new System.Drawing.Point(2, 76);
             this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(25, 19);
@@ -2947,7 +2973,7 @@ namespace WindowsFormsApp1
             // 
             // type1_end
             // 
-            this.type1_end.Location = new System.Drawing.Point(188, 2);
+            this.type1_end.Location = new System.Drawing.Point(188, 21);
             this.type1_end.Margin = new System.Windows.Forms.Padding(2);
             this.type1_end.Name = "type1_end";
             this.type1_end.Size = new System.Drawing.Size(63, 20);
@@ -2958,7 +2984,7 @@ namespace WindowsFormsApp1
             this.type1_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.type1_start.Location = new System.Drawing.Point(102, 2);
+            this.type1_start.Location = new System.Drawing.Point(102, 21);
             this.type1_start.Margin = new System.Windows.Forms.Padding(2);
             this.type1_start.Name = "type1_start";
             this.type1_start.Size = new System.Drawing.Size(58, 20);
@@ -2969,7 +2995,7 @@ namespace WindowsFormsApp1
             this.type4_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.type4_start.Location = new System.Drawing.Point(102, 59);
+            this.type4_start.Location = new System.Drawing.Point(102, 78);
             this.type4_start.Margin = new System.Windows.Forms.Padding(2);
             this.type4_start.Name = "type4_start";
             this.type4_start.Size = new System.Drawing.Size(58, 20);
@@ -2980,7 +3006,7 @@ namespace WindowsFormsApp1
             this.type5_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.type5_start.Location = new System.Drawing.Point(102, 78);
+            this.type5_start.Location = new System.Drawing.Point(102, 97);
             this.type5_start.Margin = new System.Windows.Forms.Padding(2);
             this.type5_start.Name = "type5_start";
             this.type5_start.Size = new System.Drawing.Size(58, 20);
@@ -2996,14 +3022,14 @@ namespace WindowsFormsApp1
             this.label26.Location = new System.Drawing.Point(164, 76);
             this.label26.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(20, 21);
+            this.label26.Size = new System.Drawing.Size(20, 19);
             this.label26.TabIndex = 37;
             this.label26.Text = "~";
             this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // type5_end
             // 
-            this.type5_end.Location = new System.Drawing.Point(188, 78);
+            this.type5_end.Location = new System.Drawing.Point(188, 97);
             this.type5_end.Margin = new System.Windows.Forms.Padding(2);
             this.type5_end.Name = "type5_end";
             this.type5_end.Size = new System.Drawing.Size(63, 20);
@@ -3015,7 +3041,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.type1_selection.AutoSize = true;
-            this.type1_selection.Location = new System.Drawing.Point(32, 3);
+            this.type1_selection.Location = new System.Drawing.Point(32, 22);
             this.type1_selection.Name = "type1_selection";
             this.type1_selection.Size = new System.Drawing.Size(65, 13);
             this.type1_selection.TabIndex = 39;
@@ -3027,7 +3053,7 @@ namespace WindowsFormsApp1
             this.type3_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.type3_start.Location = new System.Drawing.Point(102, 40);
+            this.type3_start.Location = new System.Drawing.Point(102, 59);
             this.type3_start.Margin = new System.Windows.Forms.Padding(2);
             this.type3_start.Name = "type3_start";
             this.type3_start.Size = new System.Drawing.Size(58, 20);
@@ -3038,11 +3064,151 @@ namespace WindowsFormsApp1
             this.type2_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.type2_start.Location = new System.Drawing.Point(102, 21);
+            this.type2_start.Location = new System.Drawing.Point(102, 40);
             this.type2_start.Margin = new System.Windows.Forms.Padding(2);
             this.type2_start.Name = "type2_start";
             this.type2_start.Size = new System.Drawing.Size(58, 20);
             this.type2_start.TabIndex = 7;
+            // 
+            // Foreign
+            // 
+            this.Foreign.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Foreign.AutoSize = true;
+            this.Foreign.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.Foreign.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Foreign.Location = new System.Drawing.Point(2, 2);
+            this.Foreign.Margin = new System.Windows.Forms.Padding(2);
+            this.Foreign.Name = "Foreign";
+            this.Foreign.Size = new System.Drawing.Size(80, 15);
+            this.Foreign.TabIndex = 4;
+            this.Foreign.Text = "외국인선물";
+            this.Foreign.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Foreign.UseVisualStyleBackColor = false;
+            // 
+            // label23
+            // 
+            this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label23.AutoSize = true;
+            this.label23.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label23.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label23.Location = new System.Drawing.Point(3, 0);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(23, 19);
+            this.label23.TabIndex = 44;
+            this.label23.Text = "#0";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label24
+            // 
+            this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label24.AutoSize = true;
+            this.label24.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label24.Location = new System.Drawing.Point(3, 0);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(23, 20);
+            this.label24.TabIndex = 45;
+            this.label24.Text = "#0";
+            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label37
+            // 
+            this.label37.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label37.AutoSize = true;
+            this.label37.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label37.Location = new System.Drawing.Point(164, 0);
+            this.label37.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(20, 19);
+            this.label37.TabIndex = 45;
+            this.label37.Text = "~";
+            this.label37.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label38
+            // 
+            this.label38.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label38.AutoSize = true;
+            this.label38.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label38.Location = new System.Drawing.Point(166, 0);
+            this.label38.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(18, 20);
+            this.label38.TabIndex = 46;
+            this.label38.Text = "~";
+            this.label38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // type0_selection_all
+            // 
+            this.type0_selection_all.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type0_selection_all.AutoSize = true;
+            this.type0_selection_all.Location = new System.Drawing.Point(32, 3);
+            this.type0_selection_all.Name = "type0_selection_all";
+            this.type0_selection_all.Size = new System.Drawing.Size(65, 14);
+            this.type0_selection_all.TabIndex = 47;
+            this.type0_selection_all.Text = "checkBox1";
+            this.type0_selection_all.UseVisualStyleBackColor = true;
+            // 
+            // type0_all_start
+            // 
+            this.type0_all_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type0_all_start.Location = new System.Drawing.Point(102, 2);
+            this.type0_all_start.Margin = new System.Windows.Forms.Padding(2);
+            this.type0_all_start.Name = "type0_all_start";
+            this.type0_all_start.Size = new System.Drawing.Size(60, 20);
+            this.type0_all_start.TabIndex = 48;
+            // 
+            // type0_all_end
+            // 
+            this.type0_all_end.Location = new System.Drawing.Point(188, 2);
+            this.type0_all_end.Margin = new System.Windows.Forms.Padding(2);
+            this.type0_all_end.Name = "type0_all_end";
+            this.type0_all_end.Size = new System.Drawing.Size(64, 20);
+            this.type0_all_end.TabIndex = 49;
+            // 
+            // type0_selection
+            // 
+            this.type0_selection.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type0_selection.AutoSize = true;
+            this.type0_selection.Location = new System.Drawing.Point(32, 3);
+            this.type0_selection.Name = "type0_selection";
+            this.type0_selection.Size = new System.Drawing.Size(65, 13);
+            this.type0_selection.TabIndex = 46;
+            this.type0_selection.Text = "checkBox1";
+            this.type0_selection.UseVisualStyleBackColor = true;
+            // 
+            // type0_start
+            // 
+            this.type0_start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.type0_start.Location = new System.Drawing.Point(102, 2);
+            this.type0_start.Margin = new System.Windows.Forms.Padding(2);
+            this.type0_start.Name = "type0_start";
+            this.type0_start.Size = new System.Drawing.Size(58, 20);
+            this.type0_start.TabIndex = 47;
+            // 
+            // type0_end
+            // 
+            this.type0_end.Location = new System.Drawing.Point(188, 2);
+            this.type0_end.Margin = new System.Windows.Forms.Padding(2);
+            this.type0_end.Name = "type0_end";
+            this.type0_end.Size = new System.Drawing.Size(63, 20);
+            this.type0_end.TabIndex = 48;
             // 
             // Setting
             // 
@@ -3321,5 +3487,16 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.ComboBox sell_set2_after;
         private System.Windows.Forms.CheckBox clear_index;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.CheckBox Foreign;
+        private System.Windows.Forms.TextBox type0_all_end;
+        private System.Windows.Forms.TextBox type0_all_start;
+        private System.Windows.Forms.CheckBox type0_selection_all;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TextBox type0_end;
+        private System.Windows.Forms.TextBox type0_start;
+        private System.Windows.Forms.CheckBox type0_selection;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label37;
     }
 }

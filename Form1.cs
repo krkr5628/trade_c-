@@ -1070,6 +1070,15 @@ namespace WindowsFormsApp1
         private void KOR_INDEX()
         {
             //외국인 선물 누적
+            if (utility.kospi_commodity)
+            {
+                //opt50038
+                axKHOpenAPI1.SetInputValue("종목코드", sCode1.First());
+                axKHOpenAPI1.CommRqData("KOSPI200_INDEX", "opt50001", 0, GetScreenNo());
+
+            }
+
+            System.Threading.Thread.Sleep(200);
 
             //KOSPI 200 FUTURES
             if (utility.kospi_commodity)
