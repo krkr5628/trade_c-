@@ -734,207 +734,256 @@ namespace WindowsFormsApp1
             {
                 double tmp5 = await GetStockIndex(dowUrl, "DOW");
 
-                if (tmp5 == 0)
+                if (tmp5 == -999)
                 {
-                    WriteLog_System($"[수신오류] DOW30 : 5초 뒤 재시도\n");
-                    telegram_message($"[수신오류] DOW30 : 5초 뒤 재시도\n");
-                    System.Threading.Thread.Sleep(5000);
-                    US_INDEX();
-                    return;
+                    WriteLog_System($"[수신오류] DOW30 : 인터넷 접속 및 웹사이트 접속 차단 확인\n");
+                    telegram_message($"[수신오류] DOW30 : 인터넷 접속 및 웹사이트 접속 차단 확인\n");
                 }
-
-                dow_index.Text = tmp5.ToString();
-
-                if (utility.buy_condition_index)
+                else
                 {
-                    if (utility.type3_selection)
+                    dow_index.Text = tmp5.ToString();
+
+                    if (utility.buy_condition_index)
                     {
-                        double start = Convert.ToDouble(utility.type3_start);
-                        double end = Convert.ToDouble(utility.type3_end);
-                        if (tmp5 < start || end < tmp5)
+                        if (utility.type3_selection)
                         {
-                            index_buy = true;
+                            double start = Convert.ToDouble(utility.type3_start);
+                            double end = Convert.ToDouble(utility.type3_end);
+                            if (tmp5 < start || end < tmp5)
+                            {
+                                index_buy = true;
 
-                            WriteLog_System($"[BUY/이탈] DOW30 RANGE\n");
-                            WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
-                            WriteLog_System("Trade Stop\n");
+                                WriteLog_System($"[BUY/이탈] DOW30 RANGE\n");
+                                WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
+                                WriteLog_System("Trade Stop\n");
 
-                            telegram_message($"[BUY/이탈] DOW30 RANGE\n");
-                            telegram_message($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
-                            telegram_message("Trade Stop\n");
+                                telegram_message($"[BUY/이탈] DOW30 RANGE\n");
+                                telegram_message($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
+                                telegram_message("Trade Stop\n");
+                            }
                         }
                     }
-                }
 
-                if (utility.clear_index)
-                {
-                    if (utility.type3_selection_all)
+                    if (utility.clear_index)
                     {
-                        double start = Convert.ToDouble(utility.type3_start_all);
-                        double end = Convert.ToDouble(utility.type3_end_all);
-                        if (tmp5 < start || end < tmp5)
+                        if (utility.type3_selection_all)
                         {
-                            index_clear = true;
+                            double start = Convert.ToDouble(utility.type3_start_all);
+                            double end = Convert.ToDouble(utility.type3_end_all);
+                            if (tmp5 < start || end < tmp5)
+                            {
+                                index_clear = true;
 
-                            WriteLog_System($"[CLEAR/이탈] DOW30 INDEX RANGE\n");
-                            WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
-                            WriteLog_System("Trade Stop\n");
+                                WriteLog_System($"[CLEAR/이탈] DOW30 INDEX RANGE\n");
+                                WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
+                                WriteLog_System("Trade Stop\n");
 
-                            telegram_message($"[CLEAR/이탈] DOW30 INDEX RANGE\n");
-                            telegram_message($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
-                            telegram_message("Trade Stop\n");
+                                telegram_message($"[CLEAR/이탈] DOW30 INDEX RANGE\n");
+                                telegram_message($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
+                                telegram_message("Trade Stop\n");
+                            }
                         }
                     }
                 }
             }
+
+            //
+            await Task.Delay(2000);
 
             //S&P500
             if (utility.sp_index)
             {
                 double tmp5 = await GetStockIndex(sp500Url, "S&P");
 
-                if (tmp5 == 0)
+                if (tmp5 == -999)
                 {
-                    WriteLog_System($"[수신오류] S&P500 : 5초 뒤 재시도\n");
-                    telegram_message($"[수신오류] S&P500 : 5초 뒤 재시도\n");
-                    System.Threading.Thread.Sleep(5000);
-                    US_INDEX();
+                    WriteLog_System($"[수신오류] S&P500  : 인터넷 접속 및 웹사이트 접속 차단 확인\n");
+                    telegram_message($"[수신오류] S&P500 : 인터넷 접속 및 웹사이트 접속 차단 확인\n");
                     return;
                 }
-
-                sp_index.Text = tmp5.ToString();
-
-                if (utility.buy_condition_index)
+                else
                 {
-                    if (utility.type4_selection)
+                    sp_index.Text = tmp5.ToString();
+
+                    if (utility.buy_condition_index)
                     {
-                        double start = Convert.ToDouble(utility.type4_start);
-                        double end = Convert.ToDouble(utility.type4_end);
-                        if (tmp5 < start || end < tmp5)
+                        if (utility.type4_selection)
                         {
-                            index_buy = true;
+                            double start = Convert.ToDouble(utility.type4_start);
+                            double end = Convert.ToDouble(utility.type4_end);
+                            if (tmp5 < start || end < tmp5)
+                            {
+                                index_buy = true;
 
-                            WriteLog_System($"[BUY/이탈] S&P500 RANGE\n");
-                            WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
-                            WriteLog_System("Trade Stop\n");
+                                WriteLog_System($"[BUY/이탈] S&P500 RANGE\n");
+                                WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
+                                WriteLog_System("Trade Stop\n");
 
-                            telegram_message($"[BUY/이탈] S&P500 RANGE\n");
-                            telegram_message($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
-                            telegram_message("Trade Stop\n");
+                                telegram_message($"[BUY/이탈] S&P500 RANGE\n");
+                                telegram_message($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
+                                telegram_message("Trade Stop\n");
+                            }
                         }
                     }
-                }
 
-                if (utility.clear_index)
-                {
-                    if (utility.type4_selection_all)
+                    if (utility.clear_index)
                     {
-                        double start = Convert.ToDouble(utility.type4_start_all);
-                        double end = Convert.ToDouble(utility.type4_end_all);
-                        if (tmp5 < start || end < tmp5)
+                        if (utility.type4_selection_all)
                         {
-                            index_clear = true;
+                            double start = Convert.ToDouble(utility.type4_start_all);
+                            double end = Convert.ToDouble(utility.type4_end_all);
+                            if (tmp5 < start || end < tmp5)
+                            {
+                                index_clear = true;
 
-                            WriteLog_System($"[CLEAR/이탈] S&P500 RANGE\n");
-                            WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
-                            WriteLog_System("Trade Stop\n");
+                                WriteLog_System($"[CLEAR/이탈] S&P500 RANGE\n");
+                                WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
+                                WriteLog_System("Trade Stop\n");
 
-                            telegram_message($"[CLEAR/이탈] S&P500 RANGE\n");
-                            telegram_message($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
-                            telegram_message("Trade Stop\n");
+                                telegram_message($"[CLEAR/이탈] S&P500 RANGE\n");
+                                telegram_message($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
+                                telegram_message("Trade Stop\n");
+                            }
                         }
                     }
-                }
+
+                }        
             }
+
+            //
+            await Task.Delay(3000);
 
             //NASDAQ100
             if (utility.nasdaq_index)
             {
                 double tmp5 = await GetStockIndex(nasdaqUrl, "NASDAQ");
 
-                if (tmp5 == 0)
+                if (tmp5 == -999)
                 {
-                    WriteLog_System($"[수신오류] NASDAQ100 : : 5초 뒤 재시도\n");
-                    telegram_message($"[수신오류] NASDAQ100 : : 5초 뒤 재시도\n");
-                    System.Threading.Thread.Sleep(5000);
-                    US_INDEX();
+                    WriteLog_System($"[수신오류] NASDAQ100  : 인터넷 접속 및 웹사이트 접속 차단 확인\n");
+                    telegram_message($"[수신오류] NASDAQ100: 인터넷 접속 및 웹사이트 접속 차단 확인\n");
                     return;
                 }
-
-                nasdaq_index.Text = tmp5.ToString();
-
-                if (utility.buy_condition_index)
+                else
                 {
-                    if (utility.type5_selection)
+                    nasdaq_index.Text = tmp5.ToString();
+
+                    if (utility.buy_condition_index)
                     {
-                        double start = Convert.ToDouble(utility.type5_start);
-                        double end = Convert.ToDouble(utility.type5_end);
-                        if (tmp5 < start || end < tmp5)
+                        if (utility.type5_selection)
                         {
-                            index_buy = true;
+                            double start = Convert.ToDouble(utility.type5_start);
+                            double end = Convert.ToDouble(utility.type5_end);
+                            if (tmp5 < start || end < tmp5)
+                            {
+                                index_buy = true;
 
-                            WriteLog_System($"[BUY/이탈] NASDAQ RANGE\n");
-                            WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
-                            WriteLog_System("Trade Stop\n");
+                                WriteLog_System($"[BUY/이탈] NASDAQ RANGE\n");
+                                WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
+                                WriteLog_System("Trade Stop\n");
 
-                            telegram_message($"[BUY/이탈] NASDAQ RANGE\n");
-                            telegram_message($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
-                            telegram_message("Trade Stop\n");
+                                telegram_message($"[BUY/이탈] NASDAQ RANGE\n");
+                                telegram_message($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
+                                telegram_message("Trade Stop\n");
+                            }
+                        }
+                    }
+
+                    if (utility.clear_index)
+                    {
+                        if (utility.type5_selection_all)
+                        {
+                            double start = Convert.ToDouble(utility.type5_start_all);
+                            double end = Convert.ToDouble(utility.type5_end_all);
+                            if (tmp5 < start || end < tmp5)
+                            {
+                                index_clear = true;
+
+                                WriteLog_System($"[CLEAR/이탈] NASDAQ INDEX RANGE\n");
+                                WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
+                                WriteLog_System("Trade Stop\n");
+
+                                telegram_message($"[CLEAR/이탈] NASDAQ INDEX RANGE\n");
+                                telegram_message($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
+                                telegram_message("Trade Stop\n");
+                            }
                         }
                     }
                 }
-
-                if (utility.clear_index)
-                {
-                    if (utility.type5_selection_all)
-                    {
-                        double start = Convert.ToDouble(utility.type5_start_all);
-                        double end = Convert.ToDouble(utility.type5_end_all);
-                        if (tmp5 < start || end < tmp5)
-                        {
-                            index_clear = true;
-
-                            WriteLog_System($"[CLEAR/이탈] NASDAQ INDEX RANGE\n");
-                            WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
-                            WriteLog_System("Trade Stop\n");
-
-                            telegram_message($"[CLEAR/이탈] NASDAQ INDEX RANGE\n");
-                            telegram_message($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
-                            telegram_message("Trade Stop\n");
-                        }
-                    }              
-                }
             }
         }
+
+        private int delayMilliseconds = 60000; //1분
+        private int Max_Retry = 4;
+        private string[] userAgents = new string[]
+        {
+         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
+         "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:76.0) Gecko/20100101 Firefox/76.0",
+         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.4 Safari/605.1.15",
+         "Mozilla/5.0 (Linux; Android 10; SM-G975F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Mobile Safari/537.36"
+        };
 
         private async Task<double> GetStockIndex(string url, string symbol)
         {
             using (HttpClient client = new HttpClient())
             {
-                try
+                for (int i = 0; i < Max_Retry; i++)
                 {
-                    HttpResponseMessage response = await client.GetAsync(url);
-                    if (response.IsSuccessStatusCode)
+                    try
                     {
-                        string responseData = await response.Content.ReadAsStringAsync();
-                        JObject jsonData = JObject.Parse(responseData);
+                        client.DefaultRequestHeaders.Clear(); // 이전 헤더를 제거
+                        client.DefaultRequestHeaders.Add("User-Agent", userAgents[i]);
 
-                        // Navigate the JSON structure to get the closing price
-                        double closePrice = Convert.ToDouble(jsonData["chart"]["result"][0]["meta"]["regularMarketPrice"]);
-                        double chartPreviousClose = Convert.ToDouble(jsonData["chart"]["result"][0]["meta"]["chartPreviousClose"]);
+                        HttpResponseMessage response = await client.GetAsync(url);
 
-                        return Math.Round((closePrice - chartPreviousClose) / chartPreviousClose * 100, 2);
+                        if (response.IsSuccessStatusCode)
+                        {
+                            string responseData = await response.Content.ReadAsStringAsync();
+                            JObject jsonData = JObject.Parse(responseData);
+
+                            // Navigate the JSON structure to get the closing price
+                            double closePrice = Convert.ToDouble(jsonData["chart"]["result"][0]["meta"]["regularMarketPrice"]);
+                            double chartPreviousClose = Convert.ToDouble(jsonData["chart"]["result"][0]["meta"]["chartPreviousClose"]);
+
+                            return Math.Round((closePrice - chartPreviousClose) / chartPreviousClose * 100, 2);
+                        }
+                        else if ((int)response.StatusCode == 429)
+                        {
+                            if (response.Headers.Contains("Retry-After"))
+                            {
+                                string retryAfter = response.Headers.GetValues("Retry-After").FirstOrDefault();
+                                if (int.TryParse(retryAfter, out int retryAfterSeconds))
+                                {
+                                    delayMilliseconds = retryAfterSeconds * 1000;
+                                    WriteLog_System($"과다요청(retry) : {delayMilliseconds/1000}초 지연\n");
+                                }
+                                else
+                                {
+                                    delayMilliseconds += 30000;
+                                    WriteLog_System($"과다요청 : {delayMilliseconds/1000}초 지연\n");
+                                }
+                            }
+                            else
+                            {
+                                delayMilliseconds += 30000;
+                                WriteLog_System($"과다요청 : {delayMilliseconds/1000}초 지연\n");
+                            }
+
+                            await Task.Delay(delayMilliseconds); // 지연 후 재시도
+                        }
+                        else
+                        {
+                            WriteLog_System($"Error fetching data for {symbol}: {response.StatusCode}\n");
+                            break;
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        WriteLog_System($"Error fetching data for {symbol}: {response.StatusCode}");
+                        WriteLog_System($"Error fetching data for {symbol}: {ex.Message}\n");
+                        break;
                     }
                 }
-                catch (Exception ex)
-                {
-                    WriteLog_System($"Error fetching data for {symbol}: {ex.Message}");
-                }
-                return 0;
+                return -999;
             }
         }
 
@@ -2640,16 +2689,6 @@ namespace WindowsFormsApp1
             int term = 200;
             if (utility.term_for_buy) term = Convert.ToInt32(utility.term_for_buy_text);
 
-            //기존에 포함된 종목이면 따로 변경해줘야 함
-            if (check)
-            {
-                //편입 차트 상태 '매수중' 변경
-                DataRow[] findRows = dtCondStock.Select($"종목코드 = {code}");
-                findRows[0]["상태"] = "매수중";
-                dtCondStock.AcceptChanges();
-                dataGridView1.DataSource = dtCondStock;
-            }
-
             //매수 주문(1초에 5회)
             //주문 방식 구분
             string[] order_method = buy_condtion_method.Text.Split('/');
@@ -2674,6 +2713,17 @@ namespace WindowsFormsApp1
                     //
                     WriteLog_Order($"[매수주문/시장가/주문성공/{condition_name}] : {code_name}({code}) {order_acc_market} 개\n");
                     telegram_message($"[매수주문/시장가/주문성공/{condition_name}] : {code_name}({code}) {order_acc_market} 개\n");
+
+                    //기존에 포함된 종목이면 따로 변경해줘야 함
+                    if (check)
+                    {
+                        //편입 차트 상태 '매수중' 변경
+                        DataRow[] findRows = dtCondStock.Select($"종목코드 = {code}");
+                        findRows[0]["상태"] = "매수중";
+                        findRows[0]["보유수량"] = "0/" + order_acc_market;
+                        dtCondStock.AcceptChanges();
+                        dataGridView1.DataSource = dtCondStock;
+                    }
 
                     //보유 수량 업데이트
                     string[] hold_status_update = max_hoid.Text.Split('/');
@@ -2768,6 +2818,17 @@ namespace WindowsFormsApp1
                     int hold_update = Convert.ToInt32(hold_status_update[0]);
                     int hold_max_update = Convert.ToInt32(hold_status_update[1]);
                     max_hoid.Text = (hold_update + 1) + "/" + hold_max_update;
+
+                    //기존에 포함된 종목이면 따로 변경해줘야 함
+                    if (check)
+                    {
+                        //편입 차트 상태 '매수중' 변경
+                        DataRow[] findRows = dtCondStock.Select($"종목코드 = {code}");
+                        findRows[0]["상태"] = "매수중";
+                        findRows[0]["보유수량"] = "0/" + order_acc;
+                        dtCondStock.AcceptChanges();
+                        dataGridView1.DataSource = dtCondStock;
+                    }
 
                     //매매 횟수업데이트
                     if (utility.buy_INDEPENDENT)
