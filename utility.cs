@@ -390,7 +390,7 @@ namespace WindowsFormsApp1
             String[] nasdaq_index_tmp = reader.ReadLine().Split('/');
             nasdaq_index = Convert.ToBoolean(nasdaq_index_tmp[1]);
 
-            //#1
+            //#0
             String[] type0_selection_tmp = reader.ReadLine().Split('/');
             type0_selection = Convert.ToBoolean(type0_selection_tmp[1]);
             type0_start = Convert.ToString(type0_selection_tmp[2]);
@@ -426,7 +426,7 @@ namespace WindowsFormsApp1
             type5_start = Convert.ToString(type5_selection_tmp[2]);
             type5_end = Convert.ToString(type5_selection_tmp[3]);
 
-            //#1
+            //#0
             String[] type0_selection_all_tmp = reader.ReadLine().Split('/');
             type0_selection_all = Convert.ToBoolean(type0_selection_all_tmp[1]);
             type0_start_all = Convert.ToString(type0_selection_all_tmp[2]);
