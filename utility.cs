@@ -10,9 +10,7 @@ namespace WindowsFormsApp1
 {
     class utility
     {
-        //check 변수
-        //public static string system_route = "C:\\Users\\krkr5\\OneDrive\\바탕 화면\\project\\password\\setting.txt";
-        public static string system_route = "C:\\Auto_Trade_Kiwoom\\setting.txt";
+        public static string system_route = "C:\\Auto_Trade_Kiwoom\\Setting\\setting.txt";
         public static bool load_check = false;
 
         //global 변수ㅊㄴ
@@ -60,6 +58,7 @@ namespace WindowsFormsApp1
         public static string profit_won_text; //익절원
         public static bool profit_ts;
         public static string profit_ts_text; //익절TS
+        public static string profit_ts_text2;
         public static bool profit_after1; //익정동시호가
         public static bool profit_after2; //익절시간외단일가
 
@@ -89,7 +88,9 @@ namespace WindowsFormsApp1
         public static bool term_for_sell;
         public static string term_for_sell_text;//종목매도텀
         public static bool term_for_non_buy; //미체결매수취소
+        public static string term_for_non_buy_text; //미체결매수취소
         public static bool term_for_non_sell;//미체결매도취소
+        public static string term_for_non_sell_text;//미체결매도취소
 
         public static int buy_set1; //매수설정
         public static int buy_set2;
@@ -104,6 +105,8 @@ namespace WindowsFormsApp1
         public static bool dow_index;
         public static bool sp_index;
         public static bool nasdaq_index;
+        public static bool Foreign_Stop;
+        public static bool Foreign_Skip;
 
         public static bool type0_selection;
         public static string type0_start;
@@ -153,6 +156,13 @@ namespace WindowsFormsApp1
         public static string KIS_appkey;
         public static string KIS_appsecret;
         public static string KIS_amount;
+
+        public static bool TradingView_Webhook;
+        public static bool TradingView_Webhook_Index;
+        public static string TradingView_Webhook_Start;
+        public static string TradingView_Webhook_Stop;
+
+        public static int Telegram_last_chat_update_id;
 
         //utility 목록
         public static async Task setting_load_auto()
@@ -266,6 +276,7 @@ namespace WindowsFormsApp1
             String[] profit_ts_tmp = reader.ReadLine().Split('/');
             profit_ts = Convert.ToBoolean(profit_ts_tmp[1]);
             profit_ts_text = profit_ts_tmp[2];
+            profit_ts_text2 = profit_ts_tmp[3];
 
             //익정동시호가
             String[] profit_after1_tmp = reader.ReadLine().Split('/');
@@ -333,23 +344,25 @@ namespace WindowsFormsApp1
             String[] clear_index_tmp = reader.ReadLine().Split('/');
             clear_index = Convert.ToBoolean(clear_index_tmp[1]);
 
-            //종목매수텀(대기)
+            //종목매수텀
             String[] term_for_buy_tmp = reader.ReadLine().Split('/');
             term_for_buy = Convert.ToBoolean(term_for_buy_tmp[1]);
             term_for_buy_text = term_for_buy_tmp[2];
 
-            //종목매도텀(대기)
+            //종목매도텀
             String[] term_for_sell_tmp = reader.ReadLine().Split('/');
             term_for_sell = Convert.ToBoolean(term_for_sell_tmp[1]);
             term_for_sell_text = term_for_sell_tmp[2];
 
-            //미체결매수취소(대기)
+            //미체결매수취소
             String[] term_for_non_buy_tmp = reader.ReadLine().Split('/');
             term_for_non_buy = Convert.ToBoolean(term_for_non_buy_tmp[1]);
+            term_for_non_buy_text = term_for_non_buy_tmp[2];
 
-            //미체결매도취소(대기)
+            //미체결매도취소
             String[] term_for_non_sell_tmp = reader.ReadLine().Split('/');
             term_for_non_sell = Convert.ToBoolean(term_for_non_sell_tmp[1]);
+            term_for_non_sell_text = term_for_non_sell_tmp[2];
 
             //매수설정
             String[] buy_set_tmp = reader.ReadLine().Split('/');
@@ -389,6 +402,14 @@ namespace WindowsFormsApp1
             //NASDAQ100
             String[] nasdaq_index_tmp = reader.ReadLine().Split('/');
             nasdaq_index = Convert.ToBoolean(nasdaq_index_tmp[1]);
+
+            //Foreign_Stop
+            String[] Foreign_Stop_tmp = reader.ReadLine().Split('/');
+            Foreign_Stop = Convert.ToBoolean(Foreign_Stop_tmp[1]);
+
+            //Foreign_Skip
+            String[] Foreign_Skip_tmp = reader.ReadLine().Split('/');
+            Foreign_Skip = Convert.ToBoolean(Foreign_Skip_tmp[1]);
 
             //#0
             String[] type0_selection_tmp = reader.ReadLine().Split('/');
@@ -497,6 +518,26 @@ namespace WindowsFormsApp1
             //한국투자증권KIS_amount
             String[] KIS_amount_tmp = reader.ReadLine().Split('/');
             KIS_amount = KIS_amount_tmp[1];
+
+            //TradingView_Webhook
+            String[] TradingView_Webhook_tmp = reader.ReadLine().Split('/');
+            TradingView_Webhook = Convert.ToBoolean(TradingView_Webhook_tmp[1]);
+
+            //TradingView_Webhook_Index
+            String[] TradingView_Webhook_Index_tmp = reader.ReadLine().Split('/');
+            TradingView_Webhook_Index = Convert.ToBoolean(TradingView_Webhook_Index_tmp[1]);
+
+            //TradingView_Webhook_Start
+            String[] TradingView_Webhook_Start_tmp = reader.ReadLine().Split('/');
+            TradingView_Webhook_Start = TradingView_Webhook_Start_tmp[1];
+
+            //TradingView_Webhook_Stop
+            String[] TradingView_Webhook_Stop_tmp = reader.ReadLine().Split('/');
+            TradingView_Webhook_Stop = TradingView_Webhook_Stop_tmp[1];
+
+            //Telegram_Chat_Number
+            String[] Telegram_last_chat_update_id_tmp = reader.ReadLine().Split('/');
+            Telegram_last_chat_update_id = Convert.ToInt32(Telegram_last_chat_update_id_tmp[1]);
 
             reader.Close();
         }

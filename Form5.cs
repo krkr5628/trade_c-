@@ -8,14 +8,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+//
+using System.Net.Http;
+using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
     public partial class Update : Form
     {
-        public Update()
+        private Trade_Auto _trade_Auto;
+
+        public Update(Trade_Auto trade_Auto)
         {
             InitializeComponent();
+            //FORM1 불러오기
+            _trade_Auto = trade_Auto;
             //
             read();
         }
@@ -61,6 +68,65 @@ namespace WindowsFormsApp1
             {
                 MessageBox.Show("파일 읽기 중 오류 발생: " + ex.Message);
             }
+
+        }
+
+        /*
+         * 
+         * 
+         * 
+         * 
+         * 
+         * 
+         * 
+         * IP 노출 우려로 PUSH 금지
+         * 
+         * 
+         * 
+         * 
+         * 
+         *  
+        */
+
+        private async void Authentication(object sender, EventArgs e)
+        {
+            if (textBox1.Text == "")
+            {
+                MessageBox.Show("인증코드를 입력하세요.");
+                return;
+            }
+            //
+            var response = await SendAuthCodeAsync(textBox1.Text);
+
+            if (response.StartsWith("ALLOW"))
+            {
+                label4.Text = "인증";
+                label5.Text = response.Split(',')[1];
+                Trade_Auto.Authentication_Check = true;
+                this.Invoke((MethodInvoker)delegate
+                {
+                    _trade_Auto.Authentic.Text = "인증";
+                });
+            }
+            else
+            {
+                label4.Text = "미인증";
+                Console.WriteLine("DENY");
+            }
+        }
+
+        public static async Task<string> SendAuthCodeAsync(string authCode)
+        {
+            HttpClient client = new HttpClient { Timeout = TimeSpan.FromSeconds(10) };
+            var content = new StringContent($"{{ \"authCode\": \"{authCode}\" }}", Encoding.UTF8, "application/json");
+            var response = await client.PostAsync("http://your-server-url/auth", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsStringAsync();
+            }
+
+            return "DENY";
         }
     }
 }
