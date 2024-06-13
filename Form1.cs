@@ -1002,115 +1002,12 @@ namespace WindowsFormsApp1
         {
             login_check = e.nErrCode;
             //
-            if (login_check == 0) initial_process(false);
-        }
-
-        //------------------------------------Login이후 동작---------------------------------
-
-        public void initial_process(bool check)
-        {
-
             if (login_check == 0)
             {
                 // 정상 처리
                 WriteLog_System("로그인 성공\n");
                 telegram_message("로그인 성공\n");
-
-                //"ACCOUNT_CNT" : 보유계좌 갯수
-                //"ACCLIST" 또는 "ACCNO" : 구분자 ';', 보유계좌 목록                
-                string 계좌목록 = axKHOpenAPI1.GetLoginInfo("ACCLIST").Trim();
-
-                System.Threading.Thread.Sleep(200);
-
-                //계좌목록은 ';'문자로 분리된 문자열
-                //분리된 계좌를 ComboBox에 추가 
-                account = 계좌목록.Split(';');
-
-                //계좌번호 존재 확인
-                if (!account.Contains(utility.setting_account_number))
-                {
-                    WriteLog_System("계좌번호 재설정 요청 및 초기화 설정\n");
-                    acc_text.Text = account[0];
-                }
-
-                //사용자 id를 UserId 라벨에 추가
-                string 사용자id = axKHOpenAPI1.GetLoginInfo("USER_ID");
-                User_id.Text = 사용자id;
-
-                System.Threading.Thread.Sleep(200);
-
-                //사용자 이름을 UserName 라벨에 추가
-                string 사용자이름 = axKHOpenAPI1.GetLoginInfo("USER_NAME");
-                User_name.Text = 사용자이름;
-
-                System.Threading.Thread.Sleep(200);
-
-                //접속서버 구분(1 : 모의투자, 나머지: 실거래서버)
-                string 접속서버구분 = axKHOpenAPI1.GetLoginInfo("GetServerGubun");
-                if (접속서버구분.Equals("1"))
-                {
-                    User_connection.Text = "모의\n";
-                }
-                else
-                {
-                    User_connection.Text = "실제\n";
-                }
-
-                System.Threading.Thread.Sleep(200);
-
-                //"KEY_BSECGB" : 키보드 보안 해지여부(0 : 정상, 1 : 해지)
-                string 키보드보안 = axKHOpenAPI1.GetLoginInfo("KEY_BSECGB");
-                if (키보드보안.Equals("1"))
-                {
-                    Keyboard_wall.Text = "정상\n";
-                }
-                else
-                {
-                    Keyboard_wall.Text = "해지\n";
-                }
-
-                System.Threading.Thread.Sleep(200);
-
-                //"FIREW_SECGB" : 방화벽 설정여부(0 : 미설정, 1 : 설정, 2 : 해지)
-                string 방화벽 = axKHOpenAPI1.GetLoginInfo("FIREW_SECGB");
-                if (방화벽.Equals("0"))
-                {
-                    Fire_wall.Text = "미설정\n";
-                }
-                else if (방화벽.Equals("1"))
-                {
-                    Fire_wall.Text = "설정\n";
-                }
-                else
-                {
-                    Fire_wall.Text = "해지\n";
-                }
-
-                System.Threading.Thread.Sleep(200);
-
-                //여기서 부터 계좌번호 필요 => 계좌 없을 시 어떻게 할지 설정해야 함
-                //일단 존재하는 계좌로 변경해서 조회함
-
-                //지수
-                Index_load();
-
-                System.Threading.Thread.Sleep(200);
-
-                //매매내역 업데이트
-                Transaction_Detail("");
-
-                System.Threading.Thread.Sleep(200);
-
-                //조건식 검색(계좌불필요) => 계좌 보유 현황 확인 => 당일 손익 받기 => 초기 보유 종목 테이블 업데이트 => 실시간 조건 검색 시작
-                if (axKHOpenAPI1.GetConditionLoad() == 1)
-                {
-                    WriteLog_System("조건식 검색 성공\n");
-                }
-                else
-                {
-                    WriteLog_System("조건식 검색 실패\n");
-                }
-
+                initial_process(false);
             }
             else
             {
@@ -1129,6 +1026,106 @@ namespace WindowsFormsApp1
                         telegram_message("버전처리 실패\n");
                         break;
                 }
+            }
+        }
+
+        //------------------------------------Login이후 동작---------------------------------
+
+        public void initial_process(bool check)
+        {
+            //"ACCOUNT_CNT" : 보유계좌 갯수
+            //"ACCLIST" 또는 "ACCNO" : 구분자 ';', 보유계좌 목록                
+            string 계좌목록 = axKHOpenAPI1.GetLoginInfo("ACCLIST").Trim();
+
+            System.Threading.Thread.Sleep(200);
+
+            //계좌목록은 ';'문자로 분리된 문자열
+            //분리된 계좌를 ComboBox에 추가 
+            account = 계좌목록.Split(';');
+
+            //계좌번호 존재 확인
+            if (!account.Contains(utility.setting_account_number))
+            {
+                WriteLog_System("계좌번호 재설정 요청 및 초기화 설정\n");
+                acc_text.Text = account[0];
+            }
+
+            //사용자 id를 UserId 라벨에 추가
+            string 사용자id = axKHOpenAPI1.GetLoginInfo("USER_ID");
+            User_id.Text = 사용자id;
+
+            System.Threading.Thread.Sleep(200);
+
+            //사용자 이름을 UserName 라벨에 추가
+            string 사용자이름 = axKHOpenAPI1.GetLoginInfo("USER_NAME");
+            User_name.Text = 사용자이름;
+
+            System.Threading.Thread.Sleep(200);
+
+            //접속서버 구분(1 : 모의투자, 나머지: 실거래서버)
+            string 접속서버구분 = axKHOpenAPI1.GetLoginInfo("GetServerGubun");
+            if (접속서버구분.Equals("1"))
+            {
+                User_connection.Text = "모의\n";
+            }
+            else
+            {
+                User_connection.Text = "실제\n";
+            }
+
+            System.Threading.Thread.Sleep(200);
+
+            //"KEY_BSECGB" : 키보드 보안 해지여부(0 : 정상, 1 : 해지)
+            string 키보드보안 = axKHOpenAPI1.GetLoginInfo("KEY_BSECGB");
+            if (키보드보안.Equals("1"))
+            {
+                Keyboard_wall.Text = "정상\n";
+            }
+            else
+            {
+                Keyboard_wall.Text = "해지\n";
+            }
+
+            System.Threading.Thread.Sleep(200);
+
+            //"FIREW_SECGB" : 방화벽 설정여부(0 : 미설정, 1 : 설정, 2 : 해지)
+            string 방화벽 = axKHOpenAPI1.GetLoginInfo("FIREW_SECGB");
+            if (방화벽.Equals("0"))
+            {
+                Fire_wall.Text = "미설정\n";
+            }
+            else if (방화벽.Equals("1"))
+            {
+                Fire_wall.Text = "설정\n";
+            }
+            else
+            {
+                Fire_wall.Text = "해지\n";
+            }
+
+            System.Threading.Thread.Sleep(200);
+
+            //여기서 부터 계좌번호 필요 => 계좌 없을 시 어떻게 할지 설정해야 함
+            //일단 존재하는 계좌로 변경해서 조회함
+
+            //지수
+            Index_load();
+
+            System.Threading.Thread.Sleep(200);
+
+            //매매내역 업데이트
+            Transaction_Detail("");
+
+            System.Threading.Thread.Sleep(200);
+
+            //조건식 검색(계좌불필요) => 계좌 보유 현황 확인 => 당일 손익 받기 => 초기 보유 종목 테이블 업데이트 => 실시간 조건 검색 시작
+            if (axKHOpenAPI1.GetConditionLoad() == 1)
+            {
+                WriteLog_System("조건식 검색 성공\n");
+            }
+            else
+            {
+                WriteLog_System("조건식 검색 실패\n");
             }
         }
 
