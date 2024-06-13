@@ -26,8 +26,7 @@ namespace WindowsFormsApp1
 
         static public string[] arrCondition = { };
         static public string[] account;
-        public int login_check = 1;
-        private bool isRunned = false;
+        //
         private bool user_money_before = true;
 
         //-----------------------------------인증 관련 신호----------------------------------------
@@ -608,7 +607,7 @@ namespace WindowsFormsApp1
 
             // 저장할 파일 경로
             string filePath = $@"C:\Auto_Trade_Kiwoom\Log\{formattedDate}_full.txt";
-            string filePath2 = "C:\\Auto_Trade\\Setting\\setting.txt";
+            string filePath2 = "C:\\Auto_Trade_Kiwoom\\Setting\\setting.txt";
 
             // StreamWriter를 사용하여 파일 저장
             try
@@ -653,15 +652,48 @@ namespace WindowsFormsApp1
             }
         }
 
+        //------------------------------------------공용기능-------------------------------------------
+
+        //화면번호
+        private int _screenNo = 1001;
+        private string GetScreenNo()
+        {
+            //화면번호 : 조회나 주문등 필요한 기능을 요청할때 이를 구별하기 위한 키값
+            //0000(혹은 0)을 제외한 임의의 네자리 숫자
+            //개수가 200개로 한정, 이 개수를 넘지 않도록 관리
+            //200개를 넘는 경우 조회 결과나 주문 결과에 다른 데이터가 섞이거나 원하지 않는 결과가 나타날 수 있다.
+            if (_screenNo < 1200)
+                _screenNo++;
+            else
+                _screenNo = 1001;
+            return _screenNo.ToString();
+        }
+
+
+        //CommRqData 에러 목록
+        private void GetErrorMessage(int errorcode)
+        {
+            switch (errorcode)
+            {
+                case 0:
+                    WriteLog_System("정상조회\n");
+                    break;
+                case 200:
+                    WriteLog_System("시세과부화\n");
+                    break;
+                case 201:
+                    WriteLog_System("조회전문작성 에러\n");
+                    break;
+            }
+        }
+
         //-----------------------------------------------Main------------------------------------------------
+
         public Trade_Auto()
         {
             InitializeComponent();
 
             //-------------------초기 동작-------------------
-
-            //테이블 초기 세팅
-            initial_Table();
 
             //기존 세팅 로드
             utility.setting_load_auto();
@@ -704,85 +736,116 @@ namespace WindowsFormsApp1
             axKHOpenAPI1.OnReceiveChejanData += onReceiveChejanData; //매매 정보 받기
         }
 
-        //------------------------------------------공용기능-------------------------------------------
+        //------------------------------------------Main_Timer-------------------------------------------
+
+        private bool isRunned = false;
+        private bool isRunned2 = false;
+        private bool isRunned3 = false;
+
+        private bool initial_process_complete = false;
+
+        private bool first_index = false;
+        private bool second_index = false;
+
+        private DateTime index1 = DateTime.Parse("08:59:00");
+        private DateTime index2 = DateTime.Parse("09:00:00");
 
         //timer1(1000ms) : 주기 고정
-        private void ClockEvent(object sender, EventArgs e)
+        private async void ClockEvent(object sender, EventArgs e)
         {
             //시간표시
             timetimer.Text = DateTime.Now.ToString("yy MM-dd (ddd) HH:mm:ss");
 
-            if (utility.load_check) Opeartion_Time();
+            if(utility.load_check && !isRunned3)
+            {
+                isRunned3 = true;
+                /*
+                var response = WindowsFormsApp1.Update.SendAuthCodeAsync("");
+                if (response.ToString().StartsWith("ALLOW")) 
+                {
+                    Authentication_Check = true;
+                    WriteLog_System($"인증 : 유효기간({response.ToString().Split(',')[1]})\n");
+                    telegram_message($"인증 : 유효기간({response.ToString().Split(',')[1]})\n");
+                }
+                else
+                {
+                    WriteLog_System("미인증 : 50만원 제한\n");
+                    telegram_message("미인증 : 50만원 제한\n");
+                }
+                */
+                isRunned = false;
+            }
 
-        }
+            if (!isRunned)
+            {
+                //운영시간 아님
+                if (!isRunned && t_now >= t_start && t_now <= t_end)
+                {
+                    isRunned = true;
+                    //테이블 초기 세팅
+                    await initial_Table();
 
-        //운영시간 확인
-        private async void Opeartion_Time()
-        {
+                    //초기 설정 반영
+                    await initial_allow(false);
+
+                    if (utility.Telegram_Allow)
+                    {
+                        Telegram_Receive();
+                    }
+
+                    //로그인
+                    await Task.Run(() =>
+                    {
+                        axKHOpenAPI1.CommConnect();
+                    });
+
+                    timer2.Start(); //편입 종목 감시 - 200ms
+                }
+            }
+
             //운영시간 확인
             DateTime t_now = DateTime.Now;
             DateTime t_start = DateTime.Parse(utility.market_start_time);
             DateTime t_end = DateTime.Parse(utility.market_end_time);
 
-            //운영시간 아님
-            if (!isRunned && t_now >= t_start && t_now <= t_end)
+            if (initial_process_complete)
             {
-                isRunned = true;
-                //초기 설정 반영
-                await initial_allow(false);
-
-                //로그인
-                await Task.Run(() =>
+                if (!isRunned2 && t_now >= t_start && t_now <= t_end)
                 {
-                    axKHOpenAPI1.CommConnect();
-                });
+                    isRunned2 = true;
 
-                timer3.Start(); //편입 종목 감시 - 200ms
-            }
-            else if (isRunned && t_now > t_end)
-            {
-                isRunned = false;
-                real_time_stop(true);
-            }
-        }
+                    auto_allow_check();
+                }
+                else if (isRunned2 && t_now > t_end)
+                {
+                    isRunned2 = false;
+                    real_time_stop(true);
+                }
 
-        //화면번호
-        private int _screenNo = 1001;
-        private string GetScreenNo()
-        {
-            //화면번호 : 조회나 주문등 필요한 기능을 요청할때 이를 구별하기 위한 키값
-            //0000(혹은 0)을 제외한 임의의 네자리 숫자
-            //개수가 200개로 한정, 이 개수를 넘지 않도록 관리
-            //200개를 넘는 경우 조회 결과나 주문 결과에 다른 데이터가 섞이거나 원하지 않는 결과가 나타날 수 있다.
-            if (_screenNo < 1200)
-                _screenNo++;
-            else
-                _screenNo = 1001;
-            return _screenNo.ToString();
-        }
+                //인덱스전송
+                //DateTime index1 = DateTime.Parse("08:59:00");
+                //DateTime index2 = DateTime.Parse("09:00:00");
 
+                if (!first_index && index1 <= t_now)
+                {
+                    first_index = true;
+                    WriteLog_System($"[INDEX/08:59:00] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
+                    telegram_message($"[INDEX/08:59:00] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
+                }
 
-        //CommRqData 에러 목록
-        private void GetErrorMessage(int errorcode)
-        {
-            switch (errorcode)
-            {
-                case 0:
-                    WriteLog_System("정상조회\n");
-                    break;
-                case 200:
-                    WriteLog_System("시세과부화\n");
-                    break;
-                case 201:
-                    WriteLog_System("조회전문작성 에러\n");
-                    break;
+                if (!second_index && index2 <= t_now)
+                {
+                    second_index = true;
+                    WriteLog_System($"[INDEX/09:00:00] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
+                    telegram_message($"[INDEX/09:00:00] : {Foreign.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
+                }
             }
         }
 
         //-----------------------------------------initial-------------------------------------
 
         //초기 Table 값 입력
-        private void initial_Table()
+        private async Task initial_Table()
         {
             DataTable dataTable = new DataTable();
             dataTable.Columns.Add("편입", typeof(string)); // '편입' '이탈'
@@ -848,6 +911,7 @@ namespace WindowsFormsApp1
             //초기 세팅
             acc_text.Text = utility.setting_account_number;
             total_money.Text = string.Format("{0:#,##0}", Convert.ToDecimal(utility.initial_balance));
+            Current_User_money.Text = "0";
             if (utility.buy_INDEPENDENT)
             {
                 maxbuy_acc.Text = string.Concat(Enumerable.Repeat("0/", utility.Fomula_list_buy_text.Split(',').Length)) + utility.maxbuy_acc;
@@ -856,6 +920,7 @@ namespace WindowsFormsApp1
             {
                 maxbuy_acc.Text = "0/" + utility.maxbuy_acc;
             }
+            User_id.Text = "-";
             operation_start.Text = utility.market_start_time;
             operation_stop.Text = utility.market_end_time;
             search_start.Text = utility.buy_condition_start;
@@ -881,6 +946,7 @@ namespace WindowsFormsApp1
             today_profit_tax.Text = "0";
             today_profit_percent.Text = "00.00%";
             today_profit.Text = "0";
+
             kospi_index.Text = "미수신";
             kosdaq_index.Text = "미수신";
             dow_index.Text = "미수신";
@@ -911,14 +977,39 @@ namespace WindowsFormsApp1
             KIS_Profit.Text = "0";
 
             //
+            update_id = utility.Telegram_last_chat_update_id;
+
+            //
+            if (Authentication_Check)
+            {
+                Authentic.Text = "인증";
+            }
+            else
+            {
+                Authentic.Text = "미인증";
+            }
+
+            //
             WriteLog_System("세팅 반영 완료\n");
             telegram_message("세팅 반영 완료\n");
         }
 
-        //
+        //------------------------------------Login---------------------------------
+
+        public int login_check = 1;
+
         private void onEventConnect(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnEventConnectEvent e)
         {
             login_check = e.nErrCode;
+            //
+            if (login_check == 0) initial_process(false);
+        }
+
+        //------------------------------------Login이후 동작---------------------------------
+
+        public void initial_process(bool check)
+        {
+
             if (login_check == 0)
             {
                 // 정상 처리
@@ -3960,7 +4051,7 @@ namespace WindowsFormsApp1
             if (real_price_all_stop)
             {
                 axKHOpenAPI1.SetRealRemove("ALL", "ALL"); //실시간 시세 중지
-                timer3.Stop();//계좌 탐색 중단
+                timer2.Stop();//계좌 탐색 중단
                 //
                 if (minuteTimer != null)
                 {

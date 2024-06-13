@@ -140,7 +140,7 @@ namespace WindowsFormsApp1
             this.label19 = new System.Windows.Forms.Label();
             this.trading_mode = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.axKHOpenAPI1 = new AxKHOpenAPILib.AxKHOpenAPI();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -1760,10 +1760,10 @@ namespace WindowsFormsApp1
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "설정 요약";
             // 
-            // timer3
+            // timer2
             // 
-            this.timer3.Interval = 300;
-            this.timer3.Tick += new System.EventHandler(this.Transfer_Timer);
+            this.timer2.Interval = 300;
+            this.timer2.Tick += new System.EventHandler(this.Transfer_Timer);
             // 
             // axKHOpenAPI1
             // 
@@ -2438,7 +2438,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.Label max_hoid;
         private System.Windows.Forms.Label label46;
-        private System.Windows.Forms.Timer timer3;
+        private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Label buy_condition;
         private System.Windows.Forms.Label sell_condtion;
         private System.Windows.Forms.Label maxbuy_acc;
