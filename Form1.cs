@@ -854,6 +854,9 @@ namespace WindowsFormsApp1
             dtCondStock = dataTable;
             dataGridView1.DataSource = dtCondStock;
 
+            dataGridView1.DefaultCellStyle.Font = new Font("굴림", 8F, FontStyle.Regular);
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("굴림", 8F, FontStyle.Bold);
+
             DataTable dataTable2 = new DataTable();
             dataTable2.Columns.Add("종목코드", typeof(string)); //고정
             dataTable2.Columns.Add("종목명", typeof(string)); //고정
@@ -867,6 +870,9 @@ namespace WindowsFormsApp1
             dtCondStock_hold = dataTable2;
             dataGridView2.DataSource = dtCondStock_hold;
 
+            dataGridView2.DefaultCellStyle.Font = new Font("굴림", 8F, FontStyle.Regular);
+            dataGridView2.ColumnHeadersDefaultCellStyle.Font = new Font("굴림", 8F, FontStyle.Bold);
+
             DataTable dataTable3 = new DataTable();
             dataTable3.Columns.Add("종목번호", typeof(string));
             dataTable3.Columns.Add("종목명", typeof(string));
@@ -879,6 +885,9 @@ namespace WindowsFormsApp1
             dataTable3.Columns.Add("체결단가", typeof(string));
             dtCondStock_Transaction = dataTable3;
             dataGridView3.DataSource = dtCondStock_Transaction;
+
+            dataGridView3.DefaultCellStyle.Font = new Font("굴림", 8F, FontStyle.Regular);
+            dataGridView3.ColumnHeadersDefaultCellStyle.Font = new Font("굴림", 8F, FontStyle.Bold);
 
         }
 
