@@ -2290,12 +2290,31 @@ namespace WindowsFormsApp1
                                 {
                                     row["편입상태"] = "실매입";
                                     row["편입가"] = average_price;
+                                    //
+                                    if (utility.profit_ts)
+                                    {
+                                        row["상태"] = "TS매수완료";
+                                        row["편입최고"] = average_price;
+                                    }
+                                    else
+                                    {
+                                        row["상태"] = "매수완료";
+                                    }
                                     //Message
                                     WriteLog_Order($"[매수주문/정상완료] : {code_name}({code}) {order_sum}개 {average_price}원\n");
                                     telegram_message($"[매수주문/정상완료] : {code_name}({code}) {order_sum}개 {average_price}원\n");
                                 }
                                 else
                                 {
+                                    if (!utility.duplication_deny)
+                                    {
+                                        row["상태"] = "대기";
+                                    }
+                                    else
+                                    {
+                                        row["상태"] = "매도완료";
+                                    }
+                                    //
                                     row["매도가"] = average_price;
                                     //Message
                                     WriteLog_Order($"[매도주문/정상완료] : {code_name}({code}) {order_sum}개 {average_price}원\n");
@@ -2350,6 +2369,7 @@ namespace WindowsFormsApp1
                         dataGridView3.Refresh();
                     }
                     break;
+
                 //KOSPI200 인덱스 처리
                 case "KOSPI200_INDEX":
 
