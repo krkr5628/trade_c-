@@ -4198,6 +4198,8 @@ namespace WindowsFormsApp1
                 //주문시간 확인(0정규장, 1시간외종가, 2시간외단일가
                 int market_time = 0;
 
+                TimeSpan t_now = TimeSpan.Parse(DateTime.Now.ToString("HH:mm:ss"));
+
                 //주문간 간격
                 if (utility.term_for_sell)
                 {
@@ -4630,39 +4632,39 @@ namespace WindowsFormsApp1
             949(?);10010(?);969(?);819(?)
             */
 
+
+            string tmp0 = Convert.ToString(axKHOpenAPI1.GetChejanData(9001) + "\n");//9001(종목코드,업종코드) A020150
+            string tmp1 = Convert.ToString(axKHOpenAPI1.GetChejanData(912) + "\n");//912(주문업무분류); JJ
+            string tmp2 = Convert.ToString(axKHOpenAPI1.GetChejanData(913) + "\n");//913(주문상태) 접수 체결
+            string tmp3 = Convert.ToString(axKHOpenAPI1.GetChejanData(900) + "\n");//900(주문수량) 18 => 고정값
+            string tmp4 = Convert.ToString(axKHOpenAPI1.GetChejanData(901) + "\n");//901(주문가격) 0(시장가)
+            string tmp5 = Convert.ToString(axKHOpenAPI1.GetChejanData(902) + "\n");//902(미체결수량) 18 0 16
+            string tmp6 = Convert.ToString(axKHOpenAPI1.GetChejanData(905) + "\n");//905(주문구분) +매수 -매도 정정 취소
+            string tmp7 = Convert.ToString(axKHOpenAPI1.GetChejanData(906) + "\n");//906(매매구분) 시장가
+            string tmp8 = Convert.ToString(axKHOpenAPI1.GetChejanData(907) + "\n");//907(매도수구분) 2(매수) 1(매도)
+            string tmp9 = Convert.ToString(axKHOpenAPI1.GetChejanData(910) + "\n");//910(체결가) 25000
+            string tmp10 = Convert.ToString(axKHOpenAPI1.GetChejanData(911) + "\n");//911(체결량) 18
+            string tmp11 = Convert.ToString(axKHOpenAPI1.GetChejanData(938) + "\n");//938(당일매매수수료) 0 2830 =>누적
+            string tmp12 = Convert.ToString(axKHOpenAPI1.GetChejanData(939) + "\n");//939(당일매매세금) 0 0 =>누적
+            string tmp13 = Convert.ToString(axKHOpenAPI1.GetChejanData(908) + "\n");//908(주문 및 체결시간)
+
+
+            WriteLog_System($"{e.sGubun}/{tmp0}/{tmp1}/{tmp2}/{tmp3}/{tmp4}/{tmp5}/{tmp6}/{tmp7}/{tmp8}/{tmp9}/{tmp10}/{tmp11}/{tmp12}/{tmp13}\n");
+
             if (e.sGubun.Equals("0"))
             {
-                /*
-                //값확인(매수)
-                WriteLog("----------------------------------+\n");
-                WriteLog(axKHOpenAPI1.GetChejanData(9001) + "\n");//9001(종목코드,업종코드) A020150
-                WriteLog(axKHOpenAPI1.GetChejanData(912) + "\n");//912(주문업무분류); JJ
-                WriteLog(axKHOpenAPI1.GetChejanData(913) + "\n");//913(주문상태) 접수 체결
-                WriteLog(axKHOpenAPI1.GetChejanData(900) + "\n");//900(주문수량) 18 => 고정값
-                WriteLog(axKHOpenAPI1.GetChejanData(901) + "\n");//901(주문가격) 0(시장가)
-                WriteLog(axKHOpenAPI1.GetChejanData(902) + "\n");//902(미체결수량) 18 0 16
-                WriteLog(axKHOpenAPI1.GetChejanData(905) + "\n");//905(주문구분) +매수 -매도 정정 취소
-                WriteLog(axKHOpenAPI1.GetChejanData(906) + "\n");//906(매매구분) 시장가
-                WriteLog(axKHOpenAPI1.GetChejanData(907) + "\n");//907(매도수구분) 2(매수) 1(매도)
-                WriteLog(axKHOpenAPI1.GetChejanData(910) + "\n");//910(체결가) 25000
-                WriteLog(axKHOpenAPI1.GetChejanData(911) + "\n");//911(체결량) 18
-                WriteLog(axKHOpenAPI1.GetChejanData(938) + "\n");// 938(당일매매수수료) 0 2830 =>누적
-                WriteLog(axKHOpenAPI1.GetChejanData(939) + "\n");//939(당일매매세금) 0 0 =>누적
-                WriteLog(axKHOpenAPI1.GetChejanData(908) + "\n");//908(주문 및 체결시간)
-                WriteLog("----------------------------------+\n");
-                */
 
                 //매도수구분
-                string Gubun = axKHOpenAPI1.GetChejanData(907);
+                string Gubun = tmp8; //axKHOpenAPI1.GetChejanData(907)
                 //추가로드- 종목코드
-                string code = axKHOpenAPI1.GetChejanData(9001).Replace("A", "");
+                string code = tmp0.Replace("A", ""); //axKHOpenAPI1.GetChejanData(9001)
                 //추가로드 - 종목이름
                 string code_name = axKHOpenAPI1.GetChejanData(302).Trim();
                 // 누적체결수량/주문수량
-                string order_sum = axKHOpenAPI1.GetChejanData(900);
-                string partial_sum = axKHOpenAPI1.GetChejanData(911);
+                string order_sum = tmp3; //axKHOpenAPI1.GetChejanData(900)
+                string partial_sum = tmp10; //axKHOpenAPI1.GetChejanData(911);
                 //미체결수량
-                string left_Acc = axKHOpenAPI1.GetChejanData(902);
+                string left_Acc = tmp5; //axKHOpenAPI1.GetChejanData(902);
 
                 WriteLog_Order($"[체결] 구분 : {Gubun} / 종목 : {code_name}({code}) / 누적체결수량 : {partial_sum}/{order_sum} / 미체결수량 : {left_Acc}\n");
 
