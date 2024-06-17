@@ -1633,7 +1633,7 @@ namespace WindowsFormsApp1
             tmp.Add("Telegram_Last_Chat_update_id/" + Convert.ToString(Trade_Auto.update_id));
 
             // 저장할 파일 경로
-            string filePath = $@"C:\Auto_Trade\Setting\setting.txt";
+            string filePath = $@"C:\Auto_Trade_Kiwoom\Setting\setting.txt";
 
             // StreamWriter를 사용하여 파일 저장
             try
