@@ -862,12 +862,6 @@ namespace WindowsFormsApp1
             dataGridView1.DefaultCellStyle.Font = new Font("굴림", 8F, FontStyle.Regular);
             dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("굴림", 8F, FontStyle.Bold);
 
-            // Set the bool column to display as a checkbox
-            dataGridView1.Columns["선택"].ReadOnly = false;
-            dataGridView1.Columns["선택"].Width = 50;
-            dataGridView1.Columns["편입"].Width = 50;
-            dataGridView1.Columns["상태"].Width = 50;
-
             DataTable dataTable2 = new DataTable();
             dataTable2.Columns.Add("종목코드", typeof(string)); //고정
             dataTable2.Columns.Add("종목명", typeof(string)); //고정
