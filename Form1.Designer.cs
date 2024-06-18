@@ -174,6 +174,7 @@ namespace WindowsFormsApp1
             this.label39 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
             this.kospi_index = new System.Windows.Forms.Label();
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -2291,6 +2292,11 @@ namespace WindowsFormsApp1
             this.kospi_index.TabIndex = 5;
             this.kospi_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // timer3
+            // 
+            this.timer3.Interval = 200;
+            this.timer3.Tick += new System.EventHandler(this.Trade_Check_Event);
+            // 
             // Trade_Auto
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -2486,6 +2492,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button Refresh;
         private System.Windows.Forms.Button select_cancel;
+        private System.Windows.Forms.Timer timer3;
     }
 }
 
