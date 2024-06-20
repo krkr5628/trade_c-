@@ -31,12 +31,14 @@ namespace WindowsFormsApp1
 
         //-----------------------------------인증 관련 신호----------------------------------------
 
+        public static string Authentication = "1ab2c3d4e5f6g7h8i9"; //인증코드에 백슬래시 및 쉼표 불가능
         public static bool Authentication_Check = true; //미인증(false) / 인증(true)
         private int sample_balance = 500000; //500,000원(미인증 매매 금액 제한)
 
         //-----------------------------------storage----------------------------------------
 
         //매매로그 맟 전체로그 저장
+        private List<string> log_trade = new List<string>();
         private List<string> log_full = new List<string>();
 
         //실시간 조건 검색 용 테이블(누적 저장)
@@ -483,6 +485,7 @@ namespace WindowsFormsApp1
             string time = DateTime.Now.ToString("HH:mm:ss:fff");
             log_window3.AppendText($@"{"[" + time + "] " + message}");
             log_full.Add($"[{time}][Order] : {message}");
+            log_trade.Add($"[{time}][Order] : {message}");
         }
 
         //로그창(Stock)
@@ -666,7 +669,7 @@ namespace WindowsFormsApp1
                 MessageBox.Show("파일 저장 중 오류 발생: " + ex.Message);
             }
 
-            /*
+            
             // StreamWriter를 사용하여 파일 저장
             try
             {
@@ -680,7 +683,7 @@ namespace WindowsFormsApp1
             {
                 MessageBox.Show("파일 저장 중 오류 발생: " + ex.Message);
             }
-            */
+            
 
             //Telegram Message Last Number
             try
@@ -697,9 +700,9 @@ namespace WindowsFormsApp1
                 // 파일이 비어 있지 않은지 확인
                 if (lines.Any())
                 {
-                    lines[lines.Count - 2] = "Telegram_Last_Chat_update_id/" + Convert.ToString(update_id);
-                    lines[lines.Count - 1] = "GridView1_Refresh_Time/" + Convert.ToString(UI_UPDATE.Text);
-
+                    lines[lines.Count - 3] = "Telegram_Last_Chat_update_id/" + Convert.ToString(update_id);
+                    lines[lines.Count - 2] = "GridView1_Refresh_Time/" + Convert.ToString(UI_UPDATE.Text);
+                    lines[lines.Count - 1] = "Auth/" + Convert.ToString(Authentication);
                     File.WriteAllLines(filePath3, lines);
                 }
                 else
@@ -4019,7 +4022,15 @@ namespace WindowsFormsApp1
         //매수 주문 수량 계산
         private int buy_order_cal(int price)
         {
+            //
             int current_balance = Convert.ToInt32(User_money.Text.Replace(",", ""));
+            //
+            if (!Authentication_Check && current_balance > sample_balance)
+            {
+                current_balance = sample_balance;
+            }
+
+            //
             int max_buy = Convert.ToInt32(utility.maxbuy);
             //
             if (utility.buy_per_percent)

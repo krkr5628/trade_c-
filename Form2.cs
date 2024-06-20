@@ -1635,6 +1635,8 @@ namespace WindowsFormsApp1
             tmp.Add("Telegram_Last_Chat_update_id/" + Convert.ToString(Trade_Auto.update_id));
             //
             tmp.Add("GridView1_Refresh_Time/" + Convert.ToString(Trade_Auto.UI_Refresh_interval));
+            //
+            tmp.Add("Auth/" + Convert.ToString(Trade_Auto.Authentication));
 
             // 저장할 파일 경로
             string filePath = $@"C:\Auto_Trade_Kiwoom\Setting\setting.txt";
