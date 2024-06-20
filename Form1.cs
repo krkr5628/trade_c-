@@ -1937,17 +1937,7 @@ namespace WindowsFormsApp1
                 telegram_message("자동 매매 정지\n");
                 return;
             }
-            
-            if (index_stop && !skip)
-            {
-                WriteLog_System("미국 전영업일 휴무 : 중단\n");
-                telegram_message("미국 전영업일 휴무 : 중단\n");
-                WriteLog_System("자동 매매 정지\n");
-                telegram_message("자동 매매 정지\n");
-                return;
-            }
-            
-
+                    
             //자동 설정 여부
             if (!utility.auto_trade_allow && !skip)
             {
@@ -3604,6 +3594,11 @@ namespace WindowsFormsApp1
         {
             //지수 확인
             if (index_buy)
+            {
+                return "대기";
+            }
+
+            if (index_stop)
             {
                 return "대기";
             }
