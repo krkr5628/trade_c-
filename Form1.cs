@@ -698,6 +698,7 @@ namespace WindowsFormsApp1
                 if (lines.Any())
                 {
                     lines[lines.Count - 2] = "Telegram_Last_Chat_update_id/" + Convert.ToString(update_id);
+                    lines[lines.Count - 1] = "GridView1_Refresh_Time/" + Convert.ToString(UI_UPDATE.Text);
 
                     File.WriteAllLines(filePath3, lines);
                 }
@@ -710,6 +711,13 @@ namespace WindowsFormsApp1
             {
                 MessageBox.Show("파일 저장 중 오류 발생: " + ex.Message);
             }
+        }
+
+        public static string UI_Refresh_interval;
+
+        private void UI_UPDATE_TextChanged(object sender, EventArgs e)
+        {
+            UI_Refresh_interval = UI_UPDATE.Text;
         }
 
         //------------------------------------------공용기능-------------------------------------------
@@ -783,6 +791,7 @@ namespace WindowsFormsApp1
             Refresh.Click += Refresh_Click;
             Match_btn.Click += Match_Click;
             select_cancel.Click += Select_cancel_Click;
+            UI_UPDATE.TextChanged += UI_UPDATE_TextChanged;
 
             //-------------------로그인 이벤트 동작-------------------
             axKHOpenAPI1.OnEventConnect += onEventConnect; //로그인 상태 확인(ID,NAME,계좌번호,KEYBOARD,FIREWALL,조건식)
@@ -941,7 +950,6 @@ namespace WindowsFormsApp1
             dataTable2.Columns.Add("손익금액", typeof(string));
             dataTable2.Columns.Add("매도수량", typeof(string)); //고정
             dtCondStock_hold = dataTable2;
-            dataGridView2.DataSource = dtCondStock_hold;
 
             dataGridView2.DefaultCellStyle.Font = new Font("굴림", 8F, FontStyle.Regular);
             dataGridView2.ColumnHeadersDefaultCellStyle.Font = new Font("굴림", 8F, FontStyle.Bold);
@@ -969,6 +977,7 @@ namespace WindowsFormsApp1
         }
 
         private BindingSource bindingSource;
+        private BindingSource bindingSource2;
 
         //데이터 바인딩(속도, 변경, 고급 기능 등)
         private void InitializeDataGridView()
@@ -984,6 +993,11 @@ namespace WindowsFormsApp1
             dataGridView1.Columns["편입"].Width = 50;
             dataGridView1.Columns["상태"].Width = 50;
             dataGridView1.Columns["거래량"].Width = 80;
+
+            bindingSource2 = new BindingSource();
+            bindingSource2.DataSource = dtCondStock_hold;
+
+            dataGridView2.DataSource = bindingSource2;
         }
 
         //셀 값이 변경될 때마다 이를 즉시 커밋하여 DataTable에 반영
@@ -1007,29 +1021,76 @@ namespace WindowsFormsApp1
             }
         }
 
+        private bool ui_timer = false;
+
         private void gridView1_refresh()
         {
-            // 현재 스크롤 위치 저장
-            int firstDisplayedRowIndex = dataGridView1.FirstDisplayedScrollingRowIndex;
-
-            //
-            if (dataGridView1.InvokeRequired)
+            if (UI_UPDATE.Text.Trim().Equals("실시간"))
             {
-                dataGridView1.Invoke((MethodInvoker)delegate {
+                // 현재 스크롤 위치 저장
+                int firstDisplayedRowIndex = dataGridView1.FirstDisplayedScrollingRowIndex;
+
+                //
+                if (dataGridView1.InvokeRequired)
+                {
+                    dataGridView1.Invoke((MethodInvoker)delegate {
+                        bindingSource.ResetBindings(false);
+                    });
+                }
+                else
+                {
                     bindingSource.ResetBindings(false);
-                });
-            }
-            else
-            {
-                bindingSource.ResetBindings(false);
-            }
+                }
 
-            // 스크롤 위치 복원
-            if (firstDisplayedRowIndex >= 0 && firstDisplayedRowIndex < dataGridView1.Rows.Count && firstDisplayedRowIndex != dataGridView1.FirstDisplayedScrollingRowIndex)
-            {
-                dataGridView1.FirstDisplayedScrollingRowIndex = firstDisplayedRowIndex;
+                // 스크롤 위치 복원
+                if (firstDisplayedRowIndex >= 0 && firstDisplayedRowIndex < dataGridView1.Rows.Count && firstDisplayedRowIndex != dataGridView1.FirstDisplayedScrollingRowIndex)
+                {
+                    dataGridView1.FirstDisplayedScrollingRowIndex = firstDisplayedRowIndex;
+                }
+
+                if(Ui_timer != null){
+                    Ui_timer.Stop();
+                    Ui_timer.Dispose();
+                    Ui_timer = null;
+                }
             }
-            
+            else if (!UI_UPDATE.Text.Trim().Equals("실시간") && !ui_timer)
+            {
+                ui_timer = true;
+                UI_timer();
+            }
+        }
+
+        private System.Timers.Timer Ui_timer;
+
+        private void UI_timer()
+        {
+            Ui_timer = new System.Timers.Timer(Convert.ToInt32(UI_UPDATE.Text.Replace("ms", "")));
+            Ui_timer.Elapsed += (sender, e) =>
+            {
+                // 현재 스크롤 위치 저장
+                int firstDisplayedRowIndex = dataGridView1.FirstDisplayedScrollingRowIndex;
+
+                //
+                if (dataGridView1.InvokeRequired)
+                {
+                    dataGridView1.Invoke((MethodInvoker)delegate {
+                        bindingSource.ResetBindings(false);
+                    });
+                }
+                else
+                {
+                    bindingSource.ResetBindings(false);
+                }
+
+                // 스크롤 위치 복원
+                if (firstDisplayedRowIndex >= 0 && firstDisplayedRowIndex < dataGridView1.Rows.Count && firstDisplayedRowIndex != dataGridView1.FirstDisplayedScrollingRowIndex)
+                {
+                    dataGridView1.FirstDisplayedScrollingRowIndex = firstDisplayedRowIndex;
+                }
+            };
+            Ui_timer.AutoReset = false;
+            Ui_timer.Start();
         }
 
         //초기 설정 변수
@@ -1041,6 +1102,11 @@ namespace WindowsFormsApp1
             string[] mode = { "지정가", "시장가" };
             string[] hoo = { "5호가", "4호가", "3호가", "2호가", "1호가", "현재가", "시장가", "-1호가", "-2호가", "-3호가", "-4호가", "-5호가" };
             string[] hoo2 = { "5호가", "4호가", "3호가", "2호가", "1호가", "현재가", "시장가", "-1호가", "-2호가", "-3호가", "-4호가", "-5호가" };
+            string[] ui_range = { "실시간", "100ms", "300ms", "500ms", "700ms", "1000ms"};
+            //
+            UI_UPDATE.Items.AddRange(ui_range);
+            UI_UPDATE.SelectedItem = utility.GridView1_Refresh_Time;
+            UI_Refresh_interval = utility.GridView1_Refresh_Time;
 
             //초기 세팅
             acc_text.Text = utility.setting_account_number;
@@ -1703,22 +1769,22 @@ namespace WindowsFormsApp1
                 WriteLog_System($"EDT시각{givenData_edited .ToString()} / KOR시각{currentDate.ToString()}\n");
 
                 //날짜 차이 계산
-                TimeSpan difference = currentDate - givenData_edited;
+                TimeSpan difference = currentDate.Date - givenData_edited.Date;
 
                 //월요일
                 if (today_week.Equals("월") && Math.Abs(difference.Days) > 3)
                 {
                     if (utility.Foreign_Stop) index_stop = true;
                     if (utility.Foreign_Skip) index_skip = true;
-                    WriteLog_System("미국장 전영업일 휴무\n");
-                    telegram_message("미국장 전영업일 휴무\n");
+                    WriteLog_System("[미국장 전영업일 휴무] : 매수 중단(조건식 탐색은 실행)\n");
+                    telegram_message("[미국장 전영업일 휴무] : 매수 중단(조건식 탐색은 실행)\n");
                 }
                 else if (!today_week.Equals("월") && Math.Abs(difference.Days) > 1)
                 {
                     if (utility.Foreign_Stop) index_stop = true;
                     if (utility.Foreign_Skip) index_skip = true;
-                    WriteLog_System("미국장 전영업일 휴무\n");
-                    telegram_message("미국장 전영업일 휴무\n");
+                    WriteLog_System("[미국장 전영업일 휴무] : 매수 중단(조건식 탐색은 실행)\n");
+                    telegram_message("[미국장 전영업일 휴무] : 매수 중단(조건식 탐색은 실행)\n");
                 }
             }
         }
@@ -1881,6 +1947,16 @@ namespace WindowsFormsApp1
         //초기 매매 설정
         public void auto_allow(bool skip)
         {
+            if (skip)
+            {
+                WriteLog_System("수동 실행 : 인덱스 중단, 외국 영업일 중단 무시\n");
+                telegram_message("수동 실행 : 인덱스 중단, 외국 영업일 중단 무시\n");
+                //
+                index_stop = false;
+                index_buy = false;
+                index_clear = false;
+            }
+
             //계좌 없으면 이탈
             if (!account.Contains(utility.setting_account_number))
             {
@@ -1946,9 +2022,11 @@ namespace WindowsFormsApp1
                 return;
             }
 
-            //계좌 탐색 - 200ms 
-            timer2.Start();
-            
+            if (!index_stop)
+            {
+                timer2.Start();
+            }
+
             //자동 매수 조건식 설정 여부
             if (utility.buy_condition)
             {
@@ -2225,14 +2303,12 @@ namespace WindowsFormsApp1
                     if (dataGridView2.InvokeRequired)
                     {
                         dataGridView2.Invoke((MethodInvoker)delegate {
-                            dataGridView2.DataSource = dtCondStock_hold;
-                            dataGridView2.Refresh();
+                            bindingSource2.ResetBindings(false);
                         });
                     }
                     else
                     {
-                        dataGridView2.DataSource = dtCondStock_hold;
-                        dataGridView2.Refresh();
+                        bindingSource2.ResetBindings(false);
                     }
 
                     System.Threading.Thread.Sleep(300);
@@ -2680,6 +2756,14 @@ namespace WindowsFormsApp1
 
                         if (!buy_and_check)
                         {
+                            //운영시간 확인
+                            DateTime t_now = DateTime.Now;
+                            DateTime t_end = DateTime.Parse(utility.buy_condition_end);
+                            if(t_now > t_end)
+                            {
+                                WriteLog_Stock($"[신규편입/초기/{condition_nameORcode}] :  {code_name}({code})\n매수 시간 이후 종목은 차트에 포함하지 않습니다.\n");
+                                continue;
+                            }
                             WriteLog_Stock($"[신규편입/초기/{condition_nameORcode}] :  {code_name}({code})\n");
                         }
 
@@ -2787,6 +2871,14 @@ namespace WindowsFormsApp1
                         return;
                     }
 
+                    //운영시간 확인
+                    DateTime t_now2 = DateTime.Now;
+                    DateTime t_end2 = DateTime.Parse(utility.buy_condition_end);
+                    if (t_now2 > t_end2)
+                    {
+                        WriteLog_Stock($"[신규편입/초기/{condition_nameORcode}] :  {code_name2}({code2})\n매수 시간 이후 종목은 차트에 포함하지 않습니다.\n");
+                        return;
+                    }
                     WriteLog_Stock($"[신규종목/편입/{condition_nameORcode}] : {code_name2}({code2})\n");
 
                     if (!utility.buy_AND)
@@ -3077,14 +3169,12 @@ namespace WindowsFormsApp1
                 if (dataGridView2.InvokeRequired)
                 {
                     dataGridView2.Invoke((MethodInvoker)delegate {
-                        dataGridView2.DataSource = dtCondStock_hold;
-                        dataGridView2.Refresh();
+                        bindingSource2.ResetBindings(false);
                     });
                 }
                 else
                 {
-                    dataGridView2.DataSource = dtCondStock_hold;
-                    dataGridView2.Refresh();
+                    bindingSource2.ResetBindings(false);
                 }
             }
         }

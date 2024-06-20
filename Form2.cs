@@ -44,6 +44,8 @@ namespace WindowsFormsApp1
             telegram_test_button.Click += telegram_test;
 
             //미사용 항목 경고창(19개)
+            KIS_Allow.Click += HandleCheckedChanged;
+            TradingView_Webhook.Click += HandleCheckedChanged;
 
             //--------------------------------------------
 
@@ -1631,6 +1633,8 @@ namespace WindowsFormsApp1
             tmp.Add("TradingView_Webhook_Stop/" + TradingView_Webhook_Stop.Text);
             //
             tmp.Add("Telegram_Last_Chat_update_id/" + Convert.ToString(Trade_Auto.update_id));
+            //
+            tmp.Add("GridView1_Refresh_Time/" + Convert.ToString(Trade_Auto.UI_Refresh_interval));
 
             // 저장할 파일 경로
             string filePath = $@"C:\Auto_Trade_Kiwoom\Setting\setting.txt";

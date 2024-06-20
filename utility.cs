@@ -164,6 +164,8 @@ namespace WindowsFormsApp1
 
         public static int Telegram_last_chat_update_id;
 
+        public static string GridView1_Refresh_Time;
+
         //utility 목록
         public static async Task setting_load_auto()
         {
@@ -538,6 +540,10 @@ namespace WindowsFormsApp1
             //Telegram_Chat_Number
             String[] Telegram_last_chat_update_id_tmp = reader.ReadLine().Split('/');
             Telegram_last_chat_update_id = Convert.ToInt32(Telegram_last_chat_update_id_tmp[1]);
+
+            //Telegram_Chat_Number
+            String[] GridView1_Refresh_Time_tmp = reader.ReadLine().Split('/');
+            GridView1_Refresh_Time = Convert.ToString(GridView1_Refresh_Time_tmp[1]);
 
             reader.Close();
         }
