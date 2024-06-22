@@ -4446,7 +4446,7 @@ namespace WindowsFormsApp1
 
                 //보유수량계산
                 string[] tmp = row["보유수량"].ToString().Split('/');
-                int order_acc = Convert.ToInt32(tmp[0]);
+                int order_acc = Convert.ToInt32(tmp[0].Replace(",", ""));
 
                 //주문 방식 구분
                 string[] order_method = buy_condtion_method.Text.Split('/');
