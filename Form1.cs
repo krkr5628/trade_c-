@@ -2254,7 +2254,7 @@ namespace WindowsFormsApp1
         }
 
 
-        //#############################Datatable 반복 수정문 및 최적화 기준점
+        //#############################이전까지 반드시 동기화 작동 / Datatable 반복 수정문 및 최적화 기준점########################
 
 
         //-----------------------실시간 조건 검색------------------------------
@@ -3208,11 +3208,10 @@ namespace WindowsFormsApp1
         {
             //신규 값 받기
             string price = Regex.Replace(axKHOpenAPI1.GetCommRealData(e.sRealKey, 10).Trim(), @"[\+\-]", ""); //새로운 현재가
-            if (price.Equals("")) return;
-
-            string updown = axKHOpenAPI1.GetCommRealData(e.sRealKey, 12).Trim(); //새로운 등락율
             string amount = axKHOpenAPI1.GetCommRealData(e.sRealKey, 13).Trim(); //새로운 거래량
-            double native_percent = 0;
+
+            if (price.Equals("") || amount.Equals("")) return;
+
             string percent = "";
 
             //종목 확인
@@ -3221,65 +3220,60 @@ namespace WindowsFormsApp1
             if (findRows.Length != 0)
             {
                 //값 등록
-                for (int i = 0; i < findRows.Length; i++)
+                Parallel.ForEach(findRows, row =>
                 {
-                    //신규 값 계산
-                    if (!price.Equals(""))
-                    {
-                        double native_price = Convert.ToDouble(price);
-                        native_percent = (native_price - Convert.ToDouble(findRows[i]["편입가"].ToString().Replace(",", ""))) / Convert.ToDouble(findRows[i]["편입가"].ToString().Replace(",", "")) * 100;
-                        percent = string.Format("{0:#,##0.00}%", Convert.ToDecimal(native_percent)); //새로운 수익률
-                    }
+                    //필요값 사전 추출
+                    string buy_price = row["편입가"].ToString().Replace(",", "");
+                    string status = row["상태"].ToString();
+                    string in_high = row["편입최고"].ToString().Replace(",", "");
+                    string order_number = row["주문번호"].ToString();
+                    string hold = row["보유수량"].ToString().Split('/')[0];
 
-                    //신규 값 빈값 확인
-                    if (!price.Equals(""))
+                    //값 계산
+                    double native_price = Convert.ToDouble(price);
+                    double native_percent = (native_price - Convert.ToDouble(buy_price)) / Convert.ToDouble(buy_price) * 100;
+                    percent = string.Format("{0:#,##0.00}%", Convert.ToDecimal(native_percent)); //새로운 수익률
+
+                    //값 반영
+                    row["현재가"] = string.Format("{0:#,##0}", Convert.ToInt32(price)); //새로운 현재가
+                    row["거래량"] = string.Format("{0:#,##0}", Convert.ToInt32(amount)); //새로운 거래량
+                    row["수익률"] = percent;
+
+                    //TS 계산 및 반영
+                    if (Convert.ToString(status) == "매수완료" && Convert.ToString(status) == "TS매수완료" && Convert.ToInt32(in_high) < Convert.ToInt32(price))
                     {
-                        findRows[i]["현재가"] = string.Format("{0:#,##0}", Convert.ToInt32(price)); //새로운 현재가
-                        //
-                        if (Convert.ToString(findRows[i]["상태"]) == "매수완료" && Convert.ToString(findRows[i]["상태"]) == "TS매수완료" && Convert.ToInt32(findRows[i]["편입최고"]) < Convert.ToInt32(price))
+                        row["편입최고"] = string.Format("{0:#,##0}", Convert.ToInt32(price)); //새로운 현재가
+                        if (Convert.ToString(status) == "TS매수완료" && native_percent >= double.Parse(utility.profit_ts_text))
                         {
-                            findRows[i]["편입최고"] = string.Format("{0:#,##0}", Convert.ToInt32(price)); //새로운 현재가
-                            if (Convert.ToString(findRows[i]["상태"]) == "TS매수완료" && native_percent >= double.Parse(utility.profit_ts_text))
-                            {
-                                findRows[i]["상태"] = "매수완료";
-                            }
+                            row["상태"] = "매수완료";
                         }
-                    }
-                    if (!amount.Equals(""))
-                    {
-                        findRows[i]["거래량"] = string.Format("{0:#,##0}", Convert.ToInt32(amount)); //새로운 거래량
-                    }
-                    if (!percent.Equals(""))
-                    {
-                        findRows[i]["수익률"] = percent;
                     }
 
                     //매도 확인
-                    if (findRows[i]["상태"].Equals("매수완료") && !percent.Equals(""))
+                    if (status.Equals("매수완료"))
                     {
                         lock (sell_lock)
                         {
-                            string order_num = findRows[i]["주문번호"].ToString();
-                            if (!sell_runningCodes.ContainsKey(order_num))
+                            if (!sell_runningCodes.ContainsKey(order_number))
                             {
-                                sell_runningCodes[order_num] = true;
+                                sell_runningCodes[order_number] = true;
                                 if (utility.profit_ts)
                                 {
-                                    if (Convert.ToInt32(findRows[i]["편입최고"]) > Convert.ToInt32(price))
+                                    if (Convert.ToInt32(in_high) > Convert.ToInt32(price))
                                     {
-                                        double down_percent_real = (Convert.ToDouble(price) - Convert.ToDouble(findRows[i]["편입최고"].ToString().Replace(",", ""))) / Convert.ToDouble(findRows[i]["편입최고"].ToString().Replace(",", "")) * 100;
-                                        sell_check_price(price.Equals("") ? findRows[0]["현재가"].ToString() : string.Format("{0:#,##0}", Convert.ToInt32(price)), percent, Convert.ToInt32(findRows[i]["보유수량"].ToString().Split('/')[0]), Convert.ToInt32(findRows[i]["편입가"].ToString().Replace(",", "")), order_num, down_percent_real);
+                                        double down_percent_real = (Convert.ToDouble(price) - Convert.ToDouble(in_high)) / Convert.ToDouble(in_high) * 100;
+                                        sell_check_price(string.Format("{0:#,##0}", Convert.ToInt32(price)), percent, Convert.ToInt32(hold), Convert.ToInt32(buy_price), order_number, down_percent_real);
                                     }
                                 }
                                 else
                                 {
-                                    sell_check_price(price.Equals("") ? findRows[0]["현재가"].ToString() : string.Format("{0:#,##0}", Convert.ToInt32(price)), percent, Convert.ToInt32(findRows[i]["보유수량"].ToString().Split('/')[0]), Convert.ToInt32(findRows[i]["편입가"].ToString().Replace(",", "")), order_num, 0);
+                                    sell_check_price(string.Format("{0:#,##0}", Convert.ToInt32(price)), percent, Convert.ToInt32(hold), Convert.ToInt32(buy_price), order_number, 0);
                                 }
-                                sell_runningCodes.Remove(order_num);
+                                sell_runningCodes.Remove(order_number);
                             }
                         }
                     }
-                }
+                });
 
                 gridView1_refresh();
             }
@@ -3291,18 +3285,13 @@ namespace WindowsFormsApp1
             if (findRows2.Length != 0)
             {
                 //값 등록
-                for (int i = 0; i < findRows.Length; i++)
+                for (int i = 0; i < findRows2.Length; i++)
                 {
-                    if (!price.Equals(""))
-                    {
-                        findRows2[i]["현재가"] = string.Format("{0:#,##0}", Convert.ToInt32(price)); //새로운 현재가
-                        findRows2[i]["평가금액"] = string.Format("{0:#,##0}", Convert.ToInt32(price) * Convert.ToInt32(findRows2[i]["보유수량"].ToString().Replace(",", "")));
-                    }
-                    if (!percent.Equals(""))
-                    {
-                        findRows2[i]["수익률"] = percent;
-                        findRows2[i]["손익금액"] = string.Format("{0:#,##0}", Convert.ToInt32(Convert.ToInt32(findRows2[i]["평가금액"].ToString().Replace(",", "")) * Convert.ToDouble(percent.Replace("%", "")) / 100));
-                    }
+                    findRows2[i]["현재가"] = string.Format("{0:#,##0}", Convert.ToInt32(price)); //새로운 현재가
+                    findRows2[i]["평가금액"] = string.Format("{0:#,##0}", Convert.ToInt32(price) * Convert.ToInt32(findRows2[i]["보유수량"].ToString().Replace(",", "")));
+                    //
+                    findRows2[i]["수익률"] = percent;
+                    findRows2[i]["손익금액"] = string.Format("{0:#,##0}", Convert.ToInt32(Convert.ToInt32(findRows2[i]["평가금액"].ToString().Replace(",", "")) * Convert.ToDouble(percent.Replace("%", "")) / 100));
                 }
 
                 //적용
