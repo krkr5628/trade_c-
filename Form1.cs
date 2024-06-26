@@ -3591,6 +3591,8 @@ namespace WindowsFormsApp1
                         }
                     }
 
+                    WriteLog_Stock($"[기존종목/이탈/{e.strConditionName}] : {findRows[0]["종목명"]}({e.sTrCode}) 재이탈 대상 없음\n");
+
                     break;
             }
         }
