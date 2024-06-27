@@ -590,7 +590,7 @@ namespace WindowsFormsApp1
             if (currentMessage.Length > 0)
             {
                 telegram_send(currentMessage.ToString());
-            }      
+            }
         }
 
         private bool telegram_stop = false;
@@ -2013,129 +2013,130 @@ namespace WindowsFormsApp1
         //크레온 프로그램과 연동하여 값 수신하도록 구성
         private async Task KOR_FOREIGN_COMMUNICATION()
         {
-            using (var client = new NamedPipeClientStream(".", "testpipe", PipeDirection.In))
+            using (var client = new NamedPipeClientStream(".", "testpipe", PipeDirection.InOut, PipeOptions.Asynchronous))
             {
-                WriteLog_System("[Foreign Commodity Receiving] : waiting for connection...\n");
                 try
                 {
-                    Task connectTask = client.ConnectAsync();
-                    if (await Task.WhenAny(connectTask, Task.Delay(60000)) != connectTask)
-                    {
-                        WriteLog_System($"[Foreign Commodity Receiving] : timeout(60) => Retry\n");
-                        await KOR_FOREIGN_COMMUNICATION();
-                        return;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    // 예외 발생
-                    WriteLog_System($"[Foreign Commodity Receiving] : Error - {ex.Message}\n");
-                    return;
-                }
-
-                using (var reader = new StreamReader(client))
-                using (var writer = new StreamWriter(client) { AutoFlush = true })
-                {
-                    // 서버로부터 환영 메시지 읽기 (60초 타임아웃)
-                    Task<string> readTask = Task.Run(() => reader.ReadLineAsync());
-                    if (await Task.WhenAny(readTask, Task.Delay(TimeSpan.FromSeconds(60))) == readTask)
-                    {
-                        if(readTask.Result.Equals("Connection_Check"))
-                        {
-                            writer.WriteLine("OK");
-                        }
-                        else
-                        {
-                            WriteLog_System("[Foreign Commodity Receiving] : connection failed\n");
-                            return;
-                        }
-
-                    }
-                    else
-                    {
-                        WriteLog_System("[Foreign Commodity Receiving] : time out(60) => Retry\n");
-                        await KOR_FOREIGN_COMMUNICATION();
-                        return;
-                    }
-
-                    // 서버로부터 주기적으로 전송되는 메시지 읽기
                     while (true)
                     {
-                        Task<string> messageTask = reader.ReadLineAsync();
-                        if (await Task.WhenAny(messageTask, Task.Delay(TimeSpan.FromSeconds(30))) == messageTask)
+                        WriteLog_System("[Foreign Commodity Receiving] : waiting for connection...\n");
+
+                        await client.ConnectAsync();
+
+                        WriteLog_System("[Foreign Commodity Receiving] : connected to server\n");
+
+                        using (var reader = new StreamReader(client))
                         {
-                            string message = messageTask.Result;
-                            if (message != null)
+                            // 서버로부터 주기적으로 전송되는 메시지 읽기
+                            while (client.IsConnected)
                             {
-                                //UI 스레드 처리
-                                if (Foreign_Commdity.InvokeRequired)
+                                try
                                 {
-                                    Foreign_Commdity.Invoke(new Action(() => Foreign_Commdity.Text = message));
-                                }
-                                else
-                                {
-                                    Foreign_Commdity.Text = message;
-                                }
-
-                                double current = Convert.ToDouble(message);
-
-                                if (utility.buy_condition_index)
-                                {
-                                    if (utility.type0_selection && !index_buy)
+                                    Task<string> messageTask = reader.ReadLineAsync();
+                                    if (await Task.WhenAny(messageTask, Task.Delay(TimeSpan.FromSeconds(30))) == messageTask)
                                     {
-                                        double start = Convert.ToDouble(utility.type0_start);
-                                        double end = Convert.ToDouble(utility.type0_end);
-                                        if (current < start || end < current)
-                                        {
+                                        string message = messageTask.Result;
 
-                                            lock (index_write)
+                                        if (message != null)
+                                        {
+                                            // UI 스레드 처리
+                                            if (Foreign_Commdity.InvokeRequired)
                                             {
-                                                index_buy = true;
+                                                Foreign_Commdity.Invoke(new Action(() => Foreign_Commdity.Text = message));
+                                            }
+                                            else
+                                            {
+                                                Foreign_Commdity.Text = message;
                                             }
 
-                                            WriteLog_System($"[BUY/이탈] FOREIGN RANGE : START({start}) <=  NOW({current}) <= END({end})\n");
-                                            WriteLog_System("Trade Stop\n");
-                                            telegram_message($"[BUY/이탈] FOREIGN RANGE : START({start}) <=  NOW({current}) <= END({end})\n");
-                                            telegram_message("Trade Stop\n");
-                                        }
-                                    }
-                                }
+                                            double current = Convert.ToDouble(message);
 
-                                if (utility.clear_index)
-                                {
-                                    if (utility.type0_selection_all && !index_clear)
-                                    {
-                                        double start = Convert.ToDouble(utility.type0_start_all);
-                                        double end = Convert.ToDouble(utility.type0_end_all);
-                                        if (current < start || end < current)
-                                        {
-                                            lock (index_write)
+                                            if (utility.buy_condition_index)
                                             {
-                                                index_clear = true;
+                                                if (utility.type0_selection && !index_buy)
+                                                {
+                                                    double start = Convert.ToDouble(utility.type0_start);
+                                                    double end = Convert.ToDouble(utility.type0_end);
+                                                    if (current < start || end < current)
+                                                    {
+                                                        lock (index_write)
+                                                        {
+                                                            index_buy = true;
+                                                        }
+
+                                                        WriteLog_System($"[BUY/이탈] FOREIGN RANGE : START({start}) <=  NOW({current}) <= END({end})\n");
+                                                        WriteLog_System("Trade Stop\n");
+                                                        telegram_message($"[BUY/이탈] FOREIGN RANGE : START({start}) <=  NOW({current}) <= END({end})\n");
+                                                        telegram_message("Trade Stop\n");
+                                                    }
+                                                }
                                             }
 
-                                            WriteLog_System($"[CLEAR/이탈] FOREIGN RANGE : START({start}) <=  NOW({current}) <= END({end})\n");
-                                            WriteLog_System("Trade Stop\n");
-                                            telegram_message($"[CLEAR/이탈] FOREIGN RANGE : START({start}) <=  NOW({current}) <= END({end})\n");
-                                            telegram_message("Trade Stop\n");
+                                            if (utility.clear_index)
+                                            {
+                                                if (utility.type0_selection_all && !index_clear)
+                                                {
+                                                    double start = Convert.ToDouble(utility.type0_start_all);
+                                                    double end = Convert.ToDouble(utility.type0_end_all);
+                                                    if (current < start || end < current)
+                                                    {
+                                                        lock (index_write)
+                                                        {
+                                                            index_clear = true;
+                                                        }
+
+                                                        WriteLog_System($"[CLEAR/이탈] FOREIGN RANGE : START({start}) <=  NOW({current}) <= END({end})\n");
+                                                        WriteLog_System("Trade Stop\n");
+                                                        telegram_message($"[CLEAR/이탈] FOREIGN RANGE : START({start}) <=  NOW({current}) <= END({end})\n");
+                                                        telegram_message("Trade Stop\n");
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
+                                    else
+                                    {
+                                        WriteLog_System("[Foreign Commodity Receiving] : Disconnected From Client\n");
+                                        await KOR_FOREIGN_COMMUNICATION(); // 파이프가 끊어지면 다시 연결 시도
+                                        return;
+                                    }
+
+                                    await Task.Delay(10000); // 10초 대기
+                                }
+                                catch (IOException ex)
+                                {
+                                    WriteLog_System($"[Foreign Commodity Receiving] : Error - {ex.Message}\n");
+                                    await KOR_FOREIGN_COMMUNICATION(); // 파이프가 끊어지면 다시 연결 시도
+                                    return;
+                                }
+                                catch (Exception ex)
+                                {
+                                    WriteLog_System($"[Foreign Commodity Receiving] : Error - {ex.Message}\n");
+                                    return;
                                 }
                             }
                         }
-                        else
-                        {
-                            WriteLog_System("[Foreign Commodity Receiving] : No message received in 30 seconds\n");
-                        }
                     }
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    WriteLog_System($"[Foreign Commodity Receiving] : Unauthorized Access - {ex.Message}\n");
+                    await Task.Delay(5000); // 재시도 전에 5초 대기
+                    await KOR_FOREIGN_COMMUNICATION(); // 예외 발생 시 다시 연결 시도
+                }
+                catch (Exception ex)
+                {
+                    WriteLog_System($"[Foreign Commodity Receiving] : Error - {ex.Message}\n");
+                    await Task.Delay(5000); // 재시도 전에 5초 대기
+                    await KOR_FOREIGN_COMMUNICATION(); // 예외 발생 시 다시 연결 시도
                 }
             }
         }
 
-        //------------------------------------조건식 수신---------------------------------
+    //------------------------------------조건식 수신---------------------------------
 
-        //조건식 조회(조건식이 있어야 initial 작동 / initial을 통해 계좌를 받아와야 GetCashInfo)
-        class ConditionInfo
+    //조건식 조회(조건식이 있어야 initial 작동 / initial을 통해 계좌를 받아와야 GetCashInfo)
+    class ConditionInfo
         {
             public int Index { get; set; }
             public string Name { get; set; }
