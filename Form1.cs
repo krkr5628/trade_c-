@@ -3426,123 +3426,123 @@ namespace WindowsFormsApp1
         //실시간 시세(지속적 발생 / (현재가. 등락율, 거래량, 수익률)
         private void onReceiveRealData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveRealDataEvent e)
         {
-            //신규 값 받기
-            string price = Regex.Replace(axKHOpenAPI1.GetCommRealData(e.sRealKey, 10).Trim(), @"[\+\-]", ""); //새로운 현재가
-            string amount = axKHOpenAPI1.GetCommRealData(e.sRealKey, 13).Trim(); //새로운 거래량
-            string percent = "";
+            // 신규 값 받기
+            string price = Regex.Replace(axKHOpenAPI1.GetCommRealData(e.sRealKey, 10).Trim(), @"[\+\-]", ""); // 새로운 현재가
+            string amount = axKHOpenAPI1.GetCommRealData(e.sRealKey, 13).Trim(); // 새로운 거래량
 
             if (price.Equals("") || amount.Equals("")) return;
 
-            string buy_price = "";
-            string status = "";
-            string in_high = "";
-            string order_number = "";
-            string hold = "";
+            // 값을 병렬로 업데이트
+            Task updateDataAndCheckForSellTask = Task.Run(() => UpdateDataAndCheckForSell(e.sRealKey, price, amount));
+            Task updateDataTableHoldTask = Task.Run(() => UpdateDataTableHold(e.sRealKey, price, amount));
+        }
 
-            //값 업데이트
+        private void UpdateDataAndCheckForSell(string stockCode, string price, string amount)
+        {
             lock (table1)
             {
-                DataRow[] findRows = dtCondStock.Select($"종목코드 = {e.sRealKey}");
+                DataRow[] findRows = dtCondStock.Select($"종목코드 = '{stockCode}'");
 
                 if (findRows.Length != 0)
                 {
-                    //값 등록
                     Parallel.ForEach(findRows, row =>
                     {
-                        //필요값 사전 추출
-                        buy_price = row["편입가"].ToString().Replace(",", "");
-                        status = row["상태"].ToString();
-                        in_high = row["편입최고"].ToString().Replace(",", "");
-                        order_number = row["주문번호"].ToString();
-                        hold = row["보유수량"].ToString().Split('/')[0];
+                        // 필요값 사전 추출
+                        string buy_price = row["편입가"].ToString().Replace(",", "");
+                        string status = row["상태"].ToString();
+                        string in_high = row["편입최고"].ToString().Replace(",", "");
+                        string order_number = row["주문번호"].ToString();
+                        string hold = row["보유수량"].ToString().Split('/')[0];
 
-                        //값 계산
+                        // 값 계산
                         double native_price = Convert.ToDouble(price);
                         double native_percent = (native_price - Convert.ToDouble(buy_price)) / Convert.ToDouble(buy_price) * 100;
-                        percent = string.Format("{0:#,##0.00}%", Convert.ToDecimal(native_percent)); //새로운 수익률
+                        string percent = string.Format("{0:#,##0.00}%", Convert.ToDecimal(native_percent)); // 새로운 수익률
 
-                        //값 반영
-                        row["현재가"] = string.Format("{0:#,##0}", Convert.ToInt32(price)); //새로운 현재가
-                        row["거래량"] = string.Format("{0:#,##0}", Convert.ToInt32(amount)); //새로운 거래량
+                        // 값 반영
+                        row["현재가"] = string.Format("{0:#,##0}", Convert.ToInt32(price)); // 새로운 현재가
+                        row["거래량"] = string.Format("{0:#,##0}", Convert.ToInt32(amount)); // 새로운 거래량
                         row["수익률"] = percent;
 
-                        //TS 계산 및 반영
-                        if (Convert.ToString(status) == "매수완료" && Convert.ToString(status) == "TS매수완료" && Convert.ToInt32(in_high) < Convert.ToInt32(price))
+                        // TS 계산 및 반영
+                        if (status == "매수완료" && status == "TS매수완료" && Convert.ToInt32(in_high) < Convert.ToInt32(price))
                         {
-                            row["편입최고"] = string.Format("{0:#,##0}", Convert.ToInt32(price)); //새로운 현재가
-                            if (Convert.ToString(status) == "TS매수완료" && native_percent >= double.Parse(utility.profit_ts_text))
+                            row["편입최고"] = string.Format("{0:#,##0}", Convert.ToInt32(price)); // 새로운 현재가
+                            if (status == "TS매수완료" && native_percent >= double.Parse(utility.profit_ts_text))
                             {
                                 row["상태"] = "매수완료";
+                            }
+                        }
+
+                        // 매도 확인
+                        if (status.Equals("매수완료"))
+                        {
+                            lock (sell_lock)
+                            {
+                                if (!sell_runningCodes.ContainsKey(order_number))
+                                {
+                                    sell_runningCodes[order_number] = true;
+                                    if (utility.profit_ts)
+                                    {
+                                        if (Convert.ToInt32(in_high) > Convert.ToInt32(price))
+                                        {
+                                            double down_percent_real = (Convert.ToDouble(price) - Convert.ToDouble(in_high)) / Convert.ToDouble(in_high) * 100;
+                                            sell_check_price(string.Format("{0:#,##0}", Convert.ToInt32(price)), percent, Convert.ToInt32(hold), Convert.ToInt32(buy_price), order_number, down_percent_real);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        sell_check_price(string.Format("{0:#,##0}", Convert.ToInt32(price)), percent, Convert.ToInt32(hold), Convert.ToInt32(buy_price), order_number, 0);
+                                    }
+                                    sell_runningCodes.Remove(order_number);
+                                }
                             }
                         }
                     });
 
                     gridView1_refresh();
                 }
-                else
-                {
-                    return;
-                }
             }
+        }
 
-            //매도 확인
-            if (status.Equals("매수완료"))
-            {
-                lock (sell_lock)
-                {
-                    if (!sell_runningCodes.ContainsKey(order_number))
-                    {
-                        sell_runningCodes[order_number] = true;
-                        if (utility.profit_ts)
-                        {
-                            if (Convert.ToInt32(in_high) > Convert.ToInt32(price))
-                            {
-                                double down_percent_real = (Convert.ToDouble(price) - Convert.ToDouble(in_high)) / Convert.ToDouble(in_high) * 100;
-                                sell_check_price(string.Format("{0:#,##0}", Convert.ToInt32(price)), percent, Convert.ToInt32(hold), Convert.ToInt32(buy_price), order_number, down_percent_real);
-                            }
-                        }
-                        else
-                        {
-                            sell_check_price(string.Format("{0:#,##0}", Convert.ToInt32(price)), percent, Convert.ToInt32(hold), Convert.ToInt32(buy_price), order_number, 0);
-                        }
-                        sell_runningCodes.Remove(order_number);
-                    }
-                }
-            }
-
+        private void UpdateDataTableHold(string stockCode, string price, string amount)
+        {
             lock (table2)
             {
-                //종목 확인
-                DataRow[] findRows2 = dtCondStock_hold.Select($"종목코드 = {e.sRealKey}");
+                DataRow[] findRows2 = dtCondStock_hold.Select($"종목코드 = '{stockCode}'");
 
-                //
                 if (findRows2.Length != 0)
                 {
-                    //값 등록
-                    for (int i = 0; i < findRows2.Length; i++)
+                    Parallel.ForEach(findRows2, row =>
                     {
-                        findRows2[i]["현재가"] = string.Format("{0:#,##0}", Convert.ToInt32(price)); //새로운 현재가
-                        findRows2[i]["평가금액"] = string.Format("{0:#,##0}", Convert.ToInt32(price) * Convert.ToInt32(findRows2[i]["보유수량"].ToString().Replace(",", "")));
+                        row["현재가"] = string.Format("{0:#,##0}", Convert.ToInt32(price)); // 새로운 현재가
+                        row["평가금액"] = string.Format("{0:#,##0}", Convert.ToInt32(price) * Convert.ToInt32(row["보유수량"].ToString().Replace(",", "")));
                         //
-                        findRows2[i]["수익률"] = percent;
-                        findRows2[i]["손익금액"] = string.Format("{0:#,##0}", Convert.ToInt32(Convert.ToInt32(findRows2[i]["평가금액"].ToString().Replace(",", "")) * Convert.ToDouble(percent.Replace("%", "")) / 100));
-                    }
+                        double native_price = Convert.ToDouble(price);
+                        double buy_price = Convert.ToDouble(row["평균단가"].ToString().Replace(",", ""));
+                        double native_percent = (native_price - buy_price) / buy_price * 100;
+                        string percent = string.Format("{0:#,##0.00}%", Convert.ToDecimal(native_percent)); // 새로운 수익률
+                                                                                                            //
+                        row["수익률"] = percent;
+                        row["손익금액"] = string.Format("{0:#,##0}", Convert.ToInt32(Convert.ToInt32(row["평가금액"].ToString().Replace(",", "")) * Convert.ToDouble(percent.Replace("%", "")) / 100));
+                    });
+                }
 
-                    //적용
-                    if (dataGridView2.InvokeRequired)
-                    {
-                        dataGridView2.Invoke((MethodInvoker)delegate
-                        {
-                            bindingSource2.ResetBindings(false);
-                        });
-                    }
-                    else
+                // 모든 작업이 완료되었을 때 UI 업데이트
+                if (dataGridView2.InvokeRequired)
+                {
+                    dataGridView2.Invoke((MethodInvoker)delegate
                     {
                         bindingSource2.ResetBindings(false);
-                    }
+                    });
+                }
+                else
+                {
+                    bindingSource2.ResetBindings(false);
                 }
             }
         }
+
 
         //-----------------------종목 편출입------------------------------
 
