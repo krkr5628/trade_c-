@@ -55,9 +55,13 @@ namespace WindowsFormsApp1
         private DataTable dtCondStock_Transaction = new DataTable();
 
         //-----------------------------------lock---------------------------------------- 
-        // 락 객체 생성
-        private static object buy_lock = new object();
-        private static object sell_lock = new object();
+
+        //Lock1
+        private readonly object index_write = new object();
+
+        //Lock2
+        private readonly object buy_lock = new object();
+        private readonly object sell_lock = new object();
 
         private List<Tuple<string, string>> waiting_Codes = new List<Tuple<string, string>>();
         private static Dictionary<string, bool> buy_runningCodes = new Dictionary<string, bool>();
@@ -975,15 +979,15 @@ namespace WindowsFormsApp1
                 if (!first_index && index1 <= t_now)
                 {
                     first_index = true;
-                    WriteLog_System($"[INDEX/08:59:00] : {kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
-                    telegram_message($"[INDEX/08:59:00] : {kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
+                    WriteLog_System($"[INDEX/08:59:00] : {Foreign_Commdity.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
+                    telegram_message($"[INDEX/08:59:00] : {Foreign_Commdity.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
                 }
 
                 if (!second_index && index2 <= t_now)
                 {
                     second_index = true;
-                    WriteLog_System($"[INDEX/09:00:00] : {kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
-                    telegram_message($"[INDEX/09:00:00] : {kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
+                    WriteLog_System($"[INDEX/09:00:00] : {Foreign_Commdity.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
+                    telegram_message($"[INDEX/09:00:00] : {Foreign_Commdity.Text}/{kospi_index.Text}/{kosdaq_index.Text}/{dow_index.Text}/{sp_index.Text}/{nasdaq_index.Text}\n");
                 }
             }
         }
@@ -1537,7 +1541,7 @@ namespace WindowsFormsApp1
         //------------------------------------인덱스 목록 받기--------------------------------- 
 
         //지수업데이트
-        private void Index_load()
+        private async void Index_load()
         {
             US_INDEX();
 
@@ -1551,7 +1555,7 @@ namespace WindowsFormsApp1
             //외국인 선물 누적
             if (utility.Foreign)
             {
-                KOR_FOREIGN_COMMUNICATION();
+                await Task.Run(() => KOR_FOREIGN_COMMUNICATION());
             }
         }
 
@@ -1594,7 +1598,10 @@ namespace WindowsFormsApp1
                             //
                             if (tmp5 < start || end < tmp5)
                             {
-                                index_buy = true;
+                                lock (index_write)
+                                {
+                                    index_buy = true;
+                                }
 
                                 WriteLog_System($"[BUY/이탈] DOW30 RANGE\n");
                                 WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
@@ -1616,7 +1623,10 @@ namespace WindowsFormsApp1
 
                             if (tmp5 < start || end < tmp5)
                             {
-                                index_clear = true;
+                                lock (index_write)
+                                {
+                                    index_clear = true;
+                                }
 
                                 WriteLog_System($"[CLEAR/이탈] DOW30 INDEX RANGE\n");
                                 WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
@@ -1659,7 +1669,10 @@ namespace WindowsFormsApp1
                             double end = Convert.ToDouble(utility.type4_end);
                             if (tmp5 < start || end < tmp5)
                             {
-                                index_buy = true;
+                                lock (index_write)
+                                {
+                                    index_buy = true;
+                                }
 
                                 WriteLog_System($"[BUY/이탈] S&P500 RANGE\n");
                                 WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
@@ -1680,7 +1693,11 @@ namespace WindowsFormsApp1
                             double end = Convert.ToDouble(utility.type4_end_all);
                             if (tmp5 < start || end < tmp5)
                             {
-                                index_clear = true;
+                                lock (index_write)
+                                {
+                                    index_clear = true;
+
+                                }
 
                                 WriteLog_System($"[CLEAR/이탈] S&P500 RANGE\n");
                                 WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
@@ -1724,7 +1741,10 @@ namespace WindowsFormsApp1
                             double end = Convert.ToDouble(utility.type5_end);
                             if (tmp5 < start || end < tmp5)
                             {
-                                index_buy = true;
+                                lock (index_write)
+                                {
+                                    index_buy = true;
+                                }
 
                                 WriteLog_System($"[BUY/이탈] NASDAQ RANGE\n");
                                 WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
@@ -1745,7 +1765,10 @@ namespace WindowsFormsApp1
                             double end = Convert.ToDouble(utility.type5_end_all);
                             if (tmp5 < start || end < tmp5)
                             {
-                                index_clear = true;
+                                lock (index_write)
+                                {
+                                    index_clear = true;
+                                }
 
                                 WriteLog_System($"[CLEAR/이탈] NASDAQ INDEX RANGE\n");
                                 WriteLog_System($"START({start}) <=  NOW({tmp5}) <= END({end})\n");
@@ -1970,14 +1993,6 @@ namespace WindowsFormsApp1
 
         private void KOR_INDEX()
         {
-            //외국인 선물 누적
-            if (utility.kospi_commodity)
-            {
-                KOR_FOREIGN_COMMUNICATION();
-            }
-
-            System.Threading.Thread.Sleep(delay1);
-
             //KOSPI 200 FUTURES
             if (utility.kospi_commodity)
             {
@@ -1996,57 +2011,121 @@ namespace WindowsFormsApp1
         }
 
         //크레온 프로그램과 연동하여 값 수신하도록 구성
-        private async void KOR_FOREIGN_COMMUNICATION()
+        private async Task KOR_FOREIGN_COMMUNICATION()
         {
             using (var client = new NamedPipeClientStream(".", "testpipe", PipeDirection.In))
             {
-                client.Connect();
-                using (var reader = new StreamReader(client))
+                WriteLog_System("[Foreign Commodity Receiving] : waiting for connection...\n");
+                try
                 {
+                    Task connectTask = client.ConnectAsync();
+                    if (await Task.WhenAny(connectTask, Task.Delay(60000)) != connectTask)
+                    {
+                        WriteLog_System($"[Foreign Commodity Receiving] : timeout(60) => Retry\n");
+                        await KOR_FOREIGN_COMMUNICATION();
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // 예외 발생
+                    WriteLog_System($"[Foreign Commodity Receiving] : Error - {ex.Message}\n");
+                    return;
+                }
+
+                using (var reader = new StreamReader(client))
+                using (var writer = new StreamWriter(client) { AutoFlush = true })
+                {
+                    // 서버로부터 환영 메시지 읽기 (60초 타임아웃)
+                    Task<string> readTask = Task.Run(() => reader.ReadLineAsync());
+                    if (await Task.WhenAny(readTask, Task.Delay(TimeSpan.FromSeconds(60))) == readTask)
+                    {
+                        if(readTask.Result.Equals("Connection_Check"))
+                        {
+                            writer.WriteLine("OK");
+                        }
+                        else
+                        {
+                            WriteLog_System("[Foreign Commodity Receiving] : connection failed\n");
+                            return;
+                        }
+
+                    }
+                    else
+                    {
+                        WriteLog_System("[Foreign Commodity Receiving] : time out(60) => Retry\n");
+                        await KOR_FOREIGN_COMMUNICATION();
+                        return;
+                    }
+
                     // 서버로부터 주기적으로 전송되는 메시지 읽기
                     while (true)
                     {
-                        string message = reader.ReadLine();
-                        //
-                        if (message != null)
+                        Task<string> messageTask = reader.ReadLineAsync();
+                        if (await Task.WhenAny(messageTask, Task.Delay(TimeSpan.FromSeconds(30))) == messageTask)
                         {
-                            Foreign_Commdity.Text = message;
-
-                            double current = Convert.ToDouble(message);
-
-                            if (utility.buy_condition_index)
+                            string message = messageTask.Result;
+                            if (message != null)
                             {
-                                if (utility.type0_selection && !index_buy)
+                                //UI 스레드 처리
+                                if (Foreign_Commdity.InvokeRequired)
                                 {
-                                    double start = Convert.ToDouble(utility.type0_start);
-                                    double end = Convert.ToDouble(utility.type0_end);
-                                    if (current < start || end < current)
+                                    Foreign_Commdity.Invoke(new Action(() => Foreign_Commdity.Text = message));
+                                }
+                                else
+                                {
+                                    Foreign_Commdity.Text = message;
+                                }
+
+                                double current = Convert.ToDouble(message);
+
+                                if (utility.buy_condition_index)
+                                {
+                                    if (utility.type0_selection && !index_buy)
                                     {
-                                        index_buy = true;
-                                        WriteLog_System($"[BUY/이탈] FOREIGN RANGE : START({start}) <=  NOW({current}) <= END({end})\n");
-                                        WriteLog_System("Trade Stop\n");
-                                        telegram_message($"[BUY/이탈] FOREIGN RANGE : START({start}) <=  NOW({current}) <= END({end})\n");
-                                        telegram_message("Trade Stop\n");
+                                        double start = Convert.ToDouble(utility.type0_start);
+                                        double end = Convert.ToDouble(utility.type0_end);
+                                        if (current < start || end < current)
+                                        {
+
+                                            lock (index_write)
+                                            {
+                                                index_buy = true;
+                                            }
+
+                                            WriteLog_System($"[BUY/이탈] FOREIGN RANGE : START({start}) <=  NOW({current}) <= END({end})\n");
+                                            WriteLog_System("Trade Stop\n");
+                                            telegram_message($"[BUY/이탈] FOREIGN RANGE : START({start}) <=  NOW({current}) <= END({end})\n");
+                                            telegram_message("Trade Stop\n");
+                                        }
+                                    }
+                                }
+
+                                if (utility.clear_index)
+                                {
+                                    if (utility.type0_selection_all && !index_clear)
+                                    {
+                                        double start = Convert.ToDouble(utility.type0_start_all);
+                                        double end = Convert.ToDouble(utility.type0_end_all);
+                                        if (current < start || end < current)
+                                        {
+                                            lock (index_write)
+                                            {
+                                                index_clear = true;
+                                            }
+
+                                            WriteLog_System($"[CLEAR/이탈] FOREIGN RANGE : START({start}) <=  NOW({current}) <= END({end})\n");
+                                            WriteLog_System("Trade Stop\n");
+                                            telegram_message($"[CLEAR/이탈] FOREIGN RANGE : START({start}) <=  NOW({current}) <= END({end})\n");
+                                            telegram_message("Trade Stop\n");
+                                        }
                                     }
                                 }
                             }
-
-                            if (utility.clear_index)
-                            {
-                                if (utility.type0_selection_all && !index_clear)
-                                {
-                                    double start = Convert.ToDouble(utility.type0_start_all);
-                                    double end = Convert.ToDouble(utility.type0_end_all);
-                                    if (current < start || end < current)
-                                    {
-                                        index_clear = true;
-                                        WriteLog_System($"[CLEAR/이탈] FOREIGNRANGE : START({start}) <=  NOW({current}) <= END({end})\n");
-                                        WriteLog_System("Trade Stop\n");
-                                        telegram_message($"[CLEAR/이탈] FOREIGN RANGE : START({start}) <=  NOW({current}) <= END({end})\n");
-                                        telegram_message("Trade Stop\n");
-                                    }
-                                }
-                            }
+                        }
+                        else
+                        {
+                            WriteLog_System("[Foreign Commodity Receiving] : No message received in 30 seconds\n");
                         }
                     }
                 }
@@ -2104,10 +2183,14 @@ namespace WindowsFormsApp1
             {
                 WriteLog_System("수동 실행 : 인덱스 중단, 외국 영업일 중단 무시\n");
                 telegram_message("수동 실행 : 인덱스 중단, 외국 영업일 중단 무시\n");
-                //
+
                 index_stop = false;
-                index_buy = false;
-                index_clear = false;
+                //
+                lock (index_write)
+                {
+                    index_buy = false;
+                    index_clear = false;
+                }
             }
 
             //계좌 없으면 이탈
@@ -2780,7 +2863,10 @@ namespace WindowsFormsApp1
                                 telegram_message($"HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
                                 telegram_message("Trade Stop\n");
 
-                                index_buy = true;
+                                lock (index_write)
+                                {
+                                    index_buy = true;
+                                }
                             }
                         }
                     }
@@ -2803,7 +2889,10 @@ namespace WindowsFormsApp1
                                 telegram_message($"HIGH({kospi_index_series[2]}) <= SET_HIGH({end})\n");
                                 telegram_message("Trade Stop\n");
 
-                                index_clear = true;
+                                lock (index_write)
+                                {
+                                    index_clear = true;
+                                }
                             }
                         }
                     }
@@ -2869,7 +2958,10 @@ namespace WindowsFormsApp1
                                 telegram_message($"HIGH({kosdaq_index_series[2]}) <= SET_HIGH({end})\n");
                                 telegram_message("Trade Stop\n");
 
-                                index_buy = true;
+                                lock (index_write)
+                                {
+                                    index_buy = true;
+                                }
                             }
                         }
                     }
@@ -2892,7 +2984,10 @@ namespace WindowsFormsApp1
                                 telegram_message($"HIGH({kosdaq_index_series[2]}) <= SET_HIGH({end})\n");
                                 telegram_message("Trade Stop\n");
 
-                                index_clear = true;
+                                lock (index_write)
+                                {
+                                    index_clear = true;
+                                }
                             }
                         }
                     }
