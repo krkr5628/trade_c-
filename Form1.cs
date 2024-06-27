@@ -561,7 +561,7 @@ namespace WindowsFormsApp1
             string message_edtied = "[" + time + "] " + message;
 
             //4000자 검증
-            string[] lines = message.Split(new[] { "\n" }, StringSplitOptions.None);
+            string[] lines = message_edtied.Split(new[] { "\n" }, StringSplitOptions.None);
             StringBuilder currentMessage = new StringBuilder();
 
             foreach (string line in lines)
@@ -1231,6 +1231,7 @@ namespace WindowsFormsApp1
             today_profit_percent.Text = "00.00%";
             today_profit.Text = "0";
 
+            Foreign_Commdity.Text = "미수신";
             kospi_index.Text = "미수신";
             kosdaq_index.Text = "미수신";
             dow_index.Text = "미수신";
@@ -1965,10 +1966,7 @@ namespace WindowsFormsApp1
             //외국인 선물 누적
             if (utility.kospi_commodity)
             {
-                //opt50038
-                axKHOpenAPI1.SetInputValue("종목코드", sCode1.First());
-                axKHOpenAPI1.CommRqData("KOSPI200_INDEX", "opt50001", 0, GetScreenNo());
-
+                KOR_FOREIGN_COMMUNICATION();
             }
 
             System.Threading.Thread.Sleep(delay1);
@@ -1988,6 +1986,12 @@ namespace WindowsFormsApp1
                 axKHOpenAPI1.SetInputValue("종목코드", sKCode1.First());
                 axKHOpenAPI1.CommRqData("KOSDAK150_INDEX", "opt50001", 0, GetScreenNo());
             }
+        }
+
+        //크레온 프로그램과 연동하여 값 수신하도록 구성
+        private async void KOR_FOREIGN_COMMUNICATION()
+        {
+
         }
 
         //------------------------------------조건식 수신---------------------------------
@@ -2477,10 +2481,10 @@ namespace WindowsFormsApp1
                     //
                     gridView1_refresh();
 
-                    /*
+                    
                     //실시간 항목 등록(대비기호, 현재가. 등락율, 거래량)
                     axKHOpenAPI1.SetRealReg(GetScreenNo(), e.sTrCode, "10;12;13", "1");
-                    */
+                    
 
                     break;
 
@@ -3002,11 +3006,10 @@ namespace WindowsFormsApp1
                         );
                         //
                         gridView1_refresh();
-                        /*
-                        //
+                        
                         //실시간 항목 등록(대비기호, 현재가. 등락율, 거래량)
                         axKHOpenAPI1.SetRealReg(GetScreenNo(), e.sTrCode, "10;12;13", "1");
-                        */
+                        
                     }
                     /*
                     //OR 및 AND 모드에서는 중복제거 => 초기 종목 검색시 중복 제거 필수
@@ -3096,10 +3099,10 @@ namespace WindowsFormsApp1
                     );
                     //
                     gridView1_refresh();
-                    /*
+
                     //실시간 항목 등록(대비기호, 현재가. 등락율, 거래량)
                     axKHOpenAPI1.SetRealReg(GetScreenNo(), e.sTrCode, "10;12;13", "1");
-                    */
+                   
 
                     break;
 
@@ -3146,10 +3149,10 @@ namespace WindowsFormsApp1
                     dtCondStock_Transaction.Clear();
                     Transaction_Detail(condition_nameORcode, "");
 
-                    /*
+                    
                     //실시간 항목 등록(대비기호, 현재가. 등락율, 거래량)
                     axKHOpenAPI1.SetRealReg(GetScreenNo(), e.sTrCode, "10;12;13", "1");
-                    */
+                    
 
                     break;
 
