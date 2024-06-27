@@ -19,6 +19,7 @@ using System.Timers;
 using Newtonsoft.Json.Linq;
 //
 using System.Threading;
+using System.IO.Pipes;
 
 namespace WindowsFormsApp1
 {
@@ -1546,6 +1547,12 @@ namespace WindowsFormsApp1
             {
                 Initial_kor_index();
             }
+
+            //외국인 선물 누적
+            if (utility.Foreign)
+            {
+                KOR_FOREIGN_COMMUNICATION();
+            }
         }
 
         private bool index_buy = false;
@@ -1991,7 +1998,59 @@ namespace WindowsFormsApp1
         //크레온 프로그램과 연동하여 값 수신하도록 구성
         private async void KOR_FOREIGN_COMMUNICATION()
         {
+            using (var client = new NamedPipeClientStream(".", "testpipe", PipeDirection.In))
+            {
+                client.Connect();
+                using (var reader = new StreamReader(client))
+                {
+                    // 서버로부터 주기적으로 전송되는 메시지 읽기
+                    while (true)
+                    {
+                        string message = reader.ReadLine();
+                        //
+                        if (message != null)
+                        {
+                            Foreign_Commdity.Text = message;
 
+                            double current = Convert.ToDouble(message);
+
+                            if (utility.buy_condition_index)
+                            {
+                                if (utility.type0_selection && !index_buy)
+                                {
+                                    double start = Convert.ToDouble(utility.type0_start);
+                                    double end = Convert.ToDouble(utility.type0_end);
+                                    if (current < start || end < current)
+                                    {
+                                        index_buy = true;
+                                        WriteLog_System($"[BUY/이탈] FOREIGN RANGE : START({start}) <=  NOW({current}) <= END({end})\n");
+                                        WriteLog_System("Trade Stop\n");
+                                        telegram_message($"[BUY/이탈] FOREIGN RANGE : START({start}) <=  NOW({current}) <= END({end})\n");
+                                        telegram_message("Trade Stop\n");
+                                    }
+                                }
+                            }
+
+                            if (utility.clear_index)
+                            {
+                                if (utility.type0_selection_all && !index_clear)
+                                {
+                                    double start = Convert.ToDouble(utility.type0_start_all);
+                                    double end = Convert.ToDouble(utility.type0_end_all);
+                                    if (current < start || end < current)
+                                    {
+                                        index_clear = true;
+                                        WriteLog_System($"[CLEAR/이탈] FOREIGNRANGE : START({start}) <=  NOW({current}) <= END({end})\n");
+                                        WriteLog_System("Trade Stop\n");
+                                        telegram_message($"[CLEAR/이탈] FOREIGN RANGE : START({start}) <=  NOW({current}) <= END({end})\n");
+                                        telegram_message("Trade Stop\n");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         //------------------------------------조건식 수신---------------------------------
