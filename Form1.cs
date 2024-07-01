@@ -1113,6 +1113,25 @@ namespace WindowsFormsApp1
             dataGridView1.CurrentCellDirtyStateChanged += DataGridView1_CurrentCellDirtyStateChanged;
             dataGridView1.CellValueChanged += DataGridView1_CellValueChanged;
 
+            //-------------------오류 찾기
+            dataGridView1.DataError += DataGridView1_DataError;
+
+        }
+
+        private void DataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            string errorMessage = $"DataError in row {e.RowIndex}, column {e.ColumnIndex}\n" +
+                                  $"Exception: {e.Exception.GetType()}\n" +
+                                  $"Message: {e.Exception.Message}\n" +
+                                  $"StackTrace:\n{e.Exception.StackTrace}\n";
+
+            WriteLog_System(errorMessage);
+
+            // 콘솔에 오류 출력 (디버그 모드에서 확인 가능)
+            //System.Diagnostics.Debug.WriteLine(errorMessage);
+
+            // 예외 처리 (선택적)
+            e.ThrowException = false;
         }
 
         private BindingSource bindingSource;
@@ -1123,7 +1142,6 @@ namespace WindowsFormsApp1
         {
             bindingSource = new BindingSource();
             bindingSource.DataSource = dtCondStock;
-
             dataGridView1.DataSource = bindingSource;
 
             // Set the bool column to display as a checkbox
@@ -1135,28 +1153,30 @@ namespace WindowsFormsApp1
 
             bindingSource2 = new BindingSource();
             bindingSource2.DataSource = dtCondStock_hold;
-
             dataGridView2.DataSource = bindingSource2;
         }
 
         //셀 값이 변경될 때마다 이를 즉시 커밋하여 DataTable에 반영
         private void DataGridView1_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
-            if (dataGridView1.InvokeRequired)
+            lock (table1)
             {
-                dataGridView1.Invoke((MethodInvoker)delegate
+                if (dataGridView1.InvokeRequired)
+                {
+                    dataGridView1.Invoke((MethodInvoker)delegate
+                    {
+                        if (dataGridView1.IsCurrentCellDirty)
+                        {
+                            dataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit);
+                        }
+                    });
+                }
+                else
                 {
                     if (dataGridView1.IsCurrentCellDirty)
                     {
                         dataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit);
                     }
-                });
-            }
-            else
-            {
-                if (dataGridView1.IsCurrentCellDirty)
-                {
-                    dataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit);
                 }
             }
         }
@@ -1185,26 +1205,47 @@ namespace WindowsFormsApp1
                 // 현재 스크롤 위치 저장
                 int firstDisplayedRowIndex = dataGridView1.FirstDisplayedScrollingRowIndex;
 
-                //
                 if (dataGridView1.InvokeRequired)
                 {
                     dataGridView1.Invoke((MethodInvoker)delegate
                     {
-                        bindingSource.ResetBindings(false);
-                        // 스크롤 위치 복원
-                        if (firstDisplayedRowIndex >= 0 && firstDisplayedRowIndex < dataGridView1.Rows.Count && firstDisplayedRowIndex != dataGridView1.FirstDisplayedScrollingRowIndex)
+                        try
                         {
-                            dataGridView1.FirstDisplayedScrollingRowIndex = firstDisplayedRowIndex;
+                            if (bindingSource.DataSource != null)
+                            {
+                                ((BindingSource)dataGridView1.DataSource).ResetBindings(false);
+                            }
+
+                            // 스크롤 위치 복원
+                            if (firstDisplayedRowIndex >= 0 && firstDisplayedRowIndex < dataGridView1.Rows.Count && firstDisplayedRowIndex != dataGridView1.FirstDisplayedScrollingRowIndex)
+                            {
+                                dataGridView1.FirstDisplayedScrollingRowIndex = firstDisplayedRowIndex;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            WriteLog_System($"Error in gridView1_refresh: {ex.Message}\n");
                         }
                     });
                 }
                 else
                 {
-                    bindingSource.ResetBindings(false);
-                    // 스크롤 위치 복원
-                    if (firstDisplayedRowIndex >= 0 && firstDisplayedRowIndex < dataGridView1.Rows.Count && firstDisplayedRowIndex != dataGridView1.FirstDisplayedScrollingRowIndex)
+                    try
                     {
-                        dataGridView1.FirstDisplayedScrollingRowIndex = firstDisplayedRowIndex;
+                        if (bindingSource.DataSource != null)
+                        {
+                            ((BindingSource)dataGridView1.DataSource).ResetBindings(false);
+                        }
+
+                        // 스크롤 위치 복원
+                        if (firstDisplayedRowIndex >= 0 && firstDisplayedRowIndex < dataGridView1.Rows.Count && firstDisplayedRowIndex != dataGridView1.FirstDisplayedScrollingRowIndex)
+                        {
+                            dataGridView1.FirstDisplayedScrollingRowIndex = firstDisplayedRowIndex;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        WriteLog_System($"Error in gridView1_refresh: {ex.Message}\n");
                     }
                 }
 
@@ -1232,23 +1273,26 @@ namespace WindowsFormsApp1
                 // 현재 스크롤 위치 저장
                 int firstDisplayedRowIndex = dataGridView1.FirstDisplayedScrollingRowIndex;
 
-                //
-                if (dataGridView1.InvokeRequired)
+                lock (table1)
                 {
-                    dataGridView1.Invoke((MethodInvoker)delegate
+                    //
+                    if (dataGridView1.InvokeRequired)
+                    {
+                        dataGridView1.Invoke((MethodInvoker)delegate
+                        {
+                            bindingSource.ResetBindings(false);
+                        });
+                    }
+                    else
                     {
                         bindingSource.ResetBindings(false);
-                    });
-                }
-                else
-                {
-                    bindingSource.ResetBindings(false);
-                }
+                    }
 
-                // 스크롤 위치 복원
-                if (firstDisplayedRowIndex >= 0 && firstDisplayedRowIndex < dataGridView1.Rows.Count && firstDisplayedRowIndex != dataGridView1.FirstDisplayedScrollingRowIndex)
-                {
-                    dataGridView1.FirstDisplayedScrollingRowIndex = firstDisplayedRowIndex;
+                    // 스크롤 위치 복원
+                    if (firstDisplayedRowIndex >= 0 && firstDisplayedRowIndex < dataGridView1.Rows.Count && firstDisplayedRowIndex != dataGridView1.FirstDisplayedScrollingRowIndex)
+                    {
+                        dataGridView1.FirstDisplayedScrollingRowIndex = firstDisplayedRowIndex;
+                    }
                 }
             };
             Ui_timer.AutoReset = false;
@@ -2896,18 +2940,21 @@ namespace WindowsFormsApp1
                     */
                     //
                     //
-                    if (dataGridView3.InvokeRequired)
+                    lock (table3)
                     {
-                        dataGridView3.Invoke((MethodInvoker)delegate
+                        if (dataGridView3.InvokeRequired)
+                        {
+                            dataGridView3.Invoke((MethodInvoker)delegate
+                            {
+                                dataGridView3.DataSource = dtCondStock_Transaction;
+                                dataGridView3.Refresh();
+                            });
+                        }
+                        else
                         {
                             dataGridView3.DataSource = dtCondStock_Transaction;
                             dataGridView3.Refresh();
-                        });
-                    }
-                    else
-                    {
-                        dataGridView3.DataSource = dtCondStock_Transaction;
-                        dataGridView3.Refresh();
+                        }
                     }
                     break;
 
