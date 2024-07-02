@@ -2675,7 +2675,7 @@ namespace WindowsFormsApp1
         //--------------------------------TR TABLE--------------------------------------------  
 
         //데이터 조회(예수금, 유가증권, 조건식, 일반 검색, 실시간 검색 등)
-        private void onReceiveTrData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e)
+        private async void onReceiveTrData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e)
         {
             //
             string[] name_split = e.sRQName.Split('/');
@@ -2778,7 +2778,7 @@ namespace WindowsFormsApp1
                         }
                     }
 
-                    System.Threading.Thread.Sleep(delay1);
+                    await Task.Delay(delay1);
 
                     //기존 보유 종목 차트 업데이트
                     if (condition_nameORcode.Equals("초기"))
@@ -2875,7 +2875,7 @@ namespace WindowsFormsApp1
                     {
                         WriteLog_System($"[채결내역수신/{condition_nameORcode}/{count3}] : 실패 재시도\n");
                         //
-                        System.Threading.Thread.Sleep(delay1 + 200);
+                        await Task.Delay(delay1 + 200);
                         //
                         Transaction_Detail(condition_nameORcode, name_split[2]);
                         break;
@@ -2896,30 +2896,24 @@ namespace WindowsFormsApp1
                         {
                             lock (table1)
                             {
-                                DataRow[] findRows2 = dtCondStock.AsEnumerable().Where(row => row.Field<string>("주문번호") == condition_nameORcode).ToArray();
+                                var findRows2 = dtCondStock.AsEnumerable().Where(row => row.Field<string>("주문번호") == condition_nameORcode);
 
                                 if (findRows2.Any())
                                 {
+                                    DataRow row = findRows2.First();
                                     if (order_sum == "0")
                                     {
-                                        findRows2[0]["보유수량"] = $"{order_sum}/{order_sum}";
-                                        if (utility.buy_AND)
-                                        {
-                                            findRows2[0]["상태"] = "주문";
-                                        }
-                                        else
-                                        {
-                                            findRows2[0]["상태"] = "대기";
-                                        }
-                                        //보유 수량 업데이트
-                                        string[] hold_status = max_hoid.Text.Split('/');
+                                        row["보유수량"] = $"{order_sum}/{order_sum}";
+                                        row["상태"] = utility.buy_AND ? "주문" : "대기";
+
+                                        var hold_status = max_hoid.Text.Split('/');
                                         int hold = Convert.ToInt32(hold_status[0]);
                                         int hold_max = Convert.ToInt32(hold_status[1]);
                                         max_hoid.Text = $"{hold - 1}/{hold_max}";
                                     }
                                     else
                                     {
-                                        findRows2[0]["보유수량"] = $"{order_sum}/{order_sum}";
+                                        row["보유수량"] = $"{order_sum}/{order_sum}";
                                     }
                                     gridView1_refresh();
                                 }
@@ -2933,30 +2927,26 @@ namespace WindowsFormsApp1
 
                                 if (findRows2.Any())
                                 {
-                                    if (order_sum.Equals("0"))
+                                    DataRow row = findRows2.First();
+                                    if (order_sum == "0")
                                     {
-                                        findRows2[0]["보유수량"] = $"{order_sum}/{order_sum}";
-                                        if (!utility.duplication_deny)
+                                        row["보유수량"] = $"{order_sum}/{order_sum}";
+                                        row["상태"] = !utility.duplication_deny ? "대기" : "매도완료";
+
+                                        if (utility.duplication_deny)
                                         {
-                                            findRows2[0]["상태"] = "대기";
-                                        }
-                                        else
-                                        {
-                                            findRows2[0]["상태"] = "매도완료";
-                                            //
-                                            //모든 화면에서 "code"종목 실시간 해지
                                             axKHOpenAPI1.SetRealRemove("ALL", code);
                                         }
-                                        //보유 수량 업데이트
-                                        string[] hold_status = max_hoid.Text.Split('/');
+
+                                        var hold_status = max_hoid.Text.Split('/');
                                         int hold = Convert.ToInt32(hold_status[0]);
                                         int hold_max = Convert.ToInt32(hold_status[1]);
                                         max_hoid.Text = $"{hold - 1}/{hold_max}";
                                     }
                                     else
                                     {
-                                        findRows2[0]["보유수량"] = $"{order_sum}/{order_sum}";
-                                        findRows2[0]["상태"] = "매수완료";
+                                        row["보유수량"] = $"{order_sum}/{order_sum}";
+                                        row["상태"] = "매수완료";
                                     }
                                     gridView1_refresh();
                                 }
@@ -2976,17 +2966,10 @@ namespace WindowsFormsApp1
                                     {
                                         row["편입상태"] = "실매입";
                                         row["편입가"] = average_price;
-                                        //
-                                        if (utility.profit_ts)
-                                        {
-                                            row["상태"] = "TS매수완료";
-                                            row["편입최고"] = average_price;
-                                        }
-                                        else
-                                        {
-                                            row["상태"] = "매수완료";
-                                        }
+                                        row["상태"] = utility.profit_ts ? "TS매수완료" : "매수완료";
+                                        row["편입최고"] = utility.profit_ts ? average_price : row["편입최고"];
                                         gridView1_refresh();
+
                                         //Message
                                         WriteLog_Order($"[매수주문/정상완료/01] : {code_name}({code}) {order_sum}개 {average_price}원\n");
                                         telegram_message($"[매수주문/정상완료/01] : {code_name}({code}) {order_sum}개 {average_price}원\n");
