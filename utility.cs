@@ -169,16 +169,14 @@ namespace WindowsFormsApp1
         public static string Auth;
 
         //utility 목록
-        public static async Task setting_load_auto()
+        public static void setting_load_auto()
         {
             //windows server 2022 영문 기준 바탕화면에 파일을 해제했을 떄 기준으로 주소 변경
-            await auto_load(system_route);
-            await Task.Run(() =>
-            {
-                load_check = true;
-            });
+            auto_load(system_route);
+
+            load_check = true;
         }
-        public static async Task auto_load(string filepath)
+        public static void auto_load(string filepath)
         {
             StreamReader reader = new StreamReader(filepath);
 

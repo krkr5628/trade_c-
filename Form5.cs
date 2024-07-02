@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using System.IO;
 //
 using System.Net.Http;
-using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {

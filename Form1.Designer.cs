@@ -126,7 +126,7 @@ namespace WindowsFormsApp1
             this.All_clear_btn = new System.Windows.Forms.Button();
             this.profit_clear_btn = new System.Windows.Forms.Button();
             this.loss_clear_btn = new System.Windows.Forms.Button();
-            this.Refresh = new System.Windows.Forms.Button();
+            this.Refresh_btn = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.UI_UPDATE = new System.Windows.Forms.ComboBox();
@@ -1431,7 +1431,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel7.Controls.Add(this.All_clear_btn, 4, 0);
             this.tableLayoutPanel7.Controls.Add(this.profit_clear_btn, 5, 0);
             this.tableLayoutPanel7.Controls.Add(this.loss_clear_btn, 6, 0);
-            this.tableLayoutPanel7.Controls.Add(this.Refresh, 8, 0);
+            this.tableLayoutPanel7.Controls.Add(this.Refresh_btn, 8, 0);
             this.tableLayoutPanel7.Location = new System.Drawing.Point(5, 18);
             this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
@@ -1537,20 +1537,20 @@ namespace WindowsFormsApp1
             this.loss_clear_btn.Text = "손절청산";
             this.loss_clear_btn.UseVisualStyleBackColor = false;
             // 
-            // Refresh
+            // Refresh_btn
             // 
-            this.Refresh.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.Refresh_btn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Refresh.BackColor = System.Drawing.Color.MediumPurple;
-            this.Refresh.ForeColor = System.Drawing.Color.Black;
-            this.Refresh.Location = new System.Drawing.Point(738, 2);
-            this.Refresh.Margin = new System.Windows.Forms.Padding(2);
-            this.Refresh.Name = "Refresh";
-            this.Refresh.Size = new System.Drawing.Size(92, 24);
-            this.Refresh.TabIndex = 21;
-            this.Refresh.Text = "Refresh";
-            this.Refresh.UseVisualStyleBackColor = false;
+            this.Refresh_btn.BackColor = System.Drawing.Color.MediumPurple;
+            this.Refresh_btn.ForeColor = System.Drawing.Color.Black;
+            this.Refresh_btn.Location = new System.Drawing.Point(738, 2);
+            this.Refresh_btn.Margin = new System.Windows.Forms.Padding(2);
+            this.Refresh_btn.Name = "Refresh_btn";
+            this.Refresh_btn.Size = new System.Drawing.Size(92, 24);
+            this.Refresh_btn.TabIndex = 21;
+            this.Refresh_btn.Text = "Refresh";
+            this.Refresh_btn.UseVisualStyleBackColor = false;
             // 
             // groupBox3
             // 
@@ -2557,7 +2557,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Button Log_btn;
         public System.Windows.Forms.Label Authentic;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Button Refresh;
+        private System.Windows.Forms.Button Refresh_btn;
         private System.Windows.Forms.Button select_cancel;
         private System.Windows.Forms.Timer timer3;
         private System.Windows.Forms.Button Match_btn;
