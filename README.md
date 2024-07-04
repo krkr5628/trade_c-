@@ -1,4 +1,4 @@
-![image](https://github.com/krkr5628/trade_c-/assets/75410553/7a3f6214-23bb-4ec3-9a1c-26176305cba4)# Trade_Kiwoom
+# Trade_Kiwoom
 # 다음 사항
 - 모든 기능 테스트 필요
 
