@@ -717,7 +717,7 @@ namespace WindowsFormsApp1
                     else
                     {
                         WriteLog_System("Telegram 전송 오류 발생 : " + ex.Message);
-                        telegram_stop = true;
+                        success = true;
                         WriteLog_System("Telegram 전송 중단\n");
                     }
                 }
@@ -3892,6 +3892,13 @@ namespace WindowsFormsApp1
                     {
                         lock (table1)
                         {
+                            string currentPrice = row["현재가"].ToString().Replace(",", "");
+                            //
+                            if (currentPrice.Equals(price))
+                            {
+                                return;
+                            }
+                            //
                             string buyPrice = row["편입가"].ToString().Replace(",", "");
                             string status = row["상태"].ToString();
                             string inHigh = row["편입최고"].ToString().Replace(",", "");
@@ -3969,6 +3976,13 @@ namespace WindowsFormsApp1
                     DataRow row = findRows2[0];
                     lock (table2)
                     {
+                        string currentPrice = row["현재가"].ToString().Replace(",", "");
+                        //
+                        if (currentPrice.Equals(price))
+                        {
+                            return;
+                        }
+                        //
                         row["현재가"] = string.Format("{0:#,##0}", Convert.ToInt32(price));
                         row["평가금액"] = string.Format("{0:#,##0}", Convert.ToInt32(price) * Convert.ToInt32(row["보유수량"].ToString().Replace(",", "")));
 
