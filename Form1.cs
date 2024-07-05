@@ -1692,7 +1692,8 @@ namespace WindowsFormsApp1
             await Task.Delay(delay1);
 
             // 지수
-            Index_load();
+
+            Index_load(check);
 
             await Task.Delay(delay1);
 
@@ -1800,7 +1801,7 @@ namespace WindowsFormsApp1
         //------------------------------------인덱스 목록 받기--------------------------------- 
 
         //지수업데이트
-        private async Task Index_load()
+        private async Task Index_load(bool check)
         {
             US_INDEX();
 
@@ -1812,7 +1813,7 @@ namespace WindowsFormsApp1
             }
 
             //외국인 선물 누적
-            if (utility.Foreign)
+            if (utility.Foreign && !check)
             {
                 await KOR_FOREIGN_COMMUNICATION();
             }
@@ -2108,13 +2109,13 @@ namespace WindowsFormsApp1
                         }
                         else
                         {
-                            WriteLog_System($"Error fetching data for {symbol}: {response.StatusCode}\n");
+                            WriteLog_System($"[Error fetching data for {symbol}]: {response.StatusCode}\n");
                             break;
                         }
                     }
                     catch (Exception ex)
                     {
-                        WriteLog_System($"Error fetching data for {symbol}: {ex.Message}\n");
+                        WriteLog_System($"[Error fetching data for {symbol}]: {ex.Message}\n");
                         break;
                     }
                 }
@@ -2410,9 +2411,8 @@ namespace WindowsFormsApp1
                 }
                 catch (Exception ex)
                 {
-                    WriteLog_System($"[Foreign Commodity Receiving] : Error - {ex.Message}\n");
-                    await Task.Delay(5000); // 재시도 전에 5초 대기
-                    await KOR_FOREIGN_COMMUNICATION(); // 예외 발생 시 다시 연결 시도
+                    WriteLog_System($"[Foreign Commodity Receiving/재부팅] : Error - {ex.Message}\n");
+                    return;
                 }
             }
         }
