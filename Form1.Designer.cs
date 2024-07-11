@@ -145,20 +145,6 @@ namespace WindowsFormsApp1
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.axKHOpenAPI1 = new AxKHOpenAPILib.AxKHOpenAPI();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
-            this.label9 = new System.Windows.Forms.Label();
-            this.KIS_RUN = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.KIS_Profit = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.KIS_ACCOUNT = new System.Windows.Forms.Label();
-            this.KIS_N = new System.Windows.Forms.Label();
-            this.KIS_Independent = new System.Windows.Forms.Label();
-            this.KIS_Account_Number = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.log_window2 = new System.Windows.Forms.RichTextBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
@@ -179,6 +165,20 @@ namespace WindowsFormsApp1
             this.kospi_index = new System.Windows.Forms.Label();
             this.외국인선물 = new System.Windows.Forms.Label();
             this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.KIS_RUN = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.KIS_Profit = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.KIS_ACCOUNT = new System.Windows.Forms.Label();
+            this.KIS_N = new System.Windows.Forms.Label();
+            this.KIS_Independent = new System.Windows.Forms.Label();
+            this.KIS_Account_Number = new System.Windows.Forms.Label();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -195,13 +195,13 @@ namespace WindowsFormsApp1
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axKHOpenAPI1)).BeginInit();
             this.groupBox5.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            this.tableLayoutPanel8.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             this.groupBox9.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
+            this.tableLayoutPanel8.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // Login_btn
@@ -1437,7 +1437,7 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(832, 28);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(914, 28);
             this.tableLayoutPanel7.TabIndex = 11;
             // 
             // label44
@@ -1450,7 +1450,7 @@ namespace WindowsFormsApp1
             this.label44.Location = new System.Drawing.Point(2, 0);
             this.label44.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(88, 28);
+            this.label44.Size = new System.Drawing.Size(97, 28);
             this.label44.TabIndex = 17;
             this.label44.Text = "보유수량";
             this.label44.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1462,10 +1462,10 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.max_hoid.AutoSize = true;
             this.max_hoid.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.max_hoid.Location = new System.Drawing.Point(94, 0);
+            this.max_hoid.Location = new System.Drawing.Point(103, 0);
             this.max_hoid.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.max_hoid.Name = "max_hoid";
-            this.max_hoid.Size = new System.Drawing.Size(88, 28);
+            this.max_hoid.Size = new System.Drawing.Size(97, 28);
             this.max_hoid.TabIndex = 18;
             this.max_hoid.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -1476,10 +1476,10 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label46.AutoSize = true;
             this.label46.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.label46.Location = new System.Drawing.Point(186, 0);
+            this.label46.Location = new System.Drawing.Point(204, 0);
             this.label46.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(88, 28);
+            this.label46.Size = new System.Drawing.Size(97, 28);
             this.label46.TabIndex = 19;
             this.label46.Text = "매매수량";
             this.label46.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1491,10 +1491,10 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.maxbuy_acc.AutoSize = true;
             this.maxbuy_acc.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.maxbuy_acc.Location = new System.Drawing.Point(278, 0);
+            this.maxbuy_acc.Location = new System.Drawing.Point(305, 0);
             this.maxbuy_acc.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.maxbuy_acc.Name = "maxbuy_acc";
-            this.maxbuy_acc.Size = new System.Drawing.Size(88, 28);
+            this.maxbuy_acc.Size = new System.Drawing.Size(97, 28);
             this.maxbuy_acc.TabIndex = 20;
             this.maxbuy_acc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -1504,10 +1504,10 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.All_clear_btn.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.All_clear_btn.Location = new System.Drawing.Point(370, 2);
+            this.All_clear_btn.Location = new System.Drawing.Point(406, 2);
             this.All_clear_btn.Margin = new System.Windows.Forms.Padding(2);
             this.All_clear_btn.Name = "All_clear_btn";
-            this.All_clear_btn.Size = new System.Drawing.Size(88, 24);
+            this.All_clear_btn.Size = new System.Drawing.Size(97, 24);
             this.All_clear_btn.TabIndex = 3;
             this.All_clear_btn.Text = "전체청산";
             this.All_clear_btn.UseVisualStyleBackColor = false;
@@ -1518,10 +1518,10 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.profit_clear_btn.BackColor = System.Drawing.Color.RoyalBlue;
-            this.profit_clear_btn.Location = new System.Drawing.Point(462, 2);
+            this.profit_clear_btn.Location = new System.Drawing.Point(507, 2);
             this.profit_clear_btn.Margin = new System.Windows.Forms.Padding(2);
             this.profit_clear_btn.Name = "profit_clear_btn";
-            this.profit_clear_btn.Size = new System.Drawing.Size(88, 24);
+            this.profit_clear_btn.Size = new System.Drawing.Size(97, 24);
             this.profit_clear_btn.TabIndex = 4;
             this.profit_clear_btn.Text = "수익청산";
             this.profit_clear_btn.UseVisualStyleBackColor = false;
@@ -1529,7 +1529,7 @@ namespace WindowsFormsApp1
             // loss_clear_btn
             // 
             this.loss_clear_btn.BackColor = System.Drawing.Color.Crimson;
-            this.loss_clear_btn.Location = new System.Drawing.Point(554, 2);
+            this.loss_clear_btn.Location = new System.Drawing.Point(608, 2);
             this.loss_clear_btn.Margin = new System.Windows.Forms.Padding(2);
             this.loss_clear_btn.Name = "loss_clear_btn";
             this.loss_clear_btn.Size = new System.Drawing.Size(88, 24);
@@ -1544,10 +1544,10 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Refresh_btn.BackColor = System.Drawing.Color.MediumPurple;
             this.Refresh_btn.ForeColor = System.Drawing.Color.Black;
-            this.Refresh_btn.Location = new System.Drawing.Point(738, 2);
+            this.Refresh_btn.Location = new System.Drawing.Point(810, 2);
             this.Refresh_btn.Margin = new System.Windows.Forms.Padding(2);
             this.Refresh_btn.Name = "Refresh_btn";
-            this.Refresh_btn.Size = new System.Drawing.Size(92, 24);
+            this.Refresh_btn.Size = new System.Drawing.Size(102, 24);
             this.Refresh_btn.TabIndex = 21;
             this.Refresh_btn.Text = "Refresh";
             this.Refresh_btn.UseVisualStyleBackColor = false;
@@ -1801,7 +1801,7 @@ namespace WindowsFormsApp1
             // axKHOpenAPI1
             // 
             this.axKHOpenAPI1.Enabled = true;
-            this.axKHOpenAPI1.Location = new System.Drawing.Point(385, 33);
+            this.axKHOpenAPI1.Location = new System.Drawing.Point(1624, 27);
             this.axKHOpenAPI1.Name = "axKHOpenAPI1";
             this.axKHOpenAPI1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axKHOpenAPI1.OcxState")));
             this.axKHOpenAPI1.Size = new System.Drawing.Size(85, 41);
@@ -1823,18 +1823,317 @@ namespace WindowsFormsApp1
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "TIME";
             // 
-            // groupBox6
+            // groupBox7
             // 
-            this.groupBox6.Controls.Add(this.tableLayoutPanel8);
-            this.groupBox6.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox6.Location = new System.Drawing.Point(1554, 196);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox6.Size = new System.Drawing.Size(155, 200);
-            this.groupBox6.TabIndex = 19;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "KIS";
+            this.groupBox7.Controls.Add(this.log_window2);
+            this.groupBox7.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.groupBox7.Location = new System.Drawing.Point(1058, 196);
+            this.groupBox7.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox7.Size = new System.Drawing.Size(492, 200);
+            this.groupBox7.TabIndex = 20;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Stock";
+            // 
+            // log_window2
+            // 
+            this.log_window2.AcceptsTab = true;
+            this.log_window2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.log_window2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.log_window2.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.log_window2.Location = new System.Drawing.Point(2, 17);
+            this.log_window2.Name = "log_window2";
+            this.log_window2.ReadOnly = true;
+            this.log_window2.Size = new System.Drawing.Size(489, 182);
+            this.log_window2.TabIndex = 3;
+            this.log_window2.Text = "";
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.dataGridView3);
+            this.groupBox8.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.groupBox8.Location = new System.Drawing.Point(944, 400);
+            this.groupBox8.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox8.Size = new System.Drawing.Size(765, 172);
+            this.groupBox8.TabIndex = 21;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "매매내역";
+            // 
+            // dataGridView3
+            // 
+            this.dataGridView3.AllowDrop = true;
+            this.dataGridView3.AllowUserToAddRows = false;
+            this.dataGridView3.AllowUserToDeleteRows = false;
+            this.dataGridView3.AllowUserToResizeColumns = false;
+            this.dataGridView3.AllowUserToResizeRows = false;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.dataGridView3.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
+            this.dataGridView3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView3.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView3.DefaultCellStyle = dataGridViewCellStyle12;
+            this.dataGridView3.Location = new System.Drawing.Point(4, 18);
+            this.dataGridView3.Margin = new System.Windows.Forms.Padding(2);
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle13;
+            this.dataGridView3.RowTemplate.Height = 30;
+            this.dataGridView3.Size = new System.Drawing.Size(756, 150);
+            this.dataGridView3.TabIndex = 13;
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.log_window3);
+            this.groupBox9.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.groupBox9.Location = new System.Drawing.Point(537, 196);
+            this.groupBox9.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox9.Size = new System.Drawing.Size(517, 200);
+            this.groupBox9.TabIndex = 15;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Order";
+            // 
+            // log_window3
+            // 
+            this.log_window3.AcceptsTab = true;
+            this.log_window3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.log_window3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.log_window3.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.log_window3.Location = new System.Drawing.Point(2, 17);
+            this.log_window3.Name = "log_window3";
+            this.log_window3.ReadOnly = true;
+            this.log_window3.Size = new System.Drawing.Size(514, 178);
+            this.log_window3.TabIndex = 2;
+            this.log_window3.Text = "";
+            // 
+            // tableLayoutPanel10
+            // 
+            this.tableLayoutPanel10.ColumnCount = 6;
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel10.Controls.Add(this.Foreign_Commdity, 0, 1);
+            this.tableLayoutPanel10.Controls.Add(this.label33, 5, 0);
+            this.tableLayoutPanel10.Controls.Add(this.nasdaq_index, 5, 1);
+            this.tableLayoutPanel10.Controls.Add(this.label35, 4, 0);
+            this.tableLayoutPanel10.Controls.Add(this.sp_index, 4, 1);
+            this.tableLayoutPanel10.Controls.Add(this.label37, 3, 0);
+            this.tableLayoutPanel10.Controls.Add(this.dow_index, 3, 1);
+            this.tableLayoutPanel10.Controls.Add(this.label39, 2, 0);
+            this.tableLayoutPanel10.Controls.Add(this.kosdaq_index, 2, 1);
+            this.tableLayoutPanel10.Controls.Add(this.label41, 1, 0);
+            this.tableLayoutPanel10.Controls.Add(this.kospi_index, 1, 1);
+            this.tableLayoutPanel10.Controls.Add(this.외국인선물, 0, 0);
+            this.tableLayoutPanel10.Location = new System.Drawing.Point(388, 27);
+            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
+            this.tableLayoutPanel10.RowCount = 2;
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(667, 47);
+            this.tableLayoutPanel10.TabIndex = 23;
+            // 
+            // Foreign_Commdity
+            // 
+            this.Foreign_Commdity.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Foreign_Commdity.AutoSize = true;
+            this.Foreign_Commdity.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.Foreign_Commdity.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Foreign_Commdity.Location = new System.Drawing.Point(3, 23);
+            this.Foreign_Commdity.Name = "Foreign_Commdity";
+            this.Foreign_Commdity.Size = new System.Drawing.Size(105, 24);
+            this.Foreign_Commdity.TabIndex = 11;
+            this.Foreign_Commdity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label33
+            // 
+            this.label33.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label33.AutoSize = true;
+            this.label33.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label33.Location = new System.Drawing.Point(558, 0);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(106, 23);
+            this.label33.TabIndex = 4;
+            this.label33.Text = "NASDAQ100";
+            this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // nasdaq_index
+            // 
+            this.nasdaq_index.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.nasdaq_index.AutoSize = true;
+            this.nasdaq_index.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.nasdaq_index.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.nasdaq_index.Location = new System.Drawing.Point(558, 23);
+            this.nasdaq_index.Name = "nasdaq_index";
+            this.nasdaq_index.Size = new System.Drawing.Size(106, 24);
+            this.nasdaq_index.TabIndex = 9;
+            this.nasdaq_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label35
+            // 
+            this.label35.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label35.AutoSize = true;
+            this.label35.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label35.Location = new System.Drawing.Point(447, 0);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(105, 23);
+            this.label35.TabIndex = 3;
+            this.label35.Text = "S&P500";
+            this.label35.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // sp_index
+            // 
+            this.sp_index.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.sp_index.AutoSize = true;
+            this.sp_index.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.sp_index.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.sp_index.Location = new System.Drawing.Point(447, 23);
+            this.sp_index.Name = "sp_index";
+            this.sp_index.Size = new System.Drawing.Size(105, 24);
+            this.sp_index.TabIndex = 8;
+            this.sp_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label37
+            // 
+            this.label37.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label37.AutoSize = true;
+            this.label37.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label37.Location = new System.Drawing.Point(336, 0);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(105, 23);
+            this.label37.TabIndex = 2;
+            this.label37.Text = "DOW30";
+            this.label37.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dow_index
+            // 
+            this.dow_index.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dow_index.AutoSize = true;
+            this.dow_index.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dow_index.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.dow_index.Location = new System.Drawing.Point(336, 23);
+            this.dow_index.Name = "dow_index";
+            this.dow_index.Size = new System.Drawing.Size(105, 24);
+            this.dow_index.TabIndex = 7;
+            this.dow_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label39
+            // 
+            this.label39.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label39.AutoSize = true;
+            this.label39.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label39.Location = new System.Drawing.Point(225, 0);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(105, 23);
+            this.label39.TabIndex = 1;
+            this.label39.Text = "코스닥선물";
+            this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // kosdaq_index
+            // 
+            this.kosdaq_index.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.kosdaq_index.AutoSize = true;
+            this.kosdaq_index.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.kosdaq_index.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.kosdaq_index.Location = new System.Drawing.Point(225, 23);
+            this.kosdaq_index.Name = "kosdaq_index";
+            this.kosdaq_index.Size = new System.Drawing.Size(105, 24);
+            this.kosdaq_index.TabIndex = 6;
+            this.kosdaq_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label41
+            // 
+            this.label41.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label41.AutoSize = true;
+            this.label41.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label41.Location = new System.Drawing.Point(114, 0);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(105, 23);
+            this.label41.TabIndex = 0;
+            this.label41.Text = "코스피선물";
+            this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // kospi_index
+            // 
+            this.kospi_index.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.kospi_index.AutoSize = true;
+            this.kospi_index.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.kospi_index.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.kospi_index.Location = new System.Drawing.Point(114, 23);
+            this.kospi_index.Name = "kospi_index";
+            this.kospi_index.Size = new System.Drawing.Size(105, 24);
+            this.kospi_index.TabIndex = 5;
+            this.kospi_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // 외국인선물
+            // 
+            this.외국인선물.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.외국인선물.AutoSize = true;
+            this.외국인선물.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.외국인선물.Location = new System.Drawing.Point(3, 0);
+            this.외국인선물.Name = "외국인선물";
+            this.외국인선물.Size = new System.Drawing.Size(105, 23);
+            this.외국인선물.TabIndex = 10;
+            this.외국인선물.Text = "외국인선물";
+            this.외국인선물.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // timer3
+            // 
+            this.timer3.Interval = 200;
+            this.timer3.Tick += new System.EventHandler(this.Trade_Check_Event);
             // 
             // tableLayoutPanel8
             // 
@@ -2052,317 +2351,18 @@ namespace WindowsFormsApp1
             this.KIS_Account_Number.TabIndex = 12;
             this.KIS_Account_Number.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // groupBox7
+            // groupBox6
             // 
-            this.groupBox7.Controls.Add(this.log_window2);
-            this.groupBox7.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox7.Location = new System.Drawing.Point(1058, 196);
-            this.groupBox7.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox7.Size = new System.Drawing.Size(492, 200);
-            this.groupBox7.TabIndex = 20;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "Stock";
-            // 
-            // log_window2
-            // 
-            this.log_window2.AcceptsTab = true;
-            this.log_window2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.log_window2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.log_window2.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.log_window2.Location = new System.Drawing.Point(2, 17);
-            this.log_window2.Name = "log_window2";
-            this.log_window2.ReadOnly = true;
-            this.log_window2.Size = new System.Drawing.Size(489, 182);
-            this.log_window2.TabIndex = 3;
-            this.log_window2.Text = "";
-            // 
-            // groupBox8
-            // 
-            this.groupBox8.Controls.Add(this.dataGridView3);
-            this.groupBox8.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox8.Location = new System.Drawing.Point(944, 400);
-            this.groupBox8.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox8.Size = new System.Drawing.Size(765, 172);
-            this.groupBox8.TabIndex = 21;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "매매내역";
-            // 
-            // dataGridView3
-            // 
-            this.dataGridView3.AllowDrop = true;
-            this.dataGridView3.AllowUserToAddRows = false;
-            this.dataGridView3.AllowUserToDeleteRows = false;
-            this.dataGridView3.AllowUserToResizeColumns = false;
-            this.dataGridView3.AllowUserToResizeRows = false;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.dataGridView3.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
-            this.dataGridView3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView3.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView3.DefaultCellStyle = dataGridViewCellStyle12;
-            this.dataGridView3.Location = new System.Drawing.Point(4, 18);
-            this.dataGridView3.Margin = new System.Windows.Forms.Padding(2);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle13;
-            this.dataGridView3.RowTemplate.Height = 30;
-            this.dataGridView3.Size = new System.Drawing.Size(756, 150);
-            this.dataGridView3.TabIndex = 13;
-            // 
-            // groupBox9
-            // 
-            this.groupBox9.Controls.Add(this.log_window3);
-            this.groupBox9.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox9.Location = new System.Drawing.Point(537, 196);
-            this.groupBox9.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox9.Size = new System.Drawing.Size(517, 200);
-            this.groupBox9.TabIndex = 15;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Order";
-            // 
-            // log_window3
-            // 
-            this.log_window3.AcceptsTab = true;
-            this.log_window3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.log_window3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.log_window3.Font = new System.Drawing.Font("굴림", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.log_window3.Location = new System.Drawing.Point(2, 17);
-            this.log_window3.Name = "log_window3";
-            this.log_window3.ReadOnly = true;
-            this.log_window3.Size = new System.Drawing.Size(514, 178);
-            this.log_window3.TabIndex = 2;
-            this.log_window3.Text = "";
-            // 
-            // tableLayoutPanel10
-            // 
-            this.tableLayoutPanel10.ColumnCount = 6;
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel10.Controls.Add(this.Foreign_Commdity, 0, 1);
-            this.tableLayoutPanel10.Controls.Add(this.label33, 5, 0);
-            this.tableLayoutPanel10.Controls.Add(this.nasdaq_index, 5, 1);
-            this.tableLayoutPanel10.Controls.Add(this.label35, 4, 0);
-            this.tableLayoutPanel10.Controls.Add(this.sp_index, 4, 1);
-            this.tableLayoutPanel10.Controls.Add(this.label37, 3, 0);
-            this.tableLayoutPanel10.Controls.Add(this.dow_index, 3, 1);
-            this.tableLayoutPanel10.Controls.Add(this.label39, 2, 0);
-            this.tableLayoutPanel10.Controls.Add(this.kosdaq_index, 2, 1);
-            this.tableLayoutPanel10.Controls.Add(this.label41, 1, 0);
-            this.tableLayoutPanel10.Controls.Add(this.kospi_index, 1, 1);
-            this.tableLayoutPanel10.Controls.Add(this.외국인선물, 0, 0);
-            this.tableLayoutPanel10.Location = new System.Drawing.Point(476, 27);
-            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
-            this.tableLayoutPanel10.RowCount = 2;
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(579, 47);
-            this.tableLayoutPanel10.TabIndex = 23;
-            // 
-            // Foreign_Commdity
-            // 
-            this.Foreign_Commdity.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Foreign_Commdity.AutoSize = true;
-            this.Foreign_Commdity.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Foreign_Commdity.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.Foreign_Commdity.Location = new System.Drawing.Point(3, 23);
-            this.Foreign_Commdity.Name = "Foreign_Commdity";
-            this.Foreign_Commdity.Size = new System.Drawing.Size(90, 24);
-            this.Foreign_Commdity.TabIndex = 11;
-            this.Foreign_Commdity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label33
-            // 
-            this.label33.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label33.AutoSize = true;
-            this.label33.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label33.Location = new System.Drawing.Point(483, 0);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(93, 23);
-            this.label33.TabIndex = 4;
-            this.label33.Text = "NASDAQ100";
-            this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // nasdaq_index
-            // 
-            this.nasdaq_index.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.nasdaq_index.AutoSize = true;
-            this.nasdaq_index.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.nasdaq_index.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.nasdaq_index.Location = new System.Drawing.Point(483, 23);
-            this.nasdaq_index.Name = "nasdaq_index";
-            this.nasdaq_index.Size = new System.Drawing.Size(93, 24);
-            this.nasdaq_index.TabIndex = 9;
-            this.nasdaq_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label35
-            // 
-            this.label35.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label35.AutoSize = true;
-            this.label35.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label35.Location = new System.Drawing.Point(387, 0);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(90, 23);
-            this.label35.TabIndex = 3;
-            this.label35.Text = "S&P500";
-            this.label35.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // sp_index
-            // 
-            this.sp_index.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.sp_index.AutoSize = true;
-            this.sp_index.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.sp_index.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.sp_index.Location = new System.Drawing.Point(387, 23);
-            this.sp_index.Name = "sp_index";
-            this.sp_index.Size = new System.Drawing.Size(90, 24);
-            this.sp_index.TabIndex = 8;
-            this.sp_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label37
-            // 
-            this.label37.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label37.AutoSize = true;
-            this.label37.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label37.Location = new System.Drawing.Point(291, 0);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(90, 23);
-            this.label37.TabIndex = 2;
-            this.label37.Text = "DOW30";
-            this.label37.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // dow_index
-            // 
-            this.dow_index.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dow_index.AutoSize = true;
-            this.dow_index.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dow_index.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.dow_index.Location = new System.Drawing.Point(291, 23);
-            this.dow_index.Name = "dow_index";
-            this.dow_index.Size = new System.Drawing.Size(90, 24);
-            this.dow_index.TabIndex = 7;
-            this.dow_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label39
-            // 
-            this.label39.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label39.AutoSize = true;
-            this.label39.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label39.Location = new System.Drawing.Point(195, 0);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(90, 23);
-            this.label39.TabIndex = 1;
-            this.label39.Text = "코스닥선물";
-            this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // kosdaq_index
-            // 
-            this.kosdaq_index.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.kosdaq_index.AutoSize = true;
-            this.kosdaq_index.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.kosdaq_index.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.kosdaq_index.Location = new System.Drawing.Point(195, 23);
-            this.kosdaq_index.Name = "kosdaq_index";
-            this.kosdaq_index.Size = new System.Drawing.Size(90, 24);
-            this.kosdaq_index.TabIndex = 6;
-            this.kosdaq_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label41
-            // 
-            this.label41.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label41.AutoSize = true;
-            this.label41.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label41.Location = new System.Drawing.Point(99, 0);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(90, 23);
-            this.label41.TabIndex = 0;
-            this.label41.Text = "코스피선물";
-            this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // kospi_index
-            // 
-            this.kospi_index.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.kospi_index.AutoSize = true;
-            this.kospi_index.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.kospi_index.Font = new System.Drawing.Font("굴림", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.kospi_index.Location = new System.Drawing.Point(99, 23);
-            this.kospi_index.Name = "kospi_index";
-            this.kospi_index.Size = new System.Drawing.Size(90, 24);
-            this.kospi_index.TabIndex = 5;
-            this.kospi_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // 외국인선물
-            // 
-            this.외국인선물.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.외국인선물.AutoSize = true;
-            this.외국인선물.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.외국인선물.Location = new System.Drawing.Point(3, 0);
-            this.외국인선물.Name = "외국인선물";
-            this.외국인선물.Size = new System.Drawing.Size(90, 23);
-            this.외국인선물.TabIndex = 10;
-            this.외국인선물.Text = "외국인선물";
-            this.외국인선물.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // timer3
-            // 
-            this.timer3.Interval = 200;
-            this.timer3.Tick += new System.EventHandler(this.Trade_Check_Event);
+            this.groupBox6.Controls.Add(this.tableLayoutPanel8);
+            this.groupBox6.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.groupBox6.Location = new System.Drawing.Point(1554, 196);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox6.Size = new System.Drawing.Size(155, 200);
+            this.groupBox6.TabIndex = 19;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "KIS";
             // 
             // Trade_Auto
             // 
@@ -2413,15 +2413,15 @@ namespace WindowsFormsApp1
             this.groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.axKHOpenAPI1)).EndInit();
             this.groupBox5.ResumeLayout(false);
-            this.groupBox6.ResumeLayout(false);
-            this.tableLayoutPanel8.ResumeLayout(false);
-            this.tableLayoutPanel8.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             this.groupBox9.ResumeLayout(false);
             this.tableLayoutPanel10.ResumeLayout(false);
             this.tableLayoutPanel10.PerformLayout();
+            this.tableLayoutPanel8.ResumeLayout(false);
+            this.tableLayoutPanel8.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2523,26 +2523,12 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label all_profit_percent;
         private System.Windows.Forms.Label trading_mode;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.RichTextBox log_window2;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label KIS_RUN;
-        private System.Windows.Forms.Label KIS_ACCOUNT;
-        private System.Windows.Forms.Label KIS_N;
-        private System.Windows.Forms.Label KIS_Profit;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.DataGridView dataGridView3;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.RichTextBox log_window3;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label KIS_Independent;
-        private System.Windows.Forms.Label KIS_Account_Number;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
         private System.Windows.Forms.Label nasdaq_index;
         private System.Windows.Forms.Label sp_index;
@@ -2564,6 +2550,20 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.ComboBox UI_UPDATE;
         private System.Windows.Forms.Label Foreign_Commdity;
         private System.Windows.Forms.Label 외국인선물;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label KIS_RUN;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label KIS_Profit;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label KIS_ACCOUNT;
+        private System.Windows.Forms.Label KIS_N;
+        private System.Windows.Forms.Label KIS_Independent;
+        private System.Windows.Forms.Label KIS_Account_Number;
+        private System.Windows.Forms.GroupBox groupBox6;
     }
 }
 

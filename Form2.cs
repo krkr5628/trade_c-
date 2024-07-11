@@ -45,7 +45,6 @@ namespace WindowsFormsApp1
 
             //미사용 항목 경고창(19개)
             KIS_Allow.Click += HandleCheckedChanged;
-            TradingView_Webhook.Click += HandleCheckedChanged;
 
             //--------------------------------------------
 
