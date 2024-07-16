@@ -97,6 +97,7 @@ namespace WindowsFormsApp1
             try
             {
                 axKHOpenAPI1.CommConnect();
+                await Task.Delay(delay1);
             }
             finally
             {
@@ -218,6 +219,7 @@ namespace WindowsFormsApp1
                 axKHOpenAPI1.SetInputValue("종목코드", Stock_code.Text.Trim());
                 int result = axKHOpenAPI1.CommRqData("주식기본정보", "OPT10001", 0, GetScreenNo());
                 GetErrorMessage(result);
+                await Task.Delay(delay1);
             }
             finally
             {
@@ -289,6 +291,8 @@ namespace WindowsFormsApp1
 
                 // 실시간 조건 검색 시작
                 auto_allow(true);  // 이 부분은 비동기 작업이 아니므로 Task.Run을 사용하지 않음
+
+                await Task.Delay(delay1);
             }
             finally
             {
@@ -1095,6 +1099,7 @@ namespace WindowsFormsApp1
                 try
                 {
                     axKHOpenAPI1.CommConnect();
+                    await Task.Delay(delay1);
                 }
                 finally
                 {
@@ -1725,7 +1730,7 @@ namespace WindowsFormsApp1
 
             await Hold_Update();
 
-            await Task.Delay(delay1+1000);
+            await Task.Delay(delay1);
 
             // 당일 손익 받기
             today_profit_tax_load("");
@@ -2488,6 +2493,7 @@ namespace WindowsFormsApp1
             try
             {
                 arrCondition = axKHOpenAPI1.GetConditionNameList().Trim().Split(';');
+                await Task.Delay(delay1);
             }
             finally
             {
@@ -2765,6 +2771,7 @@ namespace WindowsFormsApp1
                 try
                 {
                     result = axKHOpenAPI1.SendCondition(GetScreenNo(), condition[1], Convert.ToInt32(condition[0]), 1);
+                    await Task.Delay(delay1);
                 }
                 finally
                 {
@@ -3028,14 +3035,11 @@ namespace WindowsFormsApp1
                             try
                             {
                                 axKHOpenAPI1.SetRealReg(GetScreenNo(), e.sTrCode, "10;12;13", "1");
-                                await Task.Delay(delay1);
                             }
                             finally
                             {
                                 semaphore_Trade_Check_Event.Release();
                             }
-
-                            await Task.Delay(delay1 + 100);
                         }
                         catch (FormatException ex)
                         {
@@ -3906,7 +3910,6 @@ namespace WindowsFormsApp1
                             try
                             {
                                 axKHOpenAPI1.SetRealReg(GetScreenNo(), e.sTrCode, "10;12;13", "1");
-                                await Task.Delay(delay1);
                             }
                             finally
                             {
@@ -3987,7 +3990,6 @@ namespace WindowsFormsApp1
                             try
                             {
                                 axKHOpenAPI1.SetRealReg(GetScreenNo(), e.sTrCode, "10;12;13", "1");
-                                await Task.Delay(delay1);
                             }
                             finally
                             {
@@ -4137,13 +4139,12 @@ namespace WindowsFormsApp1
             try
             {
                 findRows = dtCondStock.Select($"종목코드 = '{stockCode}'");
+                if (findRows.Length == 0) return;
             }
             finally
             {
                 table1Semaphore.Release();
             }
-
-            if (findRows.Length == 0) return;
 
             var tasks = findRows.Select(async row =>
             {
@@ -4236,10 +4237,11 @@ namespace WindowsFormsApp1
             {
                 try
                 {
-                    DataRow[] findRows2 = dtCondStock_hold.Select($"종목코드 = '{stockCode}'");
-                    DataRow row = findRows2[0];
                     lock (table2)
                     {
+                        DataRow[] findRows2 = dtCondStock_hold.Select($"종목코드 = '{stockCode}'");
+                        DataRow row = findRows2[0];
+
                         string currentPrice = row["현재가"].ToString().Replace(",", "");
                         //
                         if (currentPrice.Equals(price))
@@ -5617,7 +5619,7 @@ namespace WindowsFormsApp1
                     today_profit_tax_load("매도");
                 }
 
-                await Task.Delay(delay1);
+                await Task.Delay(delay1 + 200);
                 WriteLog_System("[체결완료] 완료\n");
             }
             catch (Exception ex)
@@ -5711,7 +5713,7 @@ namespace WindowsFormsApp1
 
         private async Task RefreshAccountAndTransaction(string orderNumber)
         {
-            await Task.Delay(delay1+100); // Adjust delay as needed
+            await Task.Delay(delay1+200); // Adjust delay as needed
 
             lock (table3)
             {
@@ -5719,7 +5721,7 @@ namespace WindowsFormsApp1
             }
             Transaction_Detail(orderNumber, "");
 
-            await Task.Delay(delay1+100); // Adjust delay as needed
+            await Task.Delay(delay1 + 200); // Adjust delay as needed
 
             lock (table2)
             {
@@ -5727,7 +5729,7 @@ namespace WindowsFormsApp1
             }
             Account_before();
 
-            await Task.Delay(delay1); // Adjust delay as needed
+            await Task.Delay(delay1 + 200); // Adjust delay as needed
         }
 
         private string FormatTime(string time)
@@ -6032,6 +6034,8 @@ namespace WindowsFormsApp1
                     }
                 }
 
+                await Task.Delay(delay1);
+
                 //완전 전체 중단
                 if (real_price_all_stop)
                 {
@@ -6048,6 +6052,8 @@ namespace WindowsFormsApp1
                     WriteLog_System("[실시간시세/중단]\n");
                     telegram_message("[실시간시세/중단]\n");
                 }
+
+                await Task.Delay(delay1);
             }
             finally
             {
