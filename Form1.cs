@@ -4665,6 +4665,8 @@ namespace WindowsFormsApp1
                             buy_runningCodes.Remove(code);
                         }
                     }
+
+                    await Task.Delay(delay1 + 100);
                 }
             }
             finally
@@ -4712,7 +4714,7 @@ namespace WindowsFormsApp1
                             order_close(tradeType, row["주문번호"].ToString(), row["종목명"].ToString(), row["종목코드"].ToString(), row["보유수량"].ToString().Split('/')[1]);
                         }
 
-                        await Task.Delay(delay1); // 비동기 대기를 사용하여 UI 스레드 차단 방지
+                        await Task.Delay(delay1 + 100); // 비동기 대기를 사용하여 UI 스레드 차단 방지
                     }
                 }
             }
@@ -4755,7 +4757,7 @@ namespace WindowsFormsApp1
                                 }
                             }
 
-                            await Task.Delay(delay1); // Thread.Sleep 대신 Task.Delay 사용
+                            await Task.Delay(delay1 + 100); // Thread.Sleep 대신 Task.Delay 사용
                         }
                     }
                 }
@@ -4812,7 +4814,7 @@ namespace WindowsFormsApp1
                                 }
                             }
 
-                            await Task.Delay(delay1); // Thread.Sleep 대신 Task.Delay 사용
+                            await Task.Delay(delay1 + 100); // Thread.Sleep 대신 Task.Delay 사용
                         }
                     }
                 }
@@ -4954,7 +4956,7 @@ namespace WindowsFormsApp1
             try
             {
                 error = axKHOpenAPI1.SendOrder(isMarketOrder ? "시장가매수" : "지정가매수", GetScreenNo(), utility.setting_account_number, 1, code, order_acc, isMarketOrder ? 0 : hoga_cal(int.Parse(price.Replace(",", "")), order_method[1] == "현재가" ? 0 : int.Parse(order_method[1].Replace("호가", "")), int.Parse(high.Replace(",", ""))), isMarketOrder ? "03" : "00", "");
-                await Task.Delay(delay1);
+                await Task.Delay(delay1 + 100);
             }
             finally
             {
@@ -5283,7 +5285,7 @@ namespace WindowsFormsApp1
                 try
                 {
                     error = axKHOpenAPI1.SendOrder("시간외종가", GetScreenNo(), utility.setting_account_number, 2, code, order_acc, 0, "81", "");
-                    await Task.Delay(delay1);
+                    await Task.Delay(delay1 + 100);
                 }
                 finally
                 {
@@ -5356,7 +5358,7 @@ namespace WindowsFormsApp1
                 try
                 {
                     error = axKHOpenAPI1.SendOrder("시간외단일가", GetScreenNo(), utility.setting_account_number, 2, code, order_acc, edited_price_hoga, "62", "");
-                    await Task.Delay(delay1);
+                    await Task.Delay(delay1 + 100);
                 }
                 finally
                 {
@@ -5409,7 +5411,7 @@ namespace WindowsFormsApp1
                 try
                 {
                     error = axKHOpenAPI1.SendOrder("시장가매도", GetScreenNo(), utility.setting_account_number, 2, code, order_acc, 0, "03", "");
-                    await Task.Delay(delay1);
+                    await Task.Delay(delay1+100);
                 }
                 finally
                 {
@@ -5462,7 +5464,7 @@ namespace WindowsFormsApp1
                 try
                 {
                     error = axKHOpenAPI1.SendOrder("시장가매도", GetScreenNo(), utility.setting_account_number, 2, code, order_acc, edited_price_hoga, "00", "");
-                    await Task.Delay(delay1);
+                    await Task.Delay(delay1 + 100);
                 }
                 finally
                 {
