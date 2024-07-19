@@ -245,19 +245,23 @@ namespace WindowsFormsApp1
                 return;
             }
 
-            await Task.Delay(delay1);
+            await Task.Delay(delay1+ 500);
 
             // 데이터 테이블 클리어 및 갱신
             await table1Semaphore.WaitAsync(); // dtCondStock에 대한 접근을 보호
             try
             {
+                WriteLog_System("1_table1 : 진입\n");
                 dtCondStock.Clear();
                 gridView1_refresh();
             }
             finally
             {
                 table1Semaphore.Release();
+                WriteLog_System("1_table1 : 이탈\n");
             }
+
+            await Task.Delay(delay1 + 500);
 
             // 예수금 + 계좌 보유 현황 + 차트 반영
             await semaphore_Trade_Check_Event.WaitAsync(); // dtCondStock에 대한 접근을 보호
@@ -267,7 +271,7 @@ namespace WindowsFormsApp1
                 // 당일 손익 + 당일 손익률 + 당일 수수료 업데이트
                 today_profit_tax_load("");
 
-                await Task.Delay(delay1);
+                await Task.Delay(delay1 + 500);
 
                 // 체결 내역 업데이트(주문번호)
                 lock (table3)
@@ -276,7 +280,7 @@ namespace WindowsFormsApp1
                 }
                 Transaction_Detail("", "");
 
-                await Task.Delay(delay1);
+                await Task.Delay(delay1 + 500);
 
                 lock (table2)
                 {
@@ -284,16 +288,14 @@ namespace WindowsFormsApp1
                 }
                 Account_before();
 
-                await Task.Delay(delay1);
+                await Task.Delay(delay1 + 500);
 
                 await Hold_Update();
 
-                await Task.Delay(delay1);
+                await Task.Delay(delay1 + 500);
 
                 // 실시간 조건 검색 시작
                 auto_allow(true);  // 이 부분은 비동기 작업이 아니므로 Task.Run을 사용하지 않음
-
-                await Task.Delay(delay1);
             }
             finally
             {
@@ -340,11 +342,13 @@ namespace WindowsFormsApp1
                 MessageBox.Show("조건식 로딩중");
                 return;
             }
-            WriteLog_System("전체청산 시작\n");
 
             await table1Semaphore.WaitAsync();
             try
             {
+                WriteLog_System("2_table1 : 진입\n");
+                WriteLog_System("전체청산 시작\n");
+
                 if (dtCondStock.Rows.Count > 0)
                 {
                     foreach (DataRow row in dtCondStock.Rows)
@@ -367,6 +371,7 @@ namespace WindowsFormsApp1
             finally
             {
                 table1Semaphore.Release();
+                WriteLog_System("2_table1 : 이탈\n");
             }
         }
 
@@ -392,6 +397,7 @@ namespace WindowsFormsApp1
             await table1Semaphore.WaitAsync();
             try
             {
+                WriteLog_System("3_table1 : 진입\n");
                 if (dtCondStock.Rows.Count > 0)
                 {
                     foreach (DataRow row in dtCondStock.Rows)
@@ -414,6 +420,7 @@ namespace WindowsFormsApp1
             finally
             {
                 table1Semaphore.Release();
+                WriteLog_System("3_table1 : 이탈\n");
             }
         }
 
@@ -439,6 +446,7 @@ namespace WindowsFormsApp1
             await table1Semaphore.WaitAsync();
             try
             {
+                WriteLog_System("4_table1 : 진입\n");
                 if (dtCondStock.Rows.Count > 0)
                 {
                     foreach (DataRow row in dtCondStock.Rows)
@@ -461,6 +469,7 @@ namespace WindowsFormsApp1
             finally
             {
                 table1Semaphore.Release();
+                WriteLog_System("4_table1 : 이탈\n");
             }
         }
 
@@ -489,12 +498,12 @@ namespace WindowsFormsApp1
 
         private async void Match_Click(object sender, EventArgs e)
         {
-
-            WriteLog_System("데이터 매칭 시작\n");
-
             await table1Semaphore.WaitAsync(); // dtCondStock에 대한 접근을 보호
             try
             {
+                WriteLog_System("5_table1 : 진입\n");
+                WriteLog_System("데이터 매칭 시작\n");
+
                 var findRows = dtCondStock.AsEnumerable()
                     .Where(row => row.Field<string>("상태") == "매수중" &&
                                   row.Field<string>("보유수량").Split('/')[0] == row.Field<string>("보유수량").Split('/')[1])
@@ -522,11 +531,13 @@ namespace WindowsFormsApp1
             finally
             {
                 table1Semaphore.Release();
+                WriteLog_System("5_table1 : 이탈\n");
             }
 
             await table1Semaphore.WaitAsync(); // dtCondStock에 대한 접근을 보호
             try
             {
+                WriteLog_System("6_table1 : 진입\n");
                 var findRows3 = dtCondStock.AsEnumerable()
                     .Where(row => row.Field<string>("상태") == "매도중" && row.Field<string>("보유수량") == "0/0")
                     .ToArray();
@@ -552,6 +563,7 @@ namespace WindowsFormsApp1
             finally
             {
                 table1Semaphore.Release();
+                WriteLog_System("6_table1 : 이탈\n");
             }
 
             WriteLog_System("데이터 매칭 종료\n");
@@ -562,6 +574,7 @@ namespace WindowsFormsApp1
             await table1Semaphore.WaitAsync();
             try
             {
+                WriteLog_System("7_table1 : 진입\n");
                 var findRows = dtCondStock.AsEnumerable()
                     .Where(row => row.Field<string>("상태") == "매수중" && row.Field<bool>("선택"))
                     .ToArray();
@@ -578,11 +591,13 @@ namespace WindowsFormsApp1
             finally
             {
                 table1Semaphore.Release();
+                WriteLog_System("7_table1 : 이탈\n");
             }
             //
             await table1Semaphore.WaitAsync();
             try
             {
+                WriteLog_System("8_table1 : 진입\n");
                 var findRows2 = dtCondStock.AsEnumerable()
                     .Where(row => row.Field<string>("상태") == "매도중" && row.Field<bool>("선택"))
                     .ToArray();
@@ -599,6 +614,7 @@ namespace WindowsFormsApp1
             finally
             {
                 table1Semaphore.Release();
+                WriteLog_System("8_table1 : 이탈\n");
             }
         }
 
@@ -1231,18 +1247,38 @@ namespace WindowsFormsApp1
 
         private void DataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
+            // 중단점을 여기에 설정합니다.
+            System.Diagnostics.Debugger.Break();
+
             string errorMessage = $"DataError1 in row {e.RowIndex}, column {e.ColumnIndex}\n" +
                                   $"Exception: {e.Exception.GetType()}\n" +
                                   $"Message: {e.Exception.Message}\n" +
                                   $"StackTrace:\n{e.Exception.StackTrace}\n";
 
+            // 추가 디버깅 정보
+            string additionalInfo = $"Current BindingSource DataSource Type: {bindingSource.DataSource?.GetType().FullName}\n" +
+                                    $"DataGridView1 RowCount: {dataGridView1.RowCount}\n" +
+                                    $"DataGridView1 ColumnCount: {dataGridView1.ColumnCount}\n" +
+                                    $"dtCondStock RowCount: {dtCondStock.Rows.Count}\n" +
+                                    $"dtCondStock ColumnCount: {dtCondStock.Columns.Count}\n";
+
+            errorMessage += additionalInfo;
+
             WriteLog_System(errorMessage);
 
-            // 콘솔에 오류 출력 (디버그 모드에서 확인 가능)
-            //System.Diagnostics.Debug.WriteLine(errorMessage);
+            // 디버그 콘솔에 출력
+            System.Diagnostics.Debug.WriteLine(errorMessage);
 
-            // 예외 처리 (선택적)
-            e.ThrowException = false;
+            // 개발 중에는 예외를 throw하여 즉시 문제를 파악할 수 있게 합니다.
+            if (System.Diagnostics.Debugger.IsAttached)
+            {
+                throw e.Exception;
+            }
+            else
+            {
+                // 프로덕션 환경에서는 예외를 무시하고 계속 실행합니다.
+                e.ThrowException = false;
+            }
         }
 
         private void DataGridView2_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -1305,6 +1341,7 @@ namespace WindowsFormsApp1
             await table1Semaphore.WaitAsync(); // dtCondStock에 대한 접근을 보호
             try
             {
+                WriteLog_System("9_table1 : 진입\n");
                 if (dataGridView1.InvokeRequired)
                 {
                     dataGridView1.Invoke((MethodInvoker)delegate
@@ -1326,6 +1363,7 @@ namespace WindowsFormsApp1
             finally
             {
                 table1Semaphore.Release();
+                WriteLog_System("9_table1 : 이탈\n");
             }
         }
 
@@ -1335,6 +1373,7 @@ namespace WindowsFormsApp1
             await table1Semaphore.WaitAsync(); // dtCondStock에 대한 접근을 보호
             try
             {
+                WriteLog_System("10_table1 : 진입\n");
                 if (e.ColumnIndex == dataGridView1.Columns["선택"].Index)
                 {
                     bool isChecked = (bool)dataGridView1[e.ColumnIndex, e.RowIndex].Value;
@@ -1346,6 +1385,7 @@ namespace WindowsFormsApp1
             finally
             {
                 table1Semaphore.Release();
+                WriteLog_System("10_table1 : 이탈\n");
             }
         }
 
@@ -1628,6 +1668,7 @@ namespace WindowsFormsApp1
                 await table1Semaphore.WaitAsync(); // dtCondStock에 대한 접근을 보호
                 try
                 {
+                    WriteLog_System("11_table1 : 진입\n");
                     dtCondStock.Clear();
                     gridView1_refresh();
 
@@ -1635,6 +1676,7 @@ namespace WindowsFormsApp1
                 finally
                 {
                     table1Semaphore.Release();
+                    WriteLog_System("11_table1 : 이탈\n");
                 }
 
                 lock (table2)
@@ -3018,6 +3060,7 @@ namespace WindowsFormsApp1
                             await table1Semaphore.WaitAsync(); // dtCondStock에 대한 접근을 보호
                             try
                             {
+                                WriteLog_System("12_table1 : 진입\n");
                                 dtCondStock.Rows.Add(
                                     false,
                                     "편입",
@@ -3047,6 +3090,7 @@ namespace WindowsFormsApp1
                             finally
                             {
                                 table1Semaphore.Release();
+                                WriteLog_System("12_table1 : 이탈\n");
                             }
 
                             //실시간 항목 등록(대비기호, 현재가. 등락율, 거래량)
@@ -3172,6 +3216,7 @@ namespace WindowsFormsApp1
                                         await table1Semaphore.WaitAsync(); // dtCondStock에 대한 접근을 보호
                                         try
                                         {
+                                            WriteLog_System("13_table1 : 진입\n");
                                             var findRows2 = dtCondStock.AsEnumerable().Where(row => row.Field<string>("주문번호") == condition_nameORcode);
 
                                             if (findRows2.Any())
@@ -3197,6 +3242,7 @@ namespace WindowsFormsApp1
                                         finally
                                         {
                                             table1Semaphore.Release();
+                                            WriteLog_System("13_table1 : 이탈\n");
                                         }
                                     }
                                     else if (name_split[2].Equals("매도취소"))
@@ -3204,6 +3250,7 @@ namespace WindowsFormsApp1
                                         await table1Semaphore.WaitAsync(); // dtCondStock에 대한 접근을 보호
                                         try
                                         {
+                                            WriteLog_System("14_table1 : 진입\n");
                                             DataRow[] findRows2 = dtCondStock.AsEnumerable().Where(row => row.Field<string>("주문번호") == condition_nameORcode).ToArray();
 
                                             if (findRows2.Any())
@@ -3235,6 +3282,7 @@ namespace WindowsFormsApp1
                                         finally
                                         {
                                             table1Semaphore.Release();
+                                            WriteLog_System("14_table1 : 이탈\n");
                                         }
                                     }
                                     else if (transaction_number.Equals(condition_nameORcode) && condition_nameORcode != "")
@@ -3242,6 +3290,7 @@ namespace WindowsFormsApp1
                                         await table1Semaphore.WaitAsync(); // dtCondStock에 대한 접근을 보호
                                         try
                                         {
+                                            WriteLog_System("15_table1 : 진입\n");
                                             var findRows2 = dtCondStock.AsEnumerable().Where(row => row.Field<string>("주문번호") == condition_nameORcode);
 
                                             if (findRows2.Any())
@@ -3276,6 +3325,7 @@ namespace WindowsFormsApp1
                                         finally
                                         {
                                             table1Semaphore.Release();
+                                            WriteLog_System("15_table1 : 이탈\n");
                                         }
                                     }
 
@@ -3599,6 +3649,7 @@ namespace WindowsFormsApp1
                                 await table1Semaphore.WaitAsync(); // dtCondStock에 대한 접근을 보호
                                 try
                                 {
+                                    WriteLog_System("16_table1 : 진입\n");
                                     findRows_check = dtCondStock.Select($"종목코드 = '{code}'");
 
                                     if (findRows_check.Any() && findRows_check[0]["조건식"].Equals("전일보유"))
@@ -3610,6 +3661,7 @@ namespace WindowsFormsApp1
                                 finally
                                 {
                                     table1Semaphore.Release();
+                                    WriteLog_System("16_table1 : 이탈\n");
                                 }
 
                                 string average_price3 = "";
@@ -3631,6 +3683,7 @@ namespace WindowsFormsApp1
                                     await table1Semaphore.WaitAsync(); // dtCondStock에 대한 접근을 보호
                                     try
                                     {
+                                        WriteLog_System("17_table1 : 진입\n");
                                         dtCondStock.Rows.Add(
                                         false,
                                         "편입",
@@ -3661,6 +3714,7 @@ namespace WindowsFormsApp1
                                     finally
                                     {
                                         table1Semaphore.Release();
+                                        WriteLog_System("17_table1 : 이탈\n");
                                     }
 
                                     WriteLog_Stock($"[전일보유/{condition_nameORcode}/편입실패] : {code_name}({code}) 상태 수정\n");
@@ -3757,6 +3811,7 @@ namespace WindowsFormsApp1
                                 await table1Semaphore.WaitAsync(); // dtCondStock에 대한 접근을 보호
                                 try
                                 {
+                                    WriteLog_System("18_table1 : 진입\n");
                                     dtCondStock.Rows.Add(
                                         false,
                                         "편입",
@@ -3786,12 +3841,15 @@ namespace WindowsFormsApp1
                                 finally
                                 {
                                     table1Semaphore.Release();
+                                    WriteLog_System("18_table1 : 이탈\n");
                                 }
 
                                 await semaphore_Trade_Check_Event.WaitAsync(); // dtCondStock에 대한 접근을 보호
                                 try
                                 {
+                                    WriteLog_System($"[시세신청/등록시작] : {code_name}({code})\n");
                                     axKHOpenAPI1.SetRealReg(GetScreenNo(), e.sTrCode, "10;12;13", "1");
+                                    WriteLog_System($"[시세신청/등록완료] : {code_name}({code})\n");
                                     await Task.Delay(200);
                                 }
                                 finally
@@ -3883,6 +3941,7 @@ namespace WindowsFormsApp1
                             await table1Semaphore.WaitAsync(); // dtCondStock에 대한 접근을 보호
                             try
                             {
+                                WriteLog_System("19_table1 : 진입\n");
                                 dtCondStock.Rows.Add(
                                 false,
                                 "편입",
@@ -3913,6 +3972,7 @@ namespace WindowsFormsApp1
                             finally
                             {
                                 table1Semaphore.Release();
+                                WriteLog_System("19_table1 : 이탈\n");
                             }
 
                             //실시간 항목 등록(대비기호, 현재가. 등락율, 거래량)
@@ -3958,6 +4018,7 @@ namespace WindowsFormsApp1
                             await table1Semaphore.WaitAsync(); // dtCondStock에 대한 접근을 보호
                             try
                             {
+                                WriteLog_System("20_table1 : 진입\n");
                                 dtCondStock.Rows.Add(
                                 false,
                                 "편입",
@@ -3988,6 +4049,7 @@ namespace WindowsFormsApp1
                             finally
                             {
                                 table1Semaphore.Release();
+                                WriteLog_System("20_table1 : 이탈\n");
                             }
 
                             //체결내역업데이트(주문번호)
@@ -4324,6 +4386,7 @@ namespace WindowsFormsApp1
             await table1Semaphore.WaitAsync();
             try
             {
+                WriteLog_System("23_table1 : 진입\n");
                 DataRow[] findRows1 = dtCondStock.Select($"종목코드 = {e.sTrCode}");
                 string time1 = DateTime.Now.ToString("HH:mm:ss");
 
@@ -4592,6 +4655,7 @@ namespace WindowsFormsApp1
             finally
             {
                 table1Semaphore.Release();
+                WriteLog_System("23_table1 : 이탈\n");
             }
         }
 
@@ -4637,6 +4701,7 @@ namespace WindowsFormsApp1
             await table1Semaphore.WaitAsync(); // dtCondStock에 대한 접근을 보호
             try
             {
+                WriteLog_System("24_table1 : 진입\n");
                 // 특정 열 추출
                 var rowsToProcess = dtCondStock.AsEnumerable()
                     .Where(row => row.Field<string>("편입") == "편입" &&
@@ -4672,6 +4737,7 @@ namespace WindowsFormsApp1
             finally
             {
                 table1Semaphore.Release();
+                WriteLog_System("24_table1 : 이탈\n");
             }            
 
             await Task.Delay(delay1);
@@ -4694,6 +4760,7 @@ namespace WindowsFormsApp1
             await table1Semaphore.WaitAsync(); // dtCondStock에 대한 접근을 보호
             try
             {
+                WriteLog_System("25_table1 : 진입\n");
                 // 특정 상태의 행들을 찾기 위해 잠금
                 rowsToProcess = dtCondStock.AsEnumerable()
                     .Where(row => row.Field<string>("상태") == status)
@@ -4721,6 +4788,7 @@ namespace WindowsFormsApp1
             finally
             {
                 table1Semaphore.Release();
+                WriteLog_System("25_table1 : 이탈\n");
             }
         }
 
@@ -4732,6 +4800,7 @@ namespace WindowsFormsApp1
                 await table1Semaphore.WaitAsync(); // dtCondStock에 대한 접근을 보호
                 try
                 {
+                    WriteLog_System("26_table1 : 진입\n");
                     // 특정 열 추출
                     DataColumn columnStateColumn = dtCondStock.Columns["상태"];
                     var filteredRows = dtCondStock.AsEnumerable()
@@ -4764,6 +4833,7 @@ namespace WindowsFormsApp1
                 finally
                 {
                     table1Semaphore.Release();
+                    WriteLog_System("26_table1 : 이탈\n");
                 }
             }
             else if (utility.clear_sell_mode)
@@ -4778,6 +4848,7 @@ namespace WindowsFormsApp1
                 await table1Semaphore.WaitAsync(); // dtCondStock에 대한 접근을 보호
                 try
                 {
+                    WriteLog_System("27_table1 : 진입\n");
                     // 특정 열 추출
                     DataColumn columnStateColumn = dtCondStock.Columns["상태"];
                     var filteredRows = dtCondStock.AsEnumerable()
@@ -4821,6 +4892,7 @@ namespace WindowsFormsApp1
                 finally
                 {
                     table1Semaphore.Release();
+                    WriteLog_System("27_table1 : 이탈\n");
                 }
             }
         }
@@ -5046,11 +5118,13 @@ namespace WindowsFormsApp1
             await table1Semaphore.WaitAsync();
             try
             {
+                WriteLog_System("28_table1 : 진입\n");
                 await sell_order(price, "조건식매도", order_num, percent, Start_price, Code, Code_Name, hold2);
             }
             finally
             {
                 table1Semaphore.Release();
+                WriteLog_System("28_table1 : 이탈\n");
             }
         }
 
@@ -5069,11 +5143,13 @@ namespace WindowsFormsApp1
                         await table1Semaphore.WaitAsync();
                         try
                         {
+                            WriteLog_System("29_table1 : 진입\n");
                             await sell_order(price, "익절매도", order_num, percent, Start_price, Code, Code_Name, hold2);
                         }
                         finally
                         {
                             table1Semaphore.Release();
+                            WriteLog_System("29_table1 : 이탈\n");
                         }
                         return;
                     }
@@ -5088,11 +5164,13 @@ namespace WindowsFormsApp1
                         await table1Semaphore.WaitAsync();
                         try
                         {
+                            WriteLog_System("30_table1 : 진입\n");
                             await sell_order(price, "익절원", order_num, percent, Start_price, Code, Code_Name, hold2);
                         }
                         finally
                         {
                             table1Semaphore.Release();
+                            WriteLog_System("30_table1 : 이탈\n");
                         }
                         return;
                     }
@@ -5106,11 +5184,13 @@ namespace WindowsFormsApp1
                         await table1Semaphore.WaitAsync();
                         try
                         {
+                            WriteLog_System("31_table1 : 진입\n");
                             await sell_order(price, "익절TS", order_num, percent, Start_price, Code, Code_Name, hold2);
                         }
                         finally
                         {
                             table1Semaphore.Release();
+                            WriteLog_System("31_table1 : 이탈\n");
                         }
                         return;
                     }
@@ -5126,11 +5206,13 @@ namespace WindowsFormsApp1
                         await table1Semaphore.WaitAsync();
                         try
                         {
+                            WriteLog_System("32_table1 : 진입\n");
                             await sell_order(price, "손절매도", order_num, percent, Start_price, Code, Code_Name, hold2);
                         }
                         finally
                         {
                             table1Semaphore.Release();
+                            WriteLog_System("32_table1 : 이탈\n");
                         }
                         return;
                     }
@@ -5145,11 +5227,13 @@ namespace WindowsFormsApp1
                         await table1Semaphore.WaitAsync();
                         try
                         {
+                            WriteLog_System("33_table1 : 진입\n");
                             await sell_order(price, "손절원", order_num, percent, Start_price, Code, Code_Name, hold2);
                         }
                         finally
                         {
                             table1Semaphore.Release();
+                            WriteLog_System("33_table1 : 이탈\n");
                         }
                         return;
                     }
@@ -5652,6 +5736,7 @@ namespace WindowsFormsApp1
             await table1Semaphore.WaitAsync();
             try
             {
+                WriteLog_System("33_table1 : 진입\n");
                 var findRows = dtCondStock.AsEnumerable()
                                           .Where(row2 => row2.Field<string>("종목코드") == code && row2.Field<string>("상태") == "매수중");
 
@@ -5676,6 +5761,7 @@ namespace WindowsFormsApp1
             finally
             {
                 table1Semaphore.Release();
+                WriteLog_System("33_table1 : 이탈\n");
             }
         }
 
@@ -5684,6 +5770,7 @@ namespace WindowsFormsApp1
             await table1Semaphore.WaitAsync();
             try
             {
+                WriteLog_System("34_table1 : 진입\n");
                 var findRows = dtCondStock.AsEnumerable()
                                           .Where(row2 => row2.Field<string>("종목코드") == code && row2.Field<string>("상태") == "매도중");
 
@@ -5722,12 +5809,13 @@ namespace WindowsFormsApp1
             finally
             {
                 table1Semaphore.Release();
+                WriteLog_System("34_table1 : 이탈\n");
             }
         }
 
         private async Task RefreshAccountAndTransaction(string orderNumber)
         {
-            await Task.Delay(delay1); // Adjust delay as needed
+            await Task.Delay(delay1+200); // Adjust delay as needed
 
             lock (table2)
             {
@@ -5735,7 +5823,7 @@ namespace WindowsFormsApp1
             }
             Account_before();
 
-            await Task.Delay(delay1); // Adjust delay as needed
+            await Task.Delay(delay1 + 200); // Adjust delay as needed
 
             lock (table3)
             {
@@ -5743,7 +5831,8 @@ namespace WindowsFormsApp1
             }
             Transaction_Detail(orderNumber, "");
 
-            await Task.Delay(delay1); // Adjust delay as needed
+            await Task.Delay(delay1 + 200); // Adjust delay as needed
+
         }
 
         private string FormatTime(string time)
