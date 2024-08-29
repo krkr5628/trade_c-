@@ -515,7 +515,7 @@ namespace WindowsFormsApp1
                         lock (table3)
                         {
                             var findRows2 = dtCondStock_Transaction.AsEnumerable()
-                                .Where(row2 => row2.Field<string>("주문번호") == row["주문번호"].ToString() && row2.Field<string>("체결단가") != "0")
+                                .Where(row2 => row2.Field<string>("종목코드") == row["종목코드"].ToString() && row2.Field<string>("주문구분") == "현금매수" && row2.Field<string>("체결단가") != "0")
                                 .ToArray();
                             if (findRows2.Any())
                             {
@@ -548,7 +548,7 @@ namespace WindowsFormsApp1
                         lock (table3)
                         {
                             var findRows4 = dtCondStock_Transaction.AsEnumerable()
-                                .Where(row2 => row2.Field<string>("주문번호") == row["주문번호"].ToString() && row2.Field<string>("체결단가") != "0")
+                                .Where(row2 => row2.Field<string>("종목코드") == row["종목코드"].ToString() && row2.Field<string>("주문구분") == "현금매도" && row2.Field<string>("체결단가") != "0")
                                 .ToArray();
                             if (findRows4.Any())
                             {
