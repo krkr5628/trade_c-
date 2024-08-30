@@ -92,17 +92,11 @@ namespace WindowsFormsApp1
         //update
         private async void login_btn(object sender, EventArgs e)
         {
-            //CommConnect를 하는 경우 KHOpenAPI Control의 OnEventConnect 이벤트가 호출
-            await semaphore_Trade_Check_Event.WaitAsync();
-            try
-            {
-                axKHOpenAPI1.CommConnect();
-                await Task.Delay(delay1);
-            }
-            finally
-            {
-                semaphore_Trade_Check_Event.Release();
-            }
+            //
+            WriteLog_System("[로그인 창] : 실행\n");
+            //
+            axKHOpenAPI1.CommConnect();
+            await Task.Delay(delay1);
         }
 
         //설정창 실행
@@ -117,6 +111,9 @@ namespace WindowsFormsApp1
             {
                 MessageBox.Show("로그인 완료 후 조건식 로딩");
             }
+            //
+            WriteLog_System("[설정 창] : 실행\n");
+            //
             Setting newform2 = new Setting(this);
             newform2.ShowDialog(); //form2 닫기 전까지 form1 제어 불가능
         }
@@ -139,6 +136,9 @@ namespace WindowsFormsApp1
                 MessageBox.Show("조건식 로딩중");
                 return;
             }
+            //
+            WriteLog_System("[매매내역창] : 실행\n");
+            //
             Transaction newform2 = new Transaction();
             newform2.ShowDialog(); //form2 닫기 전까지 form1 UI 제어 불가능
         }
@@ -161,6 +161,9 @@ namespace WindowsFormsApp1
                 MessageBox.Show("조건식 로딩중");
                 return;
             }
+            //
+            WriteLog_System("[전체로그 창] : 실행\n");
+            //
             Log newform2 = new Log();
             newform2.ShowDialog(); //form2 닫기 전까지 form1 UI 제어 불가능
         }
@@ -183,6 +186,9 @@ namespace WindowsFormsApp1
                 MessageBox.Show("조건식 로딩중");
                 return;
             }
+            //
+            WriteLog_System("[업데이트 창] : 실행\n");
+            //
             Update newform2 = new Update(this);
             newform2.ShowDialog(); //form2 닫기 전까지 form1 UI 제어 불가능
         }
@@ -210,21 +216,14 @@ namespace WindowsFormsApp1
                 MessageBox.Show("종목코드를 입력해주세요.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-
+            //
             WriteLog_System("[종목 조회] : 실행\n");
-
-            await semaphore_Trade_Check_Event.WaitAsync();
-            try
-            {
-                axKHOpenAPI1.SetInputValue("종목코드", Stock_code.Text.Trim());
-                int result = axKHOpenAPI1.CommRqData("주식기본정보", "OPT10001", 0, GetScreenNo());
-                GetErrorMessage(result);
-                await Task.Delay(delay1);
-            }
-            finally
-            {
-                semaphore_Trade_Check_Event.Release();
-            }
+            //
+            axKHOpenAPI1.SetInputValue("종목코드", Stock_code.Text.Trim());
+            int result = axKHOpenAPI1.CommRqData("주식기본정보", "OPT10001", 0, GetScreenNo());
+            GetErrorMessage(result);
+            //
+            await Task.Delay(delay1);
         }
 
         private async void real_time_search_btn(object sender, EventArgs e)
@@ -245,62 +244,40 @@ namespace WindowsFormsApp1
                 return;
             }
 
-            await Task.Delay(delay1+ 500);
+            //
+            WriteLog_System("[실시간 조건 검색 수동] : 실행\n");
+            //
 
-            // 데이터 테이블 클리어 및 갱신
-            await table1Semaphore.WaitAsync(); // dtCondStock에 대한 접근을 보호
-            try
-            {
-                WriteLog_System("1_table1 : 진입\n");
-                dtCondStock.Clear();
-                gridView1_refresh();
-            }
-            finally
-            {
-                table1Semaphore.Release();
-                WriteLog_System("1_table1 : 이탈\n");
-            }
+            // 메인 데이터 테이블 초기화 및 갱신
+            dtCondStock.Clear();
+            gridView1_refresh();
 
-            await Task.Delay(delay1 + 500);
+            await Task.Delay(delay1);
 
-            // 예수금 + 계좌 보유 현황 + 차트 반영
-            await semaphore_Trade_Check_Event.WaitAsync(); // dtCondStock에 대한 접근을 보호
-            try
-            {
+            // 당일 손익 + 당일 손익률 + 당일 수수료 업데이트
+            today_profit_tax_load("");
 
-                // 당일 손익 + 당일 손익률 + 당일 수수료 업데이트
-                today_profit_tax_load("");
+            await Task.Delay(delay1);
 
-                await Task.Delay(delay1 + 500);
+            // 체결 내역 업데이트(주문번호)
+            dtCondStock_Transaction.Clear();
+            Transaction_Detail("", "");
 
-                // 체결 내역 업데이트(주문번호)
-                lock (table3)
-                {
-                    dtCondStock_Transaction.Clear();
-                }
-                Transaction_Detail("", "");
+            await Task.Delay(delay1);
 
-                await Task.Delay(delay1 + 500);
+            //보유 종목 업데이트
+            dtCondStock_hold.Clear();
+            Account_before();
 
-                lock (table2)
-                {
-                    dtCondStock_hold.Clear();
-                }
-                Account_before();
+            await Task.Delay(delay1);
 
-                await Task.Delay(delay1 + 500);
+            //보유 종목 차트 업에이트
+            Hold_Update();
 
-                await Hold_Update();
+            await Task.Delay(delay1);
 
-                await Task.Delay(delay1 + 500);
-
-                // 실시간 조건 검색 시작
-                auto_allow(true);  // 이 부분은 비동기 작업이 아니므로 Task.Run을 사용하지 않음
-            }
-            finally
-            {
-                semaphore_Trade_Check_Event.Release();
-            }
+            // 실시간 조건 검색 시작
+            auto_allow(true);  // 이 부분은 비동기 작업이 아니므로 Task.Run을 사용하지 않음
         }
 
         private void real_time_stop_btn(object sender, EventArgs e)
@@ -320,6 +297,8 @@ namespace WindowsFormsApp1
                 MessageBox.Show("조건식 로딩중");
                 return;
             }
+            //
+            WriteLog_System("[실시간 조건 검색 수동] : 중단\n");
             //
             real_time_stop(true);
         }
@@ -343,35 +322,25 @@ namespace WindowsFormsApp1
                 return;
             }
 
-            await table1Semaphore.WaitAsync();
-            try
+            WriteLog_System("전체청산 시작\n");
+
+            if (dtCondStock.Rows.Count > 0)
             {
-                WriteLog_System("2_table1 : 진입\n");
-                WriteLog_System("전체청산 시작\n");
-
-                if (dtCondStock.Rows.Count > 0)
+                foreach (DataRow row in dtCondStock.Rows)
                 {
-                    foreach (DataRow row in dtCondStock.Rows)
+                    if (row["상태"].ToString() == "매수완료")
                     {
-                        if (row["상태"].ToString() == "매수완료")
-                        {
-                            WriteLog_Order($"[전체청산] : {row.Field<string>("주문번호")} / {row.Field<string>("현재가")}  \n");
-                            await sell_order(row.Field<string>("현재가"), "청산매도/일반", row.Field<string>("주문번호"), row.Field<string>("수익률"), row.Field<string>("편입가"), row.Field<string>("종목코드"), row.Field<string>("종목명"), row.Field<string>("보유수량"));
-                        }
-
-                        // 비동기적으로 대기
-                        await Task.Delay(delay1 + 200);
+                        WriteLog_Order($"[전체청산] : {row.Field<string>("주문번호")} / {row.Field<string>("현재가")}  \n");
+                        sell_order(row.Field<string>("현재가"), "청산매도/일반", row.Field<string>("주문번호"), row.Field<string>("수익률"), row.Field<string>("편입가"), row.Field<string>("종목코드"), row.Field<string>("종목명"), row.Field<string>("보유수량"));
                     }
-                }
-                else
-                {
-                    WriteLog_System("전체청산 종목 없음\n");
+
+                    // 비동기적으로 대기
+                    await Task.Delay(delay1);
                 }
             }
-            finally
+            else
             {
-                table1Semaphore.Release();
-                WriteLog_System("2_table1 : 이탈\n");
+                WriteLog_System("전체청산 종목 없음\n");
             }
         }
 
@@ -394,33 +363,25 @@ namespace WindowsFormsApp1
                 return;
             }
 
-            await table1Semaphore.WaitAsync();
-            try
-            {
-                WriteLog_System("3_table1 : 진입\n");
-                if (dtCondStock.Rows.Count > 0)
-                {
-                    foreach (DataRow row in dtCondStock.Rows)
-                    {
-                        double percent_edit = double.Parse(row.Field<string>("수익률").TrimEnd('%'));
-                        if (row["상태"].ToString() == "매수완료" && percent_edit >= 0)
-                        {
-                            await sell_order(row.Field<string>("현재가"), "청산매도/수익", row.Field<string>("주문번호"), row.Field<string>("수익률"), row.Field<string>("편입가"), row.Field<string>("종목코드"), row.Field<string>("종목명"), row.Field<string>("보유수량"));
-                        }
+            WriteLog_System("수익청산 시작\n");
 
-                        // 비동기적으로 대기
-                        await Task.Delay(delay1 + 100);
-                    }
-                }
-                else
+            if (dtCondStock.Rows.Count > 0)
+            {
+                foreach (DataRow row in dtCondStock.Rows)
                 {
-                    WriteLog_Order("수익청산 종목 없음\n");
+                    double percent_edit = double.Parse(row.Field<string>("수익률").TrimEnd('%'));
+                    if (row["상태"].ToString() == "매수완료" && percent_edit >= 0)
+                    {
+                        sell_order(row.Field<string>("현재가"), "청산매도/수익", row.Field<string>("주문번호"), row.Field<string>("수익률"), row.Field<string>("편입가"), row.Field<string>("종목코드"), row.Field<string>("종목명"), row.Field<string>("보유수량"));
+                    }
+
+                    // 비동기적으로 대기
+                    await Task.Delay(delay1);
                 }
             }
-            finally
+            else
             {
-                table1Semaphore.Release();
-                WriteLog_System("3_table1 : 이탈\n");
+                WriteLog_Order("수익청산 종목 없음\n");
             }
         }
 
@@ -443,51 +404,39 @@ namespace WindowsFormsApp1
                 return;
             }
 
-            await table1Semaphore.WaitAsync();
-            try
-            {
-                WriteLog_System("4_table1 : 진입\n");
-                if (dtCondStock.Rows.Count > 0)
-                {
-                    foreach (DataRow row in dtCondStock.Rows)
-                    {
-                        double percent_edit = double.Parse(row.Field<string>("수익률").TrimEnd('%'));
-                        if (row["상태"].ToString() == "매수완료" && percent_edit < 0)
-                        {
-                            await sell_order(row.Field<string>("현재가"), "청산매도/손실", row.Field<string>("주문번호"), row.Field<string>("수익률"), row.Field<string>("편입가"), row.Field<string>("종목코드"), row.Field<string>("종목명"), row.Field<string>("보유수량"));
-                        }
+            WriteLog_System("손실청산 시작\n");
 
-                        // 비동기적으로 대기
-                        await Task.Delay(delay1 + 100);
-                    }
-                }
-                else
+            if (dtCondStock.Rows.Count > 0)
+            {
+                foreach (DataRow row in dtCondStock.Rows)
                 {
-                    WriteLog_Order("손실청산 종목 없음\n");
+                    double percent_edit = double.Parse(row.Field<string>("수익률").TrimEnd('%'));
+                    if (row["상태"].ToString() == "매수완료" && percent_edit < 0)
+                    {
+                        sell_order(row.Field<string>("현재가"), "청산매도/손실", row.Field<string>("주문번호"), row.Field<string>("수익률"), row.Field<string>("편입가"), row.Field<string>("종목코드"), row.Field<string>("종목명"), row.Field<string>("보유수량"));
+                    }
+
+                    // 비동기적으로 대기
+                    await Task.Delay(delay1);
                 }
             }
-            finally
+            else
             {
-                table1Semaphore.Release();
-                WriteLog_System("4_table1 : 이탈\n");
+                WriteLog_Order("손실청산 종목 없음\n");
             }
         }
 
 
         private async void Refresh_Click(object sender, EventArgs e)
         {
-            lock (table2)
-            {
-                dtCondStock_hold.Clear();
-            }
+            WriteLog_System("데이터 Refresh 시작\n");
+
+            dtCondStock_hold.Clear();
             Account_before();
 
             await Task.Delay(delay1);
 
-            lock (table3)
-            {
-                dtCondStock_Transaction.Clear();
-            }
+            dtCondStock_Transaction.Clear();
             Transaction_Detail("", "");
 
             await Task.Delay(delay1);
@@ -498,72 +447,49 @@ namespace WindowsFormsApp1
 
         private async void Match_Click(object sender, EventArgs e)
         {
-            await table1Semaphore.WaitAsync(); // dtCondStock에 대한 접근을 보호
-            try
-            {
-                WriteLog_System("5_table1 : 진입\n");
-                WriteLog_System("데이터 매칭 시작\n");
+            WriteLog_System("데이터 매칭 시작\n");
 
-                var findRows = dtCondStock.AsEnumerable()
-                    .Where(row => row.Field<string>("상태") == "매수중" &&
-                                  row.Field<string>("보유수량").Split('/')[0] == row.Field<string>("보유수량").Split('/')[1])
-                    .ToArray();
-                if (findRows.Any())
-                {
-                    foreach (var row in findRows)
-                    {
-                        lock (table3)
-                        {
-                            var findRows2 = dtCondStock_Transaction.AsEnumerable()
-                                .Where(row2 => row2.Field<string>("종목코드") == row["종목코드"].ToString() && row2.Field<string>("주문구분") == "현금매수" && row2.Field<string>("체결단가") != "0")
-                                .ToArray();
-                            if (findRows2.Any())
-                            {
-                                row["상태"] = "매수완료";
-                                row["편입상태"] = "실매입";
-                                row["편입가"] = findRows2[0]["체결단가"];
-                            }
-                        }
-                    }
-                    gridView1_refresh();
-                }
-            }
-            finally
+            var findRows = dtCondStock.AsEnumerable()
+                .Where(row => row.Field<string>("상태") == "매수중" &&
+                              row.Field<string>("보유수량").Split('/')[0] == row.Field<string>("보유수량").Split('/')[1])
+                .ToArray();
+
+            if (findRows.Any())
             {
-                table1Semaphore.Release();
-                WriteLog_System("5_table1 : 이탈\n");
+                foreach (var row in findRows)
+                {
+                    var findRows2 = dtCondStock_Transaction.AsEnumerable()
+                            .Where(row2 => row2.Field<string>("종목코드") == row["종목코드"].ToString() && row2.Field<string>("주문구분") == "현금매수" && row2.Field<string>("체결단가") != "0")
+                            .ToArray();
+                    if (findRows2.Any())
+                    {
+                        row["상태"] = "매수완료";
+                        row["편입상태"] = "실매입";
+                        row["편입가"] = findRows2[0]["체결단가"];
+                    }
+
+                }
+                gridView1_refresh();
             }
 
-            await table1Semaphore.WaitAsync(); // dtCondStock에 대한 접근을 보호
-            try
+            var findRows3 = dtCondStock.AsEnumerable()
+                .Where(row => row.Field<string>("상태") == "매도중" && row.Field<string>("보유수량") == "0/0")
+                .ToArray();
+
+            if (findRows3.Any())
             {
-                WriteLog_System("6_table1 : 진입\n");
-                var findRows3 = dtCondStock.AsEnumerable()
-                    .Where(row => row.Field<string>("상태") == "매도중" && row.Field<string>("보유수량") == "0/0")
-                    .ToArray();
-                if (findRows3.Any())
+                foreach (var row in findRows3)
                 {
-                    foreach (var row in findRows3)
+                    var findRows4 = dtCondStock_Transaction.AsEnumerable()
+                            .Where(row2 => row2.Field<string>("종목코드") == row["종목코드"].ToString() && row2.Field<string>("주문구분") == "현금매도" && row2.Field<string>("체결단가") != "0")
+                            .ToArray();
+                    if (findRows4.Any())
                     {
-                        lock (table3)
-                        {
-                            var findRows4 = dtCondStock_Transaction.AsEnumerable()
-                                .Where(row2 => row2.Field<string>("종목코드") == row["종목코드"].ToString() && row2.Field<string>("주문구분") == "현금매도" && row2.Field<string>("체결단가") != "0")
-                                .ToArray();
-                            if (findRows4.Any())
-                            {
-                                row["상태"] = "매도완료";
-                                row["매도가"] = findRows4[0]["체결단가"];
-                            }
-                        }
+                        row["상태"] = "매도완료";
+                        row["매도가"] = findRows4[0]["체결단가"];
                     }
-                    gridView1_refresh();
                 }
-            }
-            finally
-            {
-                table1Semaphore.Release();
-                WriteLog_System("6_table1 : 이탈\n");
+                gridView1_refresh();
             }
 
             WriteLog_System("데이터 매칭 종료\n");
@@ -571,50 +497,37 @@ namespace WindowsFormsApp1
 
         private async void Select_cancel_Click(object sender, EventArgs e)
         {
-            await table1Semaphore.WaitAsync();
-            try
-            {
-                WriteLog_System("7_table1 : 진입\n");
-                var findRows = dtCondStock.AsEnumerable()
+            WriteLog_System("선택 항목 취소\n");
+
+            var findRows = dtCondStock.AsEnumerable()
                     .Where(row => row.Field<string>("상태") == "매수중" && row.Field<bool>("선택"))
                     .ToArray();
 
-                if (findRows.Any())
+            if (findRows.Any())
+            {
+                foreach (var row in findRows)
                 {
-                    foreach (var row in findRows)
-                    {
-                        order_close("매수", row["주문번호"].ToString(), row["종목명"].ToString(), row["종목코드"].ToString(), row["보유수량"].ToString().Split('/')[1]);
-                        await Task.Delay(750); // 잠시 대기
-                    }
+                    order_close("매수", row["주문번호"].ToString(), row["종목명"].ToString(), row["종목코드"].ToString(), row["보유수량"].ToString().Split('/')[1]);
+                    
+                    // 비동기적으로 대기
+                    await Task.Delay(delay1);
                 }
             }
-            finally
-            {
-                table1Semaphore.Release();
-                WriteLog_System("7_table1 : 이탈\n");
-            }
+
             //
-            await table1Semaphore.WaitAsync();
-            try
-            {
-                WriteLog_System("8_table1 : 진입\n");
-                var findRows2 = dtCondStock.AsEnumerable()
+            var findRows2 = dtCondStock.AsEnumerable()
                     .Where(row => row.Field<string>("상태") == "매도중" && row.Field<bool>("선택"))
                     .ToArray();
 
-                if (findRows2.Any())
-                {
-                    foreach (var row in findRows2)
-                    {
-                        order_close("매도", row["주문번호"].ToString(), row["종목명"].ToString(), row["종목코드"].ToString(), row["보유수량"].ToString().Split('/')[1]);
-                        await Task.Delay(750); // 잠시 대기
-                    }
-                }
-            }
-            finally
+            if (findRows2.Any())
             {
-                table1Semaphore.Release();
-                WriteLog_System("8_table1 : 이탈\n");
+                foreach (var row in findRows2)
+                {
+                    order_close("매도", row["주문번호"].ToString(), row["종목명"].ToString(), row["종목코드"].ToString(), row["보유수량"].ToString().Split('/')[1]);
+                    
+                    // 비동기적으로 대기
+                    await Task.Delay(delay1);
+                }
             }
         }
 
@@ -638,10 +551,7 @@ namespace WindowsFormsApp1
                 log_window.AppendText(fullLogMessage);
             }
 
-            lock (logFullLock)
-            {
-                log_full.Add(fullLogMessage);
-            }
+            log_full.Add(fullLogMessage);
         }
 
         private void WriteLog_Order(string message)
@@ -661,11 +571,8 @@ namespace WindowsFormsApp1
                 log_window3.AppendText(fullLogMessage);
             }
 
-            lock (logFullLock)
-            {
-                log_full.Add(fullLogMessage);
-                log_trade.Add(fullLogMessage);
-            }
+            log_full.Add(fullLogMessage);
+            log_trade.Add(fullLogMessage);
         }
 
         private void WriteLog_Stock(string message)
@@ -685,10 +592,7 @@ namespace WindowsFormsApp1
                 log_window2.AppendText(fullLogMessage);
             }
 
-            lock (logFullLock)
-            {
-                log_full.Add(fullLogMessage);
-            }
+            log_full.Add(fullLogMessage);
 
         }
 
@@ -3182,8 +3086,8 @@ namespace WindowsFormsApp1
 
                                 if (!int.TryParse(transaction_number, out int current_price))
                                 {
-                                    WriteLog_System($"[계좌별주문체결내역상세요청/종목코드({i}/{code_name})/{condition_nameORcode}/{name_split[2]}] : 변환 실패 10초 후 재시도 요망n");
-                                    telegram_message($"[계좌별주문체결내역상세요청/종목코드({i}/{code_name})/{condition_nameORcode}/{name_split[2]}] : 변환 실패 10초 후 수동 재시도 요망n");
+                                    WriteLog_System($"[계좌별주문체결내역상세요청/종목코드({i}/{code_name})/{condition_nameORcode}/{name_split[2]}] : 변환 실패 10초 후 재시도 요망\n");
+                                    telegram_message($"[계좌별주문체결내역상세요청/종목코드({i}/{code_name})/{condition_nameORcode}/{name_split[2]}] : 변환 실패 10초 후 수동 재시도 요망\n");
                                     return;
                                 }
 
@@ -4701,7 +4605,6 @@ namespace WindowsFormsApp1
             await table1Semaphore.WaitAsync(); // dtCondStock에 대한 접근을 보호
             try
             {
-                WriteLog_System("24_table1 : 진입\n");
                 // 특정 열 추출
                 var rowsToProcess = dtCondStock.AsEnumerable()
                     .Where(row => row.Field<string>("편입") == "편입" &&
@@ -4737,7 +4640,6 @@ namespace WindowsFormsApp1
             finally
             {
                 table1Semaphore.Release();
-                WriteLog_System("24_table1 : 이탈\n");
             }            
 
             await Task.Delay(delay1);
