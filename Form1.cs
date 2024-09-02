@@ -718,7 +718,15 @@ namespace WindowsFormsApp1
                         {
                             foreach (var result in resultArray)
                             {
+                                JToken editedMessage = result["message"];
+
+                                if (editedMessage == null || editedMessage["text"] == null)
+                                {
+                                    continue;
+                                }
+
                                 string message = Convert.ToString(result["message"]["text"]);
+                                //
                                 int current_message_number = Convert.ToInt32(result["update_id"]);
                                 //
                                 long unixTimestamp = Convert.ToInt64(result["message"]["date"]);
