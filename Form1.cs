@@ -4385,7 +4385,6 @@ namespace WindowsFormsApp1
             {
                 try
                 {
-                    WriteLog_System("26_table1 : 진입\n");
                     // 특정 열 추출
                     DataColumn columnStateColumn = dtCondStock.Columns["상태"];
                     var filteredRows = dtCondStock.AsEnumerable()
@@ -4432,7 +4431,6 @@ namespace WindowsFormsApp1
 
                 try
                 {
-                    WriteLog_System("27_table1 : 진입\n");
                     // 특정 열 추출
                     DataColumn columnStateColumn = dtCondStock.Columns["상태"];
                     var filteredRows = dtCondStock.AsEnumerable()
