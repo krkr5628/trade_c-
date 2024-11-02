@@ -2715,7 +2715,7 @@ namespace WindowsFormsApp1
             }
 
             //
-            WriteLog_System("[실시간조건식/시작/" + e.strConditionName + "] : 초기 검색 종목 존재\n");
+            WriteLog_Stock("[실시간조건식/시작/" + e.strConditionName + "] : 초기 검색 종목 존재\n");
             telegram_message("[실시간조건식/시작/" + e.strConditionName + "] : 초기 검색 종목 존재\n");
 
             if (code.Length > 0) code = code.Remove(code.Length - 1);
@@ -2727,7 +2727,7 @@ namespace WindowsFormsApp1
             //종목코드 리스트, 연속조회여부(기본값0만존재), 종목코드 갯수, 종목(0 주식, 3 선물옵션), 사용자 구분명, 화면번호
             error = axKHOpenAPI1.CommKwRqData(code, 0, codeCount, 0, "조건일반검색/" + e.strConditionName, GetScreenNo());
 
-            WriteLog_System("[실시간조건식/시작/" + e.strConditionName + "] : 조회결과(" + error + ")\n");
+            WriteLog_Stock("[실시간조건식/시작/" + e.strConditionName + "] : 조회결과(" + error + ")\n");
 
             await Task.Delay(delay1);
         }
