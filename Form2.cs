@@ -542,22 +542,22 @@ namespace WindowsFormsApp1
 
         private void ValidatedecimalInput(object sender, EventArgs e, TextBox textBox, string defaultValue)
         {
-            double max = -100;
-            double min = 100;
+            double max = -1000000;
+            double min = 1000000;
 
             if (double.TryParse(textBox.Text, out double result))
             {
                 if (result < min || result > max)
                 {
                     textBox.Text = defaultValue;
-                    MessageBox.Show("범위 : -100 이상  100이하", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("범위 : -1,000,000 이상  1,000,000이하", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
             }
             else
             {
                 textBox.Text = defaultValue;
-                MessageBox.Show("-100 이상  100 이하의 double 범위 양의 실수 입력", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("-1,000,000 이상  1,000,000 이하의 double 범위 양의 실수 입력", "잘못된 입력", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
         }

@@ -789,7 +789,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Stock_code.Location = new System.Drawing.Point(109, 3);
             this.Stock_code.Name = "Stock_code";
-            this.Stock_code.Size = new System.Drawing.Size(100, 23);
+            this.Stock_code.Size = new System.Drawing.Size(100, 30);
             this.Stock_code.TabIndex = 13;
             // 
             // label15
@@ -814,20 +814,21 @@ namespace WindowsFormsApp1
             // 
             // menu
             // 
+            this.menu.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menu.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Main_menu});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
             this.menu.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
-            this.menu.Size = new System.Drawing.Size(1720, 24);
+            this.menu.Size = new System.Drawing.Size(1720, 31);
             this.menu.TabIndex = 7;
             this.menu.Text = "menuStrip1";
             // 
             // Main_menu
             // 
             this.Main_menu.Name = "Main_menu";
-            this.Main_menu.Size = new System.Drawing.Size(43, 22);
+            this.Main_menu.Size = new System.Drawing.Size(64, 29);
             this.Main_menu.Text = "메인";
             // 
             // time
@@ -1609,7 +1610,7 @@ namespace WindowsFormsApp1
             this.UI_UPDATE.FormattingEnabled = true;
             this.UI_UPDATE.Location = new System.Drawing.Point(3, 3);
             this.UI_UPDATE.Name = "UI_UPDATE";
-            this.UI_UPDATE.Size = new System.Drawing.Size(134, 21);
+            this.UI_UPDATE.Size = new System.Drawing.Size(134, 28);
             this.UI_UPDATE.TabIndex = 27;
             this.UI_UPDATE.Text = "실시간";
             // 
@@ -1804,7 +1805,7 @@ namespace WindowsFormsApp1
             this.axKHOpenAPI1.Location = new System.Drawing.Point(1624, 27);
             this.axKHOpenAPI1.Name = "axKHOpenAPI1";
             this.axKHOpenAPI1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axKHOpenAPI1.OcxState")));
-            this.axKHOpenAPI1.Size = new System.Drawing.Size(85, 41);
+            this.axKHOpenAPI1.Size = new System.Drawing.Size(128, 62);
             this.axKHOpenAPI1.TabIndex = 0;
             this.axKHOpenAPI1.Visible = false;
             // 

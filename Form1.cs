@@ -54,7 +54,6 @@ namespace WindowsFormsApp1
         //
         private DataTable dtCondStock_Transaction = new DataTable();
 
-
         //-----------------------------------Semaphore---------------------------------------- 
 
         private readonly SemaphoreSlim table1Semaphore = new SemaphoreSlim(1, 1);
