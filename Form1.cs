@@ -2167,19 +2167,35 @@ namespace WindowsFormsApp1
             //지수선물 종목코드 리스트를 ';'로 구분해서 전달
             string[] tmp = axKHOpenAPI1.GetFutureList().Split(';');
 
+            /*
+            WriteLog_System("------------------\n");
             foreach (string c in tmp)
             {
-                if (c.StartsWith("101V"))
+               
+                WriteLog_System("선물월물리스트 : " + c + "\n");
+                
+            }
+            WriteLog_System("------------------\n");
+            */
+
+            foreach (string c in tmp)
+            {
+                if (c.StartsWith("101"))
                 {
                     sCode1.Add(c);
                     WriteLog_System("코스피선물월물 : " + c + "\n");
-                    continue;
+                    break;
                 }
-                if (c.StartsWith("106V"))
+
+            }
+
+            foreach (string c in tmp)
+            {
+                if (c.StartsWith("106"))
                 {
                     sKCode1.Add(c);
                     WriteLog_System("코스닥선물월물 : " + c + "\n");
-                    continue;
+                    break;
                 }
             }
             //101V
